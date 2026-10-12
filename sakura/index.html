@@ -83,14 +83,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .reveal.shown{opacity:1;transform:none}
 
 
-.butterfly{position:fixed;top:0;left:0;z-index:5;pointer-events:none;opacity:.95;animation:bflyPath var(--d,26s) linear infinite;animation-delay:var(--dl,0s)}
-.butterfly .w{position:absolute;top:-10px;width:15px;height:21px;background:var(--bc,#f2a9bd);opacity:.92}
-.butterfly .w.l{left:-14px;border-radius:80% 20% 70% 30%;transform-origin:right center;animation:flapL .45s ease-in-out infinite alternate}
-.butterfly .w.r{left:1px;border-radius:20% 80% 30% 70%;transform-origin:left center;animation:flapR .45s ease-in-out infinite alternate}
-.butterfly .bd{position:absolute;top:-8px;left:-1px;width:3px;height:17px;background:#8a5a44;border-radius:3px}
-@keyframes flapL{from{transform:rotateY(8deg)}to{transform:rotateY(72deg)}}
-@keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
-@keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
 
 /* --- Dekorasi Sakura --- */
@@ -105,10 +97,27 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .branch.tl{top:-24px;left:-36px}
 .branch.tr{top:-24px;right:-36px;transform:scaleX(-1)}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.cloud{position:fixed;z-index:2;pointer-events:none;border-radius:50%;filter:blur(12px);
+  background:radial-gradient(ellipse,rgba(255,255,255,.8),rgba(255,255,255,0) 70%);
+  animation:cloudDrift var(--t,65s) linear infinite}
+@keyframes cloudDrift{from{transform:translateX(-32vw)}to{transform:translateX(118vw)}}
+.crane{position:fixed;z-index:5;pointer-events:none;opacity:.92;animation:craneFly var(--d,40s) linear infinite;animation-delay:var(--dl,0s)}
+.crane .cw{transform-box:fill-box;transform-origin:right center;animation:cflap .55s ease-in-out infinite alternate}
+.crane .cw2{transform-box:fill-box;transform-origin:left center;animation:cflap .55s ease-in-out infinite alternate}
+@keyframes cflap{from{transform:scaleY(1)}to{transform:scaleY(.3)}}
+@keyframes craneFly{0%{transform:translate(-14vw,32vh)}25%{transform:translate(20vw,25vh)}50%{transform:translate(55vw,33vh)}75%{transform:translate(85vw,27vh)}100%{transform:translate(120vw,31vh)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="cloud" style="top:10vh;left:0;width:220px;height:70px;--t:70s"></div>
+<div class="cloud" style="top:26vh;left:0;width:160px;height:52px;--t:55s;animation-delay:-30s"></div>
+<div class="cloud" style="top:44vh;left:0;width:190px;height:60px;--t:80s;animation-delay:-52s"></div>
+<div class="crane" style="top:0;left:0;--d:42s;--dl:-8s"><svg width="54" height="36" viewBox="0 0 54 36"><path d="M27 32 L32 13 L27 5 L22 13 Z" fill="#ffffff"/><path class="cw" d="M27 13 L5 5 L21 17 Z" fill="rgba(255,255,255,.92)"/><path class="cw2" d="M27 13 L49 5 L33 17 Z" fill="rgba(255,255,255,.92)"/></svg></div>
+<div class="crane" style="top:0;left:0;--d:55s;--dl:-33s;transform:scale(.7)"><svg width="54" height="36" viewBox="0 0 54 36"><path d="M27 32 L32 13 L27 5 L22 13 Z" fill="#ffe9f0"/><path class="cw" d="M27 13 L5 5 L21 17 Z" fill="rgba(255,233,240,.92)"/><path class="cw2" d="M27 13 L49 5 L33 17 Z" fill="rgba(255,233,240,.92)"/></svg></div>
 
 <div class="branch tl"><svg width="220" height="160" viewBox="0 0 220 160"><path d="M-10,150 C60,120 120,90 210,20" stroke="#7a4a3a" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40,132 C80,110 110,95 150,60" stroke="#7a4a3a" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#f7b8cd"><circle cx="205" cy="22" r="13"/><circle cx="188" cy="34" r="10"/><circle cx="218" cy="40" r="9"/><circle cx="150" cy="62" r="11"/><circle cx="132" cy="74" r="8"/><circle cx="90" cy="104" r="10"/><circle cx="70" cy="114" r="8"/></g><g fill="#fde3ec"><circle cx="200" cy="20" r="5"/><circle cx="146" cy="60" r="4"/><circle cx="86" cy="102" r="4"/></g></svg></div>
 <div class="branch tr"><svg width="220" height="160" viewBox="0 0 220 160"><path d="M-10,150 C60,120 120,90 210,20" stroke="#7a4a3a" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40,132 C80,110 110,95 150,60" stroke="#7a4a3a" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#f7b8cd"><circle cx="205" cy="22" r="13"/><circle cx="188" cy="34" r="10"/><circle cx="218" cy="40" r="9"/><circle cx="150" cy="62" r="11"/><circle cx="132" cy="74" r="8"/><circle cx="90" cy="104" r="10"/><circle cx="70" cy="114" r="8"/></g><g fill="#fde3ec"><circle cx="200" cy="20" r="5"/><circle cx="146" cy="60" r="4"/><circle cx="86" cy="102" r="4"/></g></svg></div>
@@ -116,9 +125,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 <div class="lantern" style="left:46%;animation-duration:6.6s;animation-delay:-2.2s"><span class="cord" style="height:84px"></span><div class="cap"></div><div class="lbody" style="width:44px;height:56px"></div><span class="tassel"></span></div>
 <div class="lantern" style="left:80%;animation-duration:4.8s;animation-delay:-1.1s"><span class="cord" style="height:36px"></span><div class="cap"></div><div class="lbody" style="width:64px;height:80px"></div><span class="tassel"></span></div>
 
-<div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
   <div class="cover-inner">
@@ -469,6 +475,24 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Hembusan kelopak sakura (gusts)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[],t=0;function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:-16,s:Math.random()*7+4,
+    vy:Math.random()*1+0.5,vx:(Math.random()-0.5)*0.6,rot:Math.random()*6.28,
+    rsp:(Math.random()-0.5)*0.06,col:["#f9c6d3","#fbdce4","#f4a9c0"][Math.random()*3|0]}}
+  for(var i=0;i<30;i++)P.push(mk(true));
+  (function step(){t+=0.016;x.clearRect(0,0,W,H);
+    var gust=Math.pow(Math.max(0,Math.sin(t*0.35)),3)*3.2;
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx+gust;p.rot+=p.rsp;
+      if(p.y>H+24||p.x>W+24||p.x<-24)P[k]=mk(false);
+      else{x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.globalAlpha=0.9;x.fillStyle=p.col;
+        x.beginPath();x.ellipse(0,0,p.s,p.s*0.55,0,0,6.283);x.fill();x.restore();}}
+    x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

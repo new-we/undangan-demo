@@ -83,14 +83,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .reveal.shown{opacity:1;transform:none}
 
 
-.butterfly{position:fixed;top:0;left:0;z-index:5;pointer-events:none;opacity:.95;animation:bflyPath var(--d,26s) linear infinite;animation-delay:var(--dl,0s)}
-.butterfly .w{position:absolute;top:-10px;width:15px;height:21px;background:var(--bc,#f2a9bd);opacity:.92}
-.butterfly .w.l{left:-14px;border-radius:80% 20% 70% 30%;transform-origin:right center;animation:flapL .45s ease-in-out infinite alternate}
-.butterfly .w.r{left:1px;border-radius:20% 80% 30% 70%;transform-origin:left center;animation:flapR .45s ease-in-out infinite alternate}
-.butterfly .bd{position:absolute;top:-8px;left:-1px;width:3px;height:17px;background:#8a5a44;border-radius:3px}
-@keyframes flapL{from{transform:rotateY(8deg)}to{transform:rotateY(72deg)}}
-@keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
-@keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
 
 /* --- Dekorasi Galaxy --- */
@@ -101,17 +93,29 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .nebula.n3{width:200px;height:200px;top:44%;left:60%;background:radial-gradient(circle,#2563eb,transparent 70%)}
 @keyframes nebDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-30px) scale(1.15)}}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.aurora{position:fixed;z-index:2;pointer-events:none;width:135vw;height:32vh;left:-18vw;filter:blur(40px);opacity:.5;border-radius:50%;
+  background:linear-gradient(100deg,transparent,rgba(90,220,200,.26),rgba(150,120,255,.3),transparent);
+  animation:auroraDrift 27s ease-in-out infinite alternate}
+@keyframes auroraDrift{from{transform:translateX(-8vw) skewX(-9deg)}to{transform:translateX(8vw) skewX(9deg)}}
+.planet{position:fixed;z-index:2;pointer-events:none;border-radius:50%;
+  box-shadow:inset -9px -7px 0 rgba(0,0,0,.35),0 0 26px rgba(160,140,255,.45);
+  animation:planetFloat 19s ease-in-out infinite alternate}
+@keyframes planetFloat{from{transform:translateY(0)}to{transform:translateY(-36px)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="aurora" style="top:10vh;animation-delay:0s"></div>
+<div class="aurora" style="top:36vh;animation-delay:-13s;background:linear-gradient(100deg,transparent,rgba(255,150,200,.2),rgba(120,160,255,.26),transparent)"></div>
+<div class="planet" style="top:16vh;right:12vw;width:56px;height:56px;background:radial-gradient(circle at 35% 30%,#c9b8ff,#7a5fd0)"></div>
+<div class="planet" style="top:52vh;left:9vw;width:34px;height:34px;background:radial-gradient(circle at 35% 30%,#a8e6ff,#4d8fc9);animation-delay:-8s"></div>
 
 <div class="moon"></div>
 <div class="nebula n1"></div><div class="nebula n2"></div><div class="nebula n3"></div>
 
-<div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
   <div class="cover-inner">
@@ -473,6 +477,31 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Ledakan kelip bintang (galaxy)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[],F=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+0.6,
+    ph:Math.random()*6.28,sp:Math.random()*0.05+0.02}}
+  for(var i=0;i<24;i++)P.push(mk(true));
+  function burst(){F.push({x:Math.random()*W,y:Math.random()*H*0.7,r:2,life:0});
+    setTimeout(burst,Math.random()*2600+1400)}
+  burst();
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.ph+=p.sp;
+      var a=0.25+0.75*Math.abs(Math.sin(p.ph*2));
+      x.globalAlpha=a;x.fillStyle="#dfe8ff";x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
+    for(var j=F.length-1;j>=0;j--){var f=F[j];f.life+=0.03;f.r+=1.1;
+      var fa=Math.max(0,0.9-f.life);
+      x.globalAlpha=fa;x.strokeStyle="#ffffff";x.lineWidth=1.6;
+      x.beginPath();x.arc(f.x,f.y,f.r,0,6.283);x.stroke();
+      x.beginPath();x.moveTo(f.x-f.r*1.8,f.y);x.lineTo(f.x+f.r*1.8,f.y);
+      x.moveTo(f.x,f.y-f.r*1.8);x.lineTo(f.x,f.y+f.r*1.8);x.stroke();
+      if(f.life>=0.9)F.splice(j,1);}
+    x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>
