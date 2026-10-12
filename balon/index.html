@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan Raka &amp; Sinta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #fffafc;
+  --bg2: #ffedf5;
+  --card: #ffffff;
+  --accent: #ec4899;
+  --accent2: #db2777;
+  --accent-soft: #fce0ec;
+  --text: #6e2b4d;
+  --muted: #bd8ba0;
+  --script: #e0447c;
+  --line: #f7cfdf;
+  --cover-bg: linear-gradient(165deg,#fff0f6,#ffd9e8 60%,#ffc2d9);
+  --cover-text: #831843;
+  --cover-line: rgba(131,24,67,.25);
+  --btn-bg: #ec4899;
+  --btn-text: #ffffff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+.wrap{max-width:480px;margin:0 auto;position:relative;z-index:2;background:var(--bg)}
+.cover{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:var(--cover-bg);color:var(--cover-text);text-align:center;padding:28px;transition:opacity .8s ease}
+.cover.open{opacity:0;pointer-events:none}
+.cover-inner{max-width:380px;width:100%}
+.cover-eyebrow{letter-spacing:4px;text-transform:uppercase;font-size:12px;opacity:.85}
+.cover-names{font-family:'Great Vibes',cursive;font-size:58px;margin:12px 0;color:var(--script);line-height:1.25}
+.cover-date{font-family:'Playfair Display',serif;font-size:15px;letter-spacing:1px}
+.cover-guest{margin:26px 0 6px;padding:18px 10px;border-top:1px solid var(--cover-line);border-bottom:1px solid var(--cover-line)}
+.cover-guest p{font-size:13px;opacity:.85}
+#guestName{font-family:'Playfair Display',serif;font-size:27px;margin-top:6px;color:var(--script);word-wrap:break-word}
+.btn-open{margin-top:20px;background:var(--btn-bg);color:var(--btn-text);border:none;border-radius:999px;padding:14px 44px;font-size:15px;font-weight:600;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.cover-note{margin-top:16px;font-size:11px;opacity:.7}
+section{padding:54px 26px;text-align:center;position:relative}
+.eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:11px;color:var(--accent);font-weight:600}
+.section-title{font-family:'Playfair Display',serif;font-size:30px;margin:8px 0 16px;color:var(--text)}
+.names{font-family:'Great Vibes',cursive;font-size:54px;color:var(--script);line-height:1.3}
+.hero{padding:84px 26px 60px}
+.hero .date{font-family:'Playfair Display',serif;letter-spacing:1px;margin-top:12px;font-size:16px}
+.divider{width:60px;height:2px;background:var(--accent);margin:20px auto;border-radius:2px;opacity:.65}
+.verse{font-style:italic;font-size:14px;color:var(--muted);max-width:350px;margin:0 auto}
+.person{margin:28px 0}
+.avatar{width:94px;height:94px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:38px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));border:3px solid var(--accent-soft)}
+.person h3{font-family:'Playfair Display',serif;font-size:24px}
+.person p{font-size:14px;color:var(--muted);margin-top:6px}
+.amp{font-family:'Great Vibes',cursive;font-size:46px;color:var(--accent);margin:6px 0}
+.date-big{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:4px}
+.countdown{display:flex;justify-content:center;gap:10px;margin:22px 0;flex-wrap:wrap}
+.countdown div{background:var(--card);border:1px solid var(--line);border-radius:14px;min-width:68px;padding:12px 6px;box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.countdown span{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;display:block;color:var(--text)}
+.countdown small{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-text);border-radius:999px;padding:12px 34px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:.5px;border:none;cursor:pointer;margin-top:12px}
+.btn.small{padding:9px 26px;font-size:13px}
+.event-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.07)}
+.event-card h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--accent2);margin-bottom:8px}
+.e-date{font-weight:600}
+.e-time{color:var(--muted);font-size:14px}
+.e-place{margin:10px 0 4px;font-size:14px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.gallery div{aspect-ratio:3/4;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:28px;color:rgba(255,255,255,.92);text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.gift-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 18px;margin:14px 0;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.gift-card .bank{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.gift-card .rek{font-family:'Playfair Display',serif;font-size:25px;letter-spacing:2px;margin:8px 0 2px;color:var(--text)}
+.gift-card .an{font-size:14px;color:var(--muted)}
+.muted{font-size:14px;color:var(--muted)}
+form input,form select,form textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:14px;font-family:'Inter',sans-serif;margin:8px 0;background:#fff;color:#333}
+form textarea{resize:vertical}
+footer{padding:54px 26px 72px;text-align:center;background:var(--bg2)}
+footer .thanks{font-family:'Great Vibes',cursive;font-size:42px;color:var(--script);margin:14px 0 4px}
+footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:1px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.shown{opacity:1;transform:none}
+
+
+.butterfly{position:fixed;top:0;left:0;z-index:5;pointer-events:none;opacity:.95;animation:bflyPath var(--d,26s) linear infinite;animation-delay:var(--dl,0s)}
+.butterfly .w{position:absolute;top:-10px;width:15px;height:21px;background:var(--bc,#f2a9bd);opacity:.92}
+.butterfly .w.l{left:-14px;border-radius:80% 20% 70% 30%;transform-origin:right center;animation:flapL .45s ease-in-out infinite alternate}
+.butterfly .w.r{left:1px;border-radius:20% 80% 30% 70%;transform-origin:left center;animation:flapR .45s ease-in-out infinite alternate}
+.butterfly .bd{position:absolute;top:-8px;left:-1px;width:3px;height:17px;background:#8a5a44;border-radius:3px}
+@keyframes flapL{from{transform:rotateY(8deg)}to{transform:rotateY(72deg)}}
+@keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
+@keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
+
+
+/* --- Dekorasi Balon Cinta --- */
+.css-heart{position:fixed;bottom:-60px;left:var(--hl,20%);z-index:5;pointer-events:none;animation:heartUp var(--hd,14s) linear infinite;animation-delay:var(--hdl,0s)}
+.css-heart i{display:block;position:relative;width:var(--hs,26px);height:var(--hs,26px);transform:rotate(-45deg);background:var(--hc,#f472b6)}
+.css-heart i::before,.css-heart i::after{content:"";position:absolute;width:var(--hs,26px);height:var(--hs,26px);border-radius:50%;background:var(--hc,#f472b6)}
+.css-heart i::before{top:-50%;left:0}
+.css-heart i::after{left:50%;top:0}
+@keyframes heartUp{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-120vh) rotate(8deg)}}
+
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<div class="css-heart" style="--hl:8%;--hd:13s;--hdl:-3s;--hs:24px;--hc:#f472b6"><i></i></div>
+<div class="css-heart" style="--hl:30%;--hd:17s;--hdl:-9s;--hs:32px;--hc:#60a5fa"><i></i></div>
+<div class="css-heart" style="--hl:55%;--hd:15s;--hdl:-6s;--hs:22px;--hc:#fbbf24"><i></i></div>
+<div class="css-heart" style="--hl:72%;--hd:19s;--hdl:-12s;--hs:28px;--hc:#a78bfa"><i></i></div>
+<div class="css-heart" style="--hl:88%;--hd:14s;--hdl:-1s;--hs:20px;--hc:#34d399"><i></i></div>
+
+<div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
+<div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
+<div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
+
+<div class="cover" id="cover">
+  <div class="cover-inner">
+    <p class="cover-eyebrow">Undangan Pernikahan</p>
+    <h1 class="cover-names">Raka &amp; Sinta</h1>
+    <p class="cover-date">Senin, 21 Desember 2026</p>
+    <div class="cover-guest">
+      <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i:</p>
+      <h2 id="guestName">Tamu Undangan</h2>
+    </div>
+    <button class="btn-open" id="openBtn" type="button">Buka Undangan</button>
+    <p class="cover-note">* Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero reveal">
+    <p class="eyebrow">The Wedding of</p>
+    <h1 class="names">Raka &amp; Sinta</h1>
+    <div class="divider"></div>
+    <p class="date">Senin, 21 Desember 2026</p>
+  </section>
+
+  <section class="reveal">
+    <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
+    <div class="divider"></div>
+    <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
+    <h2 class="section-title">Mempelai</h2>
+    <div class="person">
+      <div class="avatar">R</div>
+      <h3>Raka Pratama</h3>
+      <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
+    </div>
+    <div class="amp">&amp;</div>
+    <div class="person">
+      <div class="avatar">S</div>
+      <h3>Sinta Maharani</h3>
+      <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Save the Date</h2>
+    <p class="date-big">Senin, 21 Desember 2026</p>
+    <p class="muted">Menghitung mundur menuju hari bahagia</p>
+    <div class="countdown">
+      <div><span id="cd-d">0</span><small>Hari</small></div>
+      <div><span id="cd-h">00</span><small>Jam</small></div>
+      <div><span id="cd-m">00</span><small>Menit</small></div>
+      <div><span id="cd-s">00</span><small>Detik</small></div>
+    </div>
+    <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20261221T010000Z/20261221T060000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Waktu &amp; Tempat</h2>
+    <div class="event-card">
+      <h3>Akad Nikah</h3>
+      <p class="e-date">Senin, 21 Desember 2026</p>
+      <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
+      <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
+      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
+    </div>
+    <div class="event-card">
+      <h3>Resepsi</h3>
+      <p class="e-date">Senin, 21 Desember 2026</p>
+      <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
+      <p class="e-place">Gedung Serbaguna Mojokerto<br>Jl. Gajah Mada No. 45, Mojokerto</p>
+      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Galeri</h2>
+    <p class="muted">Momen bahagia kami</p>
+    <div class="gallery">
+      <div style="background:linear-gradient(135deg,#f9a8d4,#ec4899)">R &amp; S</div>
+      <div style="background:linear-gradient(135deg,#fda4af,#f43f5e)">R &amp; S</div>
+      <div style="background:linear-gradient(135deg,#fde68a,#f59e0b)">R &amp; S</div>
+      <div style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6)">R &amp; S</div>
+      <div style="background:linear-gradient(135deg,#93c5fd,#3b82f6)">R &amp; S</div>
+      <div style="background:linear-gradient(135deg,#6ee7b7,#10b981)">R &amp; S</div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Amplop Digital</h2>
+    <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
+    <div class="gift-card">
+      <p class="bank">Bank BCA (contoh)</p>
+      <p class="rek" id="rek1">1234567890</p>
+      <p class="an">a.n. Raka Pratama</p>
+      <button class="btn small" type="button" data-copy="rek1">Salin Nomor</button>
+    </div>
+    <div class="gift-card">
+      <p class="bank">Bank Mandiri (contoh)</p>
+      <p class="rek" id="rek2">0987654321</p>
+      <p class="an">a.n. Sinta Maharani</p>
+      <button class="btn small" type="button" data-copy="rek2">Salin Nomor</button>
+    </div>
+    <div class="gift-card">
+      <p class="bank">Kirim Kado Fisik</p>
+      <p class="an">Jl. Melati No. 12, Sidoarjo,<br>Jawa Timur</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">RSVP &amp; Ucapan</h2>
+    <p class="muted">Konfirmasi kehadiran dan titipkan doa restu terbaik Anda</p>
+    <form id="rsvpForm">
+      <input type="text" id="rsvpName" placeholder="Nama lengkap" maxlength="40" required>
+      <select id="rsvpAttend" required>
+        <option value="">-- Konfirmasi Kehadiran --</option>
+        <option value="Hadir">Ya, saya akan hadir</option>
+        <option value="Tidak">Maaf, belum bisa hadir</option>
+      </select>
+      <textarea id="rsvpMsg" rows="4" placeholder="Tulis ucapan dan doa restu..." maxlength="300"></textarea>
+      <button class="btn" type="submit">Kirim via WhatsApp</button>
+    </form>
+  </section>
+
+  <footer class="reveal">
+    <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
+    <p class="thanks">Terima kasih</p>
+    <h2 class="names">Raka &amp; Sinta</h2>
+    <p class="credit">Demo undangan digital</p>
+  </footer>
+</div>
+
+<script>
+
+// ===== KONFIGURASI =====
+var CONFIG_WA = "6281234567890"; // GANTI NOMOR INI dengan nomor WhatsApp mempelai (format: 62 lalu nomor HP tanpa spasi, contoh: 6281234567890)
+
+// Nama tamu dari parameter URL ?to=  (contoh: undangan.html?to=Budi)
+(function(){
+  var raw = "";
+  try {
+    var p = new URLSearchParams(window.location.search);
+    raw = p.get("to") || "";
+    try { raw = decodeURIComponent(raw); } catch(e){}
+  } catch(e){ raw = ""; }
+  raw = raw.replace(/\s+/g, " ").trim().slice(0, 40);
+  document.getElementById("guestName").textContent = raw ? raw : "Tamu Undangan";
+})();
+
+// Buka undangan: tutup cover, tampilkan isi
+(function(){
+  var cover = document.getElementById("cover");
+  document.getElementById("openBtn").addEventListener("click", function(){
+    cover.classList.add("open");
+    setTimeout(function(){ cover.style.display = "none"; }, 850);
+    window.scrollTo(0, 0);
+  });
+})();
+
+// Hitung mundur ke 21 Desember 2026 pukul 08.00 WIB
+(function(){
+  var target = new Date("2026-12-21T08:00:00+07:00").getTime();
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff < 0) diff = 0;
+    document.getElementById("cd-d").textContent = Math.floor(diff / 86400000);
+    document.getElementById("cd-h").textContent = pad(Math.floor(diff % 86400000 / 3600000));
+    document.getElementById("cd-m").textContent = pad(Math.floor(diff % 3600000 / 60000));
+    document.getElementById("cd-s").textContent = pad(Math.floor(diff % 60000 / 1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// Tombol salin nomor rekening
+document.querySelectorAll("[data-copy]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var t = document.getElementById(btn.getAttribute("data-copy")).textContent.trim();
+    function done(){ btn.textContent = "Tersalin!"; setTimeout(function(){ btn.textContent = "Salin Nomor"; }, 1600); }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch(e){}
+      document.body.removeChild(ta); done();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done).catch(fallback);
+    } else { fallback(); }
+  });
+});
+
+// Form RSVP -> kirim via WhatsApp
+document.getElementById("rsvpForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var nama = document.getElementById("rsvpName").value.trim().slice(0, 40);
+  var hadir = document.getElementById("rsvpAttend").value;
+  var pesan = document.getElementById("rsvpMsg").value.trim().slice(0, 300);
+  var text = "Halo, saya " + nama + ".\nKonfirmasi kehadiran: " + hadir + (pesan ? "\nUcapan: " + pesan : "");
+  window.open("https://wa.me/" + CONFIG_WA + "?text=" + encodeURIComponent(text), "_blank");
+});
+
+// Animasi fade-in saat scroll
+(function(){
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("shown"); io.unobserve(en.target); }
+      });
+    }, {threshold: 0.1});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add("shown"); });
+  }
+})();
+
+
+// ===== Efek animasi tema =====
+(function(){
+  var canvas = document.getElementById("fx");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  window.addEventListener("resize", resize); resize();
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function pick(a){ return a[(Math.random()*a.length)|0]; }
+  var SYSTEMS = [{"type":"balloon","count":20,"colors":["#f472b6","#fb7185","#fbbf24","#a78bfa","#60a5fa","#34d399"]},{"type":"confetti","count":46,"colors":["#f472b6","#fb7185","#fbbf24","#a78bfa","#60a5fa","#34d399","#fde047"]}];
+  var parts = [];
+  function make(sys, init){
+    var p = {sys: sys, c: pick(sys.colors), seed: Math.random()*6.28};
+    if (sys.type === "petals") {
+      p.x = Math.random()*W; p.y = init ? Math.random()*H : -24;
+      p.s = rnd(5,13); p.vy = rnd(0.5,1.6); p.sway = rnd(0,6.28);
+      p.swaySpd = rnd(0.008,0.03); p.rot = rnd(0,6.28); p.rotSpd = rnd(-0.04,0.04);
+    } else if (sys.type === "rise") {
+      p.x = Math.random()*W; p.y = init ? Math.random()*H : H+14;
+      p.r = rnd(1.5,5); p.vy = -rnd(0.3,1.1); p.wob = rnd(0,6.28); p.wobSpd = rnd(0.01,0.04);
+      p.tw = rnd(0,6.28); p.twSpd = rnd(0.02,0.07);
+    } else if (sys.type === "drift") {
+      p.x = Math.random()*W; p.y = Math.random()*H;
+      p.r = rnd(1.2,3.6); p.vx = rnd(-0.45,0.45); p.vy = rnd(-0.45,0.45);
+      p.tw = rnd(0,6.28); p.twSpd = rnd(0.015,0.06);
+    } else if (sys.type === "confetti") {
+      p.x = Math.random()*W; p.y = init ? Math.random()*H : -14;
+      p.w = rnd(5,9); p.h = rnd(7,13); p.vy = rnd(0.9,2.2);
+      p.sway = rnd(0,6.28); p.swaySpd = rnd(0.02,0.06); p.rot = rnd(0,6.28); p.rotSpd = rnd(-0.09,0.09);
+    } else if (sys.type === "balloon") {
+      p.x = Math.random()*W; p.y = init ? Math.random()*H : H+70;
+      p.s = rnd(16,30); p.vy = -rnd(0.35,0.8); p.sway = rnd(0,6.28); p.swaySpd = rnd(0.008,0.02);
+      p.heart = Math.random() < 0.35;
+    } else if (sys.type === "stars") {
+      p.x = Math.random()*W; p.y = Math.random()*H;
+      p.r = rnd(0.6,2.2); p.tw = rnd(0,6.28); p.twSpd = rnd(0.01,0.05);
+    }
+    return p;
+  }
+  function drawBalloon(p){
+    ctx.save(); ctx.translate(p.x, p.y);
+    ctx.globalAlpha = 0.92; ctx.fillStyle = p.c;
+    if (p.heart) {
+      var s = p.s*0.55;
+      ctx.beginPath();
+      ctx.moveTo(0, s*0.9);
+      ctx.bezierCurveTo(-s*1.4, -s*0.2, -s*0.7, -s*1.3, 0, -s*0.4);
+      ctx.bezierCurveTo(s*0.7, -s*1.3, s*1.4, -s*0.2, 0, s*0.9);
+      ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.ellipse(0, -p.s*0.7, p.s*0.62, p.s*0.8, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-4,-p.s*0.02); ctx.lineTo(4,-p.s*0.02); ctx.lineTo(0,p.s*0.08); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = p.c; ctx.globalAlpha = 0.5; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(0, p.s*0.08);
+      ctx.quadraticCurveTo(6, p.s*0.5, -4, p.s*0.95); ctx.stroke();
+    }
+    ctx.restore(); ctx.globalAlpha = 1;
+  }
+  function draw(p){
+    var sys = p.sys;
+    if (sys.type === "petals") {
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = 0.9; ctx.fillStyle = p.c;
+      ctx.beginPath(); ctx.ellipse(0, 0, p.s, p.s*0.55, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,.45)";
+      ctx.beginPath(); ctx.ellipse(-p.s*0.25, -p.s*0.12, p.s*0.4, p.s*0.2, 0, 0, Math.PI*2); ctx.fill();
+      ctx.restore(); ctx.globalAlpha = 1;
+    } else if (sys.type === "rise") {
+      var a = 0.35 + 0.65*Math.abs(Math.sin(p.tw));
+      ctx.globalAlpha = a;
+      ctx.strokeStyle = p.c; ctx.lineWidth = 1.4;
+      ctx.shadowColor = p.c; ctx.shadowBlur = 8;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "rgba(255,255,255,.55)";
+      ctx.beginPath(); ctx.arc(p.x - p.r*0.3, p.y - p.r*0.3, p.r*0.25, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    } else if (sys.type === "drift" || sys.type === "stars") {
+      var a2 = 0.25 + 0.75*Math.abs(Math.sin(p.tw));
+      ctx.globalAlpha = a2; ctx.fillStyle = p.c;
+      ctx.shadowColor = p.c; ctx.shadowBlur = 10;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+    } else if (sys.type === "confetti") {
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = 0.95; ctx.fillStyle = p.c;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore(); ctx.globalAlpha = 1;
+    } else if (sys.type === "balloon") {
+      drawBalloon(p);
+    }
+  }
+  var meteors = [];
+  function spawnMeteor(){
+    meteors.push({x: rnd(W*0.3, W), y: rnd(-20, H*0.3), vx: -rnd(6,10), vy: rnd(3,5), life: 1});
+  }
+
+  function step(){
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i], sys = p.sys, dead = false;
+      if (sys.type === "petals") {
+        p.y += p.vy; p.sway += p.swaySpd; p.x += Math.sin(p.sway)*0.7; p.rot += p.rotSpd;
+        if (p.y > H + 34) dead = true;
+      } else if (sys.type === "rise") {
+        p.y += p.vy; p.wob += p.wobSpd; p.x += Math.sin(p.wob)*0.5; p.tw += p.twSpd;
+        if (p.y < -16) dead = true;
+      } else if (sys.type === "drift") {
+        p.x += p.vx; p.y += p.vy; p.tw += p.twSpd;
+        if (Math.random() < 0.008){ p.vx = rnd(-0.45,0.45); p.vy = rnd(-0.45,0.45); }
+        if (p.x < -10) p.x = W+10; if (p.x > W+10) p.x = -10;
+        if (p.y < -10) p.y = H+10; if (p.y > H+10) p.y = -10;
+      } else if (sys.type === "confetti") {
+        p.y += p.vy; p.sway += p.swaySpd; p.x += Math.sin(p.sway)*1.1; p.rot += p.rotSpd;
+        if (p.y > H + 20) dead = true;
+      } else if (sys.type === "balloon") {
+        p.y += p.vy; p.sway += p.swaySpd; p.x += Math.sin(p.sway)*0.6;
+        if (p.y < -90) dead = true;
+      } else if (sys.type === "stars") {
+        p.tw += p.twSpd;
+      }
+      if (dead) { parts[i] = make(sys, false); continue; }
+      draw(p);
+    }
+
+    requestAnimationFrame(step);
+  }
+  SYSTEMS.forEach(function(sys){
+    for (var i = 0; i < sys.count; i++) parts.push(make(sys, true));
+  });
+  step();
+})();
+
+</script>
+</body>
+</html>
