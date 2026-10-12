@@ -92,10 +92,25 @@ repeating-linear-gradient(-45deg,rgba(255,255,255,.028) 0 2px,transparent 2px 16
 linear-gradient(165deg,var(--bg),var(--bg2))}
 .wrap{background:transparent}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.batikshift{position:fixed;inset:-70px;z-index:1;pointer-events:none;opacity:.55;
+  background:repeating-linear-gradient(45deg,rgba(120,72,40,.07) 0 14px,transparent 14px 34px),repeating-linear-gradient(-45deg,rgba(120,72,40,.07) 0 14px,transparent 14px 34px);
+  animation:batikSlide 42s linear infinite}
+@keyframes batikSlide{from{background-position:0 0,0 0}to{background-position:130px 130px,-130px 130px}}
+.melati{position:fixed;top:0;z-index:5;pointer-events:none;transform-origin:top center;animation:melSway 5.5s ease-in-out infinite alternate}
+.melati u{display:block;width:2px;height:120px;margin:0 auto;background:linear-gradient(#7d8f5f,rgba(125,143,95,0))}
+.melati i{display:block;width:9px;height:9px;margin:2px auto;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffffff,#e7dfcb);box-shadow:0 0 6px rgba(255,255,255,.75)}
+@keyframes melSway{from{transform:rotate(-4.5deg)}to{transform:rotate(4.5deg)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="batikshift"></div>
+<div class="melati" style="left:10%;animation-delay:0s"><u></u><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="melati" style="left:88%;animation-delay:-2.8s"><u></u><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="melati" style="left:50%;animation-delay:-4.2s"><u></u><i></i><i></i><i></i><i></i></div>
 
 <div class="cover" id="cover">
   <div class="cover-inner">
@@ -375,6 +390,26 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Asap dupa mengepul naik (jawa)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{bx:W*0.5+(Math.random()-0.5)*W*0.5,y:i?Math.random()*H:H+20,
+    r:Math.random()*14+8,vy:-(Math.random()*0.7+0.35),ph:Math.random()*6.28,
+    sp:Math.random()*0.02+0.008,life:i?Math.random():0,max:1}}
+  for(var i=0;i<24;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.ph+=p.sp;p.life+=0.0035;
+      var px=p.bx+Math.sin(p.ph)*46*(1-p.life*0.5),pr=p.r*(1+p.life*1.6);
+      var a=0.16*(1-p.life);if(a<0)a=0;
+      if(p.life>=1||p.y<-60){P[k]=mk(false);continue}
+      var g=x.createRadialGradient(px,p.y,0,px,p.y,pr);
+      g.addColorStop(0,"rgba(200,190,175,"+a+")");g.addColorStop(1,"rgba(200,190,175,0)");
+      x.fillStyle=g;x.beginPath();x.arc(px,p.y,pr,0,6.283);x.fill();}
+    requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

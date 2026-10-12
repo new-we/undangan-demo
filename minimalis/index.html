@@ -83,9 +83,19 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .reveal.shown{opacity:1;transform:none}
 
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.divider{background:linear-gradient(90deg,var(--accent) 15%,#e9c766 40%,var(--accent) 65%);background-size:220% 100%;animation:divShine 4.5s linear infinite}
+@keyframes divShine{from{background-position:200% 0}to{background-position:-200% 0}}
+.sheen{position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(233,199,102,.08) 50%,transparent 58%);
+  background-size:260% 260%;animation:sheenMove 9s ease-in-out infinite alternate}
+@keyframes sheenMove{from{background-position:0% 0%}to{background-position:100% 100%}}
+
 </style>
 </head>
 <body>
+<canvas id="fx2"></canvas>
+<div class="sheen"></div>
 
 
 <div class="cover" id="cover">
@@ -303,6 +313,25 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 })();
 
 
+
+// Debu bokeh lembut melayang (minimalis)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*26+10,
+    vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.2,ph:Math.random()*6.28,
+    sp:Math.random()*0.015+0.006,a:Math.random()*0.07+0.04}}
+  for(var i=0;i<18;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.x+=p.vx;p.y+=p.vy;p.ph+=p.sp;
+      if(p.x<-40)p.x=W+40;if(p.x>W+40)p.x=-40;if(p.y<-40)p.y=H+40;if(p.y>H+40)p.y=-40;
+      var tw=p.a*(0.7+0.3*Math.sin(p.ph));
+      var g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+      g.addColorStop(0,"rgba(233,199,102,"+tw+")");g.addColorStop(1,"rgba(233,199,102,0)");
+      x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
+    requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

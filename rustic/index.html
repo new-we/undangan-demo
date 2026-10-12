@@ -92,10 +92,27 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .lights .bulb:nth-child(4n){animation-delay:1.9s}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.emberglow{position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 112%,rgba(255,140,40,.18),transparent 62%);
+  animation:glowFlick 3.4s ease-in-out infinite}
+@keyframes glowFlick{0%,100%{opacity:.7}30%{opacity:1}55%{opacity:.5}80%{opacity:.92}}
+.hanglamp{position:fixed;top:0;z-index:5;pointer-events:none;transform-origin:top center;animation:lampSway 6.5s ease-in-out infinite alternate}
+.hanglamp .cord{display:block;width:2px;height:80px;margin:0 auto;background:#5a4632}
+.hanglamp .shade{width:46px;height:30px;margin:-3px auto 0;background:linear-gradient(#7a5c3e,#463522);border-radius:6px 6px 15px 15px}
+.hanglamp .lbulb{width:17px;height:17px;margin:3px auto 0;border-radius:50%;background:radial-gradient(circle,#ffedb5,#ff9d3c);box-shadow:0 0 24px 9px rgba(255,157,60,.55);animation:bulbFlick 2.8s ease-in-out infinite}
+@keyframes lampSway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes bulbFlick{0%,100%{opacity:1}40%{opacity:.72}70%{opacity:.93}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="emberglow"></div>
+<div class="hanglamp" style="left:14%;animation-delay:0s"><span class="cord"></span><div class="shade"></div><div class="lbulb"></div></div>
+<div class="hanglamp" style="left:47%;animation-delay:-2.2s"><span class="cord" style="height:120px"></span><div class="shade"></div><div class="lbulb" style="animation-delay:-1s"></div></div>
+<div class="hanglamp" style="left:80%;animation-delay:-4.4s"><span class="cord" style="height:60px"></span><div class="shade"></div><div class="lbulb" style="animation-delay:-2s"></div></div>
 
 <div class="lights"><div class="wire"></div><div class="row"><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span></div></div>
 
@@ -377,6 +394,23 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Bara api beterbangan naik (rustic)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:H+10,r:Math.random()*2.4+0.8,
+    vy:-(Math.random()*1.1+0.4),vx:(Math.random()-0.5)*0.5,ph:Math.random()*6.28,
+    sp:Math.random()*0.09+0.03,col:["#ffb03c","#ff7a2e","#ffd97a"][Math.random()*3|0]}}
+  for(var i=0;i<30;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx+Math.sin(p.ph)*0.5;p.ph+=p.sp;
+      if(p.y<-12)P[k]=mk(false);else{var a=0.4+0.6*Math.abs(Math.sin(p.ph*3));
+        x.globalAlpha=a;x.fillStyle=p.col;x.shadowColor=p.col;x.shadowBlur=8;
+        x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}}
+    x.shadowBlur=0;x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

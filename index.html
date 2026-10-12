@@ -27,6 +27,15 @@ body{font-family:'Inter',system-ui,sans-serif;background:#faf7f4;color:#4a4239;l
 .card-body p{font-size:13.5px;color:#7a6f63;flex:1}
 .btn{display:inline-block;background:#b4764a;color:#fff;border-radius:999px;padding:11px 30px;font-size:14px;font-weight:600;text-align:center;margin-top:6px}
 footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
+.features{max-width:1080px;margin:0 auto;padding:10px 24px 6px}
+.features h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;color:#3d3429;margin-bottom:6px}
+.features .fsub{text-align:center;font-size:13.5px;color:#7a6f63;margin-bottom:18px;max-width:600px;margin-left:auto;margin-right:auto}
+.flist{display:grid;grid-template-columns:1fr;gap:12px;list-style:none}
+@media(min-width:640px){.flist{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.flist{grid-template-columns:1fr 1fr 1fr 1fr}}
+.flist li{background:#fff;border:1px solid #ecdfd3;border-radius:14px;padding:14px 16px;font-size:13px;color:#7a6f63}
+.flist li b{display:block;font-size:14px;color:#3d3429;margin-bottom:2px}
+.flist li b::before{content:"";display:inline-block;width:8px;height:8px;background:#b4764a;transform:rotate(45deg);margin-right:9px}
 </style>
 </head>
 <body>
@@ -35,6 +44,20 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
   <h1>Katalog Demo Undangan Pernikahan</h1>
   <p class="sub">Pilih salah satu dari 12 desain di bawah untuk melihat demo undangan digital lengkap — mulai dari sampul, profil mempelai, hitung mundur, galeri, amplop digital, hingga RSVP.</p>
 </header>
+<section class="features">
+  <h2>Fitur Undangan</h2>
+  <p class="fsub">Setiap desain undangan sudah lengkap dengan fitur-fitur berikut, dan masih bisa disesuaikan lagi sesuai permintaan.</p>
+  <ul class="flist">
+    <li><b>Musik Latar</b>Lagu pilihan sesuai permintaan, otomatis berbunyi saat undangan dibuka.</li>
+    <li><b>Hitung Mundur</b>Countdown otomatis ke hari dan jam acara.</li>
+    <li><b>Galeri Foto</b>Tampilkan momen prewedding atau foto keluarga.</li>
+    <li><b>Amplop Digital</b>Nomor rekening dengan tombol salin + alamat kirim kado.</li>
+    <li><b>RSVP WhatsApp</b>Tamu konfirmasi kehadiran langsung via WhatsApp.</li>
+    <li><b>Peta Lokasi</b>Tombol menuju Google Maps ke venue acara.</li>
+    <li><b>Animasi Bergerak</b>Setiap desain hidup dengan animasi khasnya masing-masing.</li>
+    <li><b>Ringan &amp; Praktis</b>Dibuka langsung di HP tanpa perlu install aplikasi.</li>
+  </ul>
+</section>
 <main class="grid">
   <a class="card" href="./floral/?to=Contoh">
     <img src="./assets/preview-floral.webp" alt="Preview tema Floral Elegan" loading="lazy">
@@ -129,7 +152,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     <img src="./assets/preview-fairy.webp" alt="Preview tema Fairy Garden" loading="lazy">
     <div class="card-body">
       <h2>Fairy Garden</h2>
-      <p>Taman peri malam hari dengan puluhan kunang-kunang, bunga bercahaya, dan kupu-kupu.</p>
+      <p>Taman peri malam hari dengan puluhan kunang-kunang, bunga bercahaya berdenyut, dan capung cahaya beterbangan.</p>
       <span class="btn">Lihat Demo</span>
     </div>
   </a>

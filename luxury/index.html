@@ -90,10 +90,19 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .deco i:nth-child(3){bottom:-7px;left:-7px}
 .deco i:nth-child(4){bottom:-7px;right:-7px}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.beam{position:fixed;top:-22%;z-index:3;pointer-events:none;width:120px;height:145%;
+  background:linear-gradient(rgba(255,216,130,.11),rgba(255,216,130,.015));transform:rotate(18deg);
+  filter:blur(7px);animation:beamSweep 12s ease-in-out infinite alternate}
+@keyframes beamSweep{from{transform:rotate(19deg) translateX(-13vw)}to{transform:rotate(13deg) translateX(15vw)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="beam" style="left:18%"></div>
+<div class="beam" style="left:64%;animation-delay:-6s;width:80px"></div>
 <div class="deco"><i></i><i></i><i></i><i></i></div>
 <div class="cover" id="cover">
   <div class="cover-inner">
@@ -373,6 +382,30 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Awan debu emas + bokeh berkilau (luxury)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){var big=Math.random()<0.45;
+    return{x:Math.random()*W,y:Math.random()*H,r:big?Math.random()*22+12:Math.random()*2.6+1,
+    vx:(Math.random()-0.5)*(big?0.22:0.4),vy:(Math.random()-0.5)*(big?0.18:0.35),
+    ph:Math.random()*6.28,sp:Math.random()*0.03+0.01,big:big,
+    a:big?Math.random()*0.10+0.05:Math.random()*0.5+0.4}}
+  for(var i=0;i<36;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.x+=p.vx;p.y+=p.vy;p.ph+=p.sp;
+      if(p.x<-50)p.x=W+50;if(p.x>W+50)p.x=-50;if(p.y<-50)p.y=H+50;if(p.y>H+50)p.y=-50;
+      if(p.big){var tw=p.a*(0.75+0.25*Math.sin(p.ph));
+        var g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+        g.addColorStop(0,"rgba(240,205,120,"+tw+")");g.addColorStop(1,"rgba(240,205,120,0)");
+        x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
+      else{var a2=p.a*(0.4+0.6*Math.abs(Math.sin(p.ph*2.4)));
+        x.globalAlpha=a2;x.fillStyle="#ffe9a8";x.shadowColor="#ffd76e";x.shadowBlur=9;
+        x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();x.shadowBlur=0;x.globalAlpha=1;}}
+    requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>
