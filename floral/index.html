@@ -92,10 +92,22 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 @keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
 @keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.bloom{position:fixed;z-index:4;pointer-events:none;width:56px;height:56px;animation:bloomPulse 5.5s ease-in-out infinite}
+.bloom i{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd9e0,#f2a9bd 55%,#e08ba0);box-shadow:0 0 16px rgba(242,169,189,.5)}
+.bloom i:nth-child(2){transform:rotate(72deg) scale(.8)}
+.bloom i:nth-child(3){transform:rotate(144deg) scale(.64)}
+.bloom b{position:absolute;left:21px;top:21px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,#fff8d9,#f7c948);box-shadow:0 0 12px #f7c948}
+@keyframes bloomPulse{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.14) rotate(10deg)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="bloom" style="top:14vh;left:6vw;animation-delay:0s"><i></i><i></i><i></i><b></b></div>
+<div class="bloom" style="top:64vh;right:5vw;animation-delay:-2.4s;transform:scale(.8)"><i></i><i></i><i></i><b></b></div>
+<div class="bloom" style="top:38vh;left:82vw;animation-delay:-4s;transform:scale(.65)"><i></i><i></i><i></i><b></b></div>
 
 <div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 <div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
@@ -379,6 +391,23 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Serbuk sari beterbangan (floral)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:H+8,r:Math.random()*2+0.8,
+    vy:-(Math.random()*0.5+0.2),ph:Math.random()*6.28,sp:Math.random()*0.05+0.02,
+    col:["#f7c948","#f2a9bd","#ffe9a8"][Math.random()*3|0]}}
+  for(var i=0;i<36;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.ph+=p.sp;p.x+=Math.sin(p.ph)*0.4;
+      if(p.y<-10)P[k]=mk(false);else{var a=0.35+0.65*Math.abs(Math.sin(p.ph*2));
+        x.globalAlpha=a;x.fillStyle=p.col;x.shadowColor=p.col;x.shadowBlur=7;
+        x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}}
+    x.shadowBlur=0;x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

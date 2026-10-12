@@ -83,14 +83,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .reveal.shown{opacity:1;transform:none}
 
 
-.butterfly{position:fixed;top:0;left:0;z-index:5;pointer-events:none;opacity:.95;animation:bflyPath var(--d,26s) linear infinite;animation-delay:var(--dl,0s)}
-.butterfly .w{position:absolute;top:-10px;width:15px;height:21px;background:var(--bc,#f2a9bd);opacity:.92}
-.butterfly .w.l{left:-14px;border-radius:80% 20% 70% 30%;transform-origin:right center;animation:flapL .45s ease-in-out infinite alternate}
-.butterfly .w.r{left:1px;border-radius:20% 80% 30% 70%;transform-origin:left center;animation:flapR .45s ease-in-out infinite alternate}
-.butterfly .bd{position:absolute;top:-8px;left:-1px;width:3px;height:17px;background:#8a5a44;border-radius:3px}
-@keyframes flapL{from{transform:rotateY(8deg)}to{transform:rotateY(72deg)}}
-@keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
-@keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
 
 /* --- Dekorasi Sunset --- */
@@ -112,10 +104,26 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .bird i::after{right:0;transform:rotate(20deg)}
 @keyframes birdFly{from{transform:translateX(110vw)}to{transform:translateX(-20vw)}}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.scloud{position:fixed;z-index:2;pointer-events:none;border-radius:50%;filter:blur(13px);
+  background:radial-gradient(ellipse,rgba(255,170,120,.5),rgba(255,170,120,0) 70%);
+  animation:cloudDrift var(--t,75s) linear infinite}
+@keyframes cloudDrift{from{transform:translateX(-32vw)}to{transform:translateX(118vw)}}
+.rays{position:fixed;top:6vh;left:50%;width:360px;height:360px;margin-left:-180px;z-index:2;pointer-events:none;border-radius:50%;
+  background:repeating-conic-gradient(rgba(255,200,120,.13) 0 6deg,transparent 6deg 15deg);
+  -webkit-mask:radial-gradient(circle,transparent 27%,#000 29%);mask:radial-gradient(circle,transparent 27%,#000 29%);
+  animation:raysSpin 75s linear infinite}
+@keyframes raysSpin{to{transform:rotate(360deg)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="rays"></div>
+<div class="scloud" style="top:14vh;left:0;width:230px;height:74px;--t:80s"></div>
+<div class="scloud" style="top:34vh;left:0;width:170px;height:56px;--t:62s;animation-delay:-40s"></div>
+<div class="scloud" style="top:52vh;left:0;width:200px;height:64px;--t:90s;animation-delay:-65s"></div>
 
 <div class="sunset-sun"></div>
 <div class="palm left"><div class="fronds"><span></span><span></span><span></span><span></span></div></div>
@@ -124,9 +132,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 <div class="bird" style="--bt:23%;--bd:32s;--bdl:-16s"><i></i></div>
 <div class="bird" style="--bt:10%;--bd:28s;--bdl:-23s"><i></i></div>
 
-<div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
   <div class="cover-inner">
@@ -477,6 +482,23 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Partikel panas melayang (sunset)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:H+10,r:Math.random()*2.6+1,
+    vy:-(Math.random()*0.9+0.35),ph:Math.random()*6.28,sp:Math.random()*0.05+0.02,
+    col:["#ffb36b","#ff8a5c","#ffd97a"][Math.random()*3|0]}}
+  for(var i=0;i<28;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.ph+=p.sp;p.x+=Math.sin(p.ph*1.4)*0.7;
+      if(p.y<-12)P[k]=mk(false);else{var a=0.35+0.65*Math.abs(Math.sin(p.ph*2.2));
+        x.globalAlpha=a;x.fillStyle=p.col;x.shadowColor=p.col;x.shadowBlur=8;
+        x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}}
+    x.shadowBlur=0;x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

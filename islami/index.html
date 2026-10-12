@@ -90,10 +90,23 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .lantern .lamp::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);width:3px;height:13px;background:#7a5c17;border-radius:2px}
 @keyframes sway{from{transform:rotate(3deg)}to{transform:rotate(-3deg)}}
 
+#fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
+.crescent{position:fixed;top:5vh;right:7vw;width:92px;height:92px;z-index:4;pointer-events:none;border-radius:50%;box-shadow:24px 11px 0 0 #f3d27a;transform:rotate(-16deg);animation:cresGlow 4.5s ease-in-out infinite}
+@keyframes cresGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(243,210,122,.4))}50%{filter:drop-shadow(0 0 26px rgba(243,210,122,.9))}}
+.gorb{position:fixed;z-index:4;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,238,180,.95),rgba(243,210,122,.12) 70%);animation:orbFloat var(--t,9s) ease-in-out infinite alternate}
+@keyframes orbFloat{from{transform:translateY(0);opacity:.5}to{transform:translateY(-48px);opacity:.95}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
+<div class="crescent"></div>
+<div class="gorb" style="top:30vh;left:10vw;width:26px;height:26px;--t:8s"></div>
+<div class="gorb" style="top:55vh;right:12vw;width:18px;height:18px;--t:11s;animation-delay:-4s"></div>
+<div class="gorb" style="top:72vh;left:20vw;width:32px;height:32px;--t:10s;animation-delay:-7s"></div>
+<div class="gorb" style="top:18vh;left:44vw;width:14px;height:14px;--t:7s;animation-delay:-2s"></div>
+<div class="gorb" style="top:82vh;right:30vw;width:22px;height:22px;--t:12s;animation-delay:-9s"></div>
 
 <div class="lantern" style="left:9%;animation-delay:-1s"><span class="string" style="height:64px"></span><div class="lamp"></div></div>
 <div class="lantern" style="left:45%;animation-delay:-3s"><span class="string" style="height:112px"></span><div class="lamp"></div></div>
@@ -377,6 +390,25 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   step();
 })();
 
+
+// Motes cahaya arabesque melayang (islami)
+(function(){
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){var d=Math.random()<0.3;return{x:Math.random()*W,y:i?Math.random()*H:H+10,
+    r:d?Math.random()*3+3:Math.random()*2.2+1,vy:-(Math.random()*0.45+0.15),
+    vx:(Math.random()-0.5)*0.3,ph:Math.random()*6.28,sp:Math.random()*0.04+0.015,
+    col:Math.random()<0.5?"#f3d27a":"#ffe9a8",dia:d}}
+  for(var i=0;i<30;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx+Math.sin(p.ph)*0.3;p.ph+=p.sp;
+      if(p.y<-14)P[k]=mk(false);else{var a=0.3+0.7*Math.abs(Math.sin(p.ph*1.7));
+        x.globalAlpha=a;x.fillStyle=p.col;x.shadowColor=p.col;x.shadowBlur=8;
+        if(p.dia){x.save();x.translate(p.x,p.y);x.rotate(0.785);x.fillRect(-p.r,-p.r,p.r*2,p.r*2);x.restore();}
+        else{x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}}}
+    x.shadowBlur=0;x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
 </script>
 </body>
 </html>

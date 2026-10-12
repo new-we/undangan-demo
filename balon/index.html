@@ -83,14 +83,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .reveal.shown{opacity:1;transform:none}
 
 
-.butterfly{position:fixed;top:0;left:0;z-index:5;pointer-events:none;opacity:.95;animation:bflyPath var(--d,26s) linear infinite;animation-delay:var(--dl,0s)}
-.butterfly .w{position:absolute;top:-10px;width:15px;height:21px;background:var(--bc,#f2a9bd);opacity:.92}
-.butterfly .w.l{left:-14px;border-radius:80% 20% 70% 30%;transform-origin:right center;animation:flapL .45s ease-in-out infinite alternate}
-.butterfly .w.r{left:1px;border-radius:20% 80% 30% 70%;transform-origin:left center;animation:flapR .45s ease-in-out infinite alternate}
-.butterfly .bd{position:absolute;top:-8px;left:-1px;width:3px;height:17px;background:#8a5a44;border-radius:3px}
-@keyframes flapL{from{transform:rotateY(8deg)}to{transform:rotateY(72deg)}}
-@keyframes flapR{from{transform:rotateY(-8deg)}to{transform:rotateY(-72deg)}}
-@keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
 
 /* --- Dekorasi Balon Cinta --- */
@@ -101,10 +93,28 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .css-heart i::after{left:50%;top:0}
 @keyframes heartUp{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-120vh) rotate(8deg)}}
 
+
+.cloud{position:fixed;z-index:2;pointer-events:none;border-radius:50%;filter:blur(11px);
+  background:radial-gradient(ellipse,rgba(255,255,255,.85),rgba(255,255,255,0) 70%);
+  animation:cloudDrift var(--t,60s) linear infinite}
+@keyframes cloudDrift{from{transform:translateX(-32vw)}to{transform:translateX(118vw)}}
+.rainbow{position:fixed;top:7vh;left:50%;transform:translateX(-50%);z-index:2;pointer-events:none;opacity:.85}
+.rbshine{animation:rbMove 5.5s linear infinite}
+@keyframes rbMove{from{stroke-dashoffset:660}to{stroke-dashoffset:0}}
+.ribbon{position:fixed;top:0;z-index:5;pointer-events:none;transform-origin:top center;animation:ribSway 4.6s ease-in-out infinite alternate}
+@keyframes ribSway{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+
+<svg class="rainbow" width="300" height="165" viewBox="0 0 300 165"><defs><linearGradient id="rbg" x1="0" x2="1"><stop offset="0" stop-color="#ff8a8a"/><stop offset=".2" stop-color="#ffb36b"/><stop offset=".4" stop-color="#ffe27a"/><stop offset=".6" stop-color="#9be29b"/><stop offset=".8" stop-color="#8ecdf5"/><stop offset="1" stop-color="#c9a8f5"/></linearGradient></defs><path d="M22 152 A128 128 0 0 1 278 152" fill="none" stroke="url(#rbg)" stroke-width="24" opacity=".5"/><path class="rbshine" d="M22 152 A128 128 0 0 1 278 152" fill="none" stroke="#ffffff" stroke-width="24" opacity=".55" stroke-dasharray="46 614"/></svg>
+<div class="cloud" style="top:20vh;left:0;width:200px;height:64px;--t:66s"></div>
+<div class="cloud" style="top:48vh;left:0;width:150px;height:48px;--t:52s;animation-delay:-28s"></div>
+<div class="cloud" style="top:70vh;left:0;width:180px;height:58px;--t:76s;animation-delay:-50s"></div>
+<svg class="ribbon" style="left:6%;animation-delay:0s" width="30" height="230" viewBox="0 0 30 230"><path d="M15 0 C 3 42, 27 82, 15 122 C 3 162, 27 198, 15 230" stroke="#ff9db0" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+<svg class="ribbon" style="right:6%;animation-delay:-2.3s" width="30" height="230" viewBox="0 0 30 230"><path d="M15 0 C 27 42, 3 82, 15 122 C 27 162, 3 198, 15 230" stroke="#8ecdf5" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
 
 <div class="css-heart" style="--hl:8%;--hd:13s;--hdl:-3s;--hs:24px;--hc:#f472b6"><i></i></div>
 <div class="css-heart" style="--hl:30%;--hd:17s;--hdl:-9s;--hs:32px;--hc:#60a5fa"><i></i></div>
@@ -112,9 +122,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 <div class="css-heart" style="--hl:72%;--hd:19s;--hdl:-12s;--hs:28px;--hc:#a78bfa"><i></i></div>
 <div class="css-heart" style="--hl:88%;--hd:14s;--hdl:-1s;--hs:20px;--hc:#34d399"><i></i></div>
 
-<div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
-<div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
   <div class="cover-inner">
