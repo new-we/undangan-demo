@@ -179,17 +179,39 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
   background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9),rgba(191,220,216,.35));
   animation:drift linear infinite}
 @media(max-width:380px){.hero-names{font-size:42px}.cover-names{font-size:36px}}
-/* layar lebar: sisi kanan-kiri ikut terisi lautan, tidak kosong */
+/* layar lebar: ornamen ikut memenuhi sisi kanan-kiri + semuanya bergerak */
+.wo,.side-fx{display:none}
 @media(min-width:520px){
   body{background:url('./img/bg.jpg?v=1') center/cover fixed}
   body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     background:linear-gradient(rgba(22,69,90,.35),rgba(22,69,90,.15));backdrop-filter:blur(3px)}
   .wrap{z-index:1;box-shadow:0 0 70px rgba(0,0,0,.45)}
-  #cover{max-width:480px;margin:0 auto}
+  /* cover: ornamen asli mengecil mengelilingi kartu tengah */
+  .orn.side-l{left:13%;width:24%}.orn.side-r{right:13%;width:24%}
+  .flw.a{width:15%;left:25%}.flw.b{width:14%;right:25%}
+  .flw.c{width:15%;left:25%}.flw.d{width:16%;right:25%}
+  .flw.e{width:12%;left:28%}.flw.f{width:12%;right:28%}
+  .frm.fl{left:19%;width:13%}.frm.fr{right:19%;width:13%}
+  /* ornamen lebar khusus cover */
+  .wo{display:block;position:absolute;mix-blend-mode:multiply;pointer-events:none;z-index:2}
+  .wo.wl1{left:1%;top:9%;width:22vw;max-width:330px}
+  .wo.wr1{right:1%;top:9%;width:22vw;max-width:330px}
+  .wo.wl2{left:2%;bottom:9%;width:19vw;max-width:290px}
+  .wo.wr2{right:2%;bottom:9%;width:19vw;max-width:290px}
+  /* ornamen sisi fixed: bergerak di kanan-kiri seluruh halaman */
+  .side-fx{display:block;position:fixed;z-index:0;mix-blend-mode:multiply;pointer-events:none}
+  .side-fx.sl1{left:1%;top:12%;width:19vw;max-width:300px}
+  .side-fx.sr1{right:1%;top:12%;width:19vw;max-width:300px}
+  .side-fx.sl2{left:2%;bottom:8%;width:17vw;max-width:270px}
+  .side-fx.sr2{right:2%;bottom:8%;width:17vw;max-width:270px}
 }
 </style>
 </head>
 <body>
+<img class="side-fx sl1 lambai" style="animation-duration:4400ms" src="./img/bunga.jpg?v=1" alt="">
+<img class="side-fx sr1 lambai" style="animation-duration:4800ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+<img class="side-fx sl2 lambai" style="animation-duration:5200ms" src="./img/bunga.jpg?v=1" alt="">
+<img class="side-fx sr2 lambai" style="animation-duration:4200ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
 <div class="wrap">
 
 <!-- ============ COVER (peta ornamen cermin 167) ============ -->
@@ -207,6 +229,10 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
   <img class="flw d lambai" style="animation-duration:4800ms" src="./img/bunga.jpg?v=1" alt="">
   <img class="flw e lambai" style="animation-duration:4200ms" src="./img/bunga.jpg?v=1" alt="">
   <img class="flw f lambai" style="animation-duration:5000ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="wo wl1 lambai" style="animation-duration:4300ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="wo wr1 lambai" style="animation-duration:4700ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <img class="wo wl2 lambai" style="animation-duration:5100ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="wo wr2 lambai" style="animation-duration:4500ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
   <div class="cover-card">
     <img class="cnr c1" src="./img/frame.jpg?v=1" alt="">
     <img class="cnr c2" src="./img/frame.jpg?v=1" alt="">
