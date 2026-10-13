@@ -108,6 +108,13 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 @keyframes cflap{from{transform:scaleY(1)}to{transform:scaleY(.3)}}
 @keyframes craneFly{0%{transform:translate(-14vw,32vh)}25%{transform:translate(20vw,25vh)}50%{transform:translate(55vw,33vh)}75%{transform:translate(85vw,27vh)}100%{transform:translate(120vw,31vh)}}
 
+/* Kolom ucapan (DEMO: tanpa penyimpanan) */
+.ucapan-list{margin-top:20px;display:flex;flex-direction:column;gap:12px;text-align:left}
+.ucapan-item{background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:14px 16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.ucapan-item strong{font-size:14px}
+.ucapan-item .ucapan-tgl{font-size:11px;opacity:.55;margin-left:8px}
+.ucapan-item p{font-size:13.5px;margin:4px 0 0}
+.ucapan-note{font-size:11px;opacity:.5;margin-top:10px;text-align:center}
 </style>
 </head>
 <body>
@@ -244,6 +251,13 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
       <textarea id="rsvpMsg" rows="4" placeholder="Tulis ucapan dan doa restu..." maxlength="300"></textarea>
       <button class="btn" type="submit">Kirim via WhatsApp</button>
     </form>
+    <div class="ucapan-list" id="ucapanList">
+      <div class="ucapan-item"><strong>Hamba Allah</strong><span class="ucapan-tgl">12 Okt 2026</span><p>Barakallahu laka wa baraka alaika wa jamaa bainakuma fii khair. Selamat menempuh hidup baru!</p></div>
+      <div class="ucapan-item"><strong>Rina</strong><span class="ucapan-tgl">11 Okt 2026</span><p>Selamat Raka &amp; Sinta! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.</p></div>
+      <div class="ucapan-item"><strong>Dimas</strong><span class="ucapan-tgl">10 Okt 2026</span><p>Akhirnya! Turut berbahagia untuk kalian berdua. Sampai jumpa di hari H!</p></div>
+    </div>
+    <p class="ucapan-note">Demo: ucapan yang dikirim hanya tampil di layar ini dan tidak tersimpan.</p>
+
   </section>
 
   <footer class="reveal">
@@ -492,6 +506,25 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
       else{x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.globalAlpha=0.9;x.fillStyle=p.col;
         x.beginPath();x.ellipse(0,0,p.s,p.s*0.55,0,0,6.283);x.fill();x.restore();}}
     x.globalAlpha=1;requestAnimationFrame(step);})();
+})();
+</script>
+<script>
+
+// Kolom ucapan demo: ucapan langsung tampil di layar (TANPA penyimpanan/backend)
+(function(){
+  var form = document.getElementById("rsvpForm");
+  var list = document.getElementById("ucapanList");
+  if (!form || !list) return;
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  form.addEventListener("submit", function(){
+    var nama = document.getElementById("rsvpName").value.trim().slice(0, 40);
+    var pesan = document.getElementById("rsvpMsg").value.trim().slice(0, 300);
+    if (!nama && !pesan) return;
+    var div = document.createElement("div");
+    div.className = "ucapan-item";
+    div.innerHTML = "<strong>" + esc(nama || "Tamu") + "</strong><span class='ucapan-tgl'>baru saja</span><p>" + esc(pesan || "-") + "</p>";
+    list.insertBefore(div, list.firstChild);
+  });
 })();
 </script>
 </body>
