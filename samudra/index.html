@@ -179,6 +179,14 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
   background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9),rgba(191,220,216,.35));
   animation:drift linear infinite}
 @media(max-width:380px){.hero-names{font-size:42px}.cover-names{font-size:36px}}
+/* layar lebar: sisi kanan-kiri ikut terisi lautan, tidak kosong */
+@media(min-width:520px){
+  body{background:url('./img/bg.jpg?v=1') center/cover fixed}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(rgba(22,69,90,.35),rgba(22,69,90,.15));backdrop-filter:blur(3px)}
+  .wrap{z-index:1;box-shadow:0 0 70px rgba(0,0,0,.45)}
+  #cover{max-width:480px;margin:0 auto}
+}
 </style>
 </head>
 <body>
