@@ -14,7 +14,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+body{font-family:'Jost',sans-serif;color:var(--ink);overflow-x:hidden;
+  background:var(--cream) url('./img/bg-kebun.jpg?v=2') center/cover fixed}
 h1,h2,h3,.serif{font-family:'Prata',serif;color:var(--teal);font-weight:400}
 .script{font-family:'Great Vibes',cursive}
 .wrap{max-width:480px;margin:0 auto;position:relative}
@@ -170,12 +171,21 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 
 /* kelopak */
 .petal{position:fixed;top:-6vh;z-index:60;pointer-events:none;animation:fall linear infinite}
+.edge-fl{position:fixed;top:16%;width:170px;z-index:1;mix-blend-mode:multiply;pointer-events:none;display:none}
+.edge-fl.ef-l{left:1%}.edge-fl.ef-r{right:1%;transform:scaleX(-1)}
+.edge-fl.ef-r.lambai{animation-name:lambaiR}
+.edge-fl.low{top:58%}
+@media(min-width:760px){.edge-fl{display:block}}
 @media(max-width:380px){.hero-names{font-size:44px}.cover-names{font-size:38px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
+<img class="edge-fl ef-l lambai" src="./img/bunga-goyang.jpg?v=2" alt="">
+<img class="edge-fl ef-r lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="">
+<img class="edge-fl ef-l low lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
+<img class="edge-fl ef-r low lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
 <!-- ================= COVER ================= -->
 <div id="cover">
   <div class="cover-bg"></div>
