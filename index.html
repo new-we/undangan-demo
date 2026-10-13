@@ -22,8 +22,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:#faf7f4;color:#4a4239;l
 .card{background:#fff;border:1px solid #ecdfd3;border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(120,90,60,.08);transition:transform .25s ease,box-shadow .25s ease}
 .card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(120,90,60,.14)}
 .card img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
-.card .preview-ph{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center}
-.card .preview-ph span{font-family:'Playfair Display',serif;font-style:italic;font-size:40px;color:rgba(255,255,255,.95);text-shadow:0 2px 12px rgba(0,0,0,.35);padding:0 20px;text-align:center;line-height:1.25}
 .card-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .card-body h2{font-family:'Playfair Display',serif;font-size:21px;color:#3d3429}
 .card-body p{font-size:13.5px;color:#7a6f63;flex:1}
@@ -165,7 +163,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./autumn/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#c1550e,#8a3b12)"><span>Autumn Maple</span></div>
+    <img src="./assets/preview-autumn.webp" alt="Preview tema Autumn Maple" loading="lazy">
     <div class="card-body">
       <h2>Autumn Maple</h2>
       <p>Daun maple berguguran dengan bingkai ganda yang hangat.</p>
@@ -173,7 +171,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./winter/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#a8c8e8,#4a90c2)"><span>Winter Snow</span></div>
+    <img src="./assets/preview-winter.webp" alt="Preview tema Winter Snow" loading="lazy">
     <div class="card-body">
       <h2>Winter Snow</h2>
       <p>Kepingan salju turun dengan kartu kaca buram yang elegan.</p>
@@ -181,7 +179,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./tropical/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1e8a5a,#e2603f)"><span>Tropical Palm</span></div>
+    <img src="./assets/preview-tropical.webp" alt="Preview tema Tropical Palm" loading="lazy">
     <div class="card-body">
       <h2>Tropical Palm</h2>
       <p>Daun palem bergoyang dengan kelopak hibiskus yang jatuh.</p>
@@ -189,7 +187,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./lavender/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#b08ae0,#8a5fbf)"><span>Lavender Dream</span></div>
+    <img src="./assets/preview-lavender.webp" alt="Preview tema Lavender Dream" loading="lazy">
     <div class="card-body">
       <h2>Lavender Dream</h2>
       <p>Lebah beterbangan dengan kelopak lavender yang melayang.</p>
@@ -197,7 +195,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./sunflower/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#f2b134,#e8a013)"><span>Sunflower Ceria</span></div>
+    <img src="./assets/preview-sunflower.webp" alt="Preview tema Sunflower Ceria" loading="lazy">
     <div class="card-body">
       <h2>Sunflower Ceria</h2>
       <p>Bunga matahari bergoyang dengan serbuk sari melayang.</p>
@@ -205,7 +203,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./darkrose/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#5a1420,#c22a3c)"><span>Dark Romance</span></div>
+    <img src="./assets/preview-darkrose.webp" alt="Preview tema Dark Romance" loading="lazy">
     <div class="card-body">
       <h2>Dark Romance</h2>
       <p>Kelopak mawar merah jatuh dengan cahaya lilin yang berkedip.</p>
@@ -213,7 +211,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./vineyard/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#2a3a22,#9fbf6a)"><span>Vineyard Night</span></div>
+    <img src="./assets/preview-vineyard.webp" alt="Preview tema Vineyard Night" loading="lazy">
     <div class="card-body">
       <h2>Vineyard Night</h2>
       <p>Kunang-kunang berkelip di kebun anggur malam hari.</p>
@@ -221,7 +219,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./bamboo/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#8aaa6a,#5a7a3a)"><span>Bamboo Zen</span></div>
+    <img src="./assets/preview-bamboo.webp" alt="Preview tema Bamboo Zen" loading="lazy">
     <div class="card-body">
       <h2>Bamboo Zen</h2>
       <p>Daun bambu jatuh dengan pita kabut yang bergerak tenang.</p>
@@ -229,7 +227,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./lantern/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1a2a4a,#ff9a3c)"><span>Sky Lantern</span></div>
+    <img src="./assets/preview-lantern.webp" alt="Preview tema Sky Lantern" loading="lazy">
     <div class="card-body">
       <h2>Sky Lantern</h2>
       <p>Lampion terbang ke langit malam bertabur bintang.</p>
@@ -237,7 +235,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./carnival/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#e2453c,#2a9db8)"><span>Carnival Meriah</span></div>
+    <img src="./assets/preview-carnival.webp" alt="Preview tema Carnival Meriah" loading="lazy">
     <div class="card-body">
       <h2>Carnival Meriah</h2>
       <p>Pita serpentin dan bendera segitiga yang meriah.</p>
@@ -245,7 +243,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./cyberpunk/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1a0a2e,#ff2a6d)"><span>Neon Cyber</span></div>
+    <img src="./assets/preview-cyberpunk.webp" alt="Preview tema Neon Cyber" loading="lazy">
     <div class="card-body">
       <h2>Neon Cyber</h2>
       <p>Hujan kode matrix dengan grid neon futuristik.</p>
@@ -253,7 +251,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./synthwave/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#2e1a5e,#ff6ad5)"><span>Retro Wave</span></div>
+    <img src="./assets/preview-synthwave.webp" alt="Preview tema Retro Wave" loading="lazy">
     <div class="card-body">
       <h2>Retro Wave</h2>
       <p>Matahari retro dengan grid synthwave yang bergerak.</p>
@@ -261,7 +259,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./artdeco/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1a1a1e,#d4af37)"><span>Art Deco Gold</span></div>
+    <img src="./assets/preview-artdeco.webp" alt="Preview tema Art Deco Gold" loading="lazy">
     <div class="card-body">
       <h2>Art Deco Gold</h2>
       <p>Debu emas berkilau dengan ornamen geometris 1920-an.</p>
@@ -269,7 +267,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./boho/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#d8b88a,#c08a5a)"><span>Boho Pampas</span></div>
+    <img src="./assets/preview-boho.webp" alt="Preview tema Boho Pampas" loading="lazy">
     <div class="card-body">
       <h2>Boho Pampas</h2>
       <p>Rumput pampas bergoyang dengan bulu yang melayang.</p>
@@ -277,7 +275,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./lighthouse/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#0a2a4a,#ffd97a)"><span>Mercusuar</span></div>
+    <img src="./assets/preview-lighthouse.webp" alt="Preview tema Mercusuar" loading="lazy">
     <div class="card-body">
       <h2>Mercusuar</h2>
       <p>Sorot mercusuar berputar dengan ombak yang tenang.</p>
@@ -285,7 +283,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./paris/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#e8b8c4,#d48a9e)"><span>Parisian Chic</span></div>
+    <img src="./assets/preview-paris.webp" alt="Preview tema Parisian Chic" loading="lazy">
     <div class="card-body">
       <h2>Parisian Chic</h2>
       <p>Merpati terbang dengan siluet menara Eiffel yang romantis.</p>
@@ -293,7 +291,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./venice/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1a8a7a,#c9a24c)"><span>Venice Canal</span></div>
+    <img src="./assets/preview-venice.webp" alt="Preview tema Venice Canal" loading="lazy">
     <div class="card-body">
       <h2>Venice Canal</h2>
       <p>Gondola meluncur dengan riak air kanal yang lembut.</p>
@@ -301,7 +299,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./santorini/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#6aa8e8,#1e6fd9)"><span>Santorini Blue</span></div>
+    <img src="./assets/preview-santorini.webp" alt="Preview tema Santorini Blue" loading="lazy">
     <div class="card-body">
       <h2>Santorini Blue</h2>
       <p>Kelopak bougenville jatuh dengan kubah biru khas Santorini.</p>
@@ -309,7 +307,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./morocco/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#2e1a4e,#e8a13c)"><span>Moroccan Night</span></div>
+    <img src="./assets/preview-morocco.webp" alt="Preview tema Moroccan Night" loading="lazy">
     <div class="card-body">
       <h2>Moroccan Night</h2>
       <p>Lentera gantung bergoyang dengan pola zellige eksotis.</p>
@@ -317,7 +315,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./marigold/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#f08a2e,#e87a1e)"><span>Marigold India</span></div>
+    <img src="./assets/preview-marigold.webp" alt="Preview tema Marigold India" loading="lazy">
     <div class="card-body">
       <h2>Marigold India</h2>
       <p>Kelopak marigold jatuh dengan api diya yang berkedip.</p>
@@ -325,7 +323,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./koi/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#5ab8a8,#e86a3c)"><span>Koi Pond</span></div>
+    <img src="./assets/preview-koi.webp" alt="Preview tema Koi Pond" loading="lazy">
     <div class="card-body">
       <h2>Koi Pond</h2>
       <p>Ikan koi berenang dengan riak air kolam yang menenangkan.</p>
@@ -333,7 +331,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./zenmist/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#a8b8a8,#6a7a6a)"><span>Zen Mist</span></div>
+    <img src="./assets/preview-zenmist.webp" alt="Preview tema Zen Mist" loading="lazy">
     <div class="card-body">
       <h2>Zen Mist</h2>
       <p>Pita kabut bergerak dengan taman batu zen yang tenang.</p>
@@ -341,7 +339,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./korean/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#f0a8c0,#7ab8e8)"><span>Hanbok Pastel</span></div>
+    <img src="./assets/preview-korean.webp" alt="Preview tema Hanbok Pastel" loading="lazy">
     <div class="card-body">
       <h2>Hanbok Pastel</h2>
       <p>Lentera kertas pastel melayang dengan kelopak bunga.</p>
@@ -349,7 +347,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./bali/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#d8a84c,#1e6e4e)"><span>Bali Exotic</span></div>
+    <img src="./assets/preview-bali.webp" alt="Preview tema Bali Exotic" loading="lazy">
     <div class="card-body">
       <h2>Bali Exotic</h2>
       <p>Asap dupa mengepul dengan gapura dan kamboja Bali.</p>
@@ -357,7 +355,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./cendrawasih/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1e5a3c,#ff7a3c)"><span>Cendrawasih</span></div>
+    <img src="./assets/preview-cendrawasih.webp" alt="Preview tema Cendrawasih" loading="lazy">
     <div class="card-body">
       <h2>Cendrawasih</h2>
       <p>Burung cendrawasih terbang dengan ekor bergelombang.</p>
@@ -365,7 +363,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./loveletter/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#e8a0a8,#c23c4e)"><span>Love Letter</span></div>
+    <img src="./assets/preview-loveletter.webp" alt="Preview tema Love Letter" loading="lazy">
     <div class="card-body">
       <h2>Love Letter</h2>
       <p>Amplop dan hati melayang dengan segel lilin romantis.</p>
@@ -373,7 +371,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./cinema/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#2a2a2e,#e8b64c)"><span>Cinema Classic</span></div>
+    <img src="./assets/preview-cinema.webp" alt="Preview tema Cinema Classic" loading="lazy">
     <div class="card-body">
       <h2>Cinema Classic</h2>
       <p>Lampu sorot menyapu dengan tirai bioskop klasik.</p>
@@ -381,7 +379,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./vinyl/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#c0784a,#b4552e)"><span>Retro Vinyl</span></div>
+    <img src="./assets/preview-vinyl.webp" alt="Preview tema Retro Vinyl" loading="lazy">
     <div class="card-body">
       <h2>Retro Vinyl</h2>
       <p>Piringan hitam berputar dengan not musik yang melayang.</p>
@@ -389,7 +387,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./picnic/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#9ec86a,#e8b62e)"><span>Picnic Daisy</span></div>
+    <img src="./assets/preview-picnic.webp" alt="Preview tema Picnic Daisy" loading="lazy">
     <div class="card-body">
       <h2>Picnic Daisy</h2>
       <p>Lebah dan bunga daisy bergoyang di piknik yang ceria.</p>
@@ -397,7 +395,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./constellation/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#1a2a5e,#a0c8ff)"><span>Constellation</span></div>
+    <img src="./assets/preview-constellation.webp" alt="Preview tema Constellation" loading="lazy">
     <div class="card-body">
       <h2>Constellation</h2>
       <p>Bintang jatuh dengan garis konstelasi yang berkelip.</p>
@@ -405,7 +403,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./aurora/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#0a3a2e,#3ce87a)"><span>Aurora Borealis</span></div>
+    <img src="./assets/preview-aurora.webp" alt="Preview tema Aurora Borealis" loading="lazy">
     <div class="card-body">
       <h2>Aurora Borealis</h2>
       <p>Tirai aurora menari di langit malam yang magis.</p>
@@ -413,7 +411,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./rainbow/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#a8d8f0,#ff8a8a)"><span>After Rain</span></div>
+    <img src="./assets/preview-rainbow.webp" alt="Preview tema After Rain" loading="lazy">
     <div class="card-body">
       <h2>After Rain</h2>
       <p>Pelangi setelah hujan dengan awan yang bergerak.</p>
@@ -421,7 +419,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./gardenlights/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#2a3a22,#ffd97a)"><span>Garden Lights</span></div>
+    <img src="./assets/preview-gardenlights.webp" alt="Preview tema Garden Lights" loading="lazy">
     <div class="card-body">
       <h2>Garden Lights</h2>
       <p>Untaian lampu taman bergoyang dengan cahaya hangat.</p>
@@ -429,7 +427,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./teaparty/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#a8c8a8,#7a9e7e)"><span>Tea Party</span></div>
+    <img src="./assets/preview-teaparty.webp" alt="Preview tema Tea Party" loading="lazy">
     <div class="card-body">
       <h2>Tea Party</h2>
       <p>Uap teh mengepul dengan cangkir teh yang manis.</p>
@@ -437,7 +435,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./library/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#c8a86a,#8a5a2e)"><span>Vintage Library</span></div>
+    <img src="./assets/preview-library.webp" alt="Preview tema Vintage Library" loading="lazy">
     <div class="card-body">
       <h2>Vintage Library</h2>
       <p>Halaman buku beterbangan di perpustakaan vintage.</p>
@@ -445,7 +443,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./travel/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#6aa8d8,#2a7ab8)"><span>Travel Journey</span></div>
+    <img src="./assets/preview-travel.webp" alt="Preview tema Travel Journey" loading="lazy">
     <div class="card-body">
       <h2>Travel Journey</h2>
       <p>Pesawat kertas melintasi peta perjalanan cinta.</p>
@@ -453,7 +451,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./kite/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#7ac8e8,#e84c6a)"><span>Kite Festival</span></div>
+    <img src="./assets/preview-kite.webp" alt="Preview tema Kite Festival" loading="lazy">
     <div class="card-body">
       <h2>Kite Festival</h2>
       <p>Layang-layang bergoyang dengan awan yang ceria.</p>
@@ -461,7 +459,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./bubble/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#b8a8e8,#5ac8e8)"><span>Bubble Pop</span></div>
+    <img src="./assets/preview-bubble.webp" alt="Preview tema Bubble Pop" loading="lazy">
     <div class="card-body">
       <h2>Bubble Pop</h2>
       <p>Gelembung sabun berkilau yang naik perlahan.</p>
@@ -469,7 +467,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./candy/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#f0a8c0,#f06a9e)"><span>Candy Sweet</span></div>
+    <img src="./assets/preview-candy.webp" alt="Preview tema Candy Sweet" loading="lazy">
     <div class="card-body">
       <h2>Candy Sweet</h2>
       <p>Permen dan lolipop melayang yang manis.</p>
@@ -477,7 +475,7 @@ footer{text-align:center;padding:24px;font-size:12.5px;color:#9a8d7e}
     </div>
   </a>
   <a class="card" href="./waterfall/?to=Contoh">
-    <div class="preview-ph" style="background:linear-gradient(135deg,#6ac8c8,#1e9e9e)"><span>Waterfall</span></div>
+    <img src="./assets/preview-waterfall.webp" alt="Preview tema Waterfall" loading="lazy">
     <div class="card-body">
       <h2>Waterfall</h2>
       <p>Tirai air terjun dengan kabut percikan yang segar.</p>
