@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan Raka &amp; Sinta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:ital,wght@0,300;0,400;0,500;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{--deep:#16455A;--ocean:#1B5A73;--foam:#BFDCD8;--sand:#F2EAD9;--cream:#F7FBFA;--ink:#2e3a3e;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Prata',serif;color:var(--deep);font-weight:400}
+.script{font-family:'Great Vibes',cursive}
+.wrap{max-width:480px;margin:0 auto;position:relative;background:var(--cream);box-shadow:0 0 40px rgba(22,69,90,.12)}
+
+/* ===== animasi (cermin 167) ===== */
+@keyframes lambai{0%{transform:rotateZ(-5deg)}100%{transform:rotateZ(5deg)}}
+@keyframes lambaiR{0%{transform:scaleX(-1) rotateZ(-5deg)}100%{transform:scaleX(-1) rotateZ(5deg)}}
+@keyframes slideDown{0%{transform:translateY(-110%);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes slideUp{0%{transform:translateY(110%);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes slideRight{0%{transform:translateX(-60px);opacity:0}100%{transform:translateX(0);opacity:1}}
+@keyframes slideRightR{0%{transform:scaleX(-1) translateX(-60px);opacity:0}100%{transform:scaleX(-1) translateX(0);opacity:1}}
+@keyframes fadeUp{0%{transform:translateY(40px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes fadeRight{0%{transform:translateX(-40px);opacity:0}100%{transform:translateX(0);opacity:1}}
+@keyframes zoomOut{0%{transform:scale(1.22);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes drift{0%{transform:translateY(-6vh) translateX(0) rotate(0);opacity:0}10%{opacity:.8}100%{transform:translateY(106vh) translateX(4vw) rotate(300deg);opacity:0}}
+.lambai{animation:lambai 3.4s ease-in-out infinite alternate;transform-origin:top center}
+.rv{opacity:0}
+.rv.on[data-a="fade-up"]{animation:fadeUp .9s ease forwards}
+.rv.on[data-a="fade-right"]{animation:fadeRight .9s ease forwards}
+.rv.on[data-a="zoom-out"]{animation:zoomOut 1.1s ease forwards}
+.rv.on[data-a="lambai"]{opacity:1;animation:lambai 3.4s ease-in-out infinite alternate}
+
+/* ===== COVER ===== */
+#cover{position:fixed;inset:0;z-index:50;overflow:hidden;transition:opacity 1.1s ease,visibility 1.1s}
+#cover.hide{opacity:0;visibility:hidden;pointer-events:none}
+.cover-bg{position:absolute;inset:0;background:url('./img/bg.jpg?v=1') center/cover;animation:zoomOut 2.4s ease}
+.orn{position:absolute;mix-blend-mode:multiply;pointer-events:none;z-index:2}
+.orn.side-l{left:-10%;top:6%;width:52%}
+.orn.side-r{right:-10%;top:6%;width:52%}
+.ombak{position:absolute;left:0;width:100%;height:14%;object-fit:cover;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+.ombak.top{top:0;animation:slideDown 1.4s ease .2s backwards}
+.ombak.bottom{bottom:0;animation:slideUp 1.4s ease .2s backwards}
+.frm{position:absolute;width:30%;mix-blend-mode:multiply;z-index:4;pointer-events:none}
+.frm.fl{top:12%;left:-4%;animation:slideRight 1.2s ease .5s backwards}
+.frm.fr{top:12%;right:-4%;animation:slideRightR 1.2s ease .5s backwards}
+.flw{position:absolute;mix-blend-mode:multiply;z-index:4;pointer-events:none}
+.flw.a{top:20%;left:-8%;width:38%}
+.flw.b{top:16%;right:-9%;width:34%}
+.flw.c{bottom:22%;left:-9%;width:36%}
+.flw.d{bottom:18%;right:-8%;width:40%}
+.flw.e{top:44%;left:-11%;width:30%}
+.flw.f{top:48%;right:-11%;width:30%}
+.cover-card{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:min(84%,370px);
+  background:rgba(247,251,250,.95);border:1px solid var(--foam);border-radius:20px;
+  padding:46px 28px 38px;text-align:center;box-shadow:0 24px 60px rgba(22,69,90,.22);
+  animation:fadeUp 1.2s ease .5s backwards}
+.cnr{position:absolute;width:58px;mix-blend-mode:multiply;pointer-events:none}
+.cnr.c1{top:8px;left:8px}.cnr.c2{top:8px;right:8px;transform:scaleX(-1)}
+.cnr.c3{bottom:8px;left:8px;transform:scaleY(-1)}.cnr.c4{bottom:8px;right:8px;transform:scale(-1)}
+.kicker{letter-spacing:.4em;font-size:11px;color:var(--ocean);text-transform:uppercase;margin-bottom:12px}
+.cover-names{font-size:42px;line-height:1.2;margin:4px 0}
+.cover-names .amp{color:#7fb3c8;font-size:34px}
+.cover-date{letter-spacing:.26em;font-size:12px;color:var(--deep);margin-top:10px;text-transform:uppercase}
+.divider{display:flex;align-items:center;gap:10px;margin:18px auto;max-width:220px;color:#7fb3c8}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--foam)}
+.guest-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a989c;margin-bottom:6px}
+.guest-name{font-family:'Great Vibes',cursive;font-size:34px;color:var(--deep);margin-bottom:20px}
+.btn-open{background:var(--deep);color:#fff;border:none;border-radius:999px;padding:15px 42px;
+  font-family:'Jost';letter-spacing:.22em;font-size:13px;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 12px 28px rgba(22,69,90,.35);transition:transform .25s}
+.btn-open:hover{transform:scale(1.05)}
+
+/* ===== ISI ===== */
+#main{display:none}
+#main.show{display:block}
+section{position:relative;padding:70px 26px;overflow:hidden}
+.sec-head{text-align:center;margin-bottom:32px;position:relative;z-index:2}
+.sec-head h2{font-size:30px;margin:8px 0}
+.sec-head p{font-size:14px;color:#6d7f84;max-width:330px;margin:0 auto;line-height:1.7}
+.s-orn{position:absolute;mix-blend-mode:multiply;z-index:1;pointer-events:none;opacity:.95}
+.s-orn.l{left:-9%;width:36%}.s-orn.r{right:-9%;width:36%}
+.sec-panel{position:absolute;left:0;width:100%;height:11%;object-fit:cover;mix-blend-mode:multiply;z-index:1;pointer-events:none;opacity:.9}
+.sec-panel.top{top:0}.sec-panel.bottom{bottom:0}
+
+/* hero */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;text-align:center;
+  background:url('./img/bg.jpg?v=1') center/cover;padding:90px 26px 70px}
+#hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(247,251,250,.15),rgba(247,251,250,.5))}
+#hero .inner{position:relative;z-index:2}
+.hero-names{font-size:50px;line-height:1.2;margin:8px 0}
+.hero-names .amp{color:#7fb3c8}
+.count{display:flex;gap:10px;justify-content:center;margin:24px 0 18px;position:relative;z-index:2;flex-wrap:wrap}
+.count .box{background:rgba(255,255,255,.88);border:1px solid var(--foam);border-radius:14px;min-width:66px;
+  padding:12px 6px;box-shadow:0 8px 20px rgba(22,69,90,.12)}
+.count .num{font-family:'Prata';font-size:25px;color:var(--deep)}
+.count .lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8a989c;margin-top:4px}
+.btn-sea{display:inline-block;background:var(--deep);color:#fff;text-decoration:none;border-radius:999px;
+  padding:13px 38px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;position:relative;z-index:2;
+  box-shadow:0 12px 26px rgba(22,69,90,.3)}
+
+/* couple */
+.couple-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:2}
+.person{background:#fff;border:1px solid var(--foam);border-radius:18px;padding:20px 12px;text-align:center;
+  box-shadow:0 14px 34px rgba(22,69,90,.1);position:relative}
+.person .foto{width:110px;height:140px;object-fit:cover;border-radius:70px;margin:0 auto 12px;
+  border:3px solid var(--foam);box-shadow:0 8px 18px rgba(0,0,0,.12)}
+.person h3{font-size:20px;margin-bottom:2px}
+.person .ortu{font-size:12px;color:#8a989c;line-height:1.6}
+.p-cnr{position:absolute;width:44px;mix-blend-mode:multiply;pointer-events:none;top:6px}
+.p-cnr.pl{left:6px}.p-cnr.pr{right:6px;transform:scaleX(-1)}
+.and-sep{text-align:center;font-family:'Great Vibes';font-size:44px;color:#7fb3c8;margin:14px 0;position:relative;z-index:2}
+
+/* story */
+.timeline{position:relative;z-index:2;max-width:360px;margin:0 auto;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--foam)}
+.t-item{position:relative;margin-bottom:24px;background:#fff;border:1px solid var(--foam);border-radius:14px;
+  padding:16px;box-shadow:0 10px 24px rgba(22,69,90,.08)}
+.t-item::before{content:"";position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;
+  background:var(--ocean);border:3px solid var(--cream);box-shadow:0 0 0 2px var(--foam)}
+.t-item .th{font-family:'Prata';color:var(--deep);font-size:17px}
+.t-item .td{font-size:11px;letter-spacing:.2em;color:#7fb3c8;text-transform:uppercase;margin:2px 0 8px}
+.t-item p{font-size:13.5px;line-height:1.75;color:#5a6a6e}
+
+/* venue */
+.venue-card{background:#fff;border:1px solid var(--foam);border-radius:18px;padding:30px 24px;text-align:center;
+  margin-bottom:18px;position:relative;z-index:2;box-shadow:0 14px 34px rgba(22,69,90,.1)}
+.venue-card h3{font-size:23px;margin-bottom:6px}
+.venue-card .tgl{letter-spacing:.22em;font-size:12px;color:#7fb3c8;text-transform:uppercase;margin-bottom:10px}
+.venue-card .jam{font-family:'Prata';font-size:18px;color:var(--deep);margin-bottom:8px}
+.venue-card p{font-size:13.5px;line-height:1.7;color:#5a6a6e}
+.btn-map{display:inline-block;margin-top:14px;background:var(--deep);color:#fff;text-decoration:none;
+  border-radius:999px;padding:11px 30px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+
+/* galeri */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:2}
+.gal img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid var(--foam);
+  box-shadow:0 10px 24px rgba(22,69,90,.12)}
+
+/* rsvp, wishes, gift */
+.card-box{background:#fff;border:1px solid var(--foam);border-radius:18px;padding:30px 24px;text-align:center;
+  position:relative;z-index:2;box-shadow:0 14px 34px rgba(22,69,90,.1);margin-bottom:18px}
+.card-box p{font-size:13.5px;line-height:1.75;color:#5a6a6e;margin-bottom:16px}
+.btn-wa{display:inline-block;background:#3f7d4e;color:#fff;text-decoration:none;border-radius:999px;
+  padding:13px 34px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin:6px}
+.btn-sand{display:inline-block;background:#c9a86a;color:#fff;text-decoration:none;border-radius:999px;
+  padding:13px 34px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin:6px}
+.rek{background:var(--cream);border:1px dashed #7fb3c8;border-radius:12px;padding:14px;margin:12px 0}
+.rek .bank{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#7fb3c8}
+.rek .norek{font-family:'Prata';font-size:20px;color:var(--deep);margin:6px 0 2px}
+.btn-copy{background:none;border:1px solid var(--foam);border-radius:999px;padding:8px 22px;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--deep);cursor:pointer;margin-top:8px}
+#wishForm input,#wishForm textarea{width:100%;border:1px solid var(--foam);border-radius:12px;padding:12px 14px;
+  font-family:'Jost';font-size:14px;margin-bottom:12px;background:var(--cream);color:var(--ink)}
+#wishList{display:flex;flex-direction:column;gap:12px;position:relative;z-index:2;max-height:360px;overflow-y:auto}
+.wish{background:#fff;border:1px solid var(--foam);border-radius:14px;padding:14px 16px;text-align:left}
+.wish .wn{font-family:'Prata';color:var(--deep);font-size:15px}
+.wish .wt{font-size:11px;color:#7fb3c8;letter-spacing:.12em;text-transform:uppercase;margin:2px 0 6px}
+.wish p{font-size:13.5px;line-height:1.7;color:#5a6a6e}
+
+/* stream */
+.stream-box{position:relative;z-index:2;background:var(--deep);border-radius:18px;padding:34px 24px;text-align:center;
+  color:#fff;box-shadow:0 14px 34px rgba(22,69,90,.25);overflow:hidden}
+.stream-box h3{color:#fff;font-size:24px;margin-bottom:8px}
+.stream-box p{font-size:13.5px;line-height:1.75;opacity:.9;margin-bottom:18px}
+.btn-live{display:inline-block;background:#e04848;color:#fff;text-decoration:none;border-radius:999px;
+  padding:13px 38px;font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+
+/* thanks */
+#thanks{text-align:center;background:linear-gradient(160deg,var(--deep),var(--ocean));color:#fff}
+#thanks h2{color:#fff;font-size:30px;margin-bottom:10px}
+#thanks p{font-size:13.5px;line-height:1.8;opacity:.92;max-width:330px;margin:0 auto 6px}
+#thanks .script{font-size:42px;color:var(--foam);margin-top:14px}
+footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#9aa8ac;text-transform:uppercase;background:var(--cream)}
+.bubble{position:fixed;bottom:-6vh;z-index:60;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9),rgba(191,220,216,.35));
+  animation:drift linear infinite}
+@media(max-width:380px){.hero-names{font-size:42px}.cover-names{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ============ COVER (peta ornamen cermin 167) ============ -->
+<div id="cover">
+  <div class="cover-bg"></div>
+  <img class="orn side-l lambai" style="animation-duration:4600ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="orn side-r lambai" style="animation-duration:5200ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <img class="ombak top" src="./img/ombak.jpg?v=1" alt="">
+  <img class="ombak bottom" src="./img/ombak.jpg?v=1" alt="">
+  <img class="frm fl" src="./img/frame.jpg?v=1" alt="">
+  <img class="frm fr" src="./img/frame.jpg?v=1" alt="">
+  <img class="flw a lambai" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw b lambai" style="animation-duration:4500ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw c lambai" style="animation-duration:4000ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw d lambai" style="animation-duration:4800ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw e lambai" style="animation-duration:4200ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw f lambai" style="animation-duration:5000ms" src="./img/bunga.jpg?v=1" alt="">
+  <div class="cover-card">
+    <img class="cnr c1" src="./img/frame.jpg?v=1" alt="">
+    <img class="cnr c2" src="./img/frame.jpg?v=1" alt="">
+    <img class="cnr c3" src="./img/frame.jpg?v=1" alt="">
+    <img class="cnr c4" src="./img/frame.jpg?v=1" alt="">
+    <div class="kicker">Undangan Pernikahan</div>
+    <div class="cover-names serif">Raka <span class="amp">&amp;</span> Sinta</div>
+    <div class="cover-date">Sabtu, 12 Juni 2027</div>
+    <div class="divider">❦</div>
+    <div class="guest-label">Kepada Yth.<br>Bapak/Ibu/Saudara/i</div>
+    <div class="guest-name" id="guestName">Tamu Undangan</div>
+    <button class="btn-open" id="openBtn">Buka Undangan</button>
+  </div>
+</div>
+
+<!-- ============ ISI ============ -->
+<div id="main">
+
+<section id="hero">
+  <img class="s-orn l lambai" style="top:12%" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:12%;animation-duration:4500ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn l lambai" style="top:52%;animation-duration:4200ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:56%;animation-duration:4800ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="inner">
+    <div class="kicker rv" data-a="fade-up">Our Wedding Day</div>
+    <div class="hero-names serif rv" data-a="fade-right">Raka <span class="amp">&amp;</span> Sinta</div>
+    <div class="cover-date rv" data-a="fade-up">Sabtu, 12 Juni 2027</div>
+    <div class="count rv" data-a="fade-up">
+      <div class="box"><div class="num" id="cdD">0</div><div class="lbl">Hari</div></div>
+      <div class="box"><div class="num" id="cdH">0</div><div class="lbl">Jam</div></div>
+      <div class="box"><div class="num" id="cdM">0</div><div class="lbl">Menit</div></div>
+      <div class="box"><div class="num" id="cdS">0</div><div class="lbl">Detik</div></div>
+    </div>
+    <a class="btn-sea rv" data-a="zoom-out" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Raka+%26+Sinta&dates=20270612T010000Z/20270612T040000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
+  </div>
+</section>
+
+<section id="mempelai">
+  <img class="sec-panel top" src="./img/ombak.jpg?v=1" alt="">
+  <img class="s-orn l lambai" style="top:20%" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:20%;animation-duration:4600ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="zoom-out">
+    <div class="kicker">Bride &amp; Groom</div>
+    <h2>Mempelai</h2>
+    <p>Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyempurnakan separuh agama kami.</p>
+  </div>
+  <div class="couple-grid">
+    <div class="person rv" data-a="fade-up">
+      <img class="p-cnr pl" src="./img/frame.jpg?v=1" alt=""><img class="p-cnr pr" src="./img/frame.jpg?v=1" alt="">
+      <img class="foto" src="./img/couple-1.jpg?v=1" alt="Raka">
+      <h3>Raka</h3><div class="ortu">Putra dari<br>Bapak H. Bambang<br>&amp; Ibu Hj. Ratna</div>
+    </div>
+    <div class="person rv" data-a="fade-up">
+      <img class="p-cnr pl" src="./img/frame.jpg?v=1" alt=""><img class="p-cnr pr" src="./img/frame.jpg?v=1" alt="">
+      <img class="foto" src="./img/couple-2.jpg?v=1" alt="Sinta">
+      <h3>Sinta</h3><div class="ortu">Putri dari<br>Bapak H. Slamet<br>&amp; Ibu Hj. Dewi</div>
+    </div>
+  </div>
+  <div class="and-sep rv" data-a="zoom-out">&amp;</div>
+  <img class="sec-panel bottom" src="./img/ombak.jpg?v=1" alt="">
+</section>
+
+<section id="story" style="background:#fff">
+  <img class="s-orn l lambai" style="top:8%;animation-duration:4300ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:60%;animation-duration:4700ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="zoom-out">
+    <div class="kicker">Our Journey</div>
+    <h2>Love Story</h2>
+    <p>Setiap kisah cinta itu indah, tapi kisah kami adalah favorit kami.</p>
+  </div>
+  <div class="timeline">
+    <div class="t-item rv" data-a="fade-up"><div class="th">Pertemuan Pertama</div><div class="td">2019 — Pantai</div><p>Takdir mempertemukan kami di tepi pantai saat liburan keluarga. Sapaan sederhana menjadi awal segalanya.</p></div>
+    <div class="t-item rv" data-a="fade-up"><div class="th">Menjalin Kasih</div><div class="td">2021</div><p>Seiring berjalannya waktu, benih cinta tumbuh. Kami memutuskan melangkah lebih serius.</p></div>
+    <div class="t-item rv" data-a="fade-up"><div class="th">Lamaran</div><div class="td">2026</div><p>Dengan restu kedua keluarga, sebuah cincin melingkar menjadi janji sehidup semati.</p></div>
+    <div class="t-item rv" data-a="fade-up"><div class="th">Menuju Pernikahan</div><div class="td">2027</div><p>Kini saatnya mengikat janji suci dalam pernikahan yang insya Allah penuh berkah.</p></div>
+  </div>
+</section>
+
+<section id="galeri">
+  <img class="s-orn r lambai" style="top:10%" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="fade-up">
+    <div class="kicker">Moments</div>
+    <h2>Galeri</h2>
+    <p>Potret kebahagiaan yang ingin kami bagi bersama Anda.</p>
+  </div>
+  <div class="gal">
+    <img class="rv" data-a="zoom-out" src="./img/couple-1.jpg?v=1" alt="Galeri 1">
+    <img class="rv" data-a="zoom-out" src="./img/couple-2.jpg?v=1" alt="Galeri 2">
+    <img class="rv" data-a="zoom-out" src="./img/bg.jpg?v=1" alt="Galeri 3">
+    <img class="rv" data-a="zoom-out" src="./img/bunga.jpg?v=1" alt="Galeri 4">
+  </div>
+</section>
+
+<section id="venue" style="background:#fff">
+  <img class="sec-panel top" src="./img/ombak.jpg?v=1" alt="">
+  <img class="s-orn l lambai" style="top:16%;animation-duration:4400ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:16%;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="zoom-out">
+    <div class="kicker">Save The Date</div>
+    <h2>Waktu &amp; Tempat</h2>
+    <p>Kami sangat berharap Bapak/Ibu/Saudara/i berkenan hadir pada acara kami.</p>
+  </div>
+  <div class="venue-card rv" data-a="fade-up">
+    <h3>Akad Nikah</h3><div class="tgl">Sabtu, 12 Juni 2027</div>
+    <div class="jam">08.00 — 10.00 WIB</div>
+    <p>Pantai Biru Resort<br>Jl. Pesisir Indah No. 8, Sidoarjo</p>
+    <a class="btn-map" href="https://maps.google.com/?q=Sidoarjo" target="_blank" rel="noopener">Lihat Peta</a>
+  </div>
+  <div class="venue-card rv" data-a="fade-up">
+    <h3>Resepsi</h3><div class="tgl">Sabtu, 12 Juni 2027</div>
+    <div class="jam">11.00 — 13.00 WIB</div>
+    <p>Pantai Biru Resort<br>Jl. Pesisir Indah No. 8, Sidoarjo</p>
+    <a class="btn-map" href="https://maps.google.com/?q=Sidoarjo" target="_blank" rel="noopener">Lihat Peta</a>
+  </div>
+  <img class="sec-panel bottom" src="./img/ombak.jpg?v=1" alt="">
+</section>
+
+<section id="rsvp">
+  <img class="s-orn l lambai" style="top:30%;animation-duration:5000ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:30%;animation-duration:4200ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="fade-up">
+    <div class="kicker">Konfirmasi</div>
+    <h2>RSVP</h2>
+    <p>Mohon konfirmasi kehadiran Anda melalui WhatsApp.</p>
+  </div>
+  <div class="card-box rv" data-a="fade-up">
+    <p>Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir. Mohon konfirmasi sebelum 1 Juni 2027.</p>
+    <a class="btn-wa" href="https://wa.me/6288905579037?text=Halo%2C%20saya%20akan%20hadir%20di%20pernikahan%20Raka%20%26%20Sinta">Saya Hadir</a>
+    <a class="btn-sand" href="https://wa.me/6288905579037?text=Halo%2C%20maaf%20saya%20berhalangan%20hadir%20di%20pernikahan%20Raka%20%26%20Sinta">Berhalangan</a>
+  </div>
+</section>
+
+<section id="ucapan" style="background:#fff">
+  <img class="s-orn r lambai" style="top:14%;animation-duration:4600ms" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="fade-up">
+    <div class="kicker">Doa &amp; Harapan</div>
+    <h2>Ucapan</h2>
+    <p>Tuliskan doa terbaik Anda untuk kedua mempelai.</p>
+  </div>
+  <form id="wishForm" class="card-box rv" data-a="fade-up" style="text-align:left">
+    <input id="wName" type="text" placeholder="Nama Anda" required>
+    <textarea id="wText" rows="3" placeholder="Tulis ucapan & doa..." required></textarea>
+    <button class="btn-open" type="submit" style="width:100%">Kirim Ucapan</button>
+  </form>
+  <div id="wishList">
+    <div class="wish"><div class="wn">Budi Santoso</div><div class="wt">2 hari lalu</div><p>Barakallahu laka wa baraka alaika wa jama'a bainakuma fi khair. Selamat menempuh hidup baru!</p></div>
+    <div class="wish"><div class="wn">Ani Wijaya</div><div class="wt">3 hari lalu</div><p>Selamat Raka &amp; Sinta! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.</p></div>
+  </div>
+</section>
+
+<section id="amplop">
+  <img class="sec-panel top" src="./img/ombak.jpg?v=1" alt="">
+  <img class="s-orn l lambai" style="top:24%" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="fade-up">
+    <div class="kicker">Tanda Kasih</div>
+    <h2>Amplop Digital</h2>
+    <p>Doa restu Anda adalah hadiah terindah. Namun jika berkenan memberi tanda kasih:</p>
+  </div>
+  <div class="card-box rv" data-a="fade-up">
+    <div class="rek"><div class="bank">Bank BCA</div><div class="norek">123 456 7890</div>
+      <div style="font-size:13px;color:#5a6a6e">a.n. Raka</div>
+      <button class="btn-copy" data-rek="1234567890">Salin Nomor</button></div>
+    <div class="rek"><div class="bank">Bank Mandiri</div><div class="norek">098 765 4321</div>
+      <div style="font-size:13px;color:#5a6a6e">a.n. Sinta</div>
+      <button class="btn-copy" data-rek="0987654321">Salin Nomor</button></div>
+  </div>
+  <img class="sec-panel bottom" src="./img/ombak.jpg?v=1" alt="">
+</section>
+
+<section id="mohon" style="background:#fff">
+  <img class="s-orn l lambai" style="top:20%;animation-duration:4300ms" src="./img/bunga.jpg?v=1" alt="">
+  <img class="s-orn r lambai" style="top:20%;animation-duration:4900ms;animation-name:lambaiR" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="zoom-out">
+    <div class="kicker">Dengan Hormat</div>
+    <h2>Mohon Doa Restu</h2>
+    <p style="max-width:360px">Tanpa mengurangi rasa hormat, izinkan kami mengharapkan kehadiran Bapak/Ibu/Saudara/i melalui undangan digital ini, serta memberikan doa restu kepada kami. Terima kasih.</p>
+  </div>
+</section>
+
+<section id="stream">
+  <img class="s-orn r lambai" style="top:16%" src="./img/bunga.jpg?v=1" alt="">
+  <div class="sec-head rv" data-a="fade-up">
+    <div class="kicker">Live</div>
+    <h2>Live Streaming</h2>
+    <p>Saksikan rangkaian acara pernikahan kami secara langsung.</p>
+  </div>
+  <div class="stream-box rv" data-a="zoom-out">
+    <img class="flw lambai" style="top:8px;left:-14px;width:120px" src="./img/bunga.jpg?v=1" alt="">
+    <img class="flw lambai" style="top:8px;right:-14px;width:120px;animation-duration:4400ms" src="./img/bunga.jpg?v=1" alt="">
+    <h3>Akad Nikah Live</h3>
+    <p>Sabtu, 12 Juni 2027 — 08.00 WIB<br>Live streaming akan dimulai 15 menit sebelum acara.</p>
+    <a class="btn-live" href="https://youtube.com" target="_blank" rel="noopener">Tonton Live</a>
+  </div>
+</section>
+
+<section id="thanks">
+  <img class="flw a lambai" src="./img/bunga.jpg?v=1" alt="">
+  <img class="flw b lambai" style="animation-duration:4500ms" src="./img/bunga.jpg?v=1" alt="">
+  <div class="rv" data-a="fade-up" style="position:relative;z-index:2">
+    <div class="kicker" style="color:var(--foam)">Terima Kasih</div>
+    <h2>Thank You</h2>
+    <p>Atas kehadiran dan doa restu yang diberikan, kami mengucapkan terima kasih yang sebesar-besarnya.</p>
+    <div class="script">Raka &amp; Sinta</div>
+  </div>
+</section>
+<footer>Undangan Digital &bull; Raka &amp; Sinta</footer>
+
+</div>
+</div>
+
+<script>
+(function(){
+  var to = new URLSearchParams(location.search).get('to');
+  if(to){ document.getElementById('guestName').textContent = to; }
+  var cover = document.getElementById('cover'), main = document.getElementById('main');
+
+  // gelembung laut berjatuhan
+  for(var i=0;i<12;i++){
+    var b = document.createElement('div');
+    b.className = 'bubble';
+    var s = 6 + Math.random()*12;
+    b.style.cssText = 'left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+s+'px;'
+      + 'animation-duration:'+(8+Math.random()*8)+'s;animation-delay:'+(Math.random()*9)+'s';
+    document.body.appendChild(b);
+  }
+
+  document.getElementById('openBtn').addEventListener('click', function(){
+    cover.classList.add('hide');
+    main.classList.add('show');
+    document.body.style.overflow = '';
+    setTimeout(function(){ observe(); window.scrollTo(0,0); }, 150);
+  });
+  document.body.style.overflow = 'hidden';
+
+  var target = new Date('2027-06-12T08:00:00+07:00').getTime();
+  function tick(){
+    var d = target - Date.now(); if(d < 0) d = 0;
+    document.getElementById('cdD').textContent = Math.floor(d/864e5);
+    document.getElementById('cdH').textContent = Math.floor(d/36e5)%24;
+    document.getElementById('cdM').textContent = Math.floor(d/6e4)%60;
+    document.getElementById('cdS').textContent = Math.floor(d/1e3)%60;
+  }
+  tick(); setInterval(tick, 1000);
+
+  var io;
+  function observe(){
+    io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  }
+
+  document.querySelectorAll('.btn-copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.getAttribute('data-rek');
+      if(navigator.clipboard){ navigator.clipboard.writeText(t); }
+      b.textContent = 'Tersalin!'; setTimeout(function(){ b.textContent = 'Salin Nomor'; }, 1600);
+    });
+  });
+
+  // ucapan demo (frontend-only, hilang saat refresh)
+  document.getElementById('wishForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var n = document.getElementById('wName').value.trim(),
+        t = document.getElementById('wText').value.trim();
+    if(!n || !t) return;
+    var d = document.createElement('div');
+    d.className = 'wish';
+    d.innerHTML = '<div class="wn"></div><div class="wt">baru saja</div><p></p>';
+    d.querySelector('.wn').textContent = n;
+    d.querySelector('p').textContent = t;
+    var list = document.getElementById('wishList');
+    list.insertBefore(d, list.firstChild);
+    document.getElementById('wName').value = '';
+    document.getElementById('wText').value = '';
+  });
+})();
+</script>
+</body>
+</html>
