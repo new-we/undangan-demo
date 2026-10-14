@@ -46,13 +46,10 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600}
 .rv.on[data-a="fade-right"]{animation:fadeRight .9s ease forwards}
 .rv.on[data-a="zoom-in"]{animation:zoomIn 1s ease forwards}
 
-/* ============ CAMAR (JS flock) ============ */
+/* ============ CAMAR (siluet SVG — tanpa gambar, tanpa kotak) ============ */
 #gulls{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden}
 .gull{position:absolute;top:0;left:0;will-change:transform}
-.gull img{display:block;width:100%;border-radius:50%;
-  -webkit-mask-image:radial-gradient(circle,#000 52%,transparent 70%);
-  mask-image:radial-gradient(circle,#000 52%,transparent 70%);
-  filter:sepia(.25) saturate(1.25)}
+.gull svg{display:block;width:100%;height:auto;overflow:visible}
 
 /* ============ ORNAMEN SISI DESKTOP ============ */
 .side-fx{display:none}
@@ -65,10 +62,13 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600}
   .side-ship img{width:100%;display:block;border-radius:10px;border:2px solid rgba(233,203,127,.5)}
   .side-fx.left .side-ship{left:24px;top:20%}
   .side-fx.right .side-ship{right:24px;top:52%;animation-delay:-3.2s;width:150px}
-  .side-rope{position:absolute;width:115px;border-radius:12px;border:2px solid rgba(233,203,127,.45);
+  .side-anchor{position:absolute;width:96px;height:96px;border-radius:50%;
+    border:2px solid rgba(233,203,127,.55);display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 30%,rgba(36,80,115,.85),rgba(13,31,48,.92));
     animation:floatY 7.5s ease-in-out infinite;box-shadow:0 10px 26px rgba(0,0,0,.4)}
-  .side-fx.left .side-rope{left:60px;top:58%}
-  .side-fx.right .side-rope{right:60px;top:16%;animation-delay:-3.8s}
+  .side-anchor svg{width:52px;height:52px}
+  .side-fx.left .side-anchor{left:66px;top:58%}
+  .side-fx.right .side-anchor{right:66px;top:16%;animation-delay:-3.8s}
   .side-wave{position:absolute;bottom:-4px;left:0;width:100%;height:80px;background-repeat:repeat-x;
     background-size:600px 80px;animation:waveSlide 9s linear infinite;opacity:.45}
 }
@@ -86,13 +86,15 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600}
 .ship-main{position:absolute;z-index:4;left:50%;bottom:44%;width:min(94%,520px);
   transform:translateX(-50%);animation:bob 5.4s ease-in-out infinite;
   filter:drop-shadow(0 20px 26px rgba(0,0,0,.4))}
-.ship-main img{width:100%;display:block;border-radius:12px}
-.flag{position:absolute;top:4.5%;left:60%;width:0;height:0;
-  border-top:13px solid transparent;border-bottom:13px solid transparent;border-left:36px solid var(--sunset);
-  transform-origin:left center;animation:flagWave 1.5s ease-in-out infinite;
-  filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.ship-main img{width:100%;display:block;
+  -webkit-mask-image:radial-gradient(115% 105% at 50% 42%,#000 66%,transparent 98%);
+  mask-image:radial-gradient(115% 105% at 50% 42%,#000 66%,transparent 98%);
+  filter:saturate(1.14) sepia(.14) contrast(1.03)}
 .ship-far{position:absolute;z-index:3;bottom:33%;animation:driftFar linear infinite}
-.ship-far img{width:100%;display:block;border-radius:8px}
+.ship-far img{width:100%;display:block;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 70%);
+  mask-image:radial-gradient(ellipse at center,#000 40%,transparent 70%);
+  filter:sepia(.38) saturate(1.35) brightness(.97)}
 .ship-far.f1{width:125px;animation-duration:100s;opacity:.9}
 .ship-far.f2{width:82px;bottom:39%;animation-duration:150s;animation-delay:-70s;opacity:.65}
 .waves{position:absolute;z-index:5;left:0;right:0;bottom:-4px;height:130px;
@@ -115,12 +117,14 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600}
 @media(max-width:480px){.ship-main{bottom:47%;width:96%}}
 .ticket::before{content:"";position:absolute;inset:9px;border:1px dashed rgba(233,203,127,.65);
   border-radius:10px;pointer-events:none}
-.rope-c{position:absolute;width:54px;height:54px;object-fit:cover;border-radius:10px;
-  border:2px solid var(--gold-l);box-shadow:0 4px 12px rgba(0,0,0,.45);z-index:2}
-.rope-c.tl{top:-16px;left:-16px;transform:rotate(-8deg)}
-.rope-c.tr{top:-16px;right:-16px;transform:rotate(8deg) scaleX(-1)}
-.rope-c.bl{bottom:-16px;left:-16px;transform:rotate(8deg) scaleY(-1)}
-.rope-c.br{bottom:-16px;right:-16px;transform:rotate(-8deg) scale(-1)}
+.eyelets{position:absolute;inset:-16px;pointer-events:none;
+  background:
+    radial-gradient(circle,#0d1f30 0 4px,#e9cb7f 4px 7px,#7a5a1c 7px 9px,rgba(0,0,0,0) 9.5px),
+    radial-gradient(circle,#0d1f30 0 4px,#e9cb7f 4px 7px,#7a5a1c 7px 9px,rgba(0,0,0,0) 9.5px),
+    radial-gradient(circle,#0d1f30 0 4px,#e9cb7f 4px 7px,#7a5a1c 7px 9px,rgba(0,0,0,0) 9.5px),
+    radial-gradient(circle,#0d1f30 0 4px,#e9cb7f 4px 7px,#7a5a1c 7px 9px,rgba(0,0,0,0) 9.5px);
+  background-size:22px 22px;background-repeat:no-repeat;
+  background-position:0 0,100% 0,0 100%,100% 100%}
 .tix-kicker{letter-spacing:.34em;font-size:10px;color:var(--gold-l);text-transform:uppercase}
 .tix-no{font-size:10px;letter-spacing:.24em;color:#e9d3a3;margin-top:6px}
 .ticket h1{font-size:clamp(38px,10vw,48px);color:#fff8e6;margin:10px 0 2px;line-height:1.15;font-weight:600}
@@ -279,12 +283,12 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 <!-- ornamen sisi desktop -->
 <div class="side-fx left" aria-hidden="true">
   <div class="side-ship"><img src="img/pinisi.jpg" alt=""></div>
-  <img class="side-rope" src="img/frame.jpg" alt="">
+  <div class="side-anchor"><svg viewBox="0 0 24 24" fill="none" stroke="#e9cb7f" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="5" r="2.2"/><path d="M12 7.5V21M5 12H2.5M21.5 12H19M4 14.5c0 4 3.5 6.5 8 6.5s8-2.5 8-6.5M7 10.5h10"/></svg></div>
   <div class="side-wave" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='80' viewBox='0 0 600 80'%3E%3Cpath d='M0 45 Q75 22 150 45 T300 45 T450 45 T600 45 V80 H0 Z' fill='%23e8823c'/%3E%3C/svg%3E&quot;)"></div>
 </div>
 <div class="side-fx right" aria-hidden="true">
   <div class="side-ship"><img src="img/pinisi.jpg" alt=""></div>
-  <img class="side-rope" src="img/frame.jpg" alt="">
+  <div class="side-anchor"><svg viewBox="0 0 24 24" fill="none" stroke="#e9cb7f" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="5" r="2.2"/><path d="M12 7.5V21M5 12H2.5M21.5 12H19M4 14.5c0 4 3.5 6.5 8 6.5s8-2.5 8-6.5M7 10.5h10"/></svg></div>
   <div class="side-wave" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='80' viewBox='0 0 600 80'%3E%3Cpath d='M0 45 Q75 22 150 45 T300 45 T450 45 T600 45 V80 H0 Z' fill='%23c9962e'/%3E%3C/svg%3E&quot;)"></div>
 </div>
 
@@ -297,7 +301,6 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
   <div class="ship-far f2"><img src="img/pinisi.jpg" alt=""></div>
   <div class="ship-main">
     <img src="img/pinisi.jpg" alt="Kapal Pinisi">
-    <div class="flag"></div>
   </div>
   <div class="waves">
     <div class="wave w1" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='104' viewBox='0 0 600 104'%3E%3Cpath d='M0 58 Q75 30 150 58 T300 58 T450 58 T600 58 V104 H0 Z' fill='%2316324a'/%3E%3C/svg%3E&quot;)"></div>
@@ -305,10 +308,7 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
     <div class="wave w3" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='52' viewBox='0 0 600 52'%3E%3Cpath d='M0 30 Q75 14 150 30 T300 30 T450 30 T600 30 V52 H0 Z' fill='%23e8823c'/%3E%3C/svg%3E&quot;)"></div>
   </div>
   <div class="ticket">
-    <img class="rope-c tl" src="img/frame.jpg" alt="">
-    <img class="rope-c tr" src="img/frame.jpg" alt="">
-    <img class="rope-c bl" src="img/frame.jpg" alt="">
-    <img class="rope-c br" src="img/frame.jpg" alt="">
+    <i class="eyelets" aria-hidden="true"></i>
     <div class="tix-kicker">Tiket Pelayaran</div>
     <div class="tix-no">PINISI VOYAGE &middot; No. 120627</div>
     <h1>Raka <span class="amp">&amp;</span> Sinta</h1>
@@ -587,10 +587,9 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
     function newGull(anyX){
       var d = document.createElement('div');
       d.className = 'gull';
-      var img = document.createElement('img');
-      img.src = 'img/camar.jpg'; img.alt = '';
-      d.appendChild(img);
-      var size = 26 + Math.random()*40;
+      var op = (0.55 + Math.random()*0.35).toFixed(2);
+      d.innerHTML = '<svg viewBox="0 0 52 24" aria-hidden="true"><path d="M3 19 Q14 5 26 16 Q38 5 49 19" fill="none" stroke="rgba(26,24,34,' + op + ')" stroke-width="3.4" stroke-linecap="round"/></svg>';
+      var size = 30 + Math.random()*46;
       var dir = Math.random() < .5 ? 1 : -1;
       d.style.width = size + 'px';
       var g = {
