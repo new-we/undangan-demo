@@ -1,6 +1,0 @@
-UNDANGAN DIGITAL - ANINDYA & BAGUS
-1. Buka index.html di browser (atau upload semua isi folder ke hosting / Netlify / GitHub Pages).
-2. Ubah data (tanggal, tempat, nomor WA RSVP, musik) di bagian atas script.js.
-3. Ubah nama, orang tua, alamat, rekening langsung di index.html.
-4. Ganti foto: timpa assets/avatar-bride.svg & avatar-groom.svg (atau ubah src ke foto .jpg).
-5. Nama tamu otomatis: index.html?to=Budi%20Santoso
