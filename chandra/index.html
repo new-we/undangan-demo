@@ -50,13 +50,12 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600;color:var(-
 #cover{position:fixed;inset:0;z-index:50;overflow:hidden;transition:opacity 1s ease,visibility 1s;
   background:radial-gradient(ellipse 90% 60% at 50% 0%,#2c2350 0%,#16263f 45%,#0d1b2e 100%)}
 #cover.hide{opacity:0;visibility:hidden;pointer-events:none}
-.cover-sky{position:absolute;inset:0;background:url('img/bg.jpg') center/cover;opacity:.85;animation:zoomIn 3s ease}
-.moon{position:absolute;top:7%;left:50%;transform:translateX(-50%);width:min(58vw,300px);z-index:3;
-  animation:floatY 7s ease-in-out infinite}
-.moon img{width:100%;border-radius:50%;display:block;animation:moonPulse 5.5s ease-in-out infinite}
-.moon-halo{position:absolute;top:2%;left:50%;transform:translateX(-50%);width:min(90vw,460px);height:min(90vw,460px);
+.cover-sky{position:absolute;inset:0;background:url('img/bg.jpg') center/cover;opacity:.92;animation:zoomIn 3s ease}
+.moon-halo{position:absolute;top:-6%;left:50%;transform:translateX(-50%);width:min(120vw,600px);height:min(120vw,600px);
   border-radius:50%;z-index:2;pointer-events:none;
-  background:radial-gradient(circle,rgba(232,200,116,.16),transparent 62%)}
+  background:radial-gradient(circle,rgba(255,238,190,.30) 0%,rgba(232,200,116,.15) 34%,transparent 62%);
+  animation:haloPulse 6s ease-in-out infinite}
+@keyframes haloPulse{0%,100%{opacity:.8;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
 .horizon{position:absolute;left:0;bottom:0;width:100%;height:34%;z-index:3;pointer-events:none;
   background:url('img/siluet.jpg') bottom/cover;opacity:.9;
   -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);mask-image:linear-gradient(180deg,transparent,#000 26%)}
@@ -66,9 +65,14 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600;color:var(-
   box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 40px rgba(58,43,92,.35);
   transition:transform .9s ease,opacity .9s ease;animation:fadeUp 1.2s ease .4s backwards}
 .cover-card.lift{transform:translateX(-50%) translateY(-46px);opacity:0}
-.cnr{position:absolute;width:52px;opacity:.9;pointer-events:none}
-.cnr.c1{top:6px;left:6px}.cnr.c2{top:6px;right:6px;transform:scaleX(-1)}
-.cnr.c3{bottom:6px;left:6px;transform:scaleY(-1)}.cnr.c4{bottom:6px;right:6px;transform:scale(-1)}
+.cover-card::before{content:"";position:absolute;inset:9px;border:1px solid rgba(232,200,116,.28);
+  border-radius:11px;pointer-events:none}
+.cnr{position:absolute;width:46px;height:46px;pointer-events:none;font-style:normal}
+.cnr::before,.cnr::after{content:"";position:absolute;border:0 solid var(--gold)}
+.cnr::before{inset:0;border-top-width:2px;border-left-width:2px;border-color:rgba(232,200,116,.95);border-top-left-radius:6px}
+.cnr::after{inset:8px;border-top-width:1px;border-left-width:1px;border-color:rgba(232,200,116,.5);border-top-left-radius:4px}
+.cnr.c1{top:12px;left:12px}.cnr.c2{top:12px;right:12px;transform:scaleX(-1)}
+.cnr.c3{bottom:12px;left:12px;transform:scaleY(-1)}.cnr.c4{bottom:12px;right:12px;transform:scale(-1)}
 .kicker{letter-spacing:.42em;font-size:11px;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
 .cover-names{font-size:44px;line-height:1.25;margin:4px 0}
 .cover-date{letter-spacing:.24em;font-size:12px;color:var(--muted);margin-top:10px;text-transform:uppercase}
@@ -97,8 +101,10 @@ section{position:relative;padding:72px 26px;overflow:hidden;z-index:2}
 /* hero + countdown */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;text-align:center;
   background:radial-gradient(ellipse 100% 55% at 50% 0%,#33275c 0%,#14263f 55%,#0d1b2e 100%)}
-#hero .moon-mini{width:120px;margin:0 auto 10px;animation:floatY 6s ease-in-out infinite}
-#hero .moon-mini img{width:100%;border-radius:50%;animation:moonPulse 5.5s ease-in-out infinite}
+#hero .moon-mini{width:132px;aspect-ratio:1/1;margin:0 auto 14px;border-radius:50%;overflow:hidden;
+  box-shadow:0 0 34px rgba(232,200,116,.55),0 0 95px rgba(232,200,116,.25);
+  animation:floatY 6s ease-in-out infinite}
+#hero .moon-mini img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:screen}
 .hero-names{font-size:52px;line-height:1.2;margin:10px 0}
 .count{display:flex;gap:10px;justify-content:center;margin:26px 0 20px;flex-wrap:wrap;position:relative;z-index:2}
 .count .box{background:rgba(232,200,116,.07);border:1px solid var(--line);border-radius:14px;min-width:68px;
@@ -121,8 +127,11 @@ section{position:relative;padding:72px 26px;overflow:hidden;z-index:2}
 .person h3{font-size:24px;color:var(--gold);margin-bottom:4px}
 .person .role{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .person .ortu{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300}
-.person .p-cnr{position:absolute;width:46px;opacity:.85;pointer-events:none}
-.p-cnr.pl{top:8px;left:8px}.p-cnr.pr{top:8px;right:8px;transform:scaleX(-1)}
+.person .p-cnr{position:absolute;width:34px;height:34px;pointer-events:none;font-style:normal}
+.p-cnr::before,.p-cnr::after{content:"";position:absolute;border:0 solid var(--gold)}
+.p-cnr::before{inset:0;border-top-width:2px;border-left-width:2px;border-color:rgba(232,200,116,.9);border-top-left-radius:5px}
+.p-cnr::after{inset:6px;border-top-width:1px;border-left-width:1px;border-color:rgba(232,200,116,.45);border-top-left-radius:3px}
+.p-cnr.pl{top:10px;left:10px}.p-cnr.pr{top:10px;right:10px;transform:scaleX(-1)}
 .and-sep{text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:40px;color:var(--gold);margin:6px 0 22px}
 
 /* story */
@@ -206,9 +215,12 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:.22em;color:
     -webkit-mask-image:linear-gradient(180deg,transparent,#000 32%);mask-image:linear-gradient(180deg,transparent,#000 32%)}
   .side-fx.sl{left:0}
   .side-fx.sr{right:0;animation-duration:11s}
-  .side-glow{display:block;position:fixed;top:6%;z-index:1;pointer-events:none;width:20vw;max-width:300px;opacity:.8}
-  .side-glow.gl{left:2%}.side-glow.gr{right:2%}
-  .side-glow img{width:100%;border-radius:50%;animation:moonPulse 6s ease-in-out infinite}
+  .side-glow{display:block;position:fixed;top:6%;z-index:1;pointer-events:none;width:17vw;max-width:250px;
+    aspect-ratio:1/1;border-radius:50%;overflow:hidden;opacity:.92;
+    box-shadow:0 0 44px 8px rgba(232,200,116,.32),0 0 120px 34px rgba(232,200,116,.14);
+    animation:moonPulse 6s ease-in-out infinite,floatY 7s ease-in-out infinite}
+  .side-glow.gl{left:3%}.side-glow.gr{right:3%}
+  .side-glow img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:screen}
 }
 @media(max-width:380px){.hero-names{font-size:42px}.cover-names{font-size:37px}}
 </style>
@@ -229,11 +241,9 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:.22em;color:
 <div id="cover">
   <div class="cover-sky"></div>
   <div class="moon-halo"></div>
-  <div class="moon"><img src="img/bulan.jpg" alt="Bulan purnama"></div>
   <div class="horizon"></div>
   <div class="cover-card" id="coverCard">
-    <img class="cnr c1" src="img/frame.jpg" alt=""><img class="cnr c2" src="img/frame.jpg" alt="">
-    <img class="cnr c3" src="img/frame.jpg" alt=""><img class="cnr c4" src="img/frame.jpg" alt="">
+    <i class="cnr c1"></i><i class="cnr c2"></i><i class="cnr c3"></i><i class="cnr c4"></i>
     <div class="kicker">Undangan Pernikahan</div>
     <div class="cover-names serif shimmer">Raka &amp; Sinta</div>
     <div class="cover-date">Sabtu, 12 Juni 2027</div>
@@ -269,7 +279,7 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:.22em;color:
     <p>Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyempurnakan separuh agama kami.</p>
   </div>
   <div class="person rv" data-a="fade">
-    <img class="p-cnr pl" src="img/frame.jpg" alt=""><img class="p-cnr pr" src="img/frame.jpg" alt="">
+    <i class="p-cnr pl"></i><i class="p-cnr pr"></i>
     <img class="foto" src="img/couple-1.jpg" alt="Raka">
     <h3>Raka Pratama</h3>
     <div class="role">Mempelai Pria</div>
@@ -277,7 +287,7 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:.22em;color:
   </div>
   <div class="and-sep rv" data-a="zoom">&amp;</div>
   <div class="person rv" data-a="fade">
-    <img class="p-cnr pl" src="img/frame.jpg" alt=""><img class="p-cnr pr" src="img/frame.jpg" alt="">
+    <i class="p-cnr pl"></i><i class="p-cnr pr"></i>
     <img class="foto" src="img/couple-2.jpg" alt="Sinta">
     <h3>Sinta Maharani</h3>
     <div class="role">Mempelai Wanita</div>
@@ -514,6 +524,11 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:.22em;color:
       observe();
       window.scrollTo(0, 0);
     }, 950);
+    // pengaman: paksa sembunyikan cover walau transisi CSS gagal
+    setTimeout(function(){
+      var cv = document.getElementById('cover');
+      if(cv.classList.contains('hide')){ cv.style.display = 'none'; }
+    }, 2400);
   };
   document.body.style.overflow = 'hidden';
 
