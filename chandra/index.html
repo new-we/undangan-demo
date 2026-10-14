@@ -53,20 +53,25 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600;color:var(-
 .cover-sky{position:absolute;inset:0;background:url('img/bg.jpg') center/cover;opacity:.92;animation:zoomIn 3s ease}
 .moon-halo{position:absolute;top:-6%;left:50%;transform:translateX(-50%);width:min(120vw,600px);height:min(120vw,600px);
   border-radius:50%;z-index:2;pointer-events:none;
-  background:radial-gradient(circle,rgba(255,238,190,.30) 0%,rgba(232,200,116,.15) 34%,transparent 62%);
+  background:radial-gradient(circle,rgba(255,240,200,.42) 0%,rgba(232,200,116,.22) 34%,transparent 62%);
   animation:haloPulse 6s ease-in-out infinite}
 @keyframes haloPulse{0%,100%{opacity:.8;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
 .horizon{position:absolute;left:0;bottom:0;width:100%;height:34%;z-index:3;pointer-events:none;
   background:url('img/siluet.jpg') bottom/cover;opacity:.9;
   -webkit-mask-image:linear-gradient(180deg,transparent,#000 26%);mask-image:linear-gradient(180deg,transparent,#000 26%)}
 .cover-card{position:absolute;z-index:5;left:50%;bottom:9%;transform:translateX(-50%);width:min(86%,380px);
-  background:rgba(13,27,46,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border:1px solid var(--line);border-radius:16px;padding:38px 26px 34px;text-align:center;
-  box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 40px rgba(58,43,92,.35);
+  background:rgba(8,12,28,.68);backdrop-filter:blur(7px) saturate(1.15);-webkit-backdrop-filter:blur(7px) saturate(1.15);
+  border:1px solid rgba(232,200,116,.55);border-radius:16px;padding:38px 26px 34px;text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 46px rgba(232,200,116,.14),inset 0 0 40px rgba(58,43,92,.28);
   transition:transform .9s ease,opacity .9s ease;animation:fadeUp 1.2s ease .4s backwards}
 .cover-card.lift{transform:translateX(-50%) translateY(-46px);opacity:0}
-.cover-card::before{content:"";position:absolute;inset:9px;border:1px solid rgba(232,200,116,.28);
+.cover-card::before{content:"";position:absolute;inset:9px;border:1px solid rgba(232,200,116,.38);
   border-radius:11px;pointer-events:none}
+.cover-card::after{content:"❖";position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:#0c1428;color:var(--gold);padding:0 10px;font-size:16px;line-height:1;z-index:2}
+.cover-card .kicker,.cover-card .cover-date{text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.cover-card .guest-label{text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.cover-card .guest-name{text-shadow:0 2px 16px rgba(0,0,0,.6)}
 .cnr{position:absolute;width:46px;height:46px;pointer-events:none;font-style:normal}
 .cnr::before,.cnr::after{content:"";position:absolute;border:0 solid var(--gold)}
 .cnr::before{inset:0;border-top-width:2px;border-left-width:2px;border-color:rgba(232,200,116,.95);border-top-left-radius:6px}
@@ -121,7 +126,7 @@ section{position:relative;padding:72px 26px;overflow:hidden;z-index:2}
 #mempelai{background:linear-gradient(180deg,#0d1b2e,#101f38)}
 .person{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:26px 16px;
   text-align:center;position:relative;margin-bottom:20px;backdrop-filter:blur(4px);
-  box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  box-shadow:0 16px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(232,200,116,.09)}
 .person .foto{width:130px;height:130px;object-fit:cover;border-radius:50%;margin:0 auto 14px;
   border:3px solid var(--gold-d);box-shadow:0 0 26px rgba(232,200,116,.35)}
 .person h3{font-size:24px;color:var(--gold);margin-bottom:4px}
