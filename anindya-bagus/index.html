@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Undangan Pernikahan Anindya & Bagus</title>
+<meta name="description" content="Undangan pernikahan digital Anindya & Bagus — 12 Juni 2027">
+<meta property="og:title" content="Undangan Pernikahan Anindya & Bagus">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+<!-- ===== OPENING ===== -->
+<section id="opening" aria-label="Pembuka">
+  <div class="scene" id="scene"><img src="assets/scene.svg" alt=""></div>
+
+  <div class="batik-layer" id="batik"></div>
+
+  <div class="gate" id="gate">
+    <div class="leaf left"><i></i></div>
+    <div class="leaf right"><i></i></div>
+    <img class="gate-top" src="assets/gate-top.svg" alt="">
+    <div class="gate-names"><span>Anindya</span><em>&</em><span>Bagus</span></div>
+  </div>
+
+  <div class="cover" id="cover">
+    <svg class="cover-bg" viewBox="0 0 400 560" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H400 V470 Q380 470 372 490 Q362 520 332 520 Q300 520 296 490 Q290 460 260 460 H140 Q110 460 104 490 Q100 520 68 520 Q38 520 28 490 Q20 470 0 470Z" fill="#f6f0e2"/>
+      <path d="M14 0 V462 Q42 462 50 492 Q60 508 68 508 Q92 508 96 488 Q104 448 140 448 H260 Q296 448 304 488 Q308 508 332 508 Q340 508 350 492 Q358 462 386 462 V0" fill="none" stroke="#b08d57" stroke-width="1.6"/>
+      <path d="M24 0 V458 Q48 458 56 488 Q62 498 68 498 Q86 498 90 484 Q98 438 140 438 H260 Q302 438 310 484 Q314 498 332 498 Q338 498 344 488 Q352 458 376 458 V0" fill="none" stroke="#b08d57" stroke-width=".7" opacity=".7"/>
+    </svg>
+    <div class="cover-inner">
+      <p class="eyebrow">Pernikahan</p>
+      <h1><span>Anindya</span><em>&</em><span>Bagus</span></h1>
+      <p class="date">12 · 06 · 2027</p>
+      <img class="orn" src="assets/ornament.svg" alt="">
+      <p class="to">Kepada Yth. Bapak/Ibu/Saudara/i<br><strong id="guestName">Tamu Undangan</strong></p>
+      <button id="openBtn" class="btn-gold">Buka Undangan</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAIN ===== -->
+<main id="main">
+  <button id="musicBtn" class="music" aria-label="Musik" title="Musik" hidden>♪</button>
+
+  <header class="hero reveal">
+    <p class="eyebrow">The Wedding of</p>
+    <h2 class="names"><span>Anindya</span><em>&</em><span>Bagus</span></h2>
+    <p class="date">Sabtu, 12 Juni 2027</p>
+    <img class="orn" src="assets/ornament.svg" alt="">
+  </header>
+
+  <section class="sec quote reveal">
+    <p class="eyebrow">Dengan bahagia</p>
+    <p class="body">Kami memohon doa restu atas pernikahan kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+    <p class="ayat">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, agar kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.”<br><b>— QS. Ar-Rum: 21</b></p>
+  </section>
+
+  <section class="sec couple">
+    <p class="eyebrow reveal">Mempelai</p>
+    <article class="person reveal">
+      <div class="photo"><img src="assets/avatar-bride.svg" alt="Foto Anindya"></div>
+      <h3>Anindya Putri Kusumaningrum</h3>
+      <p>Putri pertama dari<br>Bapak Drs. H. Slamet Hadiwinata<br>& Ibu Hj. Sri Rahayu</p>
+    </article>
+    <div class="amp reveal">&</div>
+    <article class="person reveal">
+      <div class="photo"><img src="assets/avatar-groom.svg" alt="Foto Bagus"></div>
+      <h3>Bagus Jati Wicaksono</h3>
+      <p>Putra kedua dari<br>Bapak Ir. Suryo Wicaksono<br>& Ibu Dra. Endang Lestari</p>
+    </article>
+  </section>
+
+  <section class="sec count reveal">
+    <p class="eyebrow">Menghitung Hari</p>
+    <h3>Sabtu, 12 Juni 2027</h3>
+    <p class="muted">Menuju hari bahagia kami di Yogyakarta</p>
+    <div class="timer">
+      <div><b id="cd-d">00</b><span>Hari</span></div>
+      <div><b id="cd-h">00</b><span>Jam</span></div>
+      <div><b id="cd-m">00</b><span>Menit</span></div>
+      <div><b id="cd-s">00</b><span>Detik</span></div>
+    </div>
+    <a id="calBtn" class="btn-dark" href="#">Simpan ke Kalender</a>
+  </section>
+
+  <section class="sec events">
+    <p class="eyebrow reveal">Waktu & Tempat</p>
+    <div class="card reveal">
+      <h3>Akad Nikah</h3>
+      <p class="big">08.00 WIB – 10.00 WIB</p>
+      <p>Pendopo Jati<br>Jl. Kaliurang Km 8, Sleman,<br>Daerah Istimewa Yogyakarta</p>
+    </div>
+    <div class="card reveal">
+      <h3>Resepsi</h3>
+      <p class="big">11.00 WIB – Selesai</p>
+      <p>Pendopo Jati<br>Jl. Kaliurang Km 8, Sleman,<br>Daerah Istimewa Yogyakarta</p>
+      <a class="btn-dark" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Yogyakarta">Lihat Lokasi</a>
+    </div>
+  </section>
+
+  <section class="sec gift reveal">
+    <p class="eyebrow">Amplop Digital</p>
+    <p class="body">Doa restu Anda merupakan karunia terindah bagi kami. Namun bila ingin memberikan tanda kasih, dapat melalui:</p>
+    <div class="card">
+      <h3>Bank BCA</h3>
+      <p class="big" id="rek">1234567890</p>
+      <p>a.n. Anindya Putri K.</p>
+      <button class="btn-dark" data-copy="#rek">Salin Nomor</button>
+    </div>
+  </section>
+
+  <section class="sec rsvp reveal">
+    <p class="eyebrow">RSVP & Ucapan</p>
+    <form id="rsvpForm">
+      <input name="nama" id="rsvpNama" placeholder="Nama" required>
+      <select name="hadir" required>
+        <option value="">Konfirmasi kehadiran</option>
+        <option>Hadir</option>
+        <option>Tidak Hadir</option>
+        <option>Masih Ragu</option>
+      </select>
+      <input name="jumlah" type="number" min="1" max="10" placeholder="Jumlah tamu">
+      <textarea name="ucapan" rows="4" placeholder="Tulis ucapan & doa"></textarea>
+      <button class="btn-gold" type="submit">Kirim via WhatsApp</button>
+    </form>
+    <div id="wishes" class="wishes"></div>
+  </section>
+
+  <footer class="sec end reveal">
+    <img class="orn" src="assets/ornament.svg" alt="">
+    <p class="body">Merupakan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+    <p class="thanks">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
+    <h2 class="names small"><span>Anindya</span><em>&</em><span>Bagus</span></h2>
+  </footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
