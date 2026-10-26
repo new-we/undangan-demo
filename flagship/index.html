@@ -345,6 +345,11 @@ let timers=[];
 function finishOpening(){
   timers.forEach(clearTimeout); timers=[];
   opening.classList.add('reveal');
+  // BUG 2026-10-26 (ditemukan kakak dari rekaman layar): setelah animasi selesai,
+  // halaman kembali ke cover karena cover adalah elemen pertama halaman.
+  // Perbaikan: sembunyikan cover saat overlay memudar, sehingga yang muncul
+  // adalah isi undangan (hero), bukan cover lagi.
+  document.getElementById('cover').style.display='none';
   setTimeout(()=>{ opening.classList.remove('on','open','scene','reveal'); document.body.classList.remove('locked'); },850);
 }
 document.getElementById('openBtn').onclick=()=>{
