@@ -117,12 +117,37 @@ background:radial-gradient(circle at 40% 35%,#8a5f22,#4a3010)}
 
 .wrap{background:radial-gradient(600px 300px at 15% -5%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),radial-gradient(500px 260px at 90% 20%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),var(--bg)}
 
+
+/* ===== MU-UPGRADE2 ornamen & animasi (2026-10-29): aset SVG transparan per tema ===== */
+@keyframes muSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes muSwayR{0%,100%{transform:scaleX(-1) rotate(-4deg)}50%{transform:scaleX(-1) rotate(4deg)}}
+@keyframes muDrift{from{background-position:0 0}to{background-position:120px 120px}}
+@keyframes muFall{0%{transform:translateY(-10vh) rotate(0deg)}100%{transform:translateY(112vh) rotate(340deg)}}
+.mu-orn{position:absolute;width:74px;height:74px;pointer-events:none;z-index:1;animation:muSway 3.8s ease-in-out infinite alternate;transform-origin:top center}
+.mu-orn.tl{top:12px;left:12px}
+.mu-orn.tr{top:12px;right:12px;animation-name:muSwayR}
+.mu-orn.bl{bottom:12px;left:12px;animation-duration:4.6s}
+.mu-orn.br{bottom:12px;right:12px;animation-name:muSwayR;animation-duration:4.6s}
+section::before{content:"";position:absolute;top:12px;right:14px;width:82px;height:82px;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.22;pointer-events:none;z-index:0}
+section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
+.mu-edge{display:none}
+@media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
+.mu-edge.l{left:6px;top:22%}
+.mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
+.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
+
+.cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
+
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
 <div class="sunflower sf1"><div class="shead"></div><div class="sstem"></div></div><div class="sunflower sf2"><div class="shead"></div><div class="sstem"></div></div>
 <div class="cover" id="cover">
+  <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
+  <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
+  <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
+  <img class="mu-orn br" src="./img/ornamen.svg" alt="">
   <div class="cover-inner">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
     <h1 class="cover-names">Raka &amp; Sinta</h1>
@@ -391,6 +416,12 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
     list.insertBefore(div, list.firstChild);
   });
 })();
+</script>
+<img class="mu-edge l" src="./img/ornamen.svg" alt="">
+<img class="mu-edge r" src="./img/ornamen.svg" alt="">
+<script>
+/* MU-UPGRADE2: partikel motif jatuh */
+(function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
 </script>
 </body>
 </html>
