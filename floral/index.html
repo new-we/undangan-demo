@@ -107,6 +107,28 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .ucapan-item .ucapan-tgl{font-size:11px;opacity:.55;margin-left:8px}
 .ucapan-item p{font-size:13.5px;margin:4px 0 0}
 .ucapan-note{font-size:11px;opacity:.5;margin-top:10px;text-align:center}
+
+/* ===== MU-UPGRADE premium 2026-10-29: kartu kaca, glow, kilau, love story ===== */
+@keyframes muFadeUp{from{opacity:0;transform:translateY(34px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes muShine{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+.cover-inner{position:relative;z-index:2;background:color-mix(in srgb, var(--card) 82%, transparent);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid color-mix(in srgb, var(--accent) 55%, transparent);border-radius:22px;padding:40px 26px 32px;box-shadow:0 24px 60px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.28);animation:muFadeUp 1.1s cubic-bezier(.22,.8,.3,1) .3s backwards}
+.gallery div{position:relative;overflow:hidden}
+.gallery div::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.38) 50%,transparent 65%);transform:translateX(-130%);animation:muShine 4.8s ease-in-out infinite;pointer-events:none}
+.event-card,.gift-card,.countdown div{transition:transform .3s ease,box-shadow .3s ease}
+.event-card:hover,.gift-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
+.countdown div{border-color:color-mix(in srgb, var(--accent) 35%, transparent)}
+.ls-list{margin-top:8px;display:flex;flex-direction:column;gap:18px;text-align:left}
+.ls-item{position:relative;background:color-mix(in srgb, var(--card) 88%, transparent);border:1px solid var(--line);border-radius:16px;padding:18px 18px 18px 20px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+.ls-item::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:3px;background:var(--accent)}
+.ls-year{display:inline-block;background:var(--accent);color:#fff;font-size:12px;letter-spacing:1.5px;font-weight:600;border-radius:999px;padding:4px 14px;margin-bottom:8px}
+.ls-item h3{font-size:19px;margin-bottom:4px}
+.ls-item p{font-size:14px;color:var(--muted)}
+
+.divider{position:relative;width:150px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.9}
+.divider::before{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;background:var(--accent);transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 3px var(--bg)}
+
+.wrap{background:radial-gradient(600px 300px at 15% -5%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),radial-gradient(500px 260px at 90% 20%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),var(--bg)}
+
 </style>
 </head>
 <body>
@@ -204,7 +226,18 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
     </div>
   </section>
 
-  <section class="reveal">
+    <section class="reveal">
+    <p class="eyebrow">Kisah Kami</p>
+    <h2 class="section-title">Love Story</h2>
+    <div class="divider"></div>
+    <div class="ls-list">
+      <div class="ls-item"><span class="ls-year">2024</span><h3>Pertemuan Pertama</h3><p>Atas izin takdir, kami dipertemukan oleh seorang teman di sebuah acara keluarga. Sapaan sederhana itu menjadi awal dari segalanya.</p></div>
+      <div class="ls-item"><span class="ls-year">2025</span><h3>Menjalin Kasih</h3><p>Seiring berjalannya waktu, kebersamaan menumbuhkan rasa yang semakin dalam, hingga kami memutuskan untuk melangkah lebih serius.</p></div>
+      <div class="ls-item"><span class="ls-year">2026</span><h3>Menuju Pernikahan</h3><p>Dengan restu kedua keluarga, kami memantapkan hati untuk mengikat janji suci dan memulai babak baru bersama.</p></div>
+    </div>
+  </section>
+
+<section class="reveal">
     <h2 class="section-title">Amplop Digital</h2>
     <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
     <div class="gift-card">
