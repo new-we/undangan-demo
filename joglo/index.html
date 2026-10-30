@@ -9,6 +9,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
+#musicBtn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#musicBtn[hidden]{display:none}
+#musicBtn.paused{opacity:.6}
+</style>
 </head>
 <body class="locked">
 
@@ -139,5 +145,22 @@
 </main>
 
 <script src="script.js"></script>
+<!-- MUSIK LATAR (memakai tombol #musicBtn yang sudah ada) -->
+<audio id="muBgMusic" loop preload="none" src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3"></audio>
+<script>
+/* MUSIK LATAR: mulai saat undangan dibuka, tombol untuk putar/jeda */
+(function(){
+  var audio=document.getElementById('muBgMusic');
+  var btn=document.getElementById('musicBtn');
+  if(!audio||!btn)return;
+  var playing=false;
+  function setState(p){playing=p;btn.textContent=p?'\u266a':'II';btn.classList.toggle('paused',!p);}
+  function playMusic(){if(playing)return;audio.play().then(function(){setState(true);}).catch(function(){});}
+  function onOpen(){btn.hidden=false;playMusic();}
+  btn.addEventListener('click',function(){if(playing){audio.pause();setState(false);}else{audio.play().then(function(){setState(true);}).catch(function(){});}});
+  var openBtn=document.getElementById('openBtn');
+  if(openBtn){openBtn.addEventListener('click',onOpen);}
+})();
+</script>
 </body>
 </html>
