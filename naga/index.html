@@ -525,7 +525,7 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
     setTimeout(function(){
       c.classList.add('hide');
       document.body.classList.remove('locked');
-      document.getElementById('hero').scrollIntoView({behavior:'smooth'});
+      window.scrollTo(0,0);
     }, 2300);
   }
 

@@ -30,20 +30,18 @@ h1,h2,h3,.serif{font-family:'Playfair Display',serif;color:#2c6e9e;font-weight:7
 @keyframes sunPulse{0%,100%{box-shadow:0 0 40px 12px rgba(255,210,63,.55)}50%{box-shadow:0 0 70px 26px rgba(255,210,63,.8)}}
 @keyframes petalFall{0%{transform:translateY(-8vh) translateX(0) rotate(0);opacity:0}8%{opacity:.95}100%{transform:translateY(108vh) translateX(6vw) rotate(340deg);opacity:0}}
 @keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.22)}}
-@keyframes fadeUp{0%{transform:translateY(42px);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes fadeLeft{0%{transform:translateX(42px);opacity:0}100%{transform:translateX(0);opacity:1}}
-@keyframes fadeRight{0%{transform:translateX(-42px);opacity:0}100%{transform:translateX(0);opacity:1}}
-@keyframes zoomIn{0%{transform:scale(1.18);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeInOnly{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeUpSoft{0%{transform:translateY(16px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes zoomOutSoft{0%{transform:scale(1.08);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes cardLift{to{transform:translate(-50%,-160%) scale(.85);opacity:0}}
-@keyframes popIn{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
 @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 .rv{opacity:0}
-.rv.on{animation:fadeUp .9s ease forwards}
-.rv.on[data-a="left"]{animation-name:fadeLeft}
-.rv.on[data-a="right"]{animation-name:fadeRight}
-.rv.on[data-a="zoom"]{animation-name:zoomIn}
+.rv.on{animation:fadeUpSoft 1.6s ease-out forwards}
+.rv.on[data-a="left"]{animation-name:fadeUpSoft}
+.rv.on[data-a="right"]{animation-name:fadeUpSoft}
+.rv.on[data-a="zoom"]{animation-name:zoomOutSoft}
 
 /* ============ MATAHARI & AWAN ============ */
 .sun{position:fixed;top:6%;left:8%;width:74px;height:74px;border-radius:50%;z-index:1;pointer-events:none;
@@ -149,7 +147,7 @@ body.opened .side{opacity:1}
   background:rgba(14,32,26,.82);border:1px solid rgba(233,201,110,.9);border-radius:14px;padding:44px 28px 36px;text-align:center;
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(233,201,110,.16);
   backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
-  animation:popIn 1s ease .3s backwards}
+  animation:fadeUpSoft 1.6s ease-out .3s backwards}
 .cover-card::before{content:"";position:absolute;inset:9px;border:1px solid rgba(233,201,110,.45);
   border-radius:9px;pointer-events:none}
 .cover-card::after{content:"\2756";position:absolute;top:-13px;left:50%;transform:translateX(-50%);
@@ -663,7 +661,7 @@ function bukaUndangan(){
     document.getElementById('cover').classList.add('hide');
     document.getElementById('main').classList.add('show');
     document.body.classList.add('opened');
-    document.getElementById('hero').scrollIntoView();
+    window.scrollTo(0,0);
     startAmbient();
   }, 950);
 }

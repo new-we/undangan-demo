@@ -608,7 +608,7 @@
     setTimeout(function(){
       c.classList.add('hide');
       document.body.classList.remove('locked');
-      document.getElementById('hero').scrollIntoView({behavior:'auto'});
+      window.scrollTo(0,0);
     }, 2000);
   }
 

@@ -23,39 +23,39 @@ h1,h2,h3,.serif{font-family:'Prata',serif;color:var(--teal);font-weight:400}
 /* ---------- animasi ---------- */
 @keyframes lambai{0%{transform:rotateZ(-5deg)}100%{transform:rotateZ(5deg)}}
 @keyframes lambaiSoft{0%{transform:rotateZ(-3deg)}100%{transform:rotateZ(3deg)}}
-@keyframes slideDown{0%{transform:translateY(-110%);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes slideUp{0%{transform:translateY(110%);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes fadeUp{0%{transform:translateY(40px);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes zoomOut{0%{transform:scale(1.25);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes fall{0%{transform:translateY(-8vh) rotate(0);opacity:0}8%{opacity:.9}100%{transform:translateY(108vh) rotate(340deg);opacity:0}}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.lambai{animation:lambai 3.2s ease-in-out infinite alternate;transform-origin:top center}
+@keyframes fadeGeb{0%{opacity:0}100%{opacity:.62}}
+@keyframes fadeInOnly{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeUpSoft{0%{transform:translateY(16px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes zoomOutSoft{0%{transform:scale(1.08);opacity:0}100%{transform:scale(1);opacity:1}}
+.lambai{animation:lambai 3.2s ease-in-out infinite alternate,fadeInOnly 2.8s ease-out both;transform-origin:top center}
 .lambai.d1{animation-duration:4.5s}.lambai.d2{animation-duration:5.2s}.lambai.d3{animation-duration:3.8s}
 
 /* reveal saat scroll */
 .rv{opacity:0}
-.rv.on[data-a="fade-up"]{animation:fadeUp .9s ease forwards}
-.rv.on[data-a="zoom-out"]{animation:zoomOut 1.1s ease forwards}
+.rv.on[data-a="fade-up"]{animation:fadeUpSoft 1.6s ease-out forwards}
+.rv.on[data-a="zoom-out"]{animation:zoomOutSoft 1.8s ease-out forwards}
 .rv.on[data-a="lambai"]{animation:lambai 3.4s ease-in-out infinite alternate;opacity:1}
 
 /* ---------- COVER ---------- */
 #cover{position:fixed;inset:0;z-index:50;overflow:hidden;transition:opacity 1.1s ease,visibility 1.1s}
 #cover.hide{opacity:0;visibility:hidden;pointer-events:none}
-.cover-bg{position:absolute;inset:0;background:url('./img/bg-kebun.jpg?v=2') center/cover;animation:zoomOut 2.2s ease}
+.cover-bg{position:absolute;inset:0;background:url('./img/bg-kebun.jpg?v=2') center/cover;animation:fadeInOnly 3s ease-out both}
 .pohon{position:absolute;top:-2%;width:46%;mix-blend-mode:multiply;pointer-events:none;z-index:2}
 .pohon.left{left:-9%}.pohon.right{right:-9%;transform:scaleX(-1)}
-.pohon.right.lambai{transform-origin:top center;animation-name:lambaiR}
+.pohon.right.lambai{transform-origin:top center;animation-name:lambaiR,fadeInOnly}
 @keyframes lambaiR{0%{transform:scaleX(-1) rotateZ(-5deg)}100%{transform:scaleX(-1) rotateZ(5deg)}}
 .gebyok{position:absolute;left:0;width:100%;height:15%;object-fit:cover;mix-blend-mode:multiply;z-index:3;pointer-events:none}
-.gebyok.top{top:0;animation:slideDown 1.4s ease .2s backwards}
-.gebyok.bottom{bottom:0;animation:slideUp 1.4s ease .2s backwards}
+.gebyok.top{top:0;animation:fadeGeb 2.8s ease-out .3s both}
+.gebyok.bottom{bottom:0;animation:fadeGeb 2.8s ease-out .3s both}
 .cbunga{position:absolute;width:34%;mix-blend-mode:multiply;z-index:4;pointer-events:none}
 .cbunga.tl{top:13%;left:-7%}.cbunga.tr{top:13%;right:-7%;transform:scaleX(-1)}
 .cbunga.bl{bottom:13%;left:-7%}.cbunga.br{bottom:13%;right:-7%}
 .cover-card{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
   width:min(82%,360px);background:rgba(251,248,241,.94);border:1px solid var(--beige);
   border-radius:18px;padding:44px 26px 36px;text-align:center;box-shadow:0 24px 60px rgba(54,86,102,.18);
-  animation:fadeUp 1.2s ease .5s backwards}
+  animation:fadeInOnly 2.8s ease-out 1.2s backwards}
 .corner{position:absolute;width:64px;mix-blend-mode:multiply;pointer-events:none}
 .corner.c1{top:6px;left:6px}.corner.c2{top:6px;right:6px;transform:scaleX(-1)}
 .corner.c3{bottom:6px;left:6px;transform:scaleY(-1)}.corner.c4{bottom:6px;right:6px;transform:scale(-1)}
@@ -173,7 +173,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 .petal{position:fixed;top:-6vh;z-index:60;pointer-events:none;animation:fall linear infinite}
 .edge-fl{position:fixed;top:16%;width:170px;z-index:1;mix-blend-mode:multiply;pointer-events:none;display:none}
 .edge-fl.ef-l{left:1%}.edge-fl.ef-r{right:1%;transform:scaleX(-1)}
-.edge-fl.ef-r.lambai{animation-name:lambaiR}
+.edge-fl.ef-r.lambai{animation-name:lambaiR,fadeInOnly}
 .edge-fl.low{top:58%}
 @media(min-width:760px){.edge-fl{display:block}}
 @media(max-width:380px){.hero-names{font-size:44px}.cover-names{font-size:38px}}
