@@ -165,7 +165,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .batikshift{background-image:url(./img/bg-batik-parang.webp);background-size:400px 400px;background-repeat:repeat;opacity:.5;animation:muBatikDrift 180s linear infinite}
 @keyframes muBatikDrift{from{background-position:0 0}to{background-position:400px 400px}}
 /* Vignette krem lembut: tengah terang tempat nama, batik terlihat ke arah tepi */
-.cover{background:radial-gradient(ellipse 90% 62% at 50% 42%,rgba(245,232,208,.16),rgba(245,232,208,0) 70%),var(--cover-bg)}
+.cover{background:radial-gradient(ellipse 90% 62% at 50% 42%,rgba(245,232,208,.16),rgba(245,232,208,0) 70%),linear-gradient(165deg,rgba(74,46,27,.90),rgba(36,20,8,.93)),url(./img/bg-batik-parang.webp);background-size:auto,auto,400px 400px;background-repeat:no-repeat,no-repeat,repeat}
 .hero{background:radial-gradient(ellipse 88% 70% at 50% 30%,rgba(245,232,208,.12),rgba(245,232,208,0) 70%)}
 /* 2. Cover: gapuro atas + renda sudut bawah (ornamen SVG lama disembunyikan, diganti aset baru) */
 .cover .mu-orn{display:none}
