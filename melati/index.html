@@ -23,14 +23,21 @@ h1,h2,h3,.serif{font-family:'Prata',serif;color:var(--teal);font-weight:400}
 /* ---------- animasi ---------- */
 @keyframes lambai{0%{transform:rotateZ(-5deg)}100%{transform:rotateZ(5deg)}}
 @keyframes lambaiSoft{0%{transform:rotateZ(-3deg)}100%{transform:rotateZ(3deg)}}
-@keyframes fall{0%{transform:translateY(-8vh) rotate(0);opacity:0}8%{opacity:.9}100%{transform:translateY(108vh) rotate(340deg);opacity:0}}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes fadeGeb{0%{opacity:0}100%{opacity:.62}}
+@keyframes slideDown{0%{transform:translateY(-110%);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes slideUp{0%{transform:translateY(110%);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes fadeUp{0%{transform:translateY(40px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes zoomOut{0%{transform:scale(1.25);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes fadeInOnly{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeGeb{0%{opacity:0}100%{opacity:.62}}
 @keyframes fadeUpSoft{0%{transform:translateY(16px);opacity:0}100%{transform:translateY(0);opacity:1}}
 @keyframes zoomOutSoft{0%{transform:scale(1.08);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes fall{0%{transform:translateY(-8vh) rotate(0);opacity:0}8%{opacity:.9}100%{transform:translateY(108vh) rotate(340deg);opacity:0}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .lambai{animation:lambai 3.2s ease-in-out infinite alternate,fadeInOnly 2.8s ease-out both;transform-origin:top center}
 .lambai.d1{animation-duration:4.5s}.lambai.d2{animation-duration:5.2s}.lambai.d3{animation-duration:3.8s}
+/* bunga kanan di-flip jadi cerminan bunga kiri (animasi lambai menimpa scaleX statis, jadi pakai lambaiR) */
+.cbunga.tr.lambai,.cbunga.br.lambai,.side-fl.r.lambai{animation-name:lambaiR,fadeInOnly}
+.cbunga.br{transform:scaleX(-1)}
 
 /* reveal saat scroll */
 .rv{opacity:0}
@@ -42,21 +49,21 @@ h1,h2,h3,.serif{font-family:'Prata',serif;color:var(--teal);font-weight:400}
 #cover{position:fixed;inset:0;z-index:50;overflow:hidden;transition:opacity 1.1s ease,visibility 1.1s}
 #cover.hide{opacity:0;visibility:hidden;pointer-events:none}
 .cover-bg{position:absolute;inset:0;background:url('./img/bg-kebun.jpg?v=2') center/cover;animation:fadeInOnly 3s ease-out both}
-.pohon{position:absolute;top:-2%;width:46%;mix-blend-mode:multiply;pointer-events:none;z-index:2}
+.pohon{position:absolute;top:-2%;width:46%;pointer-events:none;z-index:2}
 .pohon.left{left:-9%}.pohon.right{right:-9%;transform:scaleX(-1)}
 .pohon.right.lambai{transform-origin:top center;animation-name:lambaiR,fadeInOnly}
 @keyframes lambaiR{0%{transform:scaleX(-1) rotateZ(-5deg)}100%{transform:scaleX(-1) rotateZ(5deg)}}
-.gebyok{position:absolute;left:0;width:100%;height:15%;object-fit:cover;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+.gebyok{position:absolute;left:0;width:100%;height:15%;object-fit:cover;z-index:3;pointer-events:none;opacity:.62}
 .gebyok.top{top:0;animation:fadeGeb 2.8s ease-out .3s both}
 .gebyok.bottom{bottom:0;animation:fadeGeb 2.8s ease-out .3s both}
-.cbunga{position:absolute;width:34%;mix-blend-mode:multiply;z-index:4;pointer-events:none}
+.cbunga{position:absolute;width:34%;z-index:4;pointer-events:none}
 .cbunga.tl{top:13%;left:-7%}.cbunga.tr{top:13%;right:-7%;transform:scaleX(-1)}
 .cbunga.bl{bottom:13%;left:-7%}.cbunga.br{bottom:13%;right:-7%}
 .cover-card{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
   width:min(82%,360px);background:rgba(251,248,241,.94);border:1px solid var(--beige);
   border-radius:18px;padding:44px 26px 36px;text-align:center;box-shadow:0 24px 60px rgba(54,86,102,.18);
   animation:fadeInOnly 2.8s ease-out 1.2s backwards}
-.corner{position:absolute;width:64px;mix-blend-mode:multiply;pointer-events:none}
+.corner{position:absolute;width:64px;pointer-events:none;animation:fadeInOnly 2.5s ease-out 1.6s backwards}
 .corner.c1{top:6px;left:6px}.corner.c2{top:6px;right:6px;transform:scaleX(-1)}
 .corner.c3{bottom:6px;left:6px;transform:scaleY(-1)}.corner.c4{bottom:6px;right:6px;transform:scale(-1)}
 .kicker{letter-spacing:.42em;font-size:11px;color:var(--tan);text-transform:uppercase;margin-bottom:14px}
@@ -84,7 +91,7 @@ section{position:relative;padding:74px 26px;overflow:hidden}
 .sec-head .kicker{margin-bottom:10px}
 .sec-head h2{font-size:32px;margin-bottom:8px}
 .sec-head p{font-size:14px;color:#7c7c78;max-width:320px;margin:0 auto;line-height:1.7}
-.side-fl{position:absolute;top:26px;width:44%;mix-blend-mode:multiply;z-index:1;pointer-events:none;
+.side-fl{position:absolute;top:26px;width:44%;z-index:1;pointer-events:none;
   filter:drop-shadow(0 4px 10px rgba(255,255,255,.8))}
 .side-fl.low{top:60%}
 .side-fl.l{left:-8%}.side-fl.r{right:-8%;transform:scaleX(-1)}
@@ -104,11 +111,11 @@ section{position:relative;padding:74px 26px;overflow:hidden}
 
 /* mempelai */
 .couple-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:2}
-.person{background:#fff;border:1px solid var(--beige);border-radius:18px;padding:18px 12px;text-align:center;
+.person{background:#fff;border:1px solid var(--beige);border-radius:18px;padding:10px 12px 14px;text-align:center;
   box-shadow:0 14px 34px rgba(54,86,102,.1)}
-.person .foto{width:104px;height:132px;object-fit:cover;border-radius:60px;margin:0 auto 12px;
+.person .foto{width:104px;height:132px;object-fit:cover;object-position:top center;border-radius:60px;margin:0 auto 10px;
   border:3px solid var(--beige);box-shadow:0 8px 18px rgba(0,0,0,.12)}
-.person h3{font-size:21px;margin-bottom:2px}
+.person h3{font-size:21px;line-height:1.25;min-height:79px;margin-bottom:2px}
 .person .ortu{font-size:12px;color:#8a8a86;line-height:1.6}
 
 /* love story */
@@ -168,46 +175,46 @@ section{position:relative;padding:74px 26px;overflow:hidden}
 #thanks p{font-size:13.5px;line-height:1.8;opacity:.9;max-width:320px;margin:0 auto 6px}
 #thanks .script{font-size:40px;color:var(--beige);margin-top:14px}
 footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#9a9a96;text-transform:uppercase;background:var(--cream)}
+footer a{color:var(--teal);text-decoration:none}
+.music-note{font-size:12px;color:#7c7c78;font-style:italic;margin-top:14px;letter-spacing:.06em}
+.mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.mu-music-btn[hidden]{display:none}
+.mu-music-btn.paused{opacity:.6}
+footer a:hover{text-decoration:underline}
 
 /* kelopak */
 .petal{position:fixed;top:-6vh;z-index:60;pointer-events:none;animation:fall linear infinite}
-.edge-fl{position:fixed;top:16%;width:170px;z-index:1;mix-blend-mode:multiply;pointer-events:none;display:none}
+.edge-fl{position:fixed;top:16%;width:170px;z-index:1;pointer-events:none;display:none}
 .edge-fl.ef-l{left:1%}.edge-fl.ef-r{right:1%;transform:scaleX(-1)}
 .edge-fl.ef-r.lambai{animation-name:lambaiR,fadeInOnly}
 .edge-fl.low{top:58%}
 @media(min-width:760px){.edge-fl{display:block}}
 @media(max-width:380px){.hero-names{font-size:44px}.cover-names{font-size:38px}}
 </style>
-<style>
-/* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
-.mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
-.mu-music-btn[hidden]{display:none}
-.mu-music-btn.paused{opacity:.6}
-</style>
 </head>
 <body>
 <div class="wrap">
 
-<img class="edge-fl ef-l lambai" src="./img/bunga-goyang.jpg?v=2" alt="">
-<img class="edge-fl ef-r lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="">
-<img class="edge-fl ef-l low lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
-<img class="edge-fl ef-r low lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
+<img class="edge-fl ef-l lambai" src="./img/bunga-goyang.jpg" alt="">
+<img class="edge-fl ef-r lambai d1" src="./img/bunga-goyang.jpg" alt="">
+<img class="edge-fl ef-l low lambai d2" src="./img/bunga-goyang.jpg" alt="">
+<img class="edge-fl ef-r low lambai d3" src="./img/bunga-goyang.jpg" alt="">
 <!-- ================= COVER ================= -->
 <div id="cover">
   <div class="cover-bg"></div>
-  <img class="pohon left lambai" src="./img/pohon.jpg?v=2" alt="">
-  <img class="pohon right lambai d1" src="./img/pohon.jpg?v=2" alt="">
-  <img class="gebyok top" src="./img/gebyok.jpg?v=2" alt="">
-  <img class="gebyok bottom" src="./img/gebyok.jpg?v=2" alt="">
-  <img class="cbunga tl lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="cbunga tr lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="cbunga bl lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="cbunga br lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="pohon left lambai" src="./img/pohon.jpg" alt="">
+  <img class="pohon right lambai d1" src="./img/pohon.jpg" alt="">
+  <img class="gebyok top" src="./img/gebyok.jpg" alt="">
+  <img class="gebyok bottom" src="./img/gebyok.jpg" alt="">
+  <img class="cbunga tl lambai d2" src="./img/bunga-goyang.jpg" alt="">
+  <img class="cbunga tr lambai d3" src="./img/bunga-goyang.jpg" alt="">
+  <img class="cbunga bl lambai d1" src="./img/bunga-goyang.jpg" alt="">
+  <img class="cbunga br lambai d2" src="./img/bunga-goyang.jpg" alt="">
   <div class="cover-card">
-    <img class="corner c1" src="./img/bunga-goyang.jpg?v=2" alt="">
-    <img class="corner c2" src="./img/bunga-goyang.jpg?v=2" alt="">
-    <img class="corner c3" src="./img/bunga-goyang.jpg?v=2" alt="">
-    <img class="corner c4" src="./img/bunga-goyang.jpg?v=2" alt="">
+    <img class="corner c1" src="./img/bunga-goyang.jpg" alt="">
+    <img class="corner c2" src="./img/bunga-goyang.jpg" alt="">
+    <img class="corner c3" src="./img/bunga-goyang.jpg" alt="">
+    <img class="corner c4" src="./img/bunga-goyang.jpg" alt="">
     <div class="kicker">Undangan Pernikahan</div>
     <div class="cover-names serif">Raka <span class="amp">&amp;</span> Sinta</div>
     <div class="cover-date">Sabtu, 12 Juni 2027</div>
@@ -222,10 +229,10 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 <div id="main">
 
 <section id="hero" class="sec-bg">
-  <img class="side-fl l lambai" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="side-fl r lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="side-fl l low lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
-  <img class="side-fl r low lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl l lambai" src="./img/bunga-goyang.jpg" alt="">
+  <img class="side-fl r lambai d1" src="./img/bunga-goyang.jpg" alt="">
+  <img class="side-fl l low lambai d3" src="./img/bunga-goyang.jpg" alt="">
+  <img class="side-fl r low lambai d2" src="./img/bunga-goyang.jpg" alt="">
   <div class="inner">
     <div class="kicker rv" data-a="fade-up">Undangan Pernikahan</div>
     <div class="hero-names serif rv" data-a="zoom-out">Raka <span class="amp">&amp;</span> Sinta</div>
@@ -240,7 +247,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="mempelai" class="sec-bg2">
-  <img class="side-fl l lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl l lambai d2" src="./img/bunga-goyang.jpg" alt="">
   <div class="sec-head rv" data-a="fade-up">
     <div class="kicker">Assalamu'alaikum Wr. Wb.</div>
     <h2>Mempelai</h2>
@@ -248,12 +255,12 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
   </div>
   <div class="couple-grid">
     <div class="person rv" data-a="fade-up">
-      <img class="foto" src="./img/galeri-1.jpg?v=2" alt="Raka">
+      <img class="foto" src="./img/galeri-1.jpg" alt="Raka">
       <h3>Raka</h3>
       <div class="ortu">Putra dari<br>Bapak H. Bambang<br>&amp; Ibu Hj. Ratna</div>
     </div>
     <div class="person rv" data-a="fade-up">
-      <img class="foto" src="./img/galeri-2.jpg?v=2" alt="Sinta">
+      <img class="foto" src="./img/galeri-2.jpg" alt="Sinta">
       <h3>Sinta</h3>
       <div class="ortu">Putri dari<br>Bapak H. Slamet<br>&amp; Ibu Hj. Dewi</div>
     </div>
@@ -261,7 +268,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="story" class="sec-bg">
-  <img class="side-fl r lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl r lambai d3" src="./img/bunga-goyang.jpg" alt="">
   <div class="sec-head rv" data-a="fade-up">
     <div class="kicker">Our Journey</div>
     <h2>Love Story</h2>
@@ -288,7 +295,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="venue" class="sec-bg2">
-  <img class="side-fl l lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl l lambai d1" src="./img/bunga-goyang.jpg" alt="">
   <div class="sec-head rv" data-a="fade-up">
     <div class="kicker">Save The Date</div>
     <h2>Waktu &amp; Tempat</h2>
@@ -311,7 +318,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="galeri" class="sec-bg">
-  <img class="side-fl r lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl r lambai d2" src="./img/bunga-goyang.jpg" alt="">
   <div class="sec-head rv" data-a="fade-up">
     <div class="kicker">Moments</div>
     <h2>Galeri</h2>
@@ -339,7 +346,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="amplop" class="sec-bg">
-  <img class="side-fl l lambai d3" src="./img/bunga-goyang.jpg?v=2" alt="">
+  <img class="side-fl l lambai d3" src="./img/bunga-goyang.jpg" alt="">
   <div class="sec-head rv" data-a="fade-up">
     <div class="kicker">Tanda Kasih</div>
     <h2>Amplop Digital</h2>
@@ -379,8 +386,8 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
 </section>
 
 <section id="thanks">
-  <img class="cbunga tl lambai d1" src="./img/bunga-goyang.jpg?v=2" alt="" style="position:absolute">
-  <img class="cbunga tr lambai d2" src="./img/bunga-goyang.jpg?v=2" alt="" style="position:absolute">
+  <img class="cbunga tl lambai d1" src="./img/bunga-goyang.jpg" alt="" style="position:absolute">
+  <img class="cbunga tr lambai d2" src="./img/bunga-goyang.jpg" alt="" style="position:absolute">
   <div class="rv" data-a="fade-up" style="position:relative;z-index:2">
     <div class="kicker" style="color:var(--beige)">Terima Kasih</div>
     <h2>Thank You</h2>
@@ -388,7 +395,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
     <div class="script">Raka &amp; Sinta</div>
   </div>
 </section>
-<footer>Undangan Digital &bull; Raka &amp; Sinta</footer>
+<footer>Undangan Digital by <a href="https://www.instagram.com/aditya_apps/" target="_blank" rel="noopener">Aditya Apps</a></footer>
 
 </div><!-- /main -->
 </div><!-- /wrap -->
@@ -413,6 +420,7 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
       + 'animation-duration:'+(7+Math.random()*7)+'s;animation-delay:'+(Math.random()*8)+'s;opacity:.85';
     document.body.appendChild(p);
   }
+
 
   document.getElementById('openBtn').addEventListener('click', function(){
     cover.classList.add('hide');
@@ -452,7 +460,6 @@ footer{text-align:center;padding:22px;font-size:11px;letter-spacing:.2em;color:#
   });
 
   // ucapan demo (frontend-only, hilang saat refresh)
-  var demoNames = ['Tamu Undangan'];
   document.getElementById('wishForm').addEventListener('submit', function(e){
     e.preventDefault();
     var n = document.getElementById('wName').value.trim(),
