@@ -31,7 +31,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
 #fx{position:fixed;inset:0;z-index:1;pointer-events:none}
 .wrap{max-width:480px;margin:0 auto;position:relative;z-index:2;background:var(--bg)}
-.cover{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:var(--cover-bg);color:var(--cover-text);text-align:center;padding:28px;transition:opacity .8s ease}
+.cover{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;background:var(--cover-bg);color:var(--cover-text);text-align:center;padding:28px;transition:opacity .8s ease}
 .cover.open{opacity:0;pointer-events:none}
 .cover-inner{max-width:380px;width:100%}
 .cover-eyebrow{letter-spacing:4px;text-transform:uppercase;font-size:12px;opacity:.85}
@@ -46,7 +46,7 @@ section{padding:54px 26px;text-align:center;position:relative}
 .eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:11px;color:var(--accent);font-weight:600}
 .section-title{font-family:'Playfair Display',serif;font-size:30px;margin:8px 0 16px;color:var(--text)}
 .names{font-family:'Great Vibes',cursive;font-size:54px;color:var(--script);line-height:1.3}
-.hero{padding:84px 26px 60px}
+.hero{padding:84px 26px 44px}
 .hero .date{font-family:'Playfair Display',serif;letter-spacing:1px;margin-top:12px;font-size:16px}
 .divider{width:60px;height:2px;background:var(--accent);margin:20px auto;border-radius:2px;opacity:.65}
 .verse{font-style:italic;font-size:14px;color:var(--muted);max-width:350px;margin:0 auto}
@@ -97,10 +97,6 @@ linear-gradient(165deg,var(--bg),var(--bg2))}
   background:repeating-linear-gradient(45deg,rgba(120,72,40,.07) 0 14px,transparent 14px 34px),repeating-linear-gradient(-45deg,rgba(120,72,40,.07) 0 14px,transparent 14px 34px);
   animation:batikSlide 42s linear infinite}
 @keyframes batikSlide{from{background-position:0 0,0 0}to{background-position:130px 130px,-130px 130px}}
-.melati{position:fixed;top:0;z-index:5;pointer-events:none;transform-origin:top center;animation:melSway 5.5s ease-in-out infinite alternate}
-.melati u{display:block;width:2px;height:120px;margin:0 auto;background:linear-gradient(#7d8f5f,rgba(125,143,95,0))}
-.melati i{display:block;width:9px;height:9px;margin:2px auto;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffffff,#e7dfcb);box-shadow:0 0 6px rgba(255,255,255,.75)}
-@keyframes melSway{from{transform:rotate(-4.5deg)}to{transform:rotate(4.5deg)}}
 
 /* Kolom ucapan (DEMO: tanpa penyimpanan) */
 .ucapan-list{margin-top:20px;display:flex;flex-direction:column;gap:12px;text-align:left}
@@ -136,7 +132,6 @@ linear-gradient(165deg,var(--bg),var(--bg2))}
 @keyframes muSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
 @keyframes muSwayR{0%,100%{transform:scaleX(-1) rotate(-4deg)}50%{transform:scaleX(-1) rotate(4deg)}}
 @keyframes muDrift{from{background-position:0 0}to{background-position:120px 120px}}
-@keyframes muFall{0%{transform:translateY(-10vh) rotate(0deg)}100%{transform:translateY(112vh) rotate(340deg)}}
 .mu-orn{position:absolute;width:74px;height:74px;pointer-events:none;z-index:1;animation:muSway 3.8s ease-in-out infinite alternate;transform-origin:top center}
 .mu-orn.tl{top:12px;left:12px}
 .mu-orn.tr{top:12px;right:12px;animation-name:muSwayR}
@@ -144,11 +139,6 @@ linear-gradient(165deg,var(--bg),var(--bg2))}
 .mu-orn.br{bottom:12px;right:12px;animation-name:muSwayR;animation-duration:4.6s}
 section::before{content:"";position:absolute;top:12px;right:14px;width:82px;height:82px;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.22;pointer-events:none;z-index:0}
 section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
-.mu-edge{display:none}
-@media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
-.mu-edge.l{left:6px;top:22%}
-.mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
-.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
 
 .cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
 
@@ -169,8 +159,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .hero{background:radial-gradient(ellipse 88% 70% at 50% 30%,rgba(245,232,208,.12),rgba(245,232,208,0) 70%)}
 /* 2. Cover: gapuro atas + renda sudut bawah (ornamen SVG lama disembunyikan, diganti aset baru) */
 .cover .mu-orn{display:none}
-.mu-arch{position:absolute;top:0;left:50%;width:min(480px,94vw);height:auto;z-index:1;pointer-events:none;transform:translateX(-50%);animation:muArchIn 1.1s ease-out .1s backwards}
-@keyframes muArchIn{from{opacity:0;transform:translateX(-50%) translateY(-12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.mu-arch{position:static;width:min(300px,80vw);height:auto;z-index:1;pointer-events:none;margin:auto auto 10px;animation:muArchIn 1.1s ease-out .1s backwards}
+@keyframes muArchIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 .mu-corner{position:absolute;bottom:8px;width:165px;height:auto;z-index:1;pointer-events:none}
 .mu-corner.l{left:8px;animation:muCornerIn 1s ease-out .15s backwards,muCornerSway 7s ease-in-out 1.2s infinite alternate}
 .mu-corner.r{right:8px;animation:muCornerIn 1s ease-out .3s backwards,muCornerSway 7s ease-in-out 1.35s infinite alternate}
@@ -180,8 +170,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-gunungan-wrap{position:relative;width:200px;margin:0 auto 6px}
 body.mu-opened .mu-gunungan-wrap{animation:muGunIn 1.1s ease-out .15s backwards}
 @keyframes muGunIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.mu-gunungan-glow{position:absolute;left:50%;top:50%;width:270px;height:270px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(232,199,102,.38),rgba(232,199,102,.12) 55%,rgba(232,199,102,0) 70%);filter:blur(4px);pointer-events:none;animation:muGlowPulse 4s ease-in-out infinite}
-@keyframes muGlowPulse{0%,100%{opacity:.75}50%{opacity:1}}
+.mu-gunungan-glow{position:absolute;left:50%;top:50%;width:270px;height:270px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(232,199,102,.38),rgba(232,199,102,.12) 55%,rgba(232,199,102,0) 70%);filter:blur(4px);pointer-events:none}
 .mu-gunungan{position:relative;z-index:1;display:block;width:200px;height:auto;margin:0 auto;pointer-events:none;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));animation:muGunFloat 6s ease-in-out infinite}
 @keyframes muGunFloat{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
 /* 5. Sentuhan premium: border ganda emas kartu cover + divider emas bawah nama cover */
@@ -238,132 +227,100 @@ footer .credit{color:#c9b391}
 /* B6. Form RSVP: border emas + fokus emas */
 form input,form select,form textarea{border:1px solid rgba(216,184,119,.6)}
 form input:focus,form select:focus,form textarea:focus{outline:none;border-color:#8a5a2b;box-shadow:0 0 0 3px rgba(216,184,119,.35)}
-/* ===== PENYESUAIAN ADAT JAWA ===== */
-:root{--gold:#d8b877;--cream:#f3e3bd}
-.batikshift{opacity:.16!important}
-.cover-inner{padding:30px 24px 28px;box-shadow:0 14px 34px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.25)}
-.cover-guest{margin:14px 0 4px;padding:12px 10px}
-.btn-open,.btn{box-shadow:0 4px 12px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.2)}
-.jawa-greeting{color:var(--cream);font-family:'Playfair Display',serif;font-size:14px;margin:2px auto 10px;max-width:300px}
-.hero{padding-top:52px}
-.mu-gunungan-wrap{margin-bottom:0}
-.mu-gunungan,.mu-gunungan-glow{animation:none}
-.section-title{margin-bottom:20px}
-.section-title::after{width:min(230px,68%);height:22px;margin:10px auto 0;background:linear-gradient(90deg,transparent,rgba(216,184,119,.85),transparent);clip-path:polygon(0 48%,35% 48%,50% 0,65% 48%,100% 48%,100% 55%,65% 55%,50% 100%,35% 55%,0 55%)}
-.section-title::before{display:none}
-.divider{width:170px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.divider::before{width:7px;height:7px;background:var(--gold)}
-.event-card,.gift-card,.countdown div{background:rgba(250,245,234,.94);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid rgba(216,184,119,.8);box-shadow:0 8px 20px rgba(0,0,0,.13),inset 0 0 0 1px rgba(255,255,255,.55)}
-.event-card h3{display:flex;align-items:center;justify-content:center;gap:9px}
-.event-symbol{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid rgba(138,90,43,.4);border-radius:50%;font-size:16px;color:#8a5a2b}
-.e-date,.e-time,.e-place{color:#57432d}
-.muted,.verse,.person p{color:var(--cream)}
-.gallery div{border:1px solid var(--gold)}
-.closing-note{font-size:13px;color:var(--cream);max-width:310px;margin:16px auto 0}
-footer{border-top:1px solid rgba(216,184,119,.35)}
-footer .muted{color:var(--cream)}
-.mu-corner{width:clamp(105px,34vw,165px)}
-@media(max-width:380px){.cover{padding:18px}.cover-inner{padding:26px 18px 22px}.cover-names{font-size:50px}.section-title{font-size:26px}section{padding:44px 20px}.mu-gunungan-wrap,.mu-gunungan{width:170px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}#fx,.batikshift,.melati,.mu-drop{display:none!important}}
 </style>
-
-<style id="ornamen-adat-jawa-assets">
-/* Ornamen WebP adat Jawa — aset dari folder jawa/img */
-.cover-inner{
- background-image:linear-gradient(rgba(255,253,248,.94),rgba(255,253,248,.94)),url('./img/pola_kawung.webp');
- background-size:auto,220px 220px;
- border:8px solid transparent;
- border-image:url('./img/bingkai_kartu.webp') 34 fill / 12px / 2px;
-}
-.mu-corner{width:clamp(112px,35vw,170px);bottom:8px}
-.mu-corner.r{transform:scaleX(-1)}
-.mu-gunungan{width:190px;max-height:245px;object-fit:contain}
-.section-title{padding-top:8px}
-.section-title::after{
- width:min(230px,72%);height:30px;margin:8px auto 0;
- background:url('./img/pemisah_judul.webp') center/contain no-repeat;
-}
-.divider{
- width:min(230px,72%);height:28px;margin:18px auto;
- background:url('./img/divider_floral.webp') center/contain no-repeat;
-}
-.divider::before{display:none}
-.event-card,.gift-card{
- border:8px solid transparent;
- border-image:url('./img/bingkai_kartu.webp') 34 fill / 12px / 1px;
- background-image:linear-gradient(rgba(250,245,234,.96),rgba(250,245,234,.96)),url('./img/pola_kawung.webp');
- background-size:auto,180px 180px;
-}
-.event-card h3 .event-symbol{
- width:34px;height:34px;border:0;border-radius:0;
- background:url('./img/icon_cincin.webp') center/contain no-repeat;
- font-size:0;
-}
-.event-card:nth-of-type(2) h3 .event-symbol{
- background-image:url('./img/icon_jam.webp');
-}
-.event-card .btn.small::before{
- content:"";display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:6px;
- background:url('./img/icon_lokasi.webp') center/contain no-repeat;
-}
-.gift-card .bank::before{
- content:"";display:inline-block;width:20px;height:20px;vertical-align:middle;margin-right:7px;
- background:url('./img/icon_amplop.webp') center/contain no-repeat;
-}
-.person .avatar{
- background-image:url('./img/medali_kawung.webp'),linear-gradient(135deg,var(--accent),var(--accent2));
- background-size:cover;
- border:3px solid var(--gold);
-}
-.gallery div{position:relative;isolation:isolate}
-.gallery div::before{
- content:"";position:absolute;inset:0;z-index:-1;
- background:url('./img/bingkai_foto_lengkung.webp') center/100% 100% no-repeat;
-}
-.hero{position:relative}
-.hero::after{
- content:"";display:block;width:min(270px,78%);height:42px;margin:22px auto 0;
- background:url('./img/joglo.webp') center/contain no-repeat;opacity:.82;
-}
-section{background-image:linear-gradient(180deg,transparent 0 94%,rgba(216,184,119,.035) 100%)}
-section::before{
- width:76px;height:120px;top:18px;right:8px;
- background:url('./img/untaian_melati.webp') center/contain no-repeat;
- opacity:.58;
-}
-section:nth-of-type(even)::before{left:8px;right:auto;transform:scaleX(-1)}
-footer{position:relative}
-footer::before{
- content:"";display:block;width:150px;height:78px;margin:0 auto 14px;
- background:url('./img/joglo.webp') center/contain no-repeat;opacity:.8;
-}
-@media(max-width:420px){
- .mu-gunungan{width:165px}
- .section-title::after{height:24px}
- .event-card,.gift-card{border-width:6px;border-image-width:9px}
- section::before{width:55px;height:94px;opacity:.42}
-}
-@media(prefers-reduced-motion:reduce){
- .mu-gunungan{animation:none}
+<style>
+/* ===== MU-JAWA-BERSIH 2026-11-03: instalasi bersih ornamen Jawa (basis d322e4f, patokan polish Islami) ===== */
+/* Cover: gapuro aliran (MU-ARCH-FIX), kartu berbingkai overlay, pojok HANYA di kartu cover */
+.cover-inner{margin-bottom:auto;isolation:isolate}
+.cover-inner>*{position:relative;z-index:3}
+.cover-inner>.mu-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:0}
+.cover-inner>.mu-cf{position:absolute;width:clamp(104px,28vw,128px);height:auto;pointer-events:none;z-index:2}
+.cover-inner>.mu-cf.tl{top:-6px;left:-6px}
+.cover-inner>.mu-cf.tr{top:-6px;right:-6px;transform:scaleX(-1)}
+.cover-inner>.mu-cf.bl{bottom:-6px;left:-6px;transform:scaleY(-1)}
+.cover-inner>.mu-cf.br{bottom:-6px;right:-6px;transform:scale(-1,-1)}
+.cover-inner{border:none!important;outline:none!important}
+.cover-names::after{display:none}
+.mu-divider-cover{display:block;width:78%;height:auto;margin:14px auto 0}
+.mu-divider{display:block;width:78%;height:auto;margin:18px auto}
+/* Panel: cokelat 92% + overlay redup batik 55% (batik diturunkan ke z 0 agar benar-benar teredup) */
+body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.55);z-index:1;pointer-events:none}
+.batikshift{z-index:0}
+.wrap{background:radial-gradient(600px 300px at 15% -5%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),radial-gradient(500px 260px at 90% 20%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),linear-gradient(rgba(38,22,10,.92),rgba(52,32,16,.92))}
+/* Tumpal: tepi atas & bawah panel (bawah dicerminkan) */
+.wrap::before,.wrap::after{content:"";display:block;height:40px;background:url(./img/tumpal_batas.webp) repeat-x center/auto 40px}
+.wrap::after{transform:scaleY(-1)}
+/* Judul: pemisah ornamen ganti garis emas + berlian */
+.section-title::after,.section-title::before{display:none}
+.mu-pemisah{display:block;width:60%;max-width:300px;height:auto;margin:2px auto 14px}
+/* Teks kecil emas terbaca */
+.eyebrow{color:#f3e3bd;font-size:13px}
+.verse{color:#f7ecd2;font-size:15px;line-height:1.8}
+/* Salam: gunungan garis aliran + sugeng */
+.mu-gunungan-line{display:block;height:170px;width:auto;margin:0 auto 6px}
+.mu-sugeng{font-family:'Playfair Display',serif;font-size:15px;color:#f3e3bd;letter-spacing:1.5px;margin:8px 0 0;text-align:center}
+/* Medali monogram (tengah medali transparan -> teks emas di atas panel gelap) */
+.mu-medali{position:relative;width:200px;height:200px;margin:6px auto 18px}
+.mu-medali img{display:block;width:100%;height:100%}
+.mu-medali span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Great Vibes',cursive;font-size:34px;color:#e8c766;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+/* Foto mempelai berbingkai lengkung (placeholder inisial) */
+.mu-foto{position:relative;width:150px;height:214px;margin:0 auto 14px;border-radius:50% 50% 0 0 / 35% 35% 0 0;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mu-foto span{font-family:'Great Vibes',cursive;font-size:52px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.mu-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+/* Joglo aliran */
+.mu-joglo{display:block;width:70%;max-width:340px;height:auto;margin:0 auto 8px}
+/* Ikon */
+.mu-icon{display:block;width:48px;height:48px;margin:0 auto 6px}
+.mu-icon-mini{width:22px;height:22px;vertical-align:-5px;margin-right:6px}
+/* Kartu berbingkai overlay (ganti border emas) + tekstur kawung HANYA di kartu acara */
+.event-card,.gift-card{position:relative;border:none}
+.event-card>*:not(.mu-frame),.gift-card>*:not(.mu-frame){position:relative;z-index:1}
+.mu-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:0}
+.event-card{background-color:var(--card);background-image:url(./img/pola_kawung.webp);background-size:128px}
+/* Untaian melati: tepi panel, DESKTOP saja, ayun halus */
+.mu-untaian{position:fixed;top:0;width:50px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:muUntaianSway 5s ease-in-out infinite alternate}
+.mu-untaian.l{left:10px}
+.mu-untaian.r{right:10px;animation-delay:-2.5s}
+@keyframes muUntaianSway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@media(max-width:640px){.mu-untaian{display:none}}
+/* Kelopak burst saat dibuka (bukan loop) */
+.mu-burst{position:fixed;top:-50px;z-index:9998;pointer-events:none;animation:muBurstFall linear forwards}
+@keyframes muBurstFall{to{transform:translateY(112vh) rotate(340deg)}}
+/* Tombol: bayangan dikurangi + label musik */
+.btn,.btn-open{box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.25)}
+.mu-music-label{position:fixed;right:72px;bottom:30px;z-index:9999;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:6px 10px;border-radius:999px;pointer-events:none}
+.mu-music-label[hidden]{display:none}
+.mu-note{font-size:11px;color:#c9b391;margin-top:16px;text-align:center}
+/* Hero: rapatkan jarak ke salam */
+.hero{padding:84px 26px 44px}
+/* Glow pulse dimatikan (glow statis dipertahankan) */
+.mu-gunungan-glow{animation:none}
+/* Reduced motion: matikan ayunan + reveal tanpa transisi (burst dijaga JS) */
+@media (prefers-reduced-motion:reduce){
+.mu-untaian,.mu-gunungan,.mu-corner,.batikshift,.gallery div::after{animation:none!important}
+.reveal{transition:none;opacity:1;transform:none}
 }
 </style>
-
 </head>
 <body>
-<canvas id="fx"></canvas>
+<canvas id="fx2"></canvas>
 <div class="batikshift"></div>
 
+<img class="mu-untaian l" src="./img/untaian_melati.webp" alt="" decoding="async" loading="lazy">
+<img class="mu-untaian r" src="./img/untaian_melati.webp" alt="" decoding="async" loading="lazy">
 <div class="cover" id="cover">
   <img class="mu-arch" src="./img/ornamen-arch.webp" alt="">
-  <img class="mu-corner l" src="./img/corner_flourish.webp" alt="">
-  <img class="mu-corner r" src="./img/corner_flourish.webp" alt="">
-  <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn br" src="./img/ornamen.svg" alt="">
+  <img class="mu-corner l" src="./img/ornamen-corner-left.webp" alt="">
+  <img class="mu-corner r" src="./img/ornamen-corner-right.webp" alt="">
   <div class="cover-inner">
+    <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async">
+    <img class="mu-cf tl" src="./img/corner_flourish.webp" alt="" decoding="async">
+    <img class="mu-cf tr" src="./img/corner_flourish.webp" alt="" decoding="async">
+    <img class="mu-cf bl" src="./img/corner_flourish.webp" alt="" decoding="async">
+    <img class="mu-cf br" src="./img/corner_flourish.webp" alt="" decoding="async">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
     <h1 class="cover-names">Raka &amp; Sinta</h1>
+    <img class="mu-divider-cover" src="./img/divider_floral.webp" alt="" decoding="async">
     <p class="cover-date">Senin, 21 Desember 2026</p>
     <div class="cover-guest">
       <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i:</p>
@@ -377,28 +334,31 @@ footer::before{
   <section class="hero reveal">
     <div class="mu-gunungan-wrap">
       <div class="mu-gunungan-glow"></div>
-      <img class="mu-gunungan" src="./img/gunungan.webp" alt="">
+      <img class="mu-gunungan" src="./img/ornamen-gunungan.webp" alt="">
     </div>
-    <p class="eyebrow">Sugeng Rawuh · Rahayu</p>
-    <p class="jawa-greeting">Kanthi kebahagiaan, kula ngaturaken sugeng rawuh</p>
+    <p class="eyebrow">The Wedding of</p>
     <h1 class="names">Raka &amp; Sinta</h1>
-    <div class="divider"></div>
+    <img class="mu-divider" src="./img/divider_floral.webp" alt="" decoding="async" loading="lazy">
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
 
   <section class="reveal">
+    <img class="mu-gunungan-line" src="./img/gunungan.webp" alt="" decoding="async" loading="lazy">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
-    <div class="divider"></div>
+    <p class="mu-sugeng">Sugeng Rawuh</p>
+    <img class="mu-divider" src="./img/divider_floral.webp" alt="" decoding="async" loading="lazy">
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
     <h2 class="section-title">Mempelai</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
+    <div class="mu-medali"><img src="./img/medali_kawung.webp" alt="" decoding="async" loading="lazy"><span>R &amp; S</span></div>
     <div class="person">
-      <div class="avatar">R</div>
+      <div class="mu-foto"><span>R</span><img class="mu-frame-foto" src="./img/bingkai_foto_lengkung.webp" alt="" decoding="async" loading="lazy"></div>
       <h3>Raka Pratama</h3>
       <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
     </div>
     <div class="amp">&amp;</div>
     <div class="person">
-      <div class="avatar">S</div>
+      <div class="mu-foto"><span>S</span><img class="mu-frame-foto" src="./img/bingkai_foto_lengkung.webp" alt="" decoding="async" loading="lazy"></div>
       <h3>Sinta Maharani</h3>
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
@@ -406,6 +366,7 @@ footer::before{
 
   <section class="reveal">
     <h2 class="section-title">Save the Date</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <p class="date-big">Senin, 21 Desember 2026</p>
     <p class="muted">Menghitung mundur menuju hari bahagia</p>
     <div class="countdown">
@@ -418,25 +379,32 @@ footer::before{
   </section>
 
   <section class="reveal">
+    <img class="mu-joglo" src="./img/joglo.webp" alt="" decoding="async" loading="lazy">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <div class="event-card">
-      <h3><span class="event-symbol" aria-hidden="true">◈</span> Akad Nikah</h3>
+      <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async" loading="lazy">
+      <img class="mu-icon" src="./img/icon_cincin.webp" alt="" decoding="async" loading="lazy">
+      <h3>Akad Nikah</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
-      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
+      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener"><img class="mu-icon-mini" src="./img/icon_lokasi.webp" alt="" decoding="async" loading="lazy">Lihat Lokasi</a>
     </div>
     <div class="event-card">
-      <h3><span class="event-symbol" aria-hidden="true">✦</span> Resepsi</h3>
+      <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async" loading="lazy">
+      <img class="mu-icon" src="./img/icon_jam.webp" alt="" decoding="async" loading="lazy">
+      <h3>Resepsi</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
       <p class="e-place">Gedung Serbaguna Mojokerto<br>Jl. Gajah Mada No. 45, Mojokerto</p>
-      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
+      <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener"><img class="mu-icon-mini" src="./img/icon_lokasi.webp" alt="" decoding="async" loading="lazy">Lihat Lokasi</a>
     </div>
   </section>
 
   <section class="reveal">
     <h2 class="section-title">Galeri</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <p class="muted">Momen bahagia kami</p>
     <div class="gallery">
       <div style="background:linear-gradient(135deg,#8a5a2b,#5f3c1a)">R &amp; S</div>
@@ -451,7 +419,7 @@ footer::before{
     <section class="reveal">
     <p class="eyebrow">Kisah Kami</p>
     <h2 class="section-title">Love Story</h2>
-    <div class="divider"></div>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <div class="ls-list">
       <div class="ls-item"><span class="ls-year">2024</span><h3>Pertemuan Pertama</h3><p>Atas izin takdir, kami dipertemukan oleh seorang teman di sebuah acara keluarga. Sapaan sederhana itu menjadi awal dari segalanya.</p></div>
       <div class="ls-item"><span class="ls-year">2025</span><h3>Menjalin Kasih</h3><p>Seiring berjalannya waktu, kebersamaan menumbuhkan rasa yang semakin dalam, hingga kami memutuskan untuk melangkah lebih serius.</p></div>
@@ -460,21 +428,26 @@ footer::before{
   </section>
 
 <section class="reveal">
-    <h2 class="section-title"><span class="event-symbol" aria-hidden="true">◇</span> Amplop Digital</h2>
+    <img class="mu-icon" src="./img/icon_amplop.webp" alt="" decoding="async" loading="lazy">
+    <h2 class="section-title">Amplop Digital</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
     <div class="gift-card">
+      <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async" loading="lazy">
       <p class="bank">Bank BCA (contoh)</p>
       <p class="rek" id="rek1">1234567890</p>
       <p class="an">a.n. Raka Pratama</p>
       <button class="btn small" type="button" data-copy="rek1">Salin Nomor</button>
     </div>
     <div class="gift-card">
+      <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async" loading="lazy">
       <p class="bank">Bank Mandiri (contoh)</p>
       <p class="rek" id="rek2">0987654321</p>
       <p class="an">a.n. Sinta Maharani</p>
       <button class="btn small" type="button" data-copy="rek2">Salin Nomor</button>
     </div>
     <div class="gift-card">
+      <img class="mu-frame" src="./img/bingkai_kartu.webp" alt="" decoding="async" loading="lazy">
       <p class="bank">Kirim Kado Fisik</p>
       <p class="an">Jl. Melati No. 12, Sidoarjo,<br>Jawa Timur</p>
     </div>
@@ -482,6 +455,7 @@ footer::before{
 
   <section class="reveal">
     <h2 class="section-title">RSVP &amp; Ucapan</h2>
+    <img class="mu-pemisah" src="./img/pemisah_judul.webp" alt="" decoding="async" loading="lazy">
     <p class="muted">Konfirmasi kehadiran dan titipkan doa restu terbaik Anda</p>
     <form id="rsvpForm">
       <input type="text" id="rsvpName" placeholder="Nama lengkap" maxlength="40" required>
@@ -503,10 +477,11 @@ footer::before{
   </section>
 
   <footer class="reveal">
+    <img class="mu-joglo" src="./img/joglo.webp" alt="" decoding="async" loading="lazy">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
-    <p class="closing-note">Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar.</p>
-    <p class="thanks">Matur Nuwun</p>
+    <p class="thanks">Terima kasih</p>
     <h2 class="names">Raka &amp; Sinta</h2>
+    <p class="mu-note">* Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar</p>
     <p class="credit">Demo undangan digital</p>
   </footer>
 </div>
@@ -598,69 +573,24 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 })();
 
 
-// Dekorasi partikel ringan (canvas)
+// Asap dupa mengepul naik (jawa)
 (function(){
-  var canvas = document.getElementById("fx");
-  if (!canvas) return;
-  var ctx = canvas.getContext("2d");
-  var W, H, parts = [];
-  var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reducedMotion) { canvas.style.display = "none"; return; }
-  var CFG = {"type":"petals","count":12,"colors":["#f7e7c3","#e8c766","#fff8e7"]};
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  window.addEventListener("resize", resize); resize();
-  function rnd(a, b){ return a + Math.random() * (b - a); }
-  function pick(arr){ return arr[(Math.random() * arr.length) | 0]; }
-  function make(init){
-    if (CFG.type === "petals") {
-      return {x: Math.random()*W, y: init ? Math.random()*H : -20, s: rnd(4,11),
-        vy: rnd(0.4,1.3), sway: rnd(0,6.28), swaySpd: rnd(0.008,0.028),
-        rot: rnd(0,6.28), rotSpd: rnd(-0.03,0.03), c: pick(CFG.colors)};
-    }
-    if (CFG.type === "rise") {
-      return {x: Math.random()*W, y: init ? Math.random()*H : H+12, r: rnd(1,3.6),
-        vy: -rnd(0.25,0.95), tw: rnd(0,6.28), twSpd: rnd(0.02,0.07), c: pick(CFG.colors)};
-    }
-    return {x: Math.random()*W, y: Math.random()*H, r: rnd(1.2,3.4),
-      vx: rnd(-0.4,0.4), vy: rnd(-0.4,0.4), tw: rnd(0,6.28), twSpd: rnd(0.015,0.055),
-      c: pick(CFG.colors)};
-  }
-  function draw(p){
-    if (CFG.type === "petals") {
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      ctx.globalAlpha = 0.85; ctx.fillStyle = p.c;
-      ctx.beginPath(); ctx.ellipse(0, 0, p.s, p.s*0.55, 0, 0, Math.PI*2); ctx.fill();
-      ctx.restore(); ctx.globalAlpha = 1;
-    } else {
-      var a = 0.3 + 0.7 * Math.abs(Math.sin(p.tw));
-      ctx.globalAlpha = a; ctx.fillStyle = p.c;
-      ctx.shadowColor = p.c; ctx.shadowBlur = 9;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
-    }
-  }
-  function step(){
-    ctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < parts.length; i++) {
-      var p = parts[i];
-      if (CFG.type === "petals") {
-        p.y += p.vy; p.sway += p.swaySpd; p.x += Math.sin(p.sway) * 0.6; p.rot += p.rotSpd;
-        if (p.y > H + 30) { parts[i] = make(false); continue; }
-      } else if (CFG.type === "rise") {
-        p.y += p.vy; p.tw += p.twSpd;
-        if (p.y < -14) { parts[i] = make(false); continue; }
-      } else {
-        p.x += p.vx; p.y += p.vy; p.tw += p.twSpd;
-        if (Math.random() < 0.01) { p.vx = rnd(-0.4,0.4); p.vy = rnd(-0.4,0.4); }
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      }
-      draw(p);
-    }
-    requestAnimationFrame(step);
-  }
-  for (var i = 0; i < CFG.count; i++) parts.push(make(true));
-  step();
+  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
+  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+  addEventListener("resize",rs);rs();
+  function mk(i){return{bx:W*0.5+(Math.random()-0.5)*W*0.5,y:i?Math.random()*H:H+20,
+    r:Math.random()*14+8,vy:-(Math.random()*0.7+0.35),ph:Math.random()*6.28,
+    sp:Math.random()*0.02+0.008,life:i?Math.random():0,max:1}}
+  for(var i=0;i<24;i++)P.push(mk(true));
+  (function step(){x.clearRect(0,0,W,H);
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.ph+=p.sp;p.life+=0.0035;
+      var px=p.bx+Math.sin(p.ph)*46*(1-p.life*0.5),pr=p.r*(1+p.life*1.6);
+      var a=0.16*(1-p.life);if(a<0)a=0;
+      if(p.life>=1||p.y<-60){P[k]=mk(false);continue}
+      var g=x.createRadialGradient(px,p.y,0,px,p.y,pr);
+      g.addColorStop(0,"rgba(200,190,175,"+a+")");g.addColorStop(1,"rgba(200,190,175,0)");
+      x.fillStyle=g;x.beginPath();x.arc(px,p.y,pr,0,6.283);x.fill();}
+    requestAnimationFrame(step);})();
 })();
 </script>
 <script>
@@ -682,17 +612,33 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   });
 })();
 </script>
-<img class="mu-edge l" src="./img/ornamen.svg" alt="">
-<img class="mu-edge r" src="./img/ornamen.svg" alt="">
+
 <script>
 /* MU-UPGRADE3: entrance gunungan dipicu saat cover dibuka (listener tambahan, logika buka tidak diubah) */
 (function(){
   var b=document.getElementById('openBtn');
-  if(b){b.addEventListener('click',function(){document.body.classList.add('mu-opened');});}
+  if(b){b.addEventListener('click',function(){
+    document.body.classList.add('mu-opened');
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    for(var i=0;i<6;i++){
+      (function(){
+        var im=document.createElement('img');
+        im.className='mu-burst';im.src='./img/kelopak.webp';im.alt='';
+        var s=18+Math.random()*22;
+        im.style.width=s+'px';im.style.height='auto';
+        im.style.left=(8+Math.random()*84)+'vw';
+        im.style.animationDuration=(3+Math.random()*2)+'s';
+        im.style.animationDelay=(Math.random()*0.8)+'s';
+        document.body.appendChild(im);
+        setTimeout(function(){if(im.parentNode)im.parentNode.removeChild(im);},6500);
+      })();
+    }
+  });}
 })();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik" hidden>♪</button>
+<span class="mu-music-label" id="muMusicLabel" hidden>Ketuk untuk musik</span>
 <audio id="muBgMusic" loop preload="none" src="../assets/music/There_is_Romance.mp3"></audio>
 <script>
 /* MUSIK LATAR: mulai saat undangan dibuka, tombol untuk putar/jeda */
@@ -703,8 +649,10 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   var playing=false;
   function setState(p){playing=p;btn.textContent=p?'\u266a':'II';btn.classList.toggle('paused',!p);}
   function playMusic(){if(playing)return;audio.play().then(function(){setState(true);}).catch(function(){});}
-  function onOpen(){btn.hidden=false;playMusic();}
-  btn.addEventListener('click',function(){if(playing){audio.pause();setState(false);}else{audio.play().then(function(){setState(true);}).catch(function(){});}});
+  var lbl=document.getElementById('muMusicLabel');
+  function hideLbl(){if(lbl)lbl.hidden=true;}
+  function onOpen(){btn.hidden=false;if(lbl){lbl.hidden=false;setTimeout(hideLbl,8000);}playMusic();}
+  btn.addEventListener('click',function(){hideLbl();if(playing){audio.pause();setState(false);}else{audio.play().then(function(){setState(true);}).catch(function(){});}});
   var openBtn=document.getElementById('openBtn');
   if(openBtn){openBtn.addEventListener('click',onOpen);}
   var ob=document.querySelector('[onclick*="bukaUndangan"]');
