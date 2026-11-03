@@ -326,7 +326,11 @@ section::before{display:none}
 </style>
 <style>
 /* ===== MU-RINGAN 2026-11-03: matikan animasi terus-menerus yang tidak perlu ===== */
-.batikshift,.mu-gunungan,.mu-gunungan-glow,.gallery div::after{animation:none!important}
+.batikshift,.mu-gunungan,.mu-gunungan-glow,.gallery div::after,.mu-arch{animation:none!important}
+/* ===== MU-ARCH-FIX 2026-11-03: gapuro diam, duduk rapi di atas kartu ===== */
+.cover{flex-direction:column;justify-content:flex-start;overflow-y:auto}
+.mu-arch{position:static;transform:none;width:min(300px,80vw);margin:auto auto 10px}
+.cover-inner{margin-bottom:auto}
 </style>
 </head>
 <body>
