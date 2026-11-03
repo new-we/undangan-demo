@@ -324,6 +324,10 @@ section::before{display:none}
 /* ===== MU-REVISI 2026-11-03: peletakan dirapikan, beban dikurangi ===== */
 @media (max-width:640px){.untaian{display:none}}
 </style>
+<style>
+/* ===== MU-RINGAN 2026-11-03: matikan animasi terus-menerus yang tidak perlu ===== */
+.batikshift,.mu-gunungan,.mu-gunungan-glow,.gallery div::after{animation:none!important}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -722,16 +726,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 <script>
 /* MU-UPGRADE5: melati jatuh teratur + kelopak saat dibuka */
 (function(){
-  for(var i=0;i<6;i++){
-    var d=document.createElement('img');
-    d.className='melati-fall';d.src='./img/melati.webp';d.alt='';
-    var s=16+Math.random()*16;
-    d.style.opacity='0.85';
-    d.style.width=s+'px';d.style.left=(Math.random()*100)+'vw';
-    d.style.animationDuration=(9+Math.random()*7)+'s';
-    d.style.animationDelay=(Math.random()*9)+'s';
-    document.body.appendChild(d);
-  }
   var b=document.getElementById('openBtn');
   if(b){b.addEventListener('click',function(){
     for(var j=0;j<14;j++){
