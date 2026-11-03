@@ -101,3 +101,14 @@ form .btn-gold{margin-top:.4rem;align-self:center}
 .reveal{opacity:0;transform:translateY(26px);transition:all 1s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
+
+/* ===== ORNAMEN PER TEMA (PETA_PENEMPATAN.md) ===== */
+
+/* ===== ORNAMEN PER TEMA (PETA_PENEMPATAN.md) ===== */
+.orn-header{display:block;width:92%;max-width:420px;margin:0 auto}
+.orn-pemisah{display:block;width:70%;max-width:320px;margin:24px auto}
+.orn-pojok{position:absolute;width:30vw;max-width:130px;pointer-events:none}
+.orn-pojok.tl{top:0;left:0}
+.orn-pojok.tr{top:0;right:0;transform:scaleX(-1)}
+.orn-pojok.bl{bottom:0;left:0;transform:scaleY(-1)}
+.orn-pojok.br{bottom:0;right:0;transform:scale(-1,-1)}

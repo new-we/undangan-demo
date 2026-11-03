@@ -161,6 +161,16 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
 .music-btn svg{width:20px;height:20px}
 .music-btn.spin svg{animation:spin 4s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== ORNAMEN PER TEMA (PETA_PENEMPATAN.md) ===== */
+.orn-header{display:block;width:92%;max-width:420px;margin:0 auto}
+.orn-pemisah{display:block;width:70%;max-width:320px;margin:24px auto}
+.orn-pojok{position:absolute;width:30vw;max-width:130px;pointer-events:none}
+.orn-pojok.tl{top:0;left:0}
+.orn-pojok.tr{top:0;right:0;transform:scaleX(-1)}
+.orn-pojok.bl{bottom:0;left:0;transform:scaleY(-1)}
+.orn-pojok.br{bottom:0;right:0;transform:scale(-1,-1)}
+#acara .card{position:relative}
 </style>
 </head>
 <body class="locked">
@@ -180,6 +190,7 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
     <circle cx="100" cy="217" r="4" fill="#d4af37"/>
   </svg>
   <div><span class="ribbon">THE WEDDING OF</span></div>
+  <img class="orn-header" src="assets/gunungan_header.webp" alt="" loading="lazy">
   <div class="cover-names">Dimas &amp; Sinta</div>
   <div class="cover-date">MINGGU, 20 DESEMBER 2026</div>
   <div class="guest-box">
@@ -234,14 +245,14 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
     <div><b id="cdM">00</b><span>MENIT</span></div>
     <div><b id="cdS">00</b><span>DETIK</span></div>
   </div>
-  <div class="card">
+  <div class="card"><img class="orn-pojok tl" src="assets/gunungan_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="assets/gunungan_pojok.webp" alt="" loading="lazy">
     <h3>AKAD NIKAH</h3>
     <p class="big">Minggu, 20 Desember 2026</p>
     <p class="mut">Pukul 09.00 WIB</p>
     <p class="mut">Gedung Joglo Heritage, Yogyakarta</p>
     <a class="btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Joglo+Heritage+Yogyakarta">Google Maps Lokasi</a>
   </div>
-  <div class="card">
+  <div class="card"><img class="orn-pojok tl" src="assets/gunungan_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="assets/gunungan_pojok.webp" alt="" loading="lazy">
     <h3>RESEPSI</h3>
     <p class="big">Minggu, 20 Desember 2026</p>
     <p class="mut">Pukul 11.00 – 14.00 WIB</p>
@@ -249,6 +260,7 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
     <a class="btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Joglo+Heritage+Yogyakarta">Google Maps Lokasi</a>
   </div>
 </section>
+<img class="orn-pemisah" src="assets/gunungan_pemisah.webp" alt="" loading="lazy">
 
 <!-- ================= MEMPELAI ================= -->
 <section id="mempelai">
@@ -267,6 +279,7 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
     <p class="mut">Putra kedua dari Bpk. H. Joko Prasetyo<br>&amp; Ibu Hj. Siti Aminah</p>
   </div>
 </section>
+<img class="orn-pemisah" src="assets/gunungan_pemisah.webp" alt="" loading="lazy">
 
 <!-- ================= OUR STORY ================= -->
 <section>
@@ -278,6 +291,7 @@ footer .names{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2
     <div class="story-item"><img src="assets/couple-cover.webp" alt=""><div><h4>MENIKAH</h4><p>Atas izin Allah SWT, kami menyempurnakan separuh agama dan memulai lembaran baru sebagai suami istri.</p></div></div>
   </div>
 </section>
+<img class="orn-pemisah" src="assets/gunungan_pemisah.webp" alt="" loading="lazy">
 
 <!-- ================= GALERI ================= -->
 <section id="galeri">

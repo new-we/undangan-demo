@@ -148,7 +148,6 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .mu-orn.tr{top:12px;right:12px;animation-name:muSwayR}
 .mu-orn.bl{bottom:12px;left:12px;animation-duration:4.6s}
 .mu-orn.br{bottom:12px;right:12px;animation-name:muSwayR;animation-duration:4.6s}
-section::before{content:"";position:absolute;top:12px;right:14px;width:82px;height:82px;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.22;pointer-events:none;z-index:0}
 section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-edge{display:none}
 @media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
@@ -156,8 +155,19 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
 .mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
 
-.cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
 
+
+/* ===== ORNAMEN PER TEMA (PETA_PENEMPATAN.md) ===== */
+.orn-header{display:block;width:92%;max-width:420px;margin:0 auto}
+.orn-pemisah{display:block;width:70%;max-width:320px;margin:24px auto}
+.orn-pojok{position:absolute;width:30vw;max-width:130px;pointer-events:none}
+.orn-pojok.tl{top:0;left:0}
+.orn-pojok.tr{top:0;right:0;transform:scaleX(-1)}
+.orn-pojok.bl{bottom:0;left:0;transform:scaleY(-1)}
+.orn-pojok.br{bottom:0;right:0;transform:scale(-1,-1)}
+.event-card{position:relative}
+.orn-pojok.tl{width:36vw;max-width:150px}
+.orn-pojok.br{width:22vw;max-width:84px}
 </style>
 <style>
 /* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
@@ -183,12 +193,9 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 
 
 <div class="cover" id="cover">
-  <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
-  <img class="mu-orn br" src="./img/ornamen.svg" alt="">
   <div class="cover-inner">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
+    <img class="orn-header" src="./img/sakura_header.webp" alt="" loading="lazy">
     <h1 class="cover-names">Raka &amp; Sinta</h1>
     <p class="cover-date">Senin, 21 Desember 2026</p>
     <div class="cover-guest">
@@ -207,8 +214,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <div class="divider"></div>
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
-
-  <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
@@ -225,8 +232,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
   </section>
-
-  <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <h2 class="section-title">Save the Date</h2>
     <p class="date-big">Senin, 21 Desember 2026</p>
     <p class="muted">Menghitung mundur menuju hari bahagia</p>
@@ -238,17 +245,17 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     </div>
     <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20261221T010000Z/20261221T060000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
   </section>
-
-  <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
-    <div class="event-card">
+    <div class="event-card"><img class="orn-pojok tl" src="./img/sakura_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sakura_pojok.webp" alt="" loading="lazy">
       <h3>Akad Nikah</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
-    <div class="event-card">
+    <div class="event-card"><img class="orn-pojok tl" src="./img/sakura_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sakura_pojok.webp" alt="" loading="lazy">
       <h3>Resepsi</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
@@ -256,8 +263,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
   </section>
-
-  <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <h2 class="section-title">Galeri</h2>
     <p class="muted">Momen bahagia kami</p>
     <div class="gallery">
@@ -269,8 +276,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div style="background:linear-gradient(135deg,#f6b8d0,#e88cae)">R &amp; S</div>
     </div>
   </section>
-
-    <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <p class="eyebrow">Kisah Kami</p>
     <h2 class="section-title">Love Story</h2>
     <div class="divider"></div>
@@ -280,8 +287,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div class="ls-item"><span class="ls-year">2026</span><h3>Menuju Pernikahan</h3><p>Dengan restu kedua keluarga, kami memantapkan hati untuk mengikat janji suci dan memulai babak baru bersama.</p></div>
     </div>
   </section>
-
-<section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <h2 class="section-title">Amplop Digital</h2>
     <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
     <div class="gift-card">
@@ -301,8 +308,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <p class="an">Jl. Melati No. 12, Sidoarjo,<br>Jawa Timur</p>
     </div>
   </section>
-
-  <section class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <h2 class="section-title">RSVP &amp; Ucapan</h2>
     <p class="muted">Konfirmasi kehadiran dan titipkan doa restu terbaik Anda</p>
     <form id="rsvpForm">
@@ -323,8 +330,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <p class="ucapan-note">Demo: ucapan yang dikirim hanya tampil di layar ini dan tidak tersimpan.</p>
 
   </section>
-
-  <footer class="reveal">
+<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+ class="reveal">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
     <p class="thanks">Terima kasih</p>
     <h2 class="names">Raka &amp; Sinta</h2>
@@ -591,8 +598,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   });
 })();
 </script>
-<img class="mu-edge l" src="./img/ornamen.svg" alt="">
-<img class="mu-edge r" src="./img/ornamen.svg" alt="">
 <script>
 /* MU-UPGRADE2: partikel motif jatuh */
 (function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
