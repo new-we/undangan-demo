@@ -248,6 +248,29 @@ section>*{position:relative;z-index:1}
 .bunga.bl{transform-origin:bottom left;animation:sway15Y 6.8s ease-in-out infinite alternate;animation-delay:-3s;}
 .bunga.br{transform-origin:bottom right;animation:sway15XY 6.8s ease-in-out infinite alternate;animation-delay:-4.5s;}
 @media (prefers-reduced-motion:reduce){.arab.tl,.arab.tr,.arab.bl,.arab.br,.bunga.tl,.bunga.tr,.bunga.bl,.bunga.br{animation:none!important}}
+
+
+/* FIX 2026-11-03: samakan ornamen sudut kanan atas cover dengan kiri */
+.cover-inner{position:relative;isolation:isolate;overflow:visible}
+.cover-inner>.arab.tr{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  top:-8px!important;
+  right:-8px!important;
+  left:auto!important;
+  width:96px;
+  height:96px;
+  object-fit:contain;
+  transform:scaleX(-1);
+  transform-origin:top right;
+  z-index:5;
+  animation:arabShine 5s ease-in-out infinite,sway15X 6s ease-in-out infinite alternate;
+}
+@media(max-width:400px){
+  .cover-inner>.arab.tr{width:76px;height:76px}
+}
+
 </style>
 </head>
 <body>
