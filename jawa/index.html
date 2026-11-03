@@ -169,7 +169,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .hero{background:radial-gradient(ellipse 88% 70% at 50% 30%,rgba(245,232,208,.12),rgba(245,232,208,0) 70%)}
 /* 2. Cover: gapuro atas + renda sudut bawah (ornamen SVG lama disembunyikan, diganti aset baru) */
 .cover .mu-orn{display:none}
-.mu-arch{position:absolute;top:0;left:50%;width:min(480px,94vw);height:auto;z-index:1;pointer-events:none;transform:translateX(-50%);animation:muArchIn 1.1s ease-out .1s backwards,swayArch 7s ease-in-out 1.2s infinite alternate}
+.mu-arch{position:absolute;top:0;left:50%;width:min(320px,84vw);height:auto;z-index:1;pointer-events:none;transform:translateX(-50%);animation:muArchIn 1.1s ease-out .1s backwards,swayArch 7s ease-in-out 1.2s infinite alternate}
 @keyframes muArchIn{from{opacity:0;transform:translateX(-50%) translateY(-12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .mu-corner{position:absolute;bottom:8px;width:165px;height:auto;z-index:1;pointer-events:none}
 .mu-corner.l{left:8px;animation:muCornerIn 1s ease-out .15s backwards,muCornerSway 7s ease-in-out 1.2s infinite alternate}
@@ -244,7 +244,8 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
 .wrap{background:radial-gradient(600px 300px at 15% -5%,rgba(216,184,119,.10),transparent 70%),radial-gradient(500px 260px at 90% 20%,rgba(216,184,119,.08),transparent 70%),linear-gradient(180deg,rgba(38,22,10,.92),rgba(52,32,16,.92));border-left:1px solid rgba(214,168,70,.5);border-right:1px solid rgba(214,168,70,.5)}
 .wrap::before,.wrap::after{content:"";display:block;height:40px;background:url(./img/tumpal_batas.webp) repeat-x center/auto 40px}
 .wrap::after{transform:scaleY(-1)}
-body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.55);z-index:2;pointer-events:none}
+.wrap footer{position:relative}
+body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.65);z-index:2;pointer-events:none}
 section::before{display:none}
 .cover::before{display:none}
 .sec-corner{position:absolute;width:52px;height:52px;pointer-events:none;z-index:1}
@@ -257,7 +258,7 @@ section::before{display:none}
 .cover-corner.tr{top:0;right:0}
 .cover-corner.bl{bottom:0;left:0}
 .cover-corner.br{bottom:0;right:0;transform:scaleX(-1)}
-.cover-inner{padding:58px 26px 48px;border:28px solid transparent;border-image:url(./img/bingkai_kartu.webp) 100 / 28px stretch;background:#f6f1e9 url(./img/pola_kawung.webp);background-size:128px;background-clip:padding-box;outline:none;border-radius:0}
+.cover-inner{position:relative;padding:58px 26px 48px;border:28px solid transparent;border-image:url(./img/bingkai_kartu.webp) 100 / 28px stretch;background:#f6f1e9 url(./img/pola_kawung.webp);background-size:128px;background-clip:padding-box;outline:none;border-radius:0}
 .cover-medali{position:relative;width:110px;height:110px;margin:0 auto 4px}
 .cover-medali img{position:absolute;inset:0;width:100%;height:100%}
 .cover-medali span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:30px;color:#4a3826}
@@ -278,7 +279,7 @@ section::before{display:none}
 .icon-title{width:30px;height:30px;vertical-align:middle;margin-right:8px}
 .icon-title.big{display:block;width:44px;height:44px;margin:0 auto 6px}
 .icon-loc{width:16px;height:16px;vertical-align:middle;margin-right:4px}
-.event-card,.gift-card{background:#fffdf8 url(./img/pola_kawung.webp);background-size:128px}
+.event-card{background:#fffdf8 url(./img/pola_kawung.webp);background-size:128px}
 .btn,.btn-open{box-shadow:0 6px 16px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.25)}
 .untaian{position:fixed;top:0;width:50px;pointer-events:none;z-index:5;transform-origin:top center;animation:untaianSway 5s ease-in-out infinite alternate}
 .untaian.l{left:8px}
@@ -319,6 +320,10 @@ section::before{display:none}
 .mu-arch{transform-origin:bottom center}
 @media (prefers-reduced-motion:reduce){.cover-corner.tl,.cover-corner.tr,.cover-corner.bl,.cover-corner.br,.sec-corner.tl,.sec-corner.tr,.sec-corner.bl,.sec-corner.br,.cover-medali,.salam-gunungan,.mu-arch{animation:none!important}}
 </style>
+<style>
+/* ===== MU-REVISI 2026-11-03: peletakan dirapikan, beban dikurangi ===== */
+@media (max-width:640px){.untaian{display:none}}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -330,10 +335,6 @@ section::before{display:none}
 <div class="cover" id="cover">
   <img class="mu-arch" src="./img/ornamen-arch.webp" alt="">
   <div class="cover-inner">
-    <img class="cover-corner tl" src="./img/corner_flourish.webp" alt="">
-    <img class="cover-corner tr" src="./img/corner_flourish.webp" alt="">
-    <img class="cover-corner bl" src="./img/corner_flourish.webp" alt="">
-    <img class="cover-corner br" src="./img/corner_flourish.webp" alt="">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
     <div class="cover-medali"><img src="./img/medali_kawung.webp" alt=""><span>R &amp; S</span></div>
     <h1 class="cover-names">Raka &amp; Sinta</h1>
@@ -349,10 +350,6 @@ section::before{display:none}
 
 <div class="wrap">
   <section class="hero reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <div class="mu-gunungan-wrap">
       <div class="mu-gunungan-glow"></div>
       <img class="mu-gunungan" src="./img/ornamen-gunungan.webp" alt="">
@@ -364,10 +361,6 @@ section::before{display:none}
   </section>
 
   <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb. &nbsp;•&nbsp; Sugeng Rawuh</p>
     <img class="divider-floral" src="./img/divider_floral.webp" alt="" loading="lazy" decoding="async">
     <img class="salam-gunungan" src="./img/gunungan.webp" alt="" loading="lazy" decoding="async">
@@ -388,10 +381,6 @@ section::before{display:none}
   </section>
 
   <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <h2 class="section-title">Save the Date</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
     <p class="date-big">Senin, 21 Desember 2026</p>
@@ -406,10 +395,6 @@ section::before{display:none}
   </section>
 
   <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <img class="joglo" src="./img/joglo.webp" alt="" loading="lazy" decoding="async">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
@@ -430,10 +415,6 @@ section::before{display:none}
   </section>
 
   <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <h2 class="section-title">Galeri</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
     <p class="muted">Momen bahagia kami</p>
@@ -448,10 +429,6 @@ section::before{display:none}
   </section>
 
     <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <p class="eyebrow">Kisah Kami</p>
     <h2 class="section-title">Love Story</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
@@ -463,10 +440,6 @@ section::before{display:none}
   </section>
 
 <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <img class="icon-title big" src="./img/icon_amplop.webp" alt="" loading="lazy" decoding="async">
     <h2 class="section-title">Amplop Digital</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
@@ -490,10 +463,6 @@ section::before{display:none}
   </section>
 
   <section class="reveal">
-    <img class="sec-corner tl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner tr" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner bl" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
-    <img class="sec-corner br" src="./img/corner_flourish.webp" alt="" loading="lazy" decoding="async">
     <h2 class="section-title">RSVP &amp; Ucapan</h2>
     <img class="pemisah-judul" src="./img/pemisah_judul.webp" alt="" loading="lazy" decoding="async">
     <p class="muted">Konfirmasi kehadiran dan titipkan doa restu terbaik Anda</p>
@@ -753,10 +722,11 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 <script>
 /* MU-UPGRADE5: melati jatuh teratur + kelopak saat dibuka */
 (function(){
-  for(var i=0;i<10;i++){
+  for(var i=0;i<6;i++){
     var d=document.createElement('img');
     d.className='melati-fall';d.src='./img/melati.webp';d.alt='';
-    var s=18+Math.random()*22;
+    var s=16+Math.random()*16;
+    d.style.opacity='0.85';
     d.style.width=s+'px';d.style.left=(Math.random()*100)+'vw';
     d.style.animationDuration=(9+Math.random()*7)+'s';
     d.style.animationDelay=(Math.random()*9)+'s';
