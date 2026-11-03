@@ -266,6 +266,88 @@ footer .muted{color:var(--cream)}
 @media(max-width:380px){.cover{padding:18px}.cover-inner{padding:26px 18px 22px}.cover-names{font-size:50px}.section-title{font-size:26px}section{padding:44px 20px}.mu-gunungan-wrap,.mu-gunungan{width:170px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}#fx,.batikshift,.melati,.mu-drop{display:none!important}}
 </style>
+
+<style id="ornamen-adat-jawa-assets">
+/* Ornamen WebP adat Jawa — aset dari folder jawa/img */
+.cover-inner{
+ background-image:linear-gradient(rgba(255,253,248,.94),rgba(255,253,248,.94)),url('./img/pola_kawung.webp');
+ background-size:auto,220px 220px;
+ border:8px solid transparent;
+ border-image:url('./img/bingkai_kartu.webp') 34 fill / 12px / 2px;
+}
+.mu-corner{width:clamp(112px,35vw,170px);bottom:8px}
+.mu-corner.r{transform:scaleX(-1)}
+.mu-gunungan{width:190px;max-height:245px;object-fit:contain}
+.section-title{padding-top:8px}
+.section-title::after{
+ width:min(230px,72%);height:30px;margin:8px auto 0;
+ background:url('./img/pemisah_judul.webp') center/contain no-repeat;
+}
+.divider{
+ width:min(230px,72%);height:28px;margin:18px auto;
+ background:url('./img/divider_floral.webp') center/contain no-repeat;
+}
+.divider::before{display:none}
+.event-card,.gift-card{
+ border:8px solid transparent;
+ border-image:url('./img/bingkai_kartu.webp') 34 fill / 12px / 1px;
+ background-image:linear-gradient(rgba(250,245,234,.96),rgba(250,245,234,.96)),url('./img/pola_kawung.webp');
+ background-size:auto,180px 180px;
+}
+.event-card h3 .event-symbol{
+ width:34px;height:34px;border:0;border-radius:0;
+ background:url('./img/icon_cincin.webp') center/contain no-repeat;
+ font-size:0;
+}
+.event-card:nth-of-type(2) h3 .event-symbol{
+ background-image:url('./img/icon_jam.webp');
+}
+.event-card .btn.small::before{
+ content:"";display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:6px;
+ background:url('./img/icon_lokasi.webp') center/contain no-repeat;
+}
+.gift-card .bank::before{
+ content:"";display:inline-block;width:20px;height:20px;vertical-align:middle;margin-right:7px;
+ background:url('./img/icon_amplop.webp') center/contain no-repeat;
+}
+.person .avatar{
+ background-image:url('./img/medali_kawung.webp'),linear-gradient(135deg,var(--accent),var(--accent2));
+ background-size:cover;
+ border:3px solid var(--gold);
+}
+.gallery div{position:relative;isolation:isolate}
+.gallery div::before{
+ content:"";position:absolute;inset:0;z-index:-1;
+ background:url('./img/bingkai_foto_lengkung.webp') center/100% 100% no-repeat;
+}
+.hero{position:relative}
+.hero::after{
+ content:"";display:block;width:min(270px,78%);height:42px;margin:22px auto 0;
+ background:url('./img/joglo.webp') center/contain no-repeat;opacity:.82;
+}
+section{background-image:linear-gradient(180deg,transparent 0 94%,rgba(216,184,119,.035) 100%)}
+section::before{
+ width:76px;height:120px;top:18px;right:8px;
+ background:url('./img/untaian_melati.webp') center/contain no-repeat;
+ opacity:.58;
+}
+section:nth-of-type(even)::before{left:8px;right:auto;transform:scaleX(-1)}
+footer{position:relative}
+footer::before{
+ content:"";display:block;width:150px;height:78px;margin:0 auto 14px;
+ background:url('./img/joglo.webp') center/contain no-repeat;opacity:.8;
+}
+@media(max-width:420px){
+ .mu-gunungan{width:165px}
+ .section-title::after{height:24px}
+ .event-card,.gift-card{border-width:6px;border-image-width:9px}
+ section::before{width:55px;height:94px;opacity:.42}
+}
+@media(prefers-reduced-motion:reduce){
+ .mu-gunungan{animation:none}
+}
+</style>
+
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -273,8 +355,8 @@ footer .muted{color:var(--cream)}
 
 <div class="cover" id="cover">
   <img class="mu-arch" src="./img/ornamen-arch.webp" alt="">
-  <img class="mu-corner l" src="./img/ornamen-corner-left.webp" alt="">
-  <img class="mu-corner r" src="./img/ornamen-corner-right.webp" alt="">
+  <img class="mu-corner l" src="./img/corner_flourish.webp" alt="">
+  <img class="mu-corner r" src="./img/corner_flourish.webp" alt="">
   <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
   <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
@@ -295,7 +377,7 @@ footer .muted{color:var(--cream)}
   <section class="hero reveal">
     <div class="mu-gunungan-wrap">
       <div class="mu-gunungan-glow"></div>
-      <img class="mu-gunungan" src="./img/ornamen-gunungan.webp" alt="">
+      <img class="mu-gunungan" src="./img/gunungan.webp" alt="">
     </div>
     <p class="eyebrow">Sugeng Rawuh · Rahayu</p>
     <p class="jawa-greeting">Kanthi kebahagiaan, kula ngaturaken sugeng rawuh</p>
