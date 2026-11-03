@@ -137,8 +137,6 @@ linear-gradient(165deg,var(--bg),var(--bg2))}
 .mu-orn.tr{top:12px;right:12px;animation-name:muSwayR}
 .mu-orn.bl{bottom:12px;left:12px;animation-duration:4.6s}
 .mu-orn.br{bottom:12px;right:12px;animation-name:muSwayR;animation-duration:4.6s}
-section::before{content:"";position:absolute;top:12px;right:14px;width:82px;height:82px;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.22;pointer-events:none;z-index:0}
-section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 
 .cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
 
@@ -277,6 +275,12 @@ body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.55);z-in
 .event-card>*:not(.mu-frame),.gift-card>*:not(.mu-frame){position:relative;z-index:1}
 .mu-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:0}
 .event-card{background-color:var(--card);background-image:url(./img/pola_kawung.webp);background-size:128px}
+/* Lentera gantung pojok atas hero (ganti bunga section::before yang dihapus) */
+.mu-lentera{position:absolute;top:0;width:40px;height:auto;pointer-events:none;z-index:1;transform-origin:top center;animation:muLenteraSway 5s ease-in-out infinite alternate}
+.mu-lentera.l{left:10px}
+.mu-lentera.r{right:10px;animation-delay:1.2s}
+@keyframes muLenteraSway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@media (prefers-reduced-motion:reduce){.mu-lentera{animation:none}}
 /* Untaian melati: tepi panel, DESKTOP saja, ayun halus */
 .mu-untaian{position:fixed;top:0;width:50px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:muUntaianSway 5s ease-in-out infinite alternate}
 .mu-untaian.l{left:10px}
@@ -332,6 +336,8 @@ body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.55);z-in
 
 <div class="wrap">
   <section class="hero reveal">
+    <span class="mu-lentera l" aria-hidden="true"><svg viewBox="0 0 60 96" width="40" height="64" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="0" x2="30" y2="16" stroke="#d8b877" stroke-width="2"/><circle cx="30" cy="19" r="3" stroke="#d8b877" stroke-width="1.5"/><path d="M20 23h20l-4 8H24l-4-8z" fill="#d8b877"/><path d="M30 31l16 13v22L30 79 14 66V44l16-13z" fill="rgba(232,199,102,.22)" stroke="#d8b877" stroke-width="2" stroke-linejoin="round"/><line x1="22" y1="38" x2="22" y2="72" stroke="#d8b877" stroke-width="1" opacity=".6"/><line x1="30" y1="35" x2="30" y2="75" stroke="#d8b877" stroke-width="1" opacity=".6"/><line x1="38" y1="38" x2="38" y2="72" stroke="#d8b877" stroke-width="1" opacity=".6"/><circle cx="30" cy="55" r="9" fill="#f5d67a" opacity=".85"/><line x1="30" y1="79" x2="30" y2="87" stroke="#d8b877" stroke-width="2"/><circle cx="30" cy="90" r="3" fill="#d8b877"/></svg></span>
+    <span class="mu-lentera r" aria-hidden="true"><svg viewBox="0 0 60 96" width="40" height="64" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="0" x2="30" y2="16" stroke="#d8b877" stroke-width="2"/><circle cx="30" cy="19" r="3" stroke="#d8b877" stroke-width="1.5"/><path d="M20 23h20l-4 8H24l-4-8z" fill="#d8b877"/><path d="M30 31l16 13v22L30 79 14 66V44l16-13z" fill="rgba(232,199,102,.22)" stroke="#d8b877" stroke-width="2" stroke-linejoin="round"/><line x1="22" y1="38" x2="22" y2="72" stroke="#d8b877" stroke-width="1" opacity=".6"/><line x1="30" y1="35" x2="30" y2="75" stroke="#d8b877" stroke-width="1" opacity=".6"/><line x1="38" y1="38" x2="38" y2="72" stroke="#d8b877" stroke-width="1" opacity=".6"/><circle cx="30" cy="55" r="9" fill="#f5d67a" opacity=".85"/><line x1="30" y1="79" x2="30" y2="87" stroke="#d8b877" stroke-width="2"/><circle cx="30" cy="90" r="3" fill="#d8b877"/></svg></span>
     <div class="mu-gunungan-wrap">
       <div class="mu-gunungan-glow"></div>
       <img class="mu-gunungan" src="./img/ornamen-gunungan.webp" alt="">
