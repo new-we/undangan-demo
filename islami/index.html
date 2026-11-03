@@ -254,6 +254,7 @@ section>*{position:relative;z-index:1}
 .cover-inner{position:relative;isolation:isolate;overflow:visible}
 .cover-inner>.arab.tr{
   display:block!important;
+  /* Flip around the image center so the transform does not shift it one full image width */
   visibility:visible!important;
   opacity:1!important;
   top:-8px!important;
@@ -263,7 +264,7 @@ section>*{position:relative;z-index:1}
   height:96px;
   object-fit:contain;
   transform:scaleX(-1);
-  transform-origin:top right;
+  transform-origin:top center!important;
   z-index:5;
   animation:arabShine 5s ease-in-out infinite,sway15X 6s ease-in-out infinite alternate;
 }
