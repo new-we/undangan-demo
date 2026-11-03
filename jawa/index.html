@@ -238,15 +238,38 @@ footer .credit{color:#c9b391}
 /* B6. Form RSVP: border emas + fokus emas */
 form input,form select,form textarea{border:1px solid rgba(216,184,119,.6)}
 form input:focus,form select:focus,form textarea:focus{outline:none;border-color:#8a5a2b;box-shadow:0 0 0 3px rgba(216,184,119,.35)}
+/* ===== PENYESUAIAN ADAT JAWA ===== */
+:root{--gold:#d8b877;--cream:#f3e3bd}
+.batikshift{opacity:.16!important}
+.cover-inner{padding:30px 24px 28px;box-shadow:0 14px 34px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.25)}
+.cover-guest{margin:14px 0 4px;padding:12px 10px}
+.btn-open,.btn{box-shadow:0 4px 12px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.2)}
+.jawa-greeting{color:var(--cream);font-family:'Playfair Display',serif;font-size:14px;margin:2px auto 10px;max-width:300px}
+.hero{padding-top:52px}
+.mu-gunungan-wrap{margin-bottom:0}
+.mu-gunungan,.mu-gunungan-glow{animation:none}
+.section-title{margin-bottom:20px}
+.section-title::after{width:min(230px,68%);height:22px;margin:10px auto 0;background:linear-gradient(90deg,transparent,rgba(216,184,119,.85),transparent);clip-path:polygon(0 48%,35% 48%,50% 0,65% 48%,100% 48%,100% 55%,65% 55%,50% 100%,35% 55%,0 55%)}
+.section-title::before{display:none}
+.divider{width:170px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider::before{width:7px;height:7px;background:var(--gold)}
+.event-card,.gift-card,.countdown div{background:rgba(250,245,234,.94);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid rgba(216,184,119,.8);box-shadow:0 8px 20px rgba(0,0,0,.13),inset 0 0 0 1px rgba(255,255,255,.55)}
+.event-card h3{display:flex;align-items:center;justify-content:center;gap:9px}
+.event-symbol{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid rgba(138,90,43,.4);border-radius:50%;font-size:16px;color:#8a5a2b}
+.e-date,.e-time,.e-place{color:#57432d}
+.muted,.verse,.person p{color:var(--cream)}
+.gallery div{border:1px solid var(--gold)}
+.closing-note{font-size:13px;color:var(--cream);max-width:310px;margin:16px auto 0}
+footer{border-top:1px solid rgba(216,184,119,.35)}
+footer .muted{color:var(--cream)}
+.mu-corner{width:clamp(105px,34vw,165px)}
+@media(max-width:380px){.cover{padding:18px}.cover-inner{padding:26px 18px 22px}.cover-names{font-size:50px}.section-title{font-size:26px}section{padding:44px 20px}.mu-gunungan-wrap,.mu-gunungan{width:170px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}#fx,.batikshift,.melati,.mu-drop{display:none!important}}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
-<canvas id="fx2"></canvas>
 <div class="batikshift"></div>
-<div class="melati" style="left:10%;animation-delay:0s"><u></u><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<div class="melati" style="left:88%;animation-delay:-2.8s"><u></u><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<div class="melati" style="left:50%;animation-delay:-4.2s"><u></u><i></i><i></i><i></i><i></i></div>
 
 <div class="cover" id="cover">
   <img class="mu-arch" src="./img/ornamen-arch.webp" alt="">
@@ -265,7 +288,6 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
       <h2 id="guestName">Tamu Undangan</h2>
     </div>
     <button class="btn-open" id="openBtn" type="button">Buka Undangan</button>
-    <p class="cover-note">* Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar</p>
   </div>
 </div>
 
@@ -275,7 +297,8 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
       <div class="mu-gunungan-glow"></div>
       <img class="mu-gunungan" src="./img/ornamen-gunungan.webp" alt="">
     </div>
-    <p class="eyebrow">The Wedding of</p>
+    <p class="eyebrow">Sugeng Rawuh · Rahayu</p>
+    <p class="jawa-greeting">Kanthi kebahagiaan, kula ngaturaken sugeng rawuh</p>
     <h1 class="names">Raka &amp; Sinta</h1>
     <div class="divider"></div>
     <p class="date">Senin, 21 Desember 2026</p>
@@ -315,14 +338,14 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
   <section class="reveal">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
     <div class="event-card">
-      <h3>Akad Nikah</h3>
+      <h3><span class="event-symbol" aria-hidden="true">◈</span> Akad Nikah</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
     <div class="event-card">
-      <h3>Resepsi</h3>
+      <h3><span class="event-symbol" aria-hidden="true">✦</span> Resepsi</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
       <p class="e-place">Gedung Serbaguna Mojokerto<br>Jl. Gajah Mada No. 45, Mojokerto</p>
@@ -355,7 +378,7 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
   </section>
 
 <section class="reveal">
-    <h2 class="section-title">Amplop Digital</h2>
+    <h2 class="section-title"><span class="event-symbol" aria-hidden="true">◇</span> Amplop Digital</h2>
     <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
     <div class="gift-card">
       <p class="bank">Bank BCA (contoh)</p>
@@ -399,7 +422,8 @@ form input:focus,form select:focus,form textarea:focus{outline:none;border-color
 
   <footer class="reveal">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
-    <p class="thanks">Terima kasih</p>
+    <p class="closing-note">Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar.</p>
+    <p class="thanks">Matur Nuwun</p>
     <h2 class="names">Raka &amp; Sinta</h2>
     <p class="credit">Demo undangan digital</p>
   </footer>
@@ -498,7 +522,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   if (!canvas) return;
   var ctx = canvas.getContext("2d");
   var W, H, parts = [];
-  var CFG = {"type":"petals","count":24,"colors":["#f7e7c3","#e8c766","#fff8e7","#d9b36a"]};
+  var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) { canvas.style.display = "none"; return; }
+  var CFG = {"type":"petals","count":12,"colors":["#f7e7c3","#e8c766","#fff8e7"]};
   function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   window.addEventListener("resize", resize); resize();
   function rnd(a, b){ return a + Math.random() * (b - a); }
@@ -556,26 +582,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 })();
 
 
-// Asap dupa mengepul naik (jawa)
-(function(){
-  var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
-  var W,H,P=[];function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
-  addEventListener("resize",rs);rs();
-  function mk(i){return{bx:W*0.5+(Math.random()-0.5)*W*0.5,y:i?Math.random()*H:H+20,
-    r:Math.random()*14+8,vy:-(Math.random()*0.7+0.35),ph:Math.random()*6.28,
-    sp:Math.random()*0.02+0.008,life:i?Math.random():0,max:1}}
-  for(var i=0;i<24;i++)P.push(mk(true));
-  (function step(){x.clearRect(0,0,W,H);
-    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.ph+=p.sp;p.life+=0.0035;
-      var px=p.bx+Math.sin(p.ph)*46*(1-p.life*0.5),pr=p.r*(1+p.life*1.6);
-      var a=0.16*(1-p.life);if(a<0)a=0;
-      if(p.life>=1||p.y<-60){P[k]=mk(false);continue}
-      var g=x.createRadialGradient(px,p.y,0,px,p.y,pr);
-      g.addColorStop(0,"rgba(200,190,175,"+a+")");g.addColorStop(1,"rgba(200,190,175,0)");
-      x.fillStyle=g;x.beginPath();x.arc(px,p.y,pr,0,6.283);x.fill();}
-    requestAnimationFrame(step);})();
-})();
-</script>
+
 <script>
 
 // Kolom ucapan demo: ucapan langsung tampil di layar (TANPA penyimpanan/backend)
@@ -597,10 +604,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 </script>
 <img class="mu-edge l" src="./img/ornamen.svg" alt="">
 <img class="mu-edge r" src="./img/ornamen.svg" alt="">
-<script>
-/* MU-UPGRADE2: partikel motif jatuh */
-(function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
-</script>
 <script>
 /* MU-UPGRADE3: entrance gunungan dipicu saat cover dibuka (listener tambahan, logika buka tidak diubah) */
 (function(){
