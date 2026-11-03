@@ -146,6 +146,21 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .bali-leaf{position:absolute;right:-26px;top:50%;transform:translateY(-50%);width:66px;pointer-events:none;z-index:3}
 .cover-date{display:flex;align-items:center;justify-content:center;gap:8px}
 .cover-date .swirl{width:26px;height:26px;object-fit:contain;pointer-events:none;flex:none}
+
+.verse-frame{position:relative;padding:20px 24px}
+.verse-frame-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:.8;pointer-events:none}
+.verse-frame .verse{position:relative;z-index:1}
+.orn-mempelai{display:block;width:60%;max-width:240px;margin:2px auto 0;pointer-events:none}
+.avatar-frame{position:relative;width:118px;height:118px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.avatar-frame .frame-inisial{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.avatar-frame .avatar{position:relative;z-index:1;margin:0}
+.avatar.gold{background:linear-gradient(135deg,#e8b95a,#8a5a1e)}
+.person.raka{position:relative}
+.cluster-bunga{position:absolute;top:0;right:6px;width:44px;pointer-events:none;z-index:2}
+.bali-side{position:fixed;top:50%;transform:translateY(-50%);width:56px;pointer-events:none;z-index:3;opacity:.35;display:none}
+@media(min-width:760px){.bali-side{display:block}}
+.bali-side.l{left:8px}
+.bali-side.r{right:8px;transform:translateY(-50%) scaleX(-1)}
 </style>
 <style>
 /* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
@@ -198,10 +213,12 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
   <section class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
-    <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
+    <div class="verse-frame"><img class="verse-frame-img" src="./img/frame_ayat.webp" alt=""><p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p></div>
     <h2 class="section-title">Mempelai</h2>
-    <div class="person">
-      <div class="avatar">R</div>
+    <img class="orn-mempelai" src="./img/ornamen_mempelai.webp" alt="">
+    <div class="person raka">
+      <img class="cluster-bunga" src="./img/cluster_bunga.webp" alt="">
+      <div class="avatar-frame"><img class="frame-inisial" src="./img/frame_inisial.webp" alt=""><div class="avatar gold">R</div></div>
       <h3>Raka Pratama</h3>
       <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
     </div>
@@ -481,5 +498,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   if(typeof window.bukaUndangan==='function'){var _o=window.bukaUndangan;window.bukaUndangan=function(){_o();onOpen();};}
 })();
 </script>
+<img class="bali-side l" src="./img/ornamen_samping.webp" alt="">
+<img class="bali-side r" src="./img/ornamen_samping.webp" alt="">
 </body>
 </html>
