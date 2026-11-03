@@ -196,7 +196,7 @@ p.sub{color:var(--muted);font-size:15px;line-height:1.8}
 .gal-grid .wide{grid-column:1/-1;aspect-ratio:16/9}
 
 /* ===== acara ===== */
-.event{background:rgba(34,10,10,.88);border:1px solid var(--gold);border-radius:10px;padding:36px 26px;margin-top:22px;
+.event{position:relative;background:rgba(34,10,10,.88);border:1px solid var(--gold);border-radius:10px;padding:36px 26px;margin-top:22px;
   position:relative;box-shadow:0 18px 44px rgba(0,0,0,.55)}
 .event::before{content:"";position:absolute;inset:9px;border:1px solid rgba(212,175,55,.3);border-radius:6px;pointer-events:none}
 .event h3{font-size:26px;color:var(--gold-l)}
@@ -252,6 +252,12 @@ footer p{font-size:12px;color:var(--muted);letter-spacing:1px}
 footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);margin-bottom:8px}
 
 @media(min-width:640px){.couple{flex-direction:row}.person{flex:1}}
+
+.orn-header{display:block;width:92%;max-width:420px;margin:0 auto}
+.orn-pemisah{display:block;width:70%;max-width:320px;margin:24px auto}
+.orn-pojok{position:absolute;width:30vw;max-width:130px;pointer-events:none}
+.orn-pojok.tl{top:0;left:0}
+.orn-pojok.br{bottom:0;right:0;transform:scale(-1,-1)}
 </style>
 <style>
 /* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
@@ -312,6 +318,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       <div class="scroll-hint">GULIR KE BAWAH</div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- COUNTDOWN -->
   <section id="countdown" class="dim">
@@ -328,11 +336,14 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       <div class="rv d3"><a class="save-date" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20270612T010000Z/20270612T040000Z&amp;details=Akad+Nikah+Raka+%26+Sinta">SIMPAN TANGGAL</a></div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- MEMPELAI -->
   <section id="mempelai">
     <div class="wrap" style="text-align:center">
       <div class="kicker rv">MEMPELAI</div>
+      <img class="orn-header" src="img/naga_header.webp" alt="" loading="lazy">
       <h2 class="sec rv d1">Dua Hati <span class="shimmer">Menjadi Satu</span></h2>
       <div class="divider rv d1"><i></i></div>
       <div class="couple">
@@ -350,6 +361,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- LOVE STORY -->
   <section id="story" class="dim">
@@ -366,6 +379,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- GALERI -->
   <section id="galeri">
@@ -382,14 +397,17 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- ACARA -->
   <section id="acara" class="dim">
     <div class="wrap" style="text-align:center">
       <div class="kicker rv">WAKTU &amp; TEMPAT</div>
+      <img class="orn-header" src="img/naga_header.webp" alt="" loading="lazy">
       <h2 class="sec rv d1">Rangkaian <span class="shimmer">Acara</span></h2>
       <div class="divider rv d1"><i></i></div>
-      <div class="event rv">
+      <div class="event rv"><img class="orn-pojok tl" src="img/naga_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="img/naga_pojok.webp" alt="" loading="lazy">
         <h3>Akad Nikah</h3>
         <div class="jam">08.00 — 10.00 WIB</div>
         <p>Sabtu, 12 Juni 2027<br>Gedung Serbaguna Naga Emas<br>Jl. Kemakmuran No. 88, Jakarta</p>
@@ -397,7 +415,7 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
           <a class="btn solid" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Jakarta" target="_blank" rel="noopener">LIHAT LOKASI</a>
         </div>
       </div>
-      <div class="event rv d1">
+      <div class="event rv d1"><img class="orn-pojok tl" src="img/naga_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="img/naga_pojok.webp" alt="" loading="lazy">
         <h3>Resepsi</h3>
         <div class="jam">11.00 — 14.00 WIB</div>
         <p>Sabtu, 12 Juni 2027<br>Gedung Serbaguna Naga Emas<br>Jl. Kemakmuran No. 88, Jakarta</p>
@@ -407,6 +425,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- RSVP -->
   <section id="rsvp">
@@ -430,6 +450,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </form>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- UCAPAN : frontend-only, tidak disimpan -->
   <section id="ucapan" class="dim">
@@ -449,6 +471,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       <div id="daftar-ucapan" style="text-align:left"></div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- AMPLOP DIGITAL -->
   <section id="amplop">
@@ -470,6 +494,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- MOHON DOA -->
   <section id="doa" class="dim">
@@ -479,6 +505,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       <p class="verse rv d2">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."<b>— QS. AR-RŪM : 21</b></p>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- LIVE STREAMING -->
   <section id="stream">
@@ -494,6 +522,8 @@ footer .names{font-family:'Playfair Display',serif;font-size:26px;color:var(--go
       </div>
     </div>
   </section>
+<img class="orn-pemisah" src="img/naga_pemisah.webp" alt="" loading="lazy">
+
 
   <!-- THANK YOU -->
   <section id="thanks" class="dim">
