@@ -152,6 +152,55 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .ucapan-item strong{color:#1f1b18}
 .ucapan-item p{color:#333}
 
+/* ===== MU-UPGRADE3 ornamen Islami webp + animasi (2026-11-03) ===== */
+@keyframes arabShine{0%,100%{filter:brightness(1);opacity:.96}50%{filter:brightness(1.3);opacity:1}}
+@keyframes spinSlow{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:.75;transform:scale(.92) rotate(-4deg)}50%{opacity:1;transform:scale(1.06) rotate(5deg)}}
+@keyframes mihrabGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(212,175,55,.35))}50%{filter:drop-shadow(0 0 20px rgba(212,175,55,.7))}}
+@keyframes masjidGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(212,175,55,.3))}50%{filter:drop-shadow(0 0 14px rgba(212,175,55,.6))}}
+@keyframes pemisahGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+@keyframes lenteraFlicker{0%,100%{filter:drop-shadow(0 0 12px rgba(245,200,110,.45))}50%{filter:drop-shadow(0 0 26px rgba(245,200,110,.8))}}
+/* Pojok arabesque: 4 sudut kartu cover, 3 sudut lain via flip CSS */
+.arab{position:absolute;width:96px;height:96px;pointer-events:none;z-index:3;animation:arabShine 5s ease-in-out infinite}
+.arab.tl{top:-8px;left:-8px}
+.arab.tr{top:-8px;right:-8px;transform:scaleX(-1)}
+.arab.bl{bottom:-8px;left:-8px;transform:scaleY(-1)}
+.arab.br{bottom:-8px;right:-8px;transform:scale(-1,-1)}
+/* Teks cover di atas ornamen sudut */
+.cover-eyebrow,.cover-names,.cover-date,.cover-guest,.btn-open,.cover-note{position:relative;z-index:4}
+/* Bintang segi 8 di belakang nama, opasitas rendah, berputar pelan */
+.bintang-bg{position:absolute;left:50%;top:50%;width:300px;height:300px;object-fit:contain;pointer-events:none;z-index:0;opacity:.14;animation:spinSlow 90s linear infinite}
+.bintang-hero{position:absolute;left:50%;top:64px;width:280px;height:280px;object-fit:contain;pointer-events:none;z-index:0;opacity:.12;animation:spinSlow 90s linear infinite}
+.hero .eyebrow,.hero .mihrab{position:relative;z-index:1}
+/* Bingkai mihrab untuk nama pasangan */
+.mihrab{position:relative;width:min(360px,88vw);margin:10px auto 0}
+.mihrab-img{display:block;width:100%;height:auto;animation:mihrabGlow 5s ease-in-out infinite}
+.mihrab-dalam{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:6%}
+.mihrab-dalam .names{font-size:52px}
+/* Lentera gantung dari pojok atas (menggantikan lentera CSS lama) */
+.gantung{position:fixed;top:0;z-index:5;pointer-events:none;transform-origin:top center;animation:muSway 5.5s ease-in-out infinite alternate}
+.gantung.kiri{left:14px}
+.gantung.kanan{right:14px;animation-delay:-2.5s;animation-duration:6.5s}
+.gantung .tali{display:block;width:2px;margin:0 auto;background:linear-gradient(rgba(212,175,55,0),rgba(212,175,55,.85))}
+.gantung img{display:block;width:62px;height:auto;animation:lenteraFlicker 3.4s ease-in-out infinite}
+.gantung-cover{position:absolute;top:0;z-index:3;pointer-events:none;transform-origin:top center;animation:muSway 5s ease-in-out infinite alternate}
+.gantung-cover.kiri{left:10px}
+.gantung-cover.kanan{right:10px;animation-delay:-2s}
+.gantung-cover .tali{display:block;width:2px;margin:0 auto;background:linear-gradient(rgba(212,175,55,0),rgba(212,175,55,.85))}
+.gantung-cover img{display:block;width:50px;height:auto;animation:lenteraFlicker 3.4s ease-in-out infinite}
+/* Siluet masjid: strip dasar cover + aksen di atas tombol */
+.masjid-strip{position:absolute;left:0;right:0;bottom:0;height:130px;z-index:1;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,transparent,black 35%);mask-image:linear-gradient(to bottom,transparent,black 35%)}
+.masjid-strip img{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;opacity:.95;animation:masjidGlow 5s ease-in-out infinite}
+.masjid-tombol{display:block;width:170px;max-width:64%;height:auto;margin:4px auto 0;animation:masjidGlow 5s ease-in-out infinite}
+/* Bulan bintang kecil di dekat tanggal */
+.bulan-mini{width:30px;height:30px;vertical-align:-7px;margin-right:8px;animation:twinkle 3.2s ease-in-out infinite}
+.e-date .bulan-mini{width:24px;height:24px;vertical-align:-5px}
+/* Pemisah emas */
+.pemisah-img{display:block;width:min(240px,68%);height:auto;margin:16px auto;animation:pemisahGlow 4.5s ease-in-out infinite}
+.mihrab-dalam .pemisah-img{width:min(200px,64%);margin:10px auto}
+.cover .pemisah-img{margin:12px auto}
+@media(max-width:400px){.arab{width:76px;height:76px}.bintang-bg{width:240px;height:240px}.bintang-hero{width:220px;height:220px}.gantung img{width:52px}.gantung-cover img{width:44px}}
+
 </style>
 <style>
 /* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
@@ -170,19 +219,27 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 <div class="gorb" style="top:18vh;left:44vw;width:14px;height:14px;--t:7s;animation-delay:-2s"></div>
 <div class="gorb" style="top:82vh;right:30vw;width:22px;height:22px;--t:12s;animation-delay:-9s"></div>
 
-<div class="lantern" style="left:9%;animation-delay:-1s"><span class="string" style="height:64px"></span><div class="lamp"></div></div>
-<div class="lantern" style="left:45%;animation-delay:-3s"><span class="string" style="height:112px"></span><div class="lamp"></div></div>
-<div class="lantern" style="left:80%;animation-delay:-2s"><span class="string" style="height:84px"></span><div class="lamp"></div></div>
+<div class="gantung kiri"><span class="tali" style="height:56px"></span><img src="./img/lentera.webp" alt=""></div>
+<div class="gantung kanan"><span class="tali" style="height:84px"></span><img src="./img/lentera.webp" alt=""></div>
 
 <div class="cover" id="cover">
+  <div class="gantung-cover kiri"><span class="tali" style="height:36px"></span><img src="./img/lentera.webp" alt=""></div>
+  <div class="gantung-cover kanan"><span class="tali" style="height:60px"></span><img src="./img/lentera.webp" alt=""></div>
   <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
   <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn br" src="./img/ornamen.svg" alt="">
   <div class="cover-inner">
+    <img class="arab tl" src="./img/pojok_arabesque.webp" alt="">
+    <img class="arab tr" src="./img/pojok_arabesque.webp" alt="">
+    <img class="arab bl" src="./img/pojok_arabesque.webp" alt="">
+    <img class="arab br" src="./img/pojok_arabesque.webp" alt="">
+    <img class="bintang-bg" src="./img/bintang_segi8.webp" alt="">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
     <h1 class="cover-names">Raka &amp; Sinta</h1>
-    <p class="cover-date">Senin, 21 Desember 2026</p>
+    <img class="pemisah-img" src="./img/pemisah.webp" alt="">
+    <p class="cover-date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
+    <img class="pemisah-img" src="./img/pemisah.webp" alt="">
     <div class="cover-guest">
       <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i:</p>
       <h2 id="guestName">Tamu Undangan</h2>
@@ -190,14 +247,21 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <button class="btn-open" id="openBtn" type="button">Buka Undangan</button>
     <p class="cover-note">* Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar</p>
   </div>
+  <div class="masjid-strip"><img src="./img/masjid_siluet.webp" alt=""></div>
 </div>
 
 <div class="wrap">
   <section class="hero reveal">
+    <img class="bintang-hero" src="./img/bintang_segi8.webp" alt="" loading="lazy">
     <p class="eyebrow">The Wedding of</p>
-    <h1 class="names">Raka &amp; Sinta</h1>
-    <div class="divider"></div>
-    <p class="date">Senin, 21 Desember 2026</p>
+    <div class="mihrab">
+      <img class="mihrab-img" src="./img/lengkung_mihrab.webp" alt="" loading="lazy">
+      <div class="mihrab-dalam">
+        <h1 class="names">Raka &amp; Sinta</h1>
+        <img class="pemisah-img" src="./img/pemisah.webp" alt="" loading="lazy">
+        <p class="date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
+      </div>
+    </div>
   </section>
 
   <section class="reveal">
@@ -220,7 +284,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 
   <section class="reveal">
     <h2 class="section-title">Save the Date</h2>
-    <p class="date-big">Senin, 21 Desember 2026</p>
+    <p class="date-big"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
     <p class="muted">Menghitung mundur menuju hari bahagia</p>
     <div class="countdown">
       <div><span id="cd-d">0</span><small>Hari</small></div>
@@ -228,6 +292,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div><span id="cd-m">00</span><small>Menit</small></div>
       <div><span id="cd-s">00</span><small>Detik</small></div>
     </div>
+    <img class="masjid-tombol" src="./img/masjid_siluet.webp" alt="" loading="lazy">
     <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20261221T010000Z/20261221T060000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
   </section>
 
@@ -235,14 +300,14 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <h2 class="section-title">Waktu &amp; Tempat</h2>
     <div class="event-card">
       <h3>Akad Nikah</h3>
-      <p class="e-date">Senin, 21 Desember 2026</p>
+      <p class="e-date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
     <div class="event-card">
       <h3>Resepsi</h3>
-      <p class="e-date">Senin, 21 Desember 2026</p>
+      <p class="e-date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
       <p class="e-place">Gedung Serbaguna Mojokerto<br>Jl. Gajah Mada No. 45, Mojokerto</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
@@ -318,6 +383,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 
   <footer class="reveal">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
+    <img class="pemisah-img" src="./img/pemisah.webp" alt="" loading="lazy">
     <p class="thanks">Terima kasih</p>
     <h2 class="names">Raka &amp; Sinta</h2>
     <p class="credit">Demo undangan digital</p>
