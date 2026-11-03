@@ -226,6 +226,29 @@ section>*{position:relative;z-index:1}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
 </style>
+<style>
+/* ===== MU-SWAY 2026-11-03: ornamen goyang halus, sudut kecil, tempo lambat ===== */
+@keyframes sway10{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+@keyframes sway15{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}
+@keyframes sway25{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes sway15X{from{transform:scaleX(-1) rotate(-1.5deg)}to{transform:scaleX(-1) rotate(1.5deg)}}
+@keyframes sway25X{from{transform:scaleX(-1) rotate(-2.5deg)}to{transform:scaleX(-1) rotate(2.5deg)}}
+@keyframes sway15Y{from{transform:scaleY(-1) rotate(-1.5deg)}to{transform:scaleY(-1) rotate(1.5deg)}}
+@keyframes sway15XY{from{transform:scale(-1,-1) rotate(-1.5deg)}to{transform:scale(-1,-1) rotate(1.5deg)}}
+@keyframes swayLeaf{from{transform:translateY(-50%) rotate(-2deg)}to{transform:translateY(-50%) rotate(2deg)}}
+@keyframes swayLeafX{from{transform:translateY(-50%) scaleX(-1) rotate(-2deg)}to{transform:translateY(-50%) scaleX(-1) rotate(2deg)}}
+@keyframes swayArch{from{transform:translateX(-50%) rotate(-1deg)}to{transform:translateX(-50%) rotate(1deg)}}
+
+.arab.tl{transform-origin:top left;animation:arabShine 5s ease-in-out infinite,sway15 6s ease-in-out infinite alternate;}
+.arab.tr{transform-origin:top right;animation:arabShine 5s ease-in-out infinite,sway15X 6s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.arab.bl{transform-origin:bottom left;animation:arabShine 5s ease-in-out infinite,sway15Y 6s ease-in-out infinite alternate;animation-delay:-3s;}
+.arab.br{transform-origin:bottom right;animation:arabShine 5s ease-in-out infinite,sway15XY 6s ease-in-out infinite alternate;animation-delay:-4.5s;}
+.bunga.tl{transform-origin:top left;animation:sway15 6.8s ease-in-out infinite alternate;}
+.bunga.tr{transform-origin:top right;animation:sway15X 6.8s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.bunga.bl{transform-origin:bottom left;animation:sway15Y 6.8s ease-in-out infinite alternate;animation-delay:-3s;}
+.bunga.br{transform-origin:bottom right;animation:sway15XY 6.8s ease-in-out infinite alternate;animation-delay:-4.5s;}
+@media (prefers-reduced-motion:reduce){.arab.tl,.arab.tr,.arab.bl,.arab.br,.bunga.tl,.bunga.tr,.bunga.bl,.bunga.br{animation:none!important}}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>

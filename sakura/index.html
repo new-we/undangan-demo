@@ -175,6 +175,26 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
 </style>
+<style>
+/* ===== MU-SWAY 2026-11-03: ornamen goyang halus, sudut kecil, tempo lambat ===== */
+@keyframes sway10{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+@keyframes sway15{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}
+@keyframes sway25{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes sway15X{from{transform:scaleX(-1) rotate(-1.5deg)}to{transform:scaleX(-1) rotate(1.5deg)}}
+@keyframes sway25X{from{transform:scaleX(-1) rotate(-2.5deg)}to{transform:scaleX(-1) rotate(2.5deg)}}
+@keyframes sway15Y{from{transform:scaleY(-1) rotate(-1.5deg)}to{transform:scaleY(-1) rotate(1.5deg)}}
+@keyframes sway15XY{from{transform:scale(-1,-1) rotate(-1.5deg)}to{transform:scale(-1,-1) rotate(1.5deg)}}
+@keyframes swayLeaf{from{transform:translateY(-50%) rotate(-2deg)}to{transform:translateY(-50%) rotate(2deg)}}
+@keyframes swayLeafX{from{transform:translateY(-50%) scaleX(-1) rotate(-2deg)}to{transform:translateY(-50%) scaleX(-1) rotate(2deg)}}
+@keyframes swayArch{from{transform:translateX(-50%) rotate(-1deg)}to{transform:translateX(-50%) rotate(1deg)}}
+
+.orn-pojok.tl{transform-origin:top left;animation:sway15 6s ease-in-out infinite alternate;}
+.orn-pojok.tr{transform-origin:top right;animation:sway15X 6s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.orn-pojok.bl{transform-origin:bottom left;animation:sway15Y 6s ease-in-out infinite alternate;animation-delay:-3s;}
+.orn-pojok.br{transform-origin:bottom right;animation:sway15XY 6s ease-in-out infinite alternate;animation-delay:-4.5s;}
+.orn-header{transform-origin:top center;animation:sway15 7s ease-in-out infinite alternate;animation-delay:-1s;}
+@media (prefers-reduced-motion:reduce){.orn-pojok.tl,.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br,.orn-header{animation:none!important}}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>

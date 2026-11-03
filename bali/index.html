@@ -168,6 +168,40 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
 </style>
+<style>
+/* ===== MU-SWAY 2026-11-03: ornamen goyang halus, sudut kecil, tempo lambat ===== */
+@keyframes sway10{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+@keyframes sway15{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}
+@keyframes sway25{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes sway15X{from{transform:scaleX(-1) rotate(-1.5deg)}to{transform:scaleX(-1) rotate(1.5deg)}}
+@keyframes sway25X{from{transform:scaleX(-1) rotate(-2.5deg)}to{transform:scaleX(-1) rotate(2.5deg)}}
+@keyframes sway15Y{from{transform:scaleY(-1) rotate(-1.5deg)}to{transform:scaleY(-1) rotate(1.5deg)}}
+@keyframes sway15XY{from{transform:scale(-1,-1) rotate(-1.5deg)}to{transform:scale(-1,-1) rotate(1.5deg)}}
+@keyframes swayLeaf{from{transform:translateY(-50%) rotate(-2deg)}to{transform:translateY(-50%) rotate(2deg)}}
+@keyframes swayLeafX{from{transform:translateY(-50%) scaleX(-1) rotate(-2deg)}to{transform:translateY(-50%) scaleX(-1) rotate(2deg)}}
+@keyframes swayArch{from{transform:translateX(-50%) rotate(-1deg)}to{transform:translateX(-50%) rotate(1deg)}}
+
+.bali-corner.tl{transform-origin:top left;animation:sway15 6s ease-in-out infinite alternate;}
+.bali-corner.tr{transform-origin:top right;animation:sway15X 6s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.bali-corner.bl{transform-origin:bottom left;animation:sway15Y 6s ease-in-out infinite alternate;animation-delay:-3s;}
+.bali-corner.br{transform-origin:bottom right;animation:sway15XY 6s ease-in-out infinite alternate;animation-delay:-4.5s;}
+.verse-corner.tl{transform-origin:top left;animation:sway15 6.8s ease-in-out infinite alternate;}
+.verse-corner.tr{transform-origin:top right;animation:sway15X 6.8s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.verse-corner.bl{transform-origin:bottom left;animation:sway15Y 6.8s ease-in-out infinite alternate;animation-delay:-3s;}
+.verse-corner.br{transform-origin:bottom right;animation:sway15XY 6.8s ease-in-out infinite alternate;animation-delay:-4.5s;}
+.bali-gapura{transform-origin:bottom center;animation:sway10 7s ease-in-out infinite alternate;animation-delay:-1s;}
+.jepun{transform-origin:bottom center;animation:sway25 5.5s ease-in-out infinite alternate;animation-delay:-0.8s;}
+.jepun.small{transform-origin:bottom center;animation:sway25 6.5s ease-in-out infinite alternate;animation-delay:-2s;}
+.mini-jepun{transform-origin:bottom center;animation:sway25 6s ease-in-out infinite alternate;animation-delay:-1.2s;}
+.cluster-bunga{transform-origin:bottom center;animation:sway25 6.5s ease-in-out infinite alternate;animation-delay:-1s;}
+.cluster-bunga.l{transform-origin:bottom center;animation:sway25X 6.5s ease-in-out infinite alternate;animation-delay:-3.5s;}
+.bali-leaf{transform-origin:center;animation:swayLeaf 5.5s ease-in-out infinite alternate;animation-delay:-0.5s;}
+.bali-leaf.l{transform-origin:center;animation:swayLeafX 5.5s ease-in-out infinite alternate;animation-delay:-2.8s;}
+.bali-side.l{transform-origin:center;animation:swayLeaf 6s ease-in-out infinite alternate;animation-delay:-1.5s;}
+.bali-side.r{transform-origin:center;animation:swayLeafX 6s ease-in-out infinite alternate;animation-delay:-4s;}
+.bali-header{transform-origin:top center;animation:sway10 8s ease-in-out infinite alternate;animation-delay:-2s;}
+@media (prefers-reduced-motion:reduce){.bali-corner.tl,.bali-corner.tr,.bali-corner.bl,.bali-corner.br,.verse-corner.tl,.verse-corner.tr,.verse-corner.bl,.verse-corner.br,.bali-gapura,.jepun,.jepun.small,.mini-jepun,.cluster-bunga,.cluster-bunga.l,.bali-leaf,.bali-leaf.l,.bali-side.l,.bali-side.r,.bali-header{animation:none!important}}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
