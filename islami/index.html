@@ -201,6 +201,24 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .cover .pemisah-img{margin:12px auto}
 @media(max-width:400px){.arab{width:76px;height:76px}.bintang-bg{width:240px;height:240px}.bintang-hero{width:220px;height:220px}.gantung img{width:52px}.gantung-cover img{width:44px}}
 
+
+/* ===== MU-UPGRADE4: background set 2 + header bintang + bingkai + pojok bunga + border-x ===== */
+body{background-color:var(--bg);background-image:url(./img/bg_halaman_gradasi.webp);background-position:center top;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+.wrap{background:radial-gradient(520px 260px at 50% -40px,rgba(212,175,55,.22),transparent 70%),radial-gradient(360px 200px at 88% 18%,rgba(212,175,55,.14),transparent 70%),transparent}
+section{position:relative}
+section::after{content:"";position:absolute;inset:0;background:url(./img/bg_pola_geometris.webp) repeat;background-size:256px;opacity:.35;pointer-events:none;z-index:0}
+section::before{z-index:1}
+section>*{position:relative;z-index:1}
+.section-title::before{content:"";display:block;width:88%;height:56px;margin:0 auto 10px;background:url(./img/header_garis_bintang.webp) center/cover no-repeat}
+.header-bintang{display:block;width:min(92%,420px);height:64px;object-fit:cover;object-position:center;margin:6px auto 2px;animation:pemisahGlow 5s ease-in-out infinite}
+.event-card{position:relative;padding:8%}
+.event-card>*{position:relative;z-index:1}
+.bingkai-kartu{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:0}
+.bunga{position:fixed;width:140px;height:140px;object-fit:contain;z-index:3;pointer-events:none;opacity:.9}
+.bunga.tl{top:0;left:0}.bunga.tr{top:0;right:0;transform:scaleX(-1)}
+.bunga.bl{bottom:0;left:0;transform:scaleY(-1)}.bunga.br{bottom:0;right:0;transform:scale(-1,-1)}
+@media(max-width:480px){.bunga{width:84px;height:84px;opacity:.85}}
+.border-x{height:40px;background:url(./img/border_ulang_x.webp) repeat-x center;background-size:auto 40px;opacity:.9}
 </style>
 <style>
 /* MUSIK LATAR (Bensound Tenderness, instrumental gratis) */
@@ -212,7 +230,6 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 <body>
 <canvas id="fx"></canvas>
 <canvas id="fx2"></canvas>
-<div class="crescent"></div>
 <div class="gorb" style="top:30vh;left:10vw;width:26px;height:26px;--t:8s"></div>
 <div class="gorb" style="top:55vh;right:12vw;width:18px;height:18px;--t:11s;animation-delay:-4s"></div>
 <div class="gorb" style="top:72vh;left:20vw;width:32px;height:32px;--t:10s;animation-delay:-7s"></div>
@@ -250,10 +267,15 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
   <div class="masjid-strip"><img src="./img/masjid_siluet.webp" alt=""></div>
 </div>
 
+<img class="bunga tl" src="./img/pojok_bunga.webp" alt="" loading="lazy">
+<img class="bunga tr" src="./img/pojok_bunga.webp" alt="" loading="lazy">
+<img class="bunga bl" src="./img/pojok_bunga.webp" alt="" loading="lazy">
+<img class="bunga br" src="./img/pojok_bunga.webp" alt="" loading="lazy">
 <div class="wrap">
   <section class="hero reveal">
     <img class="bintang-hero" src="./img/bintang_segi8.webp" alt="" loading="lazy">
     <p class="eyebrow">The Wedding of</p>
+    <img class="header-bintang" src="./img/header_garis_bintang.webp" alt="" loading="lazy">
     <div class="mihrab">
       <img class="mihrab-img" src="./img/lengkung_mihrab.webp" alt="" loading="lazy">
       <div class="mihrab-dalam">
@@ -263,6 +285,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       </div>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
   <section class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
@@ -281,6 +305,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
   <section class="reveal">
     <h2 class="section-title">Save the Date</h2>
@@ -295,17 +321,19 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <img class="masjid-tombol" src="./img/masjid_siluet.webp" alt="" loading="lazy">
     <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20261221T010000Z/20261221T060000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
   </section>
+  <div class="border-x"></div>
+
 
   <section class="reveal">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
-    <div class="event-card">
+    <div class="event-card"><img class="bingkai-kartu" src="./img/bingkai_kartu.webp" alt="" loading="lazy">
       <h3>Akad Nikah</h3>
       <p class="e-date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
-    <div class="event-card">
+    <div class="event-card"><img class="bingkai-kartu" src="./img/bingkai_kartu.webp" alt="" loading="lazy">
       <h3>Resepsi</h3>
       <p class="e-date"><img class="bulan-mini" src="./img/bulan_bintang.webp" alt="">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
@@ -313,6 +341,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
   <section class="reveal">
     <h2 class="section-title">Galeri</h2>
@@ -326,6 +356,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div style="background:linear-gradient(135deg,#c9962e,#7a5c17)">R &amp; S</div>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
     <section class="reveal">
     <p class="eyebrow">Kisah Kami</p>
@@ -337,6 +369,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div class="ls-item"><span class="ls-year">2026</span><h3>Menuju Pernikahan</h3><p>Dengan restu kedua keluarga, kami memantapkan hati untuk mengikat janji suci dan memulai babak baru bersama.</p></div>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
 <section class="reveal">
     <h2 class="section-title">Amplop Digital</h2>
@@ -358,6 +392,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <p class="an">Jl. Melati No. 12, Sidoarjo,<br>Jawa Timur</p>
     </div>
   </section>
+  <div class="border-x"></div>
+
 
   <section class="reveal">
     <h2 class="section-title">RSVP &amp; Ucapan</h2>
@@ -380,6 +416,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <p class="ucapan-note">Demo: ucapan yang dikirim hanya tampil di layar ini dan tidak tersimpan.</p>
 
   </section>
+  <div class="border-x"></div>
+
 
   <footer class="reveal">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
