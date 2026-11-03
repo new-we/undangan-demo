@@ -281,6 +281,10 @@ body::before{content:"";position:fixed;inset:0;background:rgba(20,10,4,.55);z-in
 .mu-lentera.r{right:10px;animation-delay:1.2s}
 @keyframes muLenteraSway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
 @media (prefers-reduced-motion:reduce){.mu-lentera{animation:none}}
+/* Cover: tempel komposisi ke atas ala tema lain (kartu lebih ke atas, gapuro jadi mahkota) */
+.cover#cover{padding-top:14px}
+.cover img.mu-arch{width:min(260px,70vw);margin:0 auto 6px}
+.cover .cover-inner{margin-bottom:0}
 /* Untaian melati: tepi panel, DESKTOP saja, ayun halus */
 .mu-untaian{position:fixed;top:0;width:50px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:muUntaianSway 5s ease-in-out infinite alternate}
 .mu-untaian.l{left:10px}
