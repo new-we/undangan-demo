@@ -287,7 +287,7 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 /* Matahari: geser ke atas + kecilkan supaya tidak tertutup foto kapal */
 .sun{top:6%!important;width:84px!important;height:84px!important;margin-left:-42px!important}
 /* Foto kapal: tegaskan sedikit mask lembut yang sudah ada */
-.ship-main img{-webkit-mask-image:radial-gradient(115% 105% at 50% 42%,#000 58%,transparent 95%)!important;mask-image:radial-gradient(115% 105% at 50% 42%,#000 58%,transparent 95%)!important}
+.ship-main img{-webkit-mask-image:none!important;mask-image:none!important;filter:none!important}
 /* Sudut tali cover */
 .cover-corner{position:absolute;width:100px;height:100px;z-index:4;pointer-events:none}
 .cover-corner.tl{top:10px;left:10px}
@@ -316,6 +316,9 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 /* Bingkai kemudi foto ~1,45x */
 .portrait{position:relative}
 .portrait::before{content:"";position:absolute;inset:-22%;background:url(img/kemudi-foto.webp) center/contain no-repeat;z-index:1;pointer-events:none;animation:spinSlow 24s linear infinite reverse}
+/* Tiket: animasi masuk yang menjaga posisi tengah (perbaiki lompat kanan-bawah) */
+.ticket{animation:ticketIn 1.6s ease-out .45s backwards!important}
+@keyframes ticketIn{0%{transform:translate(-50%,-46%);opacity:0}100%{transform:translate(-50%,-50%);opacity:1}}
 /* Camar krem (ganti SVG hitam) */
 .gull img{display:block;width:100%;height:auto}
 /* Watermark emas footer */
@@ -347,7 +350,7 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
   <img class="cover-corner br" src="img/sudut-tali-kanan-bawah.webp" alt="">
   <div class="sun"></div>
   <div class="ship-main">
-    <img src="img/pinisi.jpg" alt="Kapal Pinisi">
+    <img src="img/kapal-pinisi.webp" alt="Kapal Pinisi">
   </div>
   <div class="waves">
     <div class="wave w1" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='104' viewBox='0 0 600 104'%3E%3Cpath d='M0 58 Q75 30 150 58 T300 58 T450 58 T600 58 V104 H0 Z' fill='%2316324a'/%3E%3C/svg%3E&quot;)"></div>
