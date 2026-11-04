@@ -156,6 +156,26 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
+/* MU-MAWAR: bingkai bunga mawar watercolor di cover (revisi Floral Elegan) + melambai */
+.mu-mawar{position:absolute;pointer-events:none;z-index:3;animation:muMelambai 5s ease-in-out infinite alternate;transform-origin:top center}
+.mu-mawar img{display:block;width:100%;height:100%}
+.mu-mawar.sisi{top:10%;bottom:10%;width:clamp(52px,15vw,68px)}
+.mu-mawar.sisi.l{left:0}
+.mu-mawar.sisi.r{right:0}
+.mu-mawar.sisi.r img{transform:scaleX(-1)}
+.mu-mawar.sisi img{object-fit:contain;object-position:center}
+.mu-mawar.pojok{width:clamp(84px,26vw,112px);height:clamp(84px,26vw,112px);overflow:hidden}
+.mu-mawar.pojok.tl{top:0;left:0}
+.mu-mawar.pojok.tr{top:0;right:0}
+.mu-mawar.pojok.bl{bottom:0;left:0}
+.mu-mawar.pojok.br{bottom:0;right:0}
+.mu-mawar.pojok img{object-fit:cover}
+.mu-mawar.pojok.tl img,.mu-mawar.pojok.tr img{object-position:top}
+.mu-mawar.pojok.bl img,.mu-mawar.pojok.br img{object-position:bottom}
+.mu-mawar.pojok.tr img,.mu-mawar.pojok.br img{transform:scaleX(-1)}
+.cover .mu-orn{display:none}
+@keyframes muMelambai{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.mu-mawar{animation:none}}
 </style>
 </head>
 <body>
@@ -170,6 +190,12 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 <div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
+  <span class="mu-mawar sisi l"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
+  <span class="mu-mawar sisi r"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
+  <span class="mu-mawar pojok tl"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
+  <span class="mu-mawar pojok tr"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
+  <span class="mu-mawar pojok bl"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
+  <span class="mu-mawar pojok br"><img src="./img/mawar_samping.webp" alt="" decoding="async" loading="lazy"></span>
   <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
   <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
