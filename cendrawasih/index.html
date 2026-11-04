@@ -125,7 +125,6 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 @media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
 .mu-edge.l{left:6px;top:22%}
 .mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
-.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
 
 .cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
 
@@ -141,6 +140,22 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
+
+/* ===== ORNAMEN CENDRA WASIH 2026-11-04 (set WebP) ===== */
+.cover .mu-orn{display:none!important}
+.cover::before{display:none!important}
+.sudut-tl,.sudut-br{position:absolute;width:80%;pointer-events:none;z-index:0;filter:drop-shadow(0 0 12px rgba(240,130,76,.35))}
+.sudut-tl{top:0;left:0}
+.sudut-br{bottom:0;right:0}
+.cendrawasih{position:absolute;top:-70px;right:-10px;width:60%;z-index:2;pointer-events:none;filter:drop-shadow(0 0 12px rgba(240,130,76,.35))}
+.divider{width:70%!important;max-width:320px;height:auto!important;aspect-ratio:700/170;background:url(./img/pembatas.webp) center/contain no-repeat!important;margin:24px auto!important;opacity:1!important}
+.divider::before,.divider::after{display:none!important}
+.avatar{position:relative}
+.avatar::before{content:"";position:absolute;inset:-55px;background:url(./img/lingkaran-foto.webp) center/contain no-repeat;z-index:-1;pointer-events:none}
+.tepi-l,.tepi-r{position:absolute;top:0;bottom:0;width:38px;pointer-events:none;z-index:0;background-repeat:repeat-y;background-size:38px auto}
+.tepi-l{left:0;background-image:url(./img/tepi-kiri.webp)}
+.tepi-r{right:0;background-image:url(./img/tepi-kanan.webp)}
+.daun-jatuh{position:fixed;top:-12vh;z-index:999;pointer-events:none;background-position:center;background-size:contain;background-repeat:no-repeat;opacity:.85;animation:muFall linear infinite}
 </style>
 </head>
 <body>
@@ -148,12 +163,15 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 
 
 <div class="cover" id="cover">
+  <img class="sudut-tl" src="./img/sudut-kiri-atas.webp" alt="">
+  <img class="sudut-br" src="./img/sudut-kanan-bawah.webp" alt="">
   <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
   <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn br" src="./img/ornamen.svg" alt="">
 
   <div class="cover-inner">
+    <img class="cendrawasih" src="./img/cendrawasih.webp" alt="">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
     <h1 class="cover-names">Raka &amp; Sinta</h1>
     <p class="cover-date">Senin, 21 Desember 2026</p>
@@ -167,6 +185,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 </div>
 
 <div class="wrap">
+  <div class="tepi-l"></div>
+  <div class="tepi-r"></div>
   <section class="hero reveal">
 
     <p class="eyebrow">The Wedding of</p>
@@ -448,8 +468,8 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 <img class="mu-edge l" src="./img/ornamen.svg" alt="">
 <img class="mu-edge r" src="./img/ornamen.svg" alt="">
 <script>
-/* MU-UPGRADE2: partikel motif jatuh */
-(function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
+/* CENDRA WASIH 2026-11-04: daun & bulu jatuh hanya di strip tepi */
+(function(){var imgs=['daun-jatuh-1.webp','daun-jatuh-2.webp','daun-jatuh-3.webp','bulu.webp'];for(var i=0;i<10;i++){var d=document.createElement('div');d.className='daun-jatuh';var img=imgs[i%imgs.length];var leftSide=(i%2===0);var pos=(Math.random()*8);if(leftSide){d.style.left=pos+'vw';}else{d.style.right=pos+'vw';}var s=(img==='bulu.webp')?(22+Math.random()*8):(18+Math.random()*10);d.style.width=s+'px';d.style.height=(img==='bulu.webp'?Math.round(s*164/42):Math.round(s*56/60))+'px';d.style.backgroundImage='url(./img/'+img+')';d.style.animationDuration=(11+Math.random()*8)+'s';d.style.animationDelay=(Math.random()*10)+'s';document.body.appendChild(d);}})();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik" hidden>♪</button>
