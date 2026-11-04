@@ -156,6 +156,18 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
+/* ORN-ZIP: panel bunga kiri-kanan di belakang kartu + elemen lepas melayang (cover saja) */
+.orn-kiri,.orn-kanan{position:absolute;top:0;height:100%;width:auto;pointer-events:none;z-index:0}
+.orn-kiri{left:0}
+.orn-kanan{right:0}
+.cover .mu-orn{display:none}
+.orn-lepas{position:absolute;pointer-events:none;z-index:3;animation:ornMelayang 5s ease-in-out infinite alternate}
+.orn-lepas.kupu{top:8%;right:6%;width:46px;animation-duration:4.2s}
+.orn-lepas.b1{top:4%;left:38%;width:34px;animation-duration:5.4s}
+.orn-lepas.b2{bottom:4%;right:38%;width:30px;animation-duration:4.8s}
+.orn-lepas.b3{top:50%;left:2%;width:32px;animation-duration:5.8s}
+@keyframes ornMelayang{from{transform:translateY(-6px) rotate(-2deg)}to{transform:translateY(6px) rotate(2deg)}}
+@media (prefers-reduced-motion:reduce){.orn-lepas{animation:none}}
 </style>
 </head>
 <body>
@@ -170,6 +182,12 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 <div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
+  <img class="orn-kiri" src="./img/ornamen-floral-left.webp" alt="" decoding="async">
+  <img class="orn-kanan" src="./img/ornamen-floral-right.webp" alt="" decoding="async">
+  <img class="orn-lepas kupu" src="./img/ornamen-floral-kupu.webp" alt="" decoding="async" loading="lazy">
+  <img class="orn-lepas b1" src="./img/ornamen-floral-bunga-1.webp" alt="" decoding="async" loading="lazy">
+  <img class="orn-lepas b2" src="./img/ornamen-floral-bunga-2.webp" alt="" decoding="async" loading="lazy">
+  <img class="orn-lepas b3" src="./img/ornamen-floral-bunga-3.webp" alt="" decoding="async" loading="lazy">
   <img class="mu-orn tl" src="./img/ornamen.svg" alt="">
   <img class="mu-orn tr" src="./img/ornamen.svg" alt="">
   <img class="mu-orn bl" src="./img/ornamen.svg" alt="">
