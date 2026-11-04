@@ -12,17 +12,17 @@
   --bg: #fff9f7;
   --bg2: #fbeff0;
   --card: #ffffff;
-  --accent: #c98a5e;
-  --accent2: #a86a3c;
-  --accent-soft: #f6e3d7;
+  --accent: #B9707A;
+  --accent2: #9A5F6B;
+  --accent-soft: #F9E2E4;
   --text: #5b4a3f;
   --muted: #a08e80;
-  --script: #b4764a;
+  --script: #B9707A;
   --line: #f0ddd6;
   --cover-bg: linear-gradient(165deg,#fdeeed,#fbd9d4 60%,#f6c9c2);
   --cover-text: #6b4a3a;
-  --cover-line: rgba(107,74,58,.25);
-  --btn-bg: #b4764a;
+  --cover-line: rgba(185,112,122,.25);
+  --btn-bg: #B9707A;
   --btn-text: #ffffff;
 }
 
@@ -93,12 +93,7 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 @keyframes bflyPath{0%{transform:translate(-8vw,88vh) scale(var(--s,1))}20%{transform:translate(18vw,66vh) scale(var(--s,1))}40%{transform:translate(42vw,80vh) scale(var(--s,1))}60%{transform:translate(64vw,58vh) scale(var(--s,1))}80%{transform:translate(86vw,72vh) scale(var(--s,1))}100%{transform:translate(112vw,55vh) scale(var(--s,1))}}
 
 #fx2{position:fixed;inset:0;z-index:4;pointer-events:none}
-.bloom{position:fixed;z-index:4;pointer-events:none;width:56px;height:56px;animation:bloomPulse 5.5s ease-in-out infinite}
-.bloom i{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd9e0,#f2a9bd 55%,#e08ba0);box-shadow:0 0 16px rgba(242,169,189,.5)}
-.bloom i:nth-child(2){transform:rotate(72deg) scale(.8)}
-.bloom i:nth-child(3){transform:rotate(144deg) scale(.64)}
-.bloom b{position:absolute;left:21px;top:21px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,#fff8d9,#f7c948);box-shadow:0 0 12px #f7c948}
-@keyframes bloomPulse{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.14) rotate(10deg)}}
+0%{transform:scale(1.14) rotate(10deg)}}
 
 /* Kolom ucapan (DEMO: tanpa penyimpanan) */
 .ucapan-list{margin-top:20px;display:flex;flex-direction:column;gap:12px;text-align:left}
@@ -134,19 +129,17 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 @keyframes muSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
 @keyframes muSwayR{0%,100%{transform:scaleX(-1) rotate(-4deg)}50%{transform:scaleX(-1) rotate(4deg)}}
 @keyframes muDrift{from{background-position:0 0}to{background-position:120px 120px}}
-@keyframes muFall{0%{transform:translateY(-10vh) rotate(0deg)}100%{transform:translateY(112vh) rotate(340deg)}}
 .mu-orn{position:absolute;width:74px;height:74px;pointer-events:none;z-index:1;animation:muSway 3.8s ease-in-out infinite alternate;transform-origin:top center}
 .mu-orn.tl{top:12px;left:12px}
 .mu-orn.tr{top:12px;right:12px;animation-name:muSwayR}
 .mu-orn.bl{bottom:12px;left:12px;animation-duration:4.6s}
 .mu-orn.br{bottom:12px;right:12px;animation-name:muSwayR;animation-duration:4.6s}
-section::before{content:"";position:absolute;top:12px;right:14px;width:82px;height:82px;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.22;pointer-events:none;z-index:0}
-section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
+section::before{content:"";position:absolute;top:0;left:0;width:96px;aspect-ratio:1;background:url(./img/sudut-kiri-atas.webp) top left/contain no-repeat;pointer-events:none;z-index:-1}
+section::after{content:"";position:absolute;bottom:0;right:0;width:96px;aspect-ratio:1;background:url(./img/sudut-kanan-bawah.webp) bottom right/contain no-repeat;pointer-events:none;z-index:-1}
 .mu-edge{display:none}
 @media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
 .mu-edge.l{left:6px;top:22%}
 .mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
-.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
 
 .cover::before{content:"";position:absolute;inset:0;background:url(./img/ornamen.svg) 0 0/120px repeat;opacity:.1;pointer-events:none;animation:muDrift 26s linear infinite}
 
@@ -156,10 +149,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
-/* ORN-ZIP: panel bunga kiri-kanan di belakang kartu + elemen lepas melayang (cover saja) */
-.orn-kiri,.orn-kanan{position:absolute;top:0;height:100%;width:auto;pointer-events:none;z-index:0}
-.orn-kiri{left:0}
-.orn-kanan{right:0}
+/* ORN-ZIP: elemen lepas melayang (cover saja) — panel v1 diganti sudut v2 */
 .cover .mu-orn{display:none}
 .orn-lepas{position:absolute;pointer-events:none;z-index:3;animation:ornMelayang 5s ease-in-out infinite alternate}
 .orn-lepas.kupu{top:8%;right:6%;width:46px;animation-duration:4.2s}
@@ -168,22 +158,39 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .orn-lepas.b3{top:50%;left:2%;width:32px;animation-duration:5.8s}
 @keyframes ornMelayang{from{transform:translateY(-6px) rotate(-2deg)}to{transform:translateY(6px) rotate(2deg)}}
 @media (prefers-reduced-motion:reduce){.orn-lepas{animation:none}}
+
+/* ===== FLORAL-V2 (2026-11-04): sudut, pembatas, bingkai foto, tepi, kelopak, palet rose ===== */
+.sudut-tl,.sudut-br{position:absolute;width:75%;aspect-ratio:1;pointer-events:none;z-index:0}
+.sudut-tl{top:0;left:0}
+.sudut-br{bottom:0;right:0}
+.hero::before{width:55%}
+.divider{width:70%;max-width:320px;height:auto;aspect-ratio:700/170;margin:24px auto;background:url(./img/pembatas.webp) center/contain no-repeat;opacity:1}
+.divider::before{display:none}
+.foto-wrap{position:relative;width:94px;margin:0 auto}
+.foto-wrap::before{content:"";position:absolute;inset:-55px;background:url(./img/lingkaran-foto.webp) center/contain no-repeat;pointer-events:none;z-index:-1}
+.tepi-l,.tepi-r{position:absolute;top:0;bottom:0;width:38px;pointer-events:none;z-index:-1;background-repeat:repeat-y;background-size:38px auto}
+.tepi-l{left:0;background-image:url(./img/tepi-kiri.webp)}
+.tepi-r{right:0;background-image:url(./img/tepi-kanan.webp)}
+footer{position:relative;z-index:0}
+footer::after{content:"";position:absolute;bottom:0;right:0;width:96px;aspect-ratio:1;background:url(./img/sudut-kanan-bawah.webp) bottom right/contain no-repeat;pointer-events:none;z-index:-1}
+.verse{background:color-mix(in srgb, var(--card) 72%, transparent);padding:14px 18px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.mu-edge{display:none}
+.kelopak-fall{position:fixed;top:-8vh;z-index:4;pointer-events:none;opacity:.7;background:center/contain no-repeat;animation:kelopakFall linear infinite}
+@keyframes kelopakFall{0%{transform:translateY(-8vh) rotate(0deg)}100%{transform:translateY(112vh) rotate(300deg)}}
+@media (prefers-reduced-motion:reduce){.kelopak-fall{animation:none}}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
 <canvas id="fx2"></canvas>
-<div class="bloom" style="top:14vh;left:6vw;animation-delay:0s"><i></i><i></i><i></i><b></b></div>
-<div class="bloom" style="top:64vh;right:5vw;animation-delay:-2.4s;transform:scale(.8)"><i></i><i></i><i></i><b></b></div>
-<div class="bloom" style="top:38vh;left:82vw;animation-delay:-4s;transform:scale(.65)"><i></i><i></i><i></i><b></b></div>
 
 <div class="butterfly" style="--d:26s;--dl:-4s;--s:1;--bc:#f2a9bd"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 <div class="butterfly" style="--d:33s;--dl:-19s;--s:.7;--bc:#f6c9a0"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 <div class="butterfly" style="--d:24s;--dl:-11s;--s:1.25;--bc:#e8b7cf"><span class="w l"></span><span class="w r"></span><span class="bd"></span></div>
 
 <div class="cover" id="cover">
-  <img class="orn-kiri" src="./img/ornamen-floral-left.webp" alt="" decoding="async">
-  <img class="orn-kanan" src="./img/ornamen-floral-right.webp" alt="" decoding="async">
+  <img class="sudut-tl" src="./img/sudut-kiri-atas.webp" alt="" decoding="async">
+  <img class="sudut-br" src="./img/sudut-kanan-bawah.webp" alt="" decoding="async">
   <img class="orn-lepas kupu" src="./img/ornamen-floral-kupu.webp" alt="" decoding="async" loading="lazy">
   <img class="orn-lepas b1" src="./img/ornamen-floral-bunga-1.webp" alt="" decoding="async" loading="lazy">
   <img class="orn-lepas b2" src="./img/ornamen-floral-bunga-2.webp" alt="" decoding="async" loading="lazy">
@@ -206,6 +213,8 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 </div>
 
 <div class="wrap">
+  <div class="tepi-l"></div>
+  <div class="tepi-r"></div>
   <section class="hero reveal">
     <p class="eyebrow">The Wedding of</p>
     <h1 class="names">Raka &amp; Sinta</h1>
@@ -219,13 +228,13 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
     <h2 class="section-title">Mempelai</h2>
     <div class="person">
-      <div class="avatar">R</div>
+      <div class="foto-wrap"><div class="avatar">R</div></div>
       <h3>Raka Pratama</h3>
       <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
     </div>
     <div class="amp">&amp;</div>
     <div class="person">
-      <div class="avatar">S</div>
+      <div class="foto-wrap"><div class="avatar">S</div></div>
       <h3>Sinta Maharani</h3>
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
@@ -527,8 +536,8 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 <img class="mu-edge l" src="./img/ornamen.svg" alt="">
 <img class="mu-edge r" src="./img/ornamen.svg" alt="">
 <script>
-/* MU-UPGRADE2: partikel motif jatuh */
-(function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
+/* FLORAL-V2: kelopak kecil jatuh pelan, hanya di tepi layar */
+(function(){var files=['kelopak-1.webp','kelopak-2.webp','kelopak-3.webp'];for(var i=0;i<6;i++){var d=document.createElement('div');d.className='kelopak-fall';var s=18+Math.random()*8;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(i%2===0)?(Math.random()*4)+'vw':(96+Math.random()*3)+'vw';d.style.backgroundImage='url(./img/'+files[i%3]+')';d.style.animationDuration=(14+Math.random()*8)+'s';d.style.animationDelay=(Math.random()*10)+'s';document.body.appendChild(d);}})();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik" hidden>♪</button>
