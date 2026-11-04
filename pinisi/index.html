@@ -169,8 +169,6 @@ section{position:relative;padding:74px 26px;overflow:hidden}
   animation:shineMove 8s linear infinite;filter:drop-shadow(0 4px 18px rgba(0,0,0,.45))}
 #hero h1 .amp{font-style:italic}
 .hero-date{letter-spacing:.3em;font-size:12px;color:var(--gold-l);margin-top:14px;text-transform:uppercase}
-.hero-flag{width:0;height:0;margin:22px auto 0;border-top:11px solid transparent;border-bottom:11px solid transparent;
-  border-left:30px solid var(--sunset);transform-origin:left center;animation:flagWave 1.5s ease-in-out infinite}
 .scroll-hint{margin-top:26px;font-size:10px;letter-spacing:.4em;color:#e9d3a3;text-transform:uppercase;animation:floatY 2.6s ease-in-out infinite}
 
 /* countdown */
@@ -284,6 +282,44 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 .mu-music-btn{position:fixed;right:16px;bottom:18px;z-index:9999;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(0,0,0,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
+
+/* ===== ORNAMEN PINISI 2026-11-04 (set WebP) ===== */
+/* Matahari: geser ke atas + kecilkan supaya tidak tertutup foto kapal */
+.sun{top:6%!important;width:84px!important;height:84px!important;margin-left:-42px!important}
+/* Foto kapal: tegaskan sedikit mask lembut yang sudah ada */
+.ship-main img{-webkit-mask-image:radial-gradient(115% 105% at 50% 42%,#000 58%,transparent 95%)!important;mask-image:radial-gradient(115% 105% at 50% 42%,#000 58%,transparent 95%)!important}
+/* Sudut tali cover */
+.cover-corner{position:absolute;width:100px;height:100px;z-index:4;pointer-events:none}
+.cover-corner.tl{top:10px;left:10px}
+.cover-corner.tr{top:10px;right:10px}
+.cover-corner.bl{bottom:10px;left:10px}
+.cover-corner.br{bottom:10px;right:10px}
+/* Tiket: tali di tepi atas (ganti border inset), mawar-angin ganti belah ketupat */
+.ticket::before{content:"";position:absolute;top:-6px;left:12px;right:12px;height:14px;border:none!important;background:url(img/pembatas-tali.webp) center/auto 100% repeat-x!important}
+.ticket::after{content:"";position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:34px;height:34px;padding:0!important;background:#0d1f30 url(img/mawar-angin.webp) center/contain no-repeat!important;border-radius:50%}
+/* Garis putus-putus tiket -> pembatas ombak */
+.tix-div{border-top:none!important;width:70%;max-width:300px;height:auto;aspect-ratio:700/70;margin:22px auto;background:url(img/pembatas-ombak.webp) center/contain no-repeat}
+/* Tombol buka: aman di HP sempit */
+@media(max-width:400px){.btn-open{padding:16px 32px}}
+/* Hero: teks lebih terbaca */
+#hero .hero-inner{text-shadow:0 2px 14px rgba(0,0,0,.6)}
+#hero .kicker{font-weight:600}
+.hero-date{font-size:13px!important;font-weight:600}
+/* Hero: ombak di dasar + kapal kecil berlayar di atasnya + bintang */
+#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:url(img/ombak-bawah.webp) bottom/100% auto no-repeat;z-index:1;pointer-events:none}
+.hero-ship{position:absolute;bottom:14%;left:8%;width:130px;z-index:1;pointer-events:none;animation:floatY 6s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.bintang{position:absolute;width:14px;height:14px;z-index:1;pointer-events:none;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+/* Tombol kompas hero ganti segitiga */
+.hero-compass{width:64px;height:64px;margin:22px auto 0;border-radius:50%;border:2px solid var(--gold);background:rgba(13,31,48,.55);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hero-compass img{width:44px;height:44px;display:block}
+/* Bingkai kemudi foto ~1,45x */
+.portrait{position:relative}
+.portrait::before{content:"";position:absolute;inset:-22%;background:url(img/kemudi-foto.webp) center/contain no-repeat;z-index:1;pointer-events:none;animation:spinSlow 24s linear infinite reverse}
+/* Camar krem (ganti SVG hitam) */
+.gull img{display:block;width:100%;height:auto}
+/* Watermark emas footer */
+.footer-watermark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(340px,90%);opacity:.08;pointer-events:none;z-index:0}
 </style>
 </head>
 <body class="locked">
@@ -305,6 +341,10 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 <div id="cover">
   <div class="cover-sea"></div>
   <div class="cover-shade"></div>
+  <img class="cover-corner tl" src="img/sudut-tali-kiri-atas.webp" alt="">
+  <img class="cover-corner tr" src="img/sudut-tali-kanan-atas.webp" alt="">
+  <img class="cover-corner bl" src="img/sudut-tali-kiri-bawah.webp" alt="">
+  <img class="cover-corner br" src="img/sudut-tali-kanan-bawah.webp" alt="">
   <div class="sun"></div>
   <div class="ship-main">
     <img src="img/pinisi.jpg" alt="Kapal Pinisi">
@@ -333,11 +373,18 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 
   <!-- HERO -->
   <section id="hero">
+    <img class="hero-ship" src="img/kapal-pinisi.webp" alt="">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:8%;top:7%">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:22%;top:13%;animation-delay:-1s">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:38%;top:6%;animation-delay:-2s">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:62%;top:10%;animation-delay:-.5s">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:78%;top:6%;animation-delay:-1.5s">
+    <img class="bintang" src="img/bintang.webp" alt="" style="left:90%;top:14%;animation-delay:-2.5s">
     <div class="hero-inner">
       <div class="kicker rv" data-a="fade-up">The Wedding Of</div>
       <h1 class="rv" data-a="zoom-in">Raka <span class="amp">&amp;</span><br>Sinta</h1>
       <div class="hero-date rv" data-a="fade-up">Sabtu, 12 Juni 2027</div>
-      <div class="hero-flag rv" data-a="fade-up"></div>
+      <button class="hero-compass rv" data-a="fade-up" type="button" aria-label="Lanjut ke bawah" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})"><img src="img/mawar-angin.webp" alt=""></button>
       <div class="scroll-hint rv" data-a="fade-up">Gulir ke bawah</div>
     </div>
   </section>
@@ -538,6 +585,7 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
 
   <!-- THANKS -->
   <footer id="thanks">
+    <img class="footer-watermark" src="img/kapal-siluet-emas.webp" alt="">
     <div class="f-wave" style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='60' viewBox='0 0 600 60'%3E%3Cpath d='M0 34 Q75 16 150 34 T300 34 T450 34 T600 34 V60 H0 Z' fill='%23e8823c'/%3E%3C/svg%3E&quot;)"></div>
     <div class="thanks-kicker rv" data-a="fade-up">Terima Kasih</div>
     <div class="script rv" data-a="zoom-in">Raka &amp; Sinta</div>
@@ -590,19 +638,19 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
   // KAWANAN CAMAR — terbang acak via JS
   (function(){
     var box = document.getElementById('gulls'), gulls = [];
-    var COUNT = window.innerWidth < 768 ? 9 : 15;
+    var COUNT = window.innerWidth < 768 ? 7 : 10;
     function newGull(anyX){
       var d = document.createElement('div');
       d.className = 'gull';
       var op = (0.55 + Math.random()*0.35).toFixed(2);
-      d.innerHTML = '<svg viewBox="0 0 52 24" aria-hidden="true"><path d="M3 19 Q14 5 26 16 Q38 5 49 19" fill="none" stroke="rgba(26,24,34,' + op + ')" stroke-width="3.4" stroke-linecap="round"/></svg>';
-      var size = 30 + Math.random()*46;
+      d.innerHTML = '<img src="img/' + ['camar-1.webp','camar-2.webp','camar-3.webp'][Math.floor(Math.random()*3)] + '" alt="">';
+      var size = 54 + Math.random()*30;
       var dir = Math.random() < .5 ? 1 : -1;
       d.style.width = size + 'px';
       var g = {
         el: d, dir: dir,
         speed: (.5 + Math.random()*1) * dir,
-        y: 40 + Math.random() * (window.innerHeight * .62),
+        y: window.innerHeight * (.04 + Math.random() * .18),
         amp: 14 + Math.random()*36,
         freq: .5 + Math.random()*.9,
         ph: Math.random()*6.28,
@@ -630,7 +678,7 @@ footer .credit{margin-top:26px;font-size:10px;letter-spacing:.28em;color:#7d8ea0
     }
     requestAnimationFrame(loop);
     window.addEventListener('resize', function(){
-      gulls.forEach(function(g){ g.y = Math.min(g.y, window.innerHeight * .8); });
+      gulls.forEach(function(g){ g.y = Math.min(g.y, window.innerHeight * .22); });
     });
   })();
 
