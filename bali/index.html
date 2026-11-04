@@ -17,7 +17,7 @@
   --btn-bg:#c98a2e; --btn-text:#ffffff;
 }
 
-/* BALI PREMIUM: gapura kini ornamen emas gold_gapura.webp, menara CSS lama dibuang */
+/* BALI PREMIUM 2026-11-04: set WebP baru (ukir + kamboja), set emas lama dihapus */
 .event-card{border:2px solid var(--accent);
   background-image:repeating-linear-gradient(45deg,rgba(201,138,46,.07) 0 6px,transparent 6px 12px),repeating-linear-gradient(-45deg,rgba(30,110,78,.05) 0 6px,transparent 6px 12px)}
 .divider{height:3px;background:linear-gradient(90deg,transparent,var(--accent) 20%,var(--accent2) 50%,var(--accent) 80%,transparent)}
@@ -201,6 +201,20 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .bali-side.r{transform-origin:center;animation:swayLeafX 6s ease-in-out infinite alternate;animation-delay:-4s;}
 .bali-header{transform-origin:top center;animation:sway10 8s ease-in-out infinite alternate;animation-delay:-2s;}
 @media (prefers-reduced-motion:reduce){.bali-corner.tl,.bali-corner.tr,.bali-corner.bl,.bali-corner.br,.verse-corner.tl,.verse-corner.tr,.verse-corner.bl,.verse-corner.br,.bali-gapura,.jepun,.jepun.small,.mini-jepun,.cluster-bunga,.cluster-bunga.l,.bali-leaf,.bali-leaf.l,.bali-side.l,.bali-side.r,.bali-header{animation:none!important}}
+
+/* ===== BALI PREMIUM 2026-11-04: set WebP baru (ganti set emas lama) ===== */
+/* Sudut: tiap file sudah sudutnya sendiri -> tanpa cermin */
+.bali-corner.tl,.bali-corner.br{transform:none}
+.bali-corner.tr,.bali-corner.bl,.bali-corner.br{animation-name:sway15}
+.verse-corner.tl,.verse-corner.br{transform:none}
+.verse-corner.tr,.verse-corner.bl,.verse-corner.br{animation-name:sway15}
+/* Sisi: tepi kanan sudah bentuk kanan -> tanpa cermin */
+.bali-side.r{transform:translateY(-50%);animation-name:swayLeaf}
+/* Candi bentar lebih besar, meru footer lebih ramping */
+.bali-gapura{width:110px}
+.bali-header{width:120px}
+/* Bingkai ukir foto ~1,36x */
+.avatar-frame::before{content:"";position:absolute;inset:-18%;background:url(./img/bingkai-foto-ukir.webp) center/contain no-repeat;z-index:2;pointer-events:none}
 </style>
 </head>
 <body>
@@ -213,22 +227,22 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 
 
   <div class="cover-inner">
-    <img class="bali-corner tl" src="./img/gold_corner.webp" alt="">
-    <img class="bali-corner tr" src="./img/gold_corner.webp" alt="">
-    <img class="bali-corner bl" src="./img/gold_corner.webp" alt="">
-    <img class="bali-corner br" src="./img/gold_corner.webp" alt="">
-    <img class="bali-leaf" src="./img/gold_leaf.webp" alt="">
-    <img class="bali-leaf l" src="./img/gold_leaf.webp" alt="">
+    <img class="bali-corner tl" src="./img/sudut-ukir-kiri-atas.webp" alt="">
+    <img class="bali-corner tr" src="./img/sudut-ukir-kanan-atas.webp" alt="">
+    <img class="bali-corner bl" src="./img/sudut-ukir-kiri-bawah.webp" alt="">
+    <img class="bali-corner br" src="./img/sudut-ukir-kanan-bawah.webp" alt="">
+    <img class="bali-leaf" src="./img/daun-emas.webp" alt="">
+    <img class="bali-leaf l" src="./img/daun-emas.webp" alt="">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
-    <img class="bali-gapura" src="./img/gold_gapura.webp" alt="">
-    <div class="names-row"><img class="jepun" src="./img/gold_jepun.webp" alt=""><h1 class="cover-names">Raka &amp; Sinta</h1><img class="jepun small" src="./img/gold_jepun.webp" alt=""></div>
+    <img class="bali-gapura" src="./img/candi-bentar.webp" alt="">
+    <div class="names-row"><img class="jepun" src="./img/kamboja-1.webp" alt=""><h1 class="cover-names">Raka &amp; Sinta</h1><img class="jepun small" src="./img/kamboja-2.webp" alt=""></div>
     <p class="cover-date">Senin, 21 Desember 2026</p>
-    <img class="bali-divider" src="./img/gold_divider.webp" alt="">
+    <img class="bali-divider" src="./img/pembatas-ukir.webp" alt="">
     <div class="cover-guest">
       <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i:</p>
       <h2 id="guestName">Tamu Undangan</h2>
     </div>
-    <img class="bali-divider" src="./img/gold_divider.webp" alt="">
+    <img class="bali-divider" src="./img/pembatas-ukir.webp" alt="">
     <button class="btn-open" id="openBtn" type="button">Buka Undangan</button>
     <p class="cover-note">* Mohon maaf apabila terdapat kesalahan penulisan nama dan gelar</p>
   </div>
@@ -246,19 +260,19 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
   <section class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
-    <div class="verse-frame"><img class="verse-corner tl" src="./img/gold_corner.webp" alt=""><img class="verse-corner tr" src="./img/gold_corner.webp" alt=""><img class="verse-corner bl" src="./img/gold_corner.webp" alt=""><img class="verse-corner br" src="./img/gold_corner.webp" alt=""><p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p></div>
+    <div class="verse-frame"><img class="verse-corner tl" src="./img/sudut-kamboja-kiri-atas.webp" alt=""><img class="verse-corner tr" src="./img/sudut-kamboja-kanan-atas.webp" alt=""><img class="verse-corner bl" src="./img/sudut-kamboja-kiri-bawah.webp" alt=""><img class="verse-corner br" src="./img/sudut-kamboja-kanan-bawah.webp" alt=""><p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p></div>
     <h2 class="section-title">Mempelai</h2>
-    <img class="orn-mempelai" src="./img/gold_divider.webp" alt="">
+    <img class="orn-mempelai" src="./img/pembatas-ukir.webp" alt="">
     <div class="person raka">
-      <img class="cluster-bunga" src="./img/gold_cluster.webp" alt="">
-      <div class="avatar-frame"><div class="avatar gold">R</div><img class="mini-jepun" src="./img/gold_jepun.webp" alt=""></div>
+      
+      <div class="avatar-frame"><div class="avatar gold">R</div><img class="mini-jepun" src="./img/kamboja-3.webp" alt=""></div>
       <h3>Raka Pratama</h3>
       <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
     </div>
     <div class="amp">&amp;</div>
     <div class="person sinta">
-      <img class="cluster-bunga l" src="./img/gold_cluster.webp" alt="">
-      <div class="avatar-frame"><div class="avatar gold">S</div><img class="mini-jepun" src="./img/gold_jepun.webp" alt=""></div>
+      
+      <div class="avatar-frame"><div class="avatar gold">S</div><img class="mini-jepun" src="./img/kamboja-3.webp" alt=""></div>
       <h3>Sinta Maharani</h3>
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
@@ -364,7 +378,7 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
   </section>
 
   <footer class="reveal">
-    <img class="bali-header" src="./img/gold_header.webp" alt="">
+    <img class="bali-header" src="./img/meru.webp" alt="">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
     <p class="thanks">Terima kasih</p>
     <h2 class="names">Raka &amp; Sinta</h2>
@@ -468,8 +482,10 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
     r:4+Math.random()*8,vy:-(.4+Math.random()*.6),ph:Math.random()*6.28,a:.28}}
   for(var i=0;i<16;i++)S.push(mkS(true));
   function mkK(init){return{x:Math.random()*W,y:init?Math.random()*H:-14,
-    vy:.5+Math.random()*.8,s:5+Math.random()*4,ph:Math.random()*6.28,rot:Math.random()*6.28}}
+    vy:.5+Math.random()*.8,s:5+Math.random()*4,ph:Math.random()*6.28,rot:Math.random()*6.28,kind:Math.random()<.25?"leaf":Math.floor(Math.random()*3)}}
   for(var j=0;j<12;j++)K.push(mkK(true));
+  var petImgs=["./img/kelopak-kamboja-1.webp","./img/kelopak-kamboja-2.webp","./img/kelopak-kamboja-3.webp"].map(function(s){var im=new Image();im.src=s;return im});
+  var leafImg=new Image();leafImg.src="./img/daun-emas.webp";
   function petal(px,py,s,rot){
     x.save();x.translate(px,py);x.rotate(rot);x.fillStyle="#fdfbf4";
     for(var p=0;p<5;p++){x.rotate(1.2566);
@@ -484,7 +500,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
       x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();}
     for(var m=0;m<K.length;m++){var q=K[m];q.y+=q.vy;q.ph+=.04;q.rot+=.02;q.x+=Math.sin(q.ph)*1;
       if(q.y>H+16){K[m]=mkK(false);continue}
-      petal(q.x,q.y,q.s,q.rot);}
+      var pim=q.kind==="leaf"?leafImg:petImgs[q.kind];
+      if(pim.complete&&pim.naturalWidth){x.save();x.translate(q.x,q.y);x.rotate(q.rot);var pw=q.s*3.2,ph2=pw*(pim.naturalHeight/pim.naturalWidth);x.drawImage(pim,-pw/2,-ph2/2,pw,ph2);x.restore();}
+      else{petal(q.x,q.y,q.s,q.rot);}}
     requestAnimationFrame(step);
   })();
 })();
@@ -530,7 +548,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   if(typeof window.bukaUndangan==='function'){var _o=window.bukaUndangan;window.bukaUndangan=function(){_o();onOpen();};}
 })();
 </script>
-<img class="bali-side l" src="./img/gold_vine.webp" alt="">
-<img class="bali-side r" src="./img/gold_vine.webp" alt="">
+<img class="bali-side l" src="./img/tepi-kamboja-kiri.webp" alt="">
+<img class="bali-side r" src="./img/tepi-kamboja-kanan.webp" alt="">
 </body>
 </html>
