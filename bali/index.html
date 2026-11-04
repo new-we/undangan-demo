@@ -215,6 +215,29 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .bali-header{width:120px}
 /* Bingkai ukir foto ~1,36x */
 .avatar-frame::before{content:"";position:absolute;inset:-18%;background:url(./img/bingkai-foto-ukir.webp) center/contain no-repeat;z-index:2;pointer-events:none}
+
+/* ===== BALI PREMIUM 2026-11-04 (brief): gerbang, watermark, sudut besar, gradasi ===== */
+/* Gerbang candi bentar: absolut di belakang nama (tengah via margin, bukan transform, agar sway tidak menggeser) */
+.bali-gapura{position:absolute;top:6%;left:50%;width:58%;max-width:230px;margin:0;margin-left:-29%;z-index:-1}
+.names-row{position:relative;z-index:1}
+/* Meru watermark cover (kanan -6% agar tidak memicu scroll horizontal) */
+.meru-bg{position:absolute;bottom:4%;right:-6%;width:60%;opacity:.12;pointer-events:none;z-index:0}
+/* Sudut kartu cover: dua sudut berseberangan besar, geser ke dalam */
+.bali-corner.tl{width:38%;max-width:170px;top:8px;left:8px}
+.bali-corner.br{width:38%;max-width:170px;bottom:8px;right:8px}
+/* Sudut kotak ayat: geser ke dalam agar tidak terpotong tepi */
+.verse-corner.tl{top:6px;left:6px}
+.verse-corner.tr{top:6px;right:6px}
+.verse-corner.bl{bottom:6px;left:6px}
+.verse-corner.br{bottom:6px;right:6px}
+/* Jarak Mempelai dari kotak ayat */
+.mempelai-gap{margin-top:26px}
+/* Nama + judul: gradasi emas (bukan mustard datar) */
+.cover-names,.names,#guestName,.section-title{background:linear-gradient(135deg,#8a6224,#e4ba64 40%,#b88a38 60%,#f4dc9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* Tombol: gradasi emas + teks cokelat tua (putih di atas emas muda tidak terbaca) */
+.btn-open,.btn{background:linear-gradient(135deg,#a97a2c,#e8c070 50%,#b88a38);color:#3a2410}
+/* Emas lebih metalik: pekatkan saturasi + kontras, tambah bayangan timbul */
+.bali-corner,.bali-gapura,.bali-divider,.orn-mempelai,.verse-corner,.bali-side,.bali-header,.mini-jepun,.avatar-frame::before{filter:saturate(1.35) contrast(1.12) brightness(.96) drop-shadow(0 3px 8px rgba(120,85,20,.35))}
 </style>
 </head>
 <body>
@@ -227,15 +250,12 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 
 
   <div class="cover-inner">
+    <img class="meru-bg" src="./img/meru.webp" alt="">
     <img class="bali-corner tl" src="./img/sudut-ukir-kiri-atas.webp" alt="">
-    <img class="bali-corner tr" src="./img/sudut-ukir-kanan-atas.webp" alt="">
-    <img class="bali-corner bl" src="./img/sudut-ukir-kiri-bawah.webp" alt="">
-    <img class="bali-corner br" src="./img/sudut-ukir-kanan-bawah.webp" alt="">
-    <img class="bali-leaf" src="./img/daun-emas.webp" alt="">
-    <img class="bali-leaf l" src="./img/daun-emas.webp" alt="">
-    <p class="cover-eyebrow">Undangan Pernikahan</p>
+            <img class="bali-corner br" src="./img/sudut-ukir-kanan-bawah.webp" alt="">
+            <p class="cover-eyebrow">Undangan Pernikahan</p>
     <img class="bali-gapura" src="./img/candi-bentar.webp" alt="">
-    <div class="names-row"><img class="jepun" src="./img/kamboja-1.webp" alt=""><h1 class="cover-names">Raka &amp; Sinta</h1><img class="jepun small" src="./img/kamboja-2.webp" alt=""></div>
+    <div class="names-row"><h1 class="cover-names">Raka &amp; Sinta</h1></div>
     <p class="cover-date">Senin, 21 Desember 2026</p>
     <img class="bali-divider" src="./img/pembatas-ukir.webp" alt="">
     <div class="cover-guest">
@@ -261,8 +281,8 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
     <div class="verse-frame"><img class="verse-corner tl" src="./img/sudut-kamboja-kiri-atas.webp" alt=""><img class="verse-corner tr" src="./img/sudut-kamboja-kanan-atas.webp" alt=""><img class="verse-corner bl" src="./img/sudut-kamboja-kiri-bawah.webp" alt=""><img class="verse-corner br" src="./img/sudut-kamboja-kanan-bawah.webp" alt=""><p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p></div>
-    <h2 class="section-title">Mempelai</h2>
     <img class="orn-mempelai" src="./img/pembatas-ukir.webp" alt="">
+    <h2 class="section-title mempelai-gap">Mempelai</h2>
     <div class="person raka">
       
       <div class="avatar-frame"><div class="avatar gold">R</div><img class="mini-jepun" src="./img/kamboja-3.webp" alt=""></div>
