@@ -450,7 +450,7 @@ $('#btn-envelope').addEventListener('click',function(){
 $$('[data-goto]').forEach(function(b){
   b.addEventListener('click',function(){
     var t=document.getElementById(b.getAttribute('data-goto'));
-    if(t){ autoPaused=true; autoUI(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+    if(t){ autoPaused=true; autoUI(); t.scrollIntoView({behavior:'smooth',block:'start'}); toast('Auto Scroll dijeda — ketuk tombol Auto Scroll untuk lanjut'); }
   });
 });
 
