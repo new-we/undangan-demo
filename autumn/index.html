@@ -146,6 +146,15 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 /* HERO COVER: ranting maple realistis menjuntai di tepi atas kartu (di atas eyebrow, tidak menutupi teks) */
 .hero-maple{position:absolute;top:-36px;left:50%;transform:translateX(-50%);height:72px;width:auto;max-width:70%;object-fit:contain;z-index:3;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(90,40,10,.22))}
 </style>
+<style>
+/* ===== AUTUMN FIX 2026-11-05: bingkai tepi full tanpa potong, fixed kanan-kiri, di belakang teks ===== */
+.tepi-maple{position:fixed;top:50%;transform:translateY(-50%);width:min(110px,22vw);height:auto;z-index:1;pointer-events:none}
+.tepi-maple.l{left:0}
+.tepi-maple.r{right:0}
+.wrap section h1,.wrap section h2,.wrap section h3,.wrap section h4,.wrap section p,.wrap section li,.wrap section span,.wrap section a,.wrap section button,.wrap section label,.wrap section input,.wrap section textarea,.wrap section select,.wrap section img,.wrap section .countdown div,.wrap section .amp,.wrap section .divider{position:relative;z-index:2}
+.wrap .gallery div::after{z-index:3}
+footer *{position:relative;z-index:2}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -166,6 +175,8 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 </div>
 
 <div class="wrap">
+  <img class="tepi-maple l" src="./img/tepi-maple-kiri.webp" alt="">
+  <img class="tepi-maple r" src="./img/tepi-maple-kanan.webp" alt="">
   <section class="hero reveal">
     <p class="eyebrow">The Wedding of</p>
     <h1 class="names">Raka &amp; Sinta</h1>
@@ -173,8 +184,7 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
 
-  <section class="reveal orn-ayat">
-    <div class="orn-layer" aria-hidden="true"><img class="tepi-maple l" src="./img/tepi-maple-kiri.webp" alt=""><img class="tepi-maple r" src="./img/tepi-maple-kanan.webp" alt=""></div>
+  <section class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
