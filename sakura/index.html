@@ -210,13 +210,12 @@ section{overflow-x:clip}
   --cover-bg:linear-gradient(165deg,#fdf7ec,#f9e9d8 60%,#f3dcc8);
 }
 .cover{overflow:hidden}
-.cover::before{content:"";position:absolute;top:0;left:0;width:80%;max-width:520px;aspect-ratio:1;background:url(./img/sudut-sakura-kiri-atas.webp) top left/contain no-repeat;z-index:3;pointer-events:none}
-.cover::after{content:"";position:absolute;bottom:0;right:0;width:80%;max-width:520px;aspect-ratio:1;background:url(./img/sudut-sakura-kanan-bawah.webp) bottom right/contain no-repeat;z-index:3;pointer-events:none}
+.cover::before{content:"";position:absolute;top:0;left:0;width:min(55%,260px);aspect-ratio:1;background:url(./img/sudut-sakura-kiri-atas.webp) top left/contain no-repeat;z-index:0;pointer-events:none}
+.cover::after{content:"";position:absolute;bottom:0;right:0;width:min(55%,260px);aspect-ratio:1;background:url(./img/sudut-sakura-kanan-bawah.webp) bottom right/contain no-repeat;z-index:0;pointer-events:none}
 .cover-inner>*{position:relative;z-index:1}
-.cover-inner>.torii{z-index:0}
-.torii{position:absolute;top:5%;left:50%;width:56%;margin-left:-28%;opacity:.35;pointer-events:none}
+.torii{display:block;width:34%;margin:0 auto 6px}
 @keyframes ayun{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
-.lampion-cover{position:absolute;top:0;width:56px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:ayun 4s ease-in-out infinite alternate}
+.lampion-cover{position:absolute;top:0;width:56px;height:auto;z-index:1;pointer-events:none;transform-origin:top center;animation:ayun 4s ease-in-out infinite alternate}
 .lampion-cover.l{left:12px}
 .lampion-cover.r{right:12px;animation-duration:5s;animation-delay:-1.5s}
 .lampion-inner{position:fixed;top:0;width:52px;height:auto;z-index:6;pointer-events:none;transform-origin:top center;animation:ayun 4.5s ease-in-out infinite alternate}
@@ -243,6 +242,18 @@ section{overflow-x:clip}
 .event-card h3,.event-card .e-date,.event-card .e-time,.event-card .e-place,.event-card .btn{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){.sakura-corner,.lampion-cover,.lampion-inner,.tepi-sakura{animation:none!important}}
 </style>
+
+<style>
+/* ===== SAKURA FIX LAPISAN 2026-11-05: ornamen di belakang teks, animasi zona tepi ===== */
+.section-ayat{padding-top:calc(min(55%,260px)*.55)}
+.ayat-corner{position:absolute;top:0;width:min(55%,260px);height:auto;z-index:-1;pointer-events:none}
+.ayat-corner.l{left:0}
+.ayat-corner.r{right:0}
+.bangau{position:absolute;top:50%;width:34px;height:auto;opacity:.85;z-index:-1;pointer-events:none;transform:translateY(-50%)}
+.bangau.kiri{left:2%}
+.bangau.kanan{right:2%}
+.mu-drop{opacity:.7}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -250,13 +261,7 @@ section{overflow-x:clip}
 <div class="cloud" style="top:10vh;left:0;width:220px;height:70px;--t:70s"></div>
 <div class="cloud" style="top:26vh;left:0;width:160px;height:52px;--t:55s;animation-delay:-30s"></div>
 <div class="cloud" style="top:44vh;left:0;width:190px;height:60px;--t:80s;animation-delay:-52s"></div>
-<img class="crane" src="./img/bangau-origami-1.webp" alt="" style="--d:42s;--dl:-8s" loading="lazy">
-<img class="crane" src="./img/bangau-origami-2.webp" alt="" style="--d:55s;--dl:-33s;width:38px" loading="lazy">
 
-<img class="sakura-corner tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
-<img class="sakura-corner tr" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
-<img class="lampion-inner l" src="./img/lampion-merah.webp" alt="" loading="lazy">
-<img class="lampion-inner r" src="./img/lampion-krem.webp" alt="" loading="lazy">
 
 
 
@@ -288,7 +293,11 @@ section{overflow-x:clip}
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
 <div class="pembatas" aria-hidden="true"></div>
-<section class="reveal">
+<section class="reveal section-ayat">
+    <img class="ayat-corner l" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
+    <img class="ayat-corner r" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
+    <img class="bangau kiri" src="./img/bangau-origami-1.webp" alt="" loading="lazy">
+    <img class="bangau kanan" src="./img/bangau-origami-2.webp" alt="" loading="lazy">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
@@ -643,14 +652,14 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   var c=document.getElementById("fx2");if(!c)return;var x=c.getContext("2d");
   var W,H,P=[],t=0;function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
   addEventListener("resize",rs);rs();
-  function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:-16,s:Math.random()*7+4,
+  function mk(i,z){var zone=(z===undefined)?(Math.random()<0.5?0:1):z;return{zone:zone,x:zone?W*(0.88+Math.random()*0.10):Math.random()*W*0.10,y:i?Math.random()*H:-16,s:Math.random()*7+4,
     vy:Math.random()*1+0.5,vx:(Math.random()-0.5)*0.6,rot:Math.random()*6.28,
     rsp:(Math.random()-0.5)*0.06,col:["#f9c6d3","#fbdce4","#f4a9c0"][Math.random()*3|0]}}
-  for(var i=0;i<24;i++)P.push(mk(true));
+  for(var i=0;i<24;i++)P.push(mk(true,i%2));
   (function step(){t+=0.016;x.clearRect(0,0,W,H);
-    var gust=Math.pow(Math.max(0,Math.sin(t*0.35)),3)*3.2;
-    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx+gust;p.rot+=p.rsp;
-      if(p.y>H+24||p.x>W+24||p.x<-24)P[k]=mk(false);
+    
+    for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx;var lo=p.zone?W*0.88:0,hi=p.zone?W:W*0.12;if(p.x<lo){p.x=lo;p.vx=Math.abs(p.vx);}if(p.x>hi){p.x=hi;p.vx=-Math.abs(p.vx);}p.rot+=p.rsp;
+      if(p.y>H+24)P[k]=mk(false,p.zone);
       else{x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.globalAlpha=0.9;x.fillStyle=p.col;
         x.beginPath();x.ellipse(0,0,p.s,p.s*0.55,0,0,6.283);x.fill();x.restore();}}
     x.globalAlpha=1;requestAnimationFrame(step);})();
@@ -677,7 +686,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 </script>
 <script>
 /* MU-UPGRADE2: partikel motif jatuh */
-(function(){var KEL=['kelopak-sakura-1.webp','kelopak-sakura-2.webp','kelopak-sakura-3.webp','kelopak-sakura-4.webp','bunga-sakura-1.webp','bunga-sakura-2.webp','bunga-sakura-3.webp'];for(var i=0;i<8;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*92)+'vw';d.style.backgroundImage='url(./img/'+KEL[i%KEL.length]+')';d.style.backgroundSize='contain';d.style.backgroundRepeat='no-repeat';d.style.backgroundPosition='center';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
+(function(){var KEL=['kelopak-sakura-1.webp','kelopak-sakura-2.webp','kelopak-sakura-3.webp','kelopak-sakura-4.webp','bunga-sakura-1.webp','bunga-sakura-2.webp','bunga-sakura-3.webp'];for(var i=0;i<8;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*8;d.style.width=s+'px';d.style.height=s+'px';d.style.left=((i%2)?(90+Math.random()*6):(Math.random()*8))+'vw';d.style.backgroundImage='url(./img/'+KEL[i%KEL.length]+')';d.style.backgroundSize='contain';d.style.backgroundRepeat='no-repeat';d.style.backgroundPosition='center';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik" hidden>♪</button>
