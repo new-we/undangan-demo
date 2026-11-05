@@ -214,7 +214,7 @@ section{overflow-x:clip}
 .cover::after{content:"";position:absolute;bottom:0;right:0;width:80%;max-width:520px;aspect-ratio:1;background:url(./img/sudut-sakura-kanan-bawah.webp) bottom right/contain no-repeat;z-index:3;pointer-events:none}
 .cover-inner>*{position:relative;z-index:1}
 .cover-inner>.torii{z-index:0}
-.torii{position:absolute;top:8%;left:50%;width:62%;margin-left:-31%;opacity:.9;pointer-events:none}
+.torii{position:absolute;top:5%;left:50%;width:56%;margin-left:-28%;opacity:.35;pointer-events:none}
 @keyframes ayun{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
 .lampion-cover{position:absolute;top:0;width:56px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:ayun 4s ease-in-out infinite alternate}
 .lampion-cover.l{left:12px}
@@ -239,6 +239,8 @@ section{overflow-x:clip}
 .crane{width:54px;height:auto}
 .orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br{transform:none}
 .orn-pojok.tl,.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br{animation-name:sway15}
+.event-card .orn-pojok.tl{width:24vw;max-width:96px}
+.event-card h3,.event-card .e-date,.event-card .e-time,.event-card .e-place,.event-card .btn{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){.sakura-corner,.lampion-cover,.lampion-inner,.tepi-sakura{animation:none!important}}
 </style>
 </head>
