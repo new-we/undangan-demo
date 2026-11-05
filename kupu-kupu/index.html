@@ -28,6 +28,11 @@ section>*{position:relative;z-index:2}
 .ornw{position:absolute;pointer-events:none;z-index:1;opacity:0;transition:opacity 2s ease}
 .ornw.in{opacity:var(--w,1)}
 .ornw img{width:100%;display:block}
+/* background bunga tepi: strip tipis di luar kolom teks, kanan-kiri bergantian dari atas sampai bawah */
+.edge{position:absolute;width:70px;pointer-events:none;z-index:1}
+.edge.l{left:-45px}
+.edge.r{right:-45px}
+.edge img{width:100%;display:block}
 .orn-corner{width:min(58%,280px)}
 .orn-corner.tl{top:0;left:0}
 .orn-corner.br{bottom:0;right:0;transform:rotate(180deg)}
@@ -225,6 +230,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= SALAM ================= -->
   <section id="salam">
+    <span class="edge l" style="top:0"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <p class="body reveal">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyempurnakan separuh agama kami dalam ikatan suci pernikahan. Merupakan suatu kehormatan dan kebahagiaan bagi kami beserta keluarga apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
     <div class="divider reveal"><img class="pulse" src="./img/bunga.webp" alt=""></div>
     <p class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--plum)">Assalamu&rsquo;alaikum Wr. Wb.</p>
@@ -255,6 +261,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= AYAT ================= -->
   <section id="ayat">
+    <span class="edge l" style="top:0"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <span class="ornw wash" style="top:50%;left:50%;width:130%;transform:translate(-50%,-50%)"><img src="./img/sudut.webp" alt=""></span>
     <span class="ornw orn-ranting" style="bottom:-90px;right:-120px;transform:rotate(200deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
     <p class="body reveal" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;line-height:1.9">&ldquo;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.&rdquo;</p>
@@ -263,6 +270,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= OUR STORY ================= -->
   <section id="story">
+    <span class="edge r" style="bottom:0"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <span class="ornw orn-kupu fly" style="top:20px;left:4%;animation-delay:-9s"><img class="flap" src="./img/kupu-1.webp" alt=""></span>
     <span class="ornw orn-kupu fly" style="bottom:30px;right:4%;width:64px;animation-delay:-2s"><img class="flap" src="./img/kupu-3.webp" alt=""></span>
     <p class="eyebrow reveal">Kisah Kami</p>
@@ -283,6 +291,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= GALERI ================= -->
   <section id="galeri">
+    <span class="edge l" style="top:0"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <span class="ornw orn-kupu fly" style="top:-8px;right:2%;width:56px;animation-delay:-11s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
     <p class="eyebrow reveal">Momen Bahagia</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Galeri</h2>
@@ -324,6 +333,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= HADIAH ================= -->
   <section id="hadiah">
+    <span class="edge l" style="top:0"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <span class="ornw orn-ranting" style="bottom:-70px;right:-140px;transform:rotate(200deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
     <p class="eyebrow reveal">Tanda Kasih</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Titip Hadiah</h2>
@@ -335,6 +345,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= RSVP ================= -->
   <section id="rsvp">
+    <span class="edge r" style="top:60px"><img class="sway-slow" src="./img/bunga.webp" alt=""></span>
     <span class="ornw orn-kupu fly" style="top:10px;left:6%;width:72px;animation-delay:-6s"><img class="flap" src="./img/kupu-1.webp" alt=""></span>
     <p class="eyebrow reveal">Doa &amp; Ucapan</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">RSVP &amp; Ucapan</h2>
