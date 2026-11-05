@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="locked">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -16,7 +16,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:#F6E9E4;font-family:'Jost',sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}
-body.locked{overflow:hidden}
+html.locked,body.locked{overflow:hidden;overscroll-behavior:none}
 .wrap{position:relative;max-width:440px;margin:0 auto;background:linear-gradient(180deg,#FFF9F6 0%,#FDF0EC 34%,#F7E6F0 66%,#FFF9F6 100%);overflow:hidden;box-shadow:0 0 40px rgba(91,58,74,.18);min-height:100svh}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -67,15 +67,6 @@ section>*{position:relative;z-index:2}
   50%{transform:translate(0,1.8rem) rotate(0deg)}
   75%{transform:translate(-3rem,1rem) rotate(-5deg)}
   100%{transform:translate(0,0) rotate(0deg)}
-}
-.fly-across{animation:flyAcross 22s linear infinite;z-index:3;opacity:1}
-.fly-across.paused{animation-play-state:paused}
-@keyframes flyAcross{
-  0%{left:-14%;transform:translateY(0) rotate(0deg)}
-  25%{left:30%;transform:translateY(-1.2rem) rotate(4deg)}
-  50%{left:58%;transform:translateY(.8rem) rotate(0deg)}
-  75%{left:82%;transform:translateY(-1rem) rotate(-4deg)}
-  100%{left:104%;transform:translateY(0) rotate(0deg)}
 }
 .flap{animation:flap 1.6s ease-in-out infinite;transform-origin:50% 50%}
 @keyframes flap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.88)}}
@@ -200,7 +191,6 @@ footer a{color:var(--gold);text-decoration:none}
     <span class="ornw cover-kupu fly" style="width:76px;top:8%;right:10%"><img class="flap" src="./img/kupu-1.webp" alt=""></span>
     <span class="ornw cover-kupu fly" style="width:58px;bottom:22%;left:7%;animation-delay:-4s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
     <span class="ornw cover-kupu fly" style="width:46px;top:24%;left:12%;animation-delay:-7s"><img class="flap" src="./img/kupu-3.webp" alt=""></span>
-    <span class="ornw fly-across" style="width:52px;top:6%"><img class="flap" src="./img/kupu-3.webp" alt=""></span>
     <div class="cover-pita" id="cover-pita"><img src="./img/pita.webp" alt=""></div>
     <div class="cover-card">
       <p class="eyebrow">The Wedding of</p>
@@ -306,7 +296,7 @@ footer a{color:var(--gold);text-decoration:none}
   <section id="acara">
     <span class="ornw orn-ranting" style="top:-30px;left:-120px;transform:rotate(15deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
     <span class="ornw orn-bunga" style="top:20px;right:0"><img class="sway" src="./img/bunga.webp" alt=""></span>
-    <span class="ornw fly-across" style="width:52px;top:60%"><img class="flap" src="./img/kupu-1.webp" alt=""></span>
+    <span class="ornw orn-kupu fly" style="top:55%;right:6%;width:64px;animation-delay:-8s"><img class="flap" src="./img/kupu-1.webp" alt=""></span>
     <p class="eyebrow reveal">Rangkaian Acara</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Save The Date</h2>
     <div class="card reveal">
@@ -470,12 +460,14 @@ footer a{color:var(--gold);text-decoration:none}
     },25);
   }
   btnAuto.addEventListener('click',function(){
+    if(!opened){ document.getElementById('btn-envelope').click(); return; }
     if(!autoOn){ startAuto(); toast('Auto Scroll aktif'); return; }
     autoPaused=!autoPaused; autoUI();
     toast(autoPaused?'Auto Scroll dijeda':'Auto Scroll lanjut');
   });
   $$('[data-goto]').forEach(function(b){
     b.addEventListener('click',function(){
+      if(!opened){ document.getElementById('btn-envelope').click(); return; }
       var t=document.getElementById(b.getAttribute('data-goto'));
       if(t){ autoPaused=true; autoUI(); t.scrollIntoView({behavior:'smooth',block:'start'}); toast('Auto Scroll dijeda — ketuk tombol Auto Scroll untuk lanjut'); }
     });
@@ -489,7 +481,7 @@ footer a{color:var(--gold);text-decoration:none}
     cover.classList.add('away');
     setTimeout(function(){
       if(cover.parentNode) cover.parentNode.removeChild(cover);
-      document.body.classList.remove('locked');
+      document.body.classList.remove('locked'); document.documentElement.classList.remove('locked');
       if(!musicOn) toggleMusic();
       startAuto();
     },500);
