@@ -101,12 +101,12 @@ footer .credit{font-size:11px;color:var(--muted);margin-top:24px;letter-spacing:
 .cloud{position:fixed;z-index:2;pointer-events:none;border-radius:50%;filter:blur(12px);
   background:radial-gradient(ellipse,rgba(255,255,255,.8),rgba(255,255,255,0) 70%);
   animation:cloudDrift var(--t,65s) linear infinite}
-@keyframes cloudDrift{from{transform:translateX(-32vw)}to{transform:translateX(118vw)}}
+@keyframes cloudDrift{from{transform:translateX(-32vw)}to{transform:translateX(100vw)}}
 .crane{position:fixed;z-index:5;pointer-events:none;opacity:.92;animation:craneFly var(--d,40s) linear infinite;animation-delay:var(--dl,0s)}
 .crane .cw{transform-box:fill-box;transform-origin:right center;animation:cflap .55s ease-in-out infinite alternate}
 .crane .cw2{transform-box:fill-box;transform-origin:left center;animation:cflap .55s ease-in-out infinite alternate}
 @keyframes cflap{from{transform:scaleY(1)}to{transform:scaleY(.3)}}
-@keyframes craneFly{0%{transform:translate(-14vw,32vh)}25%{transform:translate(20vw,25vh)}50%{transform:translate(55vw,33vh)}75%{transform:translate(85vw,27vh)}100%{transform:translate(120vw,31vh)}}
+@keyframes craneFly{0%{transform:translate(-14vw,32vh)}25%{transform:translate(20vw,25vh)}50%{transform:translate(55vw,33vh)}75%{transform:translate(85vw,27vh)}100%{transform:translate(100vw,31vh)}}
 
 /* Kolom ucapan (DEMO: tanpa penyimpanan) */
 .ucapan-list{margin-top:20px;display:flex;flex-direction:column;gap:12px;text-align:left}
@@ -153,7 +153,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 @media(min-width:760px){.mu-edge{display:block;position:fixed;width:120px;height:120px;pointer-events:none;z-index:3;animation:muSway 4.4s ease-in-out infinite alternate;transform-origin:top center}
 .mu-edge.l{left:6px;top:22%}
 .mu-edge.r{right:6px;top:56%;animation-name:muSwayR}}
-.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/ornamen.svg) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
+.mu-drop{position:fixed;top:-10vh;z-index:999;pointer-events:none;background:url(./img/kelopak-sakura-1.webp) center/contain no-repeat;opacity:.8;animation:muFall linear infinite}
 
 
 
@@ -195,6 +195,52 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 .orn-header{transform-origin:top center;animation:sway15 7s ease-in-out infinite alternate;animation-delay:-1s;}
 @media (prefers-reduced-motion:reduce){.orn-pojok.tl,.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br,.orn-header{animation:none!important}}
 </style>
+
+<style>
+/* ===== SAKURA PREMIUM 2026-11-05: set WebP 21 file, palet gading, perbaikan overflow ===== */
+html{overflow-x:clip;max-width:100vw}
+body{overflow-x:clip;max-width:100vw}
+.wrap{overflow-x:clip}
+section{overflow-x:clip}
+:root{
+  --bg:#fdf8ef;
+  --bg2:#f6ead6;
+  --card:#fffdf7;
+  --line:#ecdcc3;
+  --cover-bg:linear-gradient(165deg,#fdf7ec,#f9e9d8 60%,#f3dcc8);
+}
+.cover{overflow:hidden}
+.cover::before{content:"";position:absolute;top:0;left:0;width:80%;max-width:520px;aspect-ratio:1;background:url(./img/sudut-sakura-kiri-atas.webp) top left/contain no-repeat;z-index:3;pointer-events:none}
+.cover::after{content:"";position:absolute;bottom:0;right:0;width:80%;max-width:520px;aspect-ratio:1;background:url(./img/sudut-sakura-kanan-bawah.webp) bottom right/contain no-repeat;z-index:3;pointer-events:none}
+.cover-inner>*{position:relative;z-index:1}
+.cover-inner>.torii{z-index:0}
+.torii{position:absolute;top:8%;left:50%;width:62%;margin-left:-31%;opacity:.9;pointer-events:none}
+@keyframes ayun{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.lampion-cover{position:absolute;top:0;width:56px;height:auto;z-index:3;pointer-events:none;transform-origin:top center;animation:ayun 4s ease-in-out infinite alternate}
+.lampion-cover.l{left:12px}
+.lampion-cover.r{right:12px;animation-duration:5s;animation-delay:-1.5s}
+.lampion-inner{position:fixed;top:0;width:52px;height:auto;z-index:6;pointer-events:none;transform-origin:top center;animation:ayun 4.5s ease-in-out infinite alternate}
+.lampion-inner.l{left:2%}
+.lampion-inner.r{right:2%;animation-duration:5.5s;animation-delay:-2s}
+.sakura-corner{position:fixed;top:-12px;width:150px;height:150px;z-index:3;pointer-events:none;animation:sway15 6s ease-in-out infinite alternate}
+.sakura-corner.tl{left:-12px;transform-origin:top left}
+.sakura-corner.tr{right:-12px;transform-origin:top right;animation-delay:-3s}
+.tepi-sakura{display:none}
+@media(min-width:760px){.tepi-sakura{display:block;position:fixed;top:50%;width:96px;height:auto;z-index:3;pointer-events:none;transform:translateY(-50%)}
+.tepi-sakura.l{left:6px}
+.tepi-sakura.r{right:6px}}
+.pembatas{height:56px;background:url(./img/seigaiha-emas.webp) center/cover no-repeat;margin:0 auto}
+.divider{background:linear-gradient(90deg,transparent,#c9a227,transparent)}
+.divider::before{background:#c9a227;box-shadow:0 0 0 3px var(--bg)}
+.foto-wrap{position:relative;display:inline-block;margin:10px 0 20px}
+.foto-wrap::before{content:"";position:absolute;inset:-30%;background:url(./img/bingkai-foto-sakura.webp) center/contain no-repeat;z-index:2;pointer-events:none}
+.foto-wrap .avatar{position:relative;z-index:1}
+.hanko{display:block;width:72px;height:auto;margin:10px auto 0;transform:rotate(-6deg)}
+.crane{width:54px;height:auto}
+.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br{transform:none}
+.orn-pojok.tl,.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br{animation-name:sway15}
+@media (prefers-reduced-motion:reduce){.sakura-corner,.lampion-cover,.lampion-inner,.tepi-sakura{animation:none!important}}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -202,20 +248,25 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
 <div class="cloud" style="top:10vh;left:0;width:220px;height:70px;--t:70s"></div>
 <div class="cloud" style="top:26vh;left:0;width:160px;height:52px;--t:55s;animation-delay:-30s"></div>
 <div class="cloud" style="top:44vh;left:0;width:190px;height:60px;--t:80s;animation-delay:-52s"></div>
-<div class="crane" style="top:0;left:0;--d:42s;--dl:-8s"><svg width="54" height="36" viewBox="0 0 54 36"><path d="M27 32 L32 13 L27 5 L22 13 Z" fill="#ffffff"/><path class="cw" d="M27 13 L5 5 L21 17 Z" fill="rgba(255,255,255,.92)"/><path class="cw2" d="M27 13 L49 5 L33 17 Z" fill="rgba(255,255,255,.92)"/></svg></div>
-<div class="crane" style="top:0;left:0;--d:55s;--dl:-33s;transform:scale(.7)"><svg width="54" height="36" viewBox="0 0 54 36"><path d="M27 32 L32 13 L27 5 L22 13 Z" fill="#ffe9f0"/><path class="cw" d="M27 13 L5 5 L21 17 Z" fill="rgba(255,233,240,.92)"/><path class="cw2" d="M27 13 L49 5 L33 17 Z" fill="rgba(255,233,240,.92)"/></svg></div>
+<img class="crane" src="./img/bangau-origami-1.webp" alt="" style="--d:42s;--dl:-8s" loading="lazy">
+<img class="crane" src="./img/bangau-origami-2.webp" alt="" style="--d:55s;--dl:-33s;width:38px" loading="lazy">
 
-<div class="branch tl"><svg width="220" height="160" viewBox="0 0 220 160"><path d="M-10,150 C60,120 120,90 210,20" stroke="#7a4a3a" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40,132 C80,110 110,95 150,60" stroke="#7a4a3a" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#f7b8cd"><circle cx="205" cy="22" r="13"/><circle cx="188" cy="34" r="10"/><circle cx="218" cy="40" r="9"/><circle cx="150" cy="62" r="11"/><circle cx="132" cy="74" r="8"/><circle cx="90" cy="104" r="10"/><circle cx="70" cy="114" r="8"/></g><g fill="#fde3ec"><circle cx="200" cy="20" r="5"/><circle cx="146" cy="60" r="4"/><circle cx="86" cy="102" r="4"/></g></svg></div>
-<div class="branch tr"><svg width="220" height="160" viewBox="0 0 220 160"><path d="M-10,150 C60,120 120,90 210,20" stroke="#7a4a3a" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40,132 C80,110 110,95 150,60" stroke="#7a4a3a" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#f7b8cd"><circle cx="205" cy="22" r="13"/><circle cx="188" cy="34" r="10"/><circle cx="218" cy="40" r="9"/><circle cx="150" cy="62" r="11"/><circle cx="132" cy="74" r="8"/><circle cx="90" cy="104" r="10"/><circle cx="70" cy="114" r="8"/></g><g fill="#fde3ec"><circle cx="200" cy="20" r="5"/><circle cx="146" cy="60" r="4"/><circle cx="86" cy="102" r="4"/></g></svg></div>
-<div class="lantern" style="left:10%;animation-duration:5.2s"><span class="cord"></span><div class="cap"></div><div class="lbody"></div><span class="tassel"></span></div>
-<div class="lantern" style="left:46%;animation-duration:6.6s;animation-delay:-2.2s"><span class="cord" style="height:84px"></span><div class="cap"></div><div class="lbody" style="width:44px;height:56px"></div><span class="tassel"></span></div>
-<div class="lantern" style="left:80%;animation-duration:4.8s;animation-delay:-1.1s"><span class="cord" style="height:36px"></span><div class="cap"></div><div class="lbody" style="width:64px;height:80px"></div><span class="tassel"></span></div>
+<img class="sakura-corner tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
+<img class="sakura-corner tr" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
+<img class="lampion-inner l" src="./img/lampion-merah.webp" alt="" loading="lazy">
+<img class="lampion-inner r" src="./img/lampion-krem.webp" alt="" loading="lazy">
 
+
+
+<img class="tepi-sakura l" src="./img/tepi-sakura-kiri.webp" alt="" loading="lazy">
+<img class="tepi-sakura r" src="./img/tepi-sakura-kanan.webp" alt="" loading="lazy">
 
 <div class="cover" id="cover">
+  <img class="lampion-cover l" src="./img/lampion-merah.webp" alt="" loading="lazy">
+  <img class="lampion-cover r" src="./img/lampion-krem.webp" alt="" loading="lazy">
   <div class="cover-inner">
     <p class="cover-eyebrow">Undangan Pernikahan</p>
-    <img class="orn-header" src="./img/sakura_header.webp" alt="" loading="lazy">
+        <img class="torii" src="./img/torii.webp" alt="" loading="lazy">
     <h1 class="cover-names">Raka &amp; Sinta</h1>
     <p class="cover-date">Senin, 21 Desember 2026</p>
     <div class="cover-guest">
@@ -234,25 +285,29 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <div class="divider"></div>
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
     <div class="divider"></div>
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
+  </section>
+<div class="pembatas" aria-hidden="true"></div>
+<section class="reveal">
     <h2 class="section-title">Mempelai</h2>
     <div class="person">
-      <div class="avatar">R</div>
+      <div class="foto-wrap"><div class="avatar">R</div></div>
       <h3>Raka Pratama</h3>
       <p>Putra dari Bapak H. Bambang Sutrisno<br>&amp; Ibu Hj. Sri Wahyuni</p>
     </div>
     <div class="amp">&amp;</div>
+    <img class="hanko" src="./img/stempel-hanko.webp" alt="" loading="lazy">
     <div class="person">
-      <div class="avatar">S</div>
+      <div class="foto-wrap"><div class="avatar">S</div></div>
       <h3>Sinta Maharani</h3>
       <p>Putri dari Bapak H. Agus Wijaya<br>&amp; Ibu Hj. Dewi Lestari</p>
     </div>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <h2 class="section-title">Save the Date</h2>
     <p class="date-big">Senin, 21 Desember 2026</p>
@@ -265,17 +320,17 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     </div>
     <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Raka+%26+Sinta&amp;dates=20261221T010000Z/20261221T060000Z" target="_blank" rel="noopener">Simpan Tanggal</a>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <h2 class="section-title">Waktu &amp; Tempat</h2>
-    <div class="event-card"><img class="orn-pojok tl" src="./img/sakura_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sakura_pojok.webp" alt="" loading="lazy">
+    <div class="event-card"><img class="orn-pojok tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sudut-sakura-kanan-bawah.webp" alt="" loading="lazy">
       <h3>Akad Nikah</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 08.00 - 10.00 WIB</p>
       <p class="e-place">Kediaman Mempelai Wanita<br>Jl. Melati No. 12, Sidoarjo</p>
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Jl.+Melati+Sidoarjo" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
-    <div class="event-card"><img class="orn-pojok tl" src="./img/sakura_pojok.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sakura_pojok.webp" alt="" loading="lazy">
+    <div class="event-card"><img class="orn-pojok tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy"><img class="orn-pojok br" src="./img/sudut-sakura-kanan-bawah.webp" alt="" loading="lazy">
       <h3>Resepsi</h3>
       <p class="e-date">Senin, 21 Desember 2026</p>
       <p class="e-time">Pukul 11.00 - 13.00 WIB</p>
@@ -283,7 +338,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <a class="btn small" href="https://www.google.com/maps/search/?api=1&amp;query=Gedung+Serbaguna+Mojokerto" target="_blank" rel="noopener">Lihat Lokasi</a>
     </div>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <h2 class="section-title">Galeri</h2>
     <p class="muted">Momen bahagia kami</p>
@@ -296,7 +351,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div style="background:linear-gradient(135deg,#f6b8d0,#e88cae)">R &amp; S</div>
     </div>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <p class="eyebrow">Kisah Kami</p>
     <h2 class="section-title">Love Story</h2>
@@ -307,7 +362,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <div class="ls-item"><span class="ls-year">2026</span><h3>Menuju Pernikahan</h3><p>Dengan restu kedua keluarga, kami memantapkan hati untuk mengikat janji suci dan memulai babak baru bersama.</p></div>
     </div>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <h2 class="section-title">Amplop Digital</h2>
     <p class="muted">Doa restu Anda merupakan hadiah terindah bagi kami. Apabila berkenan memberikan tanda kasih, kami sediakan dengan penuh terima kasih:</p>
@@ -328,7 +383,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
       <p class="an">Jl. Melati No. 12, Sidoarjo,<br>Jawa Timur</p>
     </div>
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal">
     <h2 class="section-title">RSVP &amp; Ucapan</h2>
     <p class="muted">Konfirmasi kehadiran dan titipkan doa restu terbaik Anda</p>
@@ -350,7 +405,7 @@ section:nth-of-type(even)::before{right:auto;left:14px;transform:scaleX(-1)}
     <p class="ucapan-note">Demo: ucapan yang dikirim hanya tampil di layar ini dan tidak tersimpan.</p>
 
   </section>
-<img class="orn-pemisah" src="./img/sakura_pemisah.webp" alt="" loading="lazy">
+<div class="pembatas" aria-hidden="true"></div>
 <footer class="reveal">
     <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
     <p class="thanks">Terima kasih</p>
@@ -456,7 +511,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   window.addEventListener("resize", resize); resize();
   function rnd(a,b){ return a + Math.random()*(b-a); }
   function pick(a){ return a[(Math.random()*a.length)|0]; }
-  var SYSTEMS = [{"type":"petals","count":64,"colors":["#f9a8c9","#f7c1d9","#ffffff","#f28bb4","#fbd3e3"]}];
+  var SYSTEMS = [{"type":"petals","count":48,"colors":["#f9a8c9","#f7c1d9","#ffffff","#f28bb4","#fbd3e3"]}];
   var parts = [];
   function make(sys, init){
     var p = {sys: sys, c: pick(sys.colors), seed: Math.random()*6.28};
@@ -589,7 +644,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   function mk(i){return{x:Math.random()*W,y:i?Math.random()*H:-16,s:Math.random()*7+4,
     vy:Math.random()*1+0.5,vx:(Math.random()-0.5)*0.6,rot:Math.random()*6.28,
     rsp:(Math.random()-0.5)*0.06,col:["#f9c6d3","#fbdce4","#f4a9c0"][Math.random()*3|0]}}
-  for(var i=0;i<30;i++)P.push(mk(true));
+  for(var i=0;i<24;i++)P.push(mk(true));
   (function step(){t+=0.016;x.clearRect(0,0,W,H);
     var gust=Math.pow(Math.max(0,Math.sin(t*0.35)),3)*3.2;
     for(var k=0;k<P.length;k++){var p=P[k];p.y+=p.vy;p.x+=p.vx+gust;p.rot+=p.rsp;
@@ -620,7 +675,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
 </script>
 <script>
 /* MU-UPGRADE2: partikel motif jatuh */
-(function(){for(var i=0;i<12;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*100)+'vw';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
+(function(){var KEL=['kelopak-sakura-1.webp','kelopak-sakura-2.webp','kelopak-sakura-3.webp','kelopak-sakura-4.webp','bunga-sakura-1.webp','bunga-sakura-2.webp','bunga-sakura-3.webp'];for(var i=0;i<8;i++){var d=document.createElement('div');d.className='mu-drop';var s=14+Math.random()*14;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(Math.random()*92)+'vw';d.style.backgroundImage='url(./img/'+KEL[i%KEL.length]+')';d.style.backgroundSize='contain';d.style.backgroundRepeat='no-repeat';d.style.backgroundPosition='center';d.style.animationDuration=(8+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';document.body.appendChild(d);}})();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik" hidden>♪</button>
