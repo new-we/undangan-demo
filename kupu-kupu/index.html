@@ -210,7 +210,7 @@ footer a{color:var(--gold);text-decoration:none}
   <!-- ================= COUNTDOWN ================= -->
   <section id="countdown">
     <span class="ornw orn-ranting" style="top:-70px;right:-120px;transform:rotate(160deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
-    <span class="ornw orn-bunga" style="top:34px;left:2px"><img class="sway" src="./img/bunga.webp" alt=""></span>
+    <span class="ornw orn-bunga" style="top:120px;left:0;width:64px"><img class="sway" src="./img/bunga.webp" alt=""></span>
     <p class="eyebrow reveal">Save The Date</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Menghitung Hari Bahagia</h2>
     <div class="cd reveal" id="cd">
@@ -282,7 +282,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= GALERI ================= -->
   <section id="galeri">
-    <span class="ornw orn-kupu fly" style="top:6px;right:8%;width:72px;animation-delay:-11s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
+    <span class="ornw orn-kupu fly" style="top:-8px;right:2%;width:56px;animation-delay:-11s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
     <span class="ornw orn-bunga" style="bottom:10px;left:0"><img class="sway" src="./img/bunga.webp" alt=""></span>
     <p class="eyebrow reveal">Momen Bahagia</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Galeri</h2>
@@ -324,7 +324,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ================= HADIAH ================= -->
   <section id="hadiah">
-    <span class="ornw orn-ranting" style="top:-70px;right:-120px;transform:rotate(170deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
+    <span class="ornw orn-ranting" style="bottom:-70px;right:-140px;transform:rotate(200deg)"><img class="sway-slow" src="./img/ranting.webp" alt=""></span>
     <p class="eyebrow reveal">Tanda Kasih</p>
     <h2 class="stitle reveal rv-zoom" style="margin-top:8px">Titip Hadiah</h2>
     <p class="body reveal" style="margin-top:8px">Kehadiran Anda adalah hadiah terindah. Namun bila berkenan memberikan tanda kasih, kami sediakan:</p>
@@ -351,10 +351,9 @@ footer a{color:var(--gold);text-decoration:none}
   <div class="pita-band reveal"><img src="./img/pita.webp" alt=""></div>
 
   <!-- ================= PENUTUP ================= -->
-  <section class="closing" id="closing">
-    <span class="ornw orn-corner tl" style="width:min(42%,180px)"><img class="sway-slow" src="./img/sudut.webp" alt=""></span>
-    <span class="ornw orn-corner br" style="width:min(42%,180px)"><img class="sway-slow" src="./img/sudut.webp" alt=""></span>
-    <span class="ornw orn-kupu fly" style="top:2px;right:8%;width:64px;animation-delay:-3s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
+  <section class="closing" id="closing" style="padding-top:72px">
+    <span class="ornw orn-bunga" style="top:6px;left:8%;width:48px"><img class="sway" src="./img/bunga.webp" alt=""></span>
+    <span class="ornw orn-kupu fly" style="top:6px;right:8%;width:48px;animation-delay:-3s"><img class="flap" src="./img/kupu-2.webp" alt=""></span>
     <p class="body reveal">Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.</p>
     <p class="reveal" style="margin-top:18px">Kami yang berbahagia,</p>
     <p class="script reveal" style="font-size:44px;margin-top:6px">Raka &amp; Sinta</p>
@@ -409,12 +408,12 @@ footer a{color:var(--gold);text-decoration:none}
   var io2=new IntersectionObserver(function(es){
     es.forEach(function(e){
       var t=e.target;
-      if(t.classList.contains('sway')||t.classList.contains('sway-slow')||t.classList.contains('fly')||t.classList.contains('fly-across')){
+      if(t.classList.contains('sway')||t.classList.contains('sway-slow')||t.classList.contains('fly')){
         t.classList.toggle('paused', !e.isIntersecting);
       }
     });
   },{threshold:0});
-  $$('.sway,.sway-slow,.fly,.fly-across').forEach(function(el){ io2.observe(el); });
+  $$('.sway,.sway-slow,.fly').forEach(function(el){ io2.observe(el); });
 
   /* toast */
   var toastEl=$('#toast'), toastT=null;
