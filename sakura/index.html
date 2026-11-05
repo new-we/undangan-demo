@@ -241,6 +241,26 @@ section{overflow-x:clip}
 .orn-pojok.tl,.orn-pojok.tr,.orn-pojok.bl,.orn-pojok.br{animation-name:sway15}
 @media (prefers-reduced-motion:reduce){.sakura-corner,.lampion-cover,.lampion-inner,.tepi-sakura{animation:none!important}}
 </style>
+<style>
+/* ===== SAKURA FIX 2026-11-05: cover seperti foto acuan + ornamen dalam ikut scroll di belakang tulisan ===== */
+/* COVER: sudut kecil di belakang kartu */
+.cover::before{width:min(55%,260px);z-index:0}
+.cover::after{width:min(55%,260px);z-index:0}
+/* COVER: torii baris sendiri antara eyebrow dan nama */
+.cover-inner>.torii{z-index:1}
+.torii{display:block;position:relative;top:auto;left:auto;width:34%;margin:0 auto 6px;opacity:1}
+/* DALAM: bunga + lampion agak diperkecil, tetap fixed (ikut scroll) */
+.sakura-corner{width:120px;height:120px;top:-10px}
+.sakura-corner.tl{left:-10px}
+.sakura-corner.tr{right:-10px}
+.lampion-inner{width:42px}
+/* DALAM: ornamen di belakang tulisan, di depan latar kartu (di dalam konteks .wrap) */
+.sakura-corner,.lampion-inner{z-index:1}
+.wrap section h1,.wrap section h2,.wrap section h3,.wrap section h4,.wrap section p,.wrap section li,.wrap section span,.wrap section a,.wrap section button,.wrap section label,.wrap section input,.wrap section textarea,.wrap section select,.wrap section img:not(.orn-pojok),.wrap section .countdown div{position:relative;z-index:2}
+.wrap .orn-pojok{z-index:2}
+.wrap .gallery div::after{z-index:3}
+footer *{position:relative;z-index:2}
+</style>
 </head>
 <body>
 <canvas id="fx"></canvas>
@@ -251,10 +271,6 @@ section{overflow-x:clip}
 <img class="crane" src="./img/bangau-origami-1.webp" alt="" style="--d:42s;--dl:-8s" loading="lazy">
 <img class="crane" src="./img/bangau-origami-2.webp" alt="" style="--d:55s;--dl:-33s;width:38px" loading="lazy">
 
-<img class="sakura-corner tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
-<img class="sakura-corner tr" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
-<img class="lampion-inner l" src="./img/lampion-merah.webp" alt="" loading="lazy">
-<img class="lampion-inner r" src="./img/lampion-krem.webp" alt="" loading="lazy">
 
 
 
@@ -279,6 +295,10 @@ section{overflow-x:clip}
 </div>
 
 <div class="wrap">
+  <img class="sakura-corner tl" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
+  <img class="sakura-corner tr" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
+  <img class="lampion-inner l" src="./img/lampion-merah.webp" alt="" loading="lazy">
+  <img class="lampion-inner r" src="./img/lampion-krem.webp" alt="" loading="lazy">
   <section class="hero reveal">
     <p class="eyebrow">The Wedding of</p>
     <h1 class="names">Raka &amp; Sinta</h1>
