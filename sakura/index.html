@@ -245,14 +245,14 @@ section{overflow-x:clip}
 
 <style>
 /* ===== SAKURA FIX LAPISAN 2026-11-05: ornamen di belakang teks, animasi zona tepi ===== */
-.section-ayat{padding-top:calc(min(55%,260px)*.55)}
-.ayat-corner{position:absolute;top:0;width:min(55%,260px);height:auto;z-index:-1;pointer-events:none}
-.ayat-corner.l{left:0}
-.ayat-corner.r{right:0}
-.bangau{position:absolute;top:50%;width:34px;height:auto;opacity:.85;z-index:-1;pointer-events:none;transform:translateY(-50%)}
-.bangau.kiri{left:2%}
-.bangau.kanan{right:2%}
 .mu-drop{opacity:.7}
+</style>
+
+<style>
+/* ===== SAKURA AYAT 2026-11-05: ornamen alur normal, tidak mungkin menimpa teks ===== */
+.orn-atas{display:flex;justify-content:space-between;height:110px;margin:0 -10px 8px;overflow:hidden;pointer-events:none}
+.orn-atas img{width:34%;object-fit:cover;object-position:top}
+.salam{position:relative;z-index:2}
 </style>
 </head>
 <body>
@@ -292,13 +292,12 @@ section{overflow-x:clip}
     <div class="divider"></div>
     <p class="date">Senin, 21 Desember 2026</p>
   </section>
-<div class="pembatas" aria-hidden="true"></div>
 <section class="reveal section-ayat">
-    <img class="ayat-corner l" src="./img/sudut-sakura-kiri-atas.webp" alt="" loading="lazy">
-    <img class="ayat-corner r" src="./img/sudut-sakura-kanan-atas.webp" alt="" loading="lazy">
-    <img class="bangau kiri" src="./img/bangau-origami-1.webp" alt="" loading="lazy">
-    <img class="bangau kanan" src="./img/bangau-origami-2.webp" alt="" loading="lazy">
-    <p class="eyebrow">Assalamu'alaikum Wr. Wb.</p>
+    <div class="orn-atas" aria-hidden="true">
+      <img src="./img/sudut-sakura-kiri-atas.webp" alt="">
+      <img src="./img/sudut-sakura-kanan-atas.webp" alt="">
+    </div>
+    <h3 class="eyebrow salam">Assalamu'alaikum Wr. Wb.</h3>
     <div class="divider"></div>
     <p class="verse">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. (QS. Ar-Rum: 21)</p>
   </section>
