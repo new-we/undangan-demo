@@ -113,8 +113,12 @@
     50%{transform:translateX(-50%) scale(1.04);opacity:1}}
 
   /* ===== teratai mengapung di dasar section ===== */
-  .teratai{position:absolute;bottom:6px;left:6%;width:92px;z-index:0;pointer-events:none;
+  .teratai{position:absolute;bottom:6px;left:6%;width:104px;z-index:3;pointer-events:none;
+    filter:drop-shadow(0 6px 12px rgba(61,79,97,.28));
     animation:apung 6s ease-in-out infinite alternate}
+  .daun-teratai{position:absolute;bottom:2px;left:3%;width:82px;z-index:2;pointer-events:none;
+    filter:drop-shadow(0 4px 8px rgba(61,79,97,.22));
+    animation:apung 6s ease-in-out infinite alternate;animation-delay:-3s}
   @keyframes apung{from{transform:translateY(0)}to{transform:translateY(-5px)}}
 
   /* ===== galeri ornamen ===== */
@@ -301,6 +305,7 @@
 <section id="mempelai">
   <div class="sec-fog" aria-hidden="true"></div>
   <img class="teratai" src="img/teratai-1.webp" alt="" loading="lazy" decoding="async">
+  <img class="daun-teratai" src="img/daun-teratai-1.webp" alt="" loading="lazy" decoding="async">
   <div class="wrap">
     <div class="label reveal">MEMPELAI</div>
     <h2 class="sec reveal">Dua hati <em>menjadi satu</em></h2>
@@ -364,6 +369,7 @@
 <section id="acara" class="alt">
   <div class="sec-fog" aria-hidden="true"></div>
   <img class="teratai" src="img/teratai-2.webp" alt="" loading="lazy" decoding="async" style="left:auto;right:6%">
+  <img class="daun-teratai" src="img/daun-teratai-2.webp" alt="" loading="lazy" decoding="async" style="left:auto;right:3%">
   <div class="wrap">
     <div class="label reveal">WAKTU &amp; TEMPAT</div>
     <h2 class="sec reveal">Rangkaian <em>acara</em></h2>
