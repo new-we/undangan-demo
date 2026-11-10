@@ -16,7 +16,7 @@
   body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8;overflow-x:hidden}
   body.locked{overflow:hidden}
   .serif{font-family:'Playfair Display',serif}
-  .wrap{max-width:640px;margin:0 auto;padding:0 26px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 26px;position:relative;z-index:2}
   section{padding:72px 0;position:relative}
 
   /* ===== gold dust canvas ===== */
@@ -84,7 +84,7 @@
   #hero{min-height:92vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;
     background:url('./img/hero.jpg') center 30%/cover no-repeat;position:relative;padding-bottom:70px}
   #hero::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(247,241,227,.25) 0%,rgba(247,241,227,0) 35%,rgba(58,43,28,.62) 100%)}
+    background:linear-gradient(180deg,rgba(58,43,28,.32) 0%,rgba(58,43,28,0) 30%,rgba(58,43,28,.28) 55%,rgba(58,43,28,.8) 100%)}
   .hero-inner{position:relative;z-index:2;color:#fff8ea}
   .hero-inner .eyebrow{letter-spacing:6px;font-size:11px;color:var(--gold-l)}
   .hero-inner h1{font-family:'Playfair Display',serif;font-size:clamp(46px,12vw,72px);line-height:1.25;margin:10px 0;
@@ -118,11 +118,12 @@
 
   /* ===== countdown ===== */
   #countdown{background:linear-gradient(160deg,#3a2b1c,#54401f);color:#f7f1e3;text-align:center;overflow:hidden}
+  #countdown::before{content:"";position:absolute;inset:0;background:url(./img/panel-kawung.webp) center/cover no-repeat;opacity:.12;pointer-events:none}
   #countdown h2.sec{color:#f7f1e3}
   #countdown .sub{color:#d9c9a8}
-  .cd{display:flex;justify-content:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:34px;max-width:480px;margin-left:auto;margin-right:auto}
   .cd .box{background:rgba(247,241,227,.08);border:1px solid rgba(233,217,174,.35);border-radius:10px;
-    min-width:74px;padding:16px 8px;backdrop-filter:blur(4px)}
+    padding:16px 4px;backdrop-filter:blur(4px)}
   .cd .box b{display:block;font-family:'Playfair Display',serif;font-size:34px;color:var(--gold-l)}
   .cd .box span{font-size:11px;letter-spacing:3px;color:#d9c9a8}
 
@@ -178,6 +179,20 @@
   footer .names em{color:var(--gold-l)}
   footer p{font-size:13px;margin-top:10px}
 
+  /* ===== ornamen pendopo (WebP transparan) ===== */
+  .roncean{position:absolute;top:0;width:min(36%,140px);pointer-events:none;z-index:0;opacity:.9}
+  .roncean.kiri{left:0}
+  .roncean.kanan{right:0}
+  .roncean img{width:100%;height:auto;display:block}
+  .orn-corner{position:absolute;width:110px;height:110px;pointer-events:none;z-index:1}
+  .orn-corner.tl{top:0;left:0}
+  .orn-corner.tr{top:0;right:0}
+  .orn-corner.bl{bottom:0;left:0}
+  .orn-corner.br{bottom:0;right:0}
+  .orn-corner img{width:100%;height:100%;object-fit:contain;display:block}
+  .gate-sign::before{content:"";position:absolute;inset:-16px;background:url(./img/medali-kawung.webp) center/contain no-repeat;opacity:.9;z-index:-1}
+  .pembatas-img{display:block;margin:26px auto 0;max-width:340px;width:80%;height:auto}
+
   /* reveal */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
   .reveal.on{opacity:1;transform:none}
@@ -198,6 +213,10 @@
   <div class="gate gate-right"><div class="knob"></div></div>
   <div class="gate-sign">R &amp; S<small>12 . 06 . 2027</small></div>
   <div class="cover-card">
+    <img class="orn-corner tl" src="./img/sudut-ukir-jawa-kiri-atas.webp" alt="">
+    <img class="orn-corner tr" src="./img/sudut-ukir-jawa-kanan-atas.webp" alt="">
+    <img class="orn-corner bl" src="./img/sudut-ukir-jawa-kiri-bawah.webp" alt="">
+    <img class="orn-corner br" src="./img/sudut-ukir-jawa-kanan-bawah.webp" alt="">
     <div class="cover-eyebrow">UNDANGAN PERNIKAHAN</div>
     <h1>Raka <em>&amp;</em> Sinta</h1>
     <div class="cover-date">SABTU, 12 JUNI 2027</div>
@@ -220,6 +239,8 @@
 
 <!-- MEMPELAI -->
 <section id="mempelai">
+  <div class="roncean kiri"><img src="./img/roncean-melati-kiri.webp" alt=""></div>
+  <div class="roncean kanan" style="width:min(28%,110px)"><img src="./img/roncean-melati-kanan.webp" alt=""></div>
   <div class="wrap">
     <div class="label reveal">ASSALAMU'ALAIKUM</div>
     <p class="verse reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."<b>— QS. AR-RŪM : 21</b></p>
@@ -248,6 +269,7 @@
     <div class="label reveal" style="color:var(--gold-l)">HITUNG MUNDUR</div>
     <h2 class="sec reveal">Menuju hari <em>bahagia</em></h2>
     <p class="sub reveal">Sabtu, 12 Juni 2027 — kami menanti kehadiran Anda dengan penuh sukacita.</p>
+    <img class="pembatas-img reveal" src="./img/pembatas-kawung.webp" alt="">
     <div class="cd reveal">
       <div class="box"><b id="cd-d">0</b><span>HARI</span></div>
       <div class="box"><b id="cd-h">0</b><span>JAM</span></div>
@@ -259,6 +281,8 @@
 
 <!-- ACARA -->
 <section id="acara">
+  <div class="roncean kiri" style="width:min(28%,110px)"><img src="./img/roncean-melati-kiri.webp" alt=""></div>
+  <div class="roncean kanan"><img src="./img/roncean-melati-kanan.webp" alt=""></div>
   <div class="wrap">
     <div class="label reveal">WAKTU &amp; TEMPAT</div>
     <h2 class="sec reveal">Rangkaian <em>acara</em></h2>
@@ -448,7 +472,8 @@
     var c = document.getElementById('dust'), x = c.getContext('2d'), P = [], F = [];
     function size(){ c.width = innerWidth; c.height = innerHeight; }
     size(); addEventListener('resize', size);
-    for(var i=0;i<36;i++) P.push({x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    function marginX(){ return Math.random()<.5 ? Math.random()*innerWidth*.12 : innerWidth*.88 + Math.random()*innerWidth*.12; }
+    for(var i=0;i<36;i++) P.push({x:marginX(), y:Math.random()*innerHeight,
       r:Math.random()*2.4+.8, s:Math.random()*.5+.15, o:Math.random()*Math.PI*2});
     for(var j=0;j<20;j++) F.push({x:Math.random()*innerWidth, y:Math.random()*innerHeight,
       w:5+Math.random()*6, h:3.5+Math.random()*4, vy:.45+Math.random()*.8,
@@ -457,7 +482,7 @@
       x.clearRect(0,0,c.width,c.height);
       P.forEach(function(p){
         p.y -= p.s; p.o += .02;
-        if(p.y < -6){ p.y = c.height+6; p.x = Math.random()*c.width; }
+        if(p.y < -6){ p.y = c.height+6; p.x = marginX(); }
         var a = .25 + Math.abs(Math.sin(p.o))*.45;
         x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7);
         x.fillStyle = 'rgba(184,134,47,' + a.toFixed(2) + ')'; x.fill();
