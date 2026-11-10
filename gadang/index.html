@@ -16,7 +16,7 @@
   body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8;overflow-x:hidden}
   body.locked{overflow:hidden}
   .serif{font-family:'Playfair Display',serif}
-  .wrap{max-width:640px;margin:0 auto;padding:0 26px}
+  .wrap{max-width:440px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
   section{padding:72px 0;position:relative}
 
   /* ===== gold dust canvas ===== */
@@ -128,7 +128,7 @@
   .cd .box span{font-size:11px;letter-spacing:3px;color:#d9c9a8}
 
   /* ===== acara ===== */
-  .event{background:#fffdf7;border:1px solid var(--line);border-radius:8px;padding:36px 28px;margin-top:26px;
+  .event{background:#fffdf7;border:1px solid var(--line);border-radius:8px;padding:36px 28px;margin-top:26px;position:relative;overflow:hidden;
     text-align:center;box-shadow:0 14px 34px rgba(58,43,28,.08)}
   .event h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-d)}
   .event .jam{font-size:15px;letter-spacing:2px;margin:10px 0 4px;font-weight:600}
@@ -179,6 +179,26 @@
   footer .names em{color:var(--gold-l)}
   footer p{font-size:13px;margin-top:10px}
 
+  /* ===== ornamen premium Minang ===== */
+  .orn{position:absolute;pointer-events:none;z-index:0;display:block}
+  .orn-corner{width:96px;height:auto}
+  .orn-tl{top:8px;left:8px}
+  .orn-tr{top:8px;right:8px}
+  .orn-bl{bottom:8px;left:8px}
+  .orn-br{bottom:8px;right:8px}
+  .cover-rumah{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,92vw);height:auto;z-index:2;pointer-events:none;opacity:.94}
+  .hero-div{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;width:min(320px,72vw);height:auto;z-index:3;pointer-events:none;opacity:.95}
+  .orn-div{text-align:center;margin:24px auto}
+  .orn-div img{width:min(260px,64vw);height:auto}
+  .cd-roof{display:block;width:min(340px,82vw);height:auto;margin:0 auto 8px}
+  .motif-wrap{text-align:center;margin:22px auto 0}
+  .motif-wrap img{width:54px;height:auto}
+  .foot-strip{display:block;width:min(300px,72vw);height:auto;margin:0 auto 18px}
+  .foot-rumah{display:block;width:150px;height:auto;margin:0 auto 14px}
+  .card-orn{position:absolute;width:54px;height:auto;pointer-events:none;z-index:0;opacity:.9}
+  .card-orn.tl{top:0;left:0}
+  .card-orn.br{bottom:0;right:0}
+
   /* reveal */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
   .reveal.on{opacity:1;transform:none}
@@ -189,6 +209,7 @@
 .mu-music-btn[hidden]{display:none}
 .mu-music-btn.paused{opacity:.6}
 </style>
+<noscript><style>#cover{display:none!important}body.locked{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}.hero-inner h1 .line{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="locked">
 <canvas id="dust"></canvas>
@@ -198,6 +219,7 @@
   <div class="gate gate-left"><div class="knob"></div></div>
   <div class="gate gate-right"><div class="knob"></div></div>
   <div class="gate-sign">R &amp; S<small>12 . 06 . 2027</small></div>
+  <img class="cover-rumah" src="./img/rumah-gadang.webp" alt="Rumah Gadang">
   <div class="cover-card">
     <div class="cover-eyebrow">UNDANGAN PERNIKAHAN</div>
     <h1>Raka <em>&amp;</em> Sinta</h1>
@@ -217,24 +239,31 @@
     <div class="hero-date">SABTU, 12 JUNI 2027</div>
     <div class="scroll-hint">GULIR KE BAWAH</div>
   </div>
+  <img class="hero-div" src="./img/divider-gonjong.webp" alt="">
 </section>
 
 <!-- MEMPELAI -->
 <section id="mempelai">
+  <img class="orn orn-corner orn-tl" src="./img/gonjong-tl.webp" alt="">
+  <img class="orn orn-corner orn-tr" src="./img/gonjong-tr.webp" alt="">
   <div class="wrap">
     <div class="label reveal">ASSALAMU'ALAIKUM</div>
     <p class="verse reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."<b>— QS. AR-RŪM : 21</b></p>
     <div class="label reveal">MEMPELAI</div>
     <h2 class="sec reveal">Dua hati <em>menjadi satu</em></h2>
-    <div class="divider reveal"><i></i></div>
+    <div class="orn-div reveal"><img src="./img/divider-songket.webp" alt=""></div>
     <div class="couple">
       <div class="person reveal">
+        <img class="card-orn tl" src="./img/songket-corner-tl.webp" alt="">
+        <img class="card-orn br" src="./img/songket-corner-br.webp" alt="">
         <div class="initial">R</div>
         <h3>Raka Pratama</h3>
         <p class="ortu">Putra pertama dari pasangan<br>Bapak H. Mahmud Yunus &amp; Ibu Hj. Rosna Dewi</p>
       </div>
       <div class="dan reveal">&amp;</div>
       <div class="person reveal">
+        <img class="card-orn tl" src="./img/songket-corner-tr.webp" alt="">
+        <img class="card-orn br" src="./img/songket-corner-bl.webp" alt="">
         <div class="initial">S</div>
         <h3>Sinta Maharani</h3>
         <p class="ortu">Putri kedua dari pasangan<br>Bapak Drs. Syafril Hadi &amp; Ibu Yulinar</p>
@@ -246,6 +275,7 @@
 <!-- COUNTDOWN -->
 <section id="countdown">
   <div class="wrap">
+    <img class="cd-roof reveal" src="./img/gonjong-roofline.webp" alt="">
     <div class="label reveal" style="color:var(--gold-l)">HITUNG MUNDUR</div>
     <h2 class="sec reveal">Menuju hari <em>bahagia</em></h2>
     <p class="sub reveal">Sabtu, 12 Juni 2027 — kami menanti kehadiran Anda dengan penuh sukacita.</p>
@@ -260,11 +290,15 @@
 
 <!-- ACARA -->
 <section id="acara">
+  <img class="orn orn-corner orn-bl" src="./img/gonjong-bl.webp" alt="">
+  <img class="orn orn-corner orn-br" src="./img/gonjong-br.webp" alt="">
   <div class="wrap">
     <div class="label reveal">WAKTU &amp; TEMPAT</div>
     <h2 class="sec reveal">Rangkaian <em>acara</em></h2>
-    <div class="divider reveal"><i></i></div>
+    <div class="orn-div reveal"><img src="./img/divider-songket.webp" alt=""></div>
     <div class="event reveal">
+      <img class="card-orn tl" src="./img/songket-corner-tl.webp" alt="">
+      <img class="card-orn br" src="./img/songket-corner-br.webp" alt="">
       <h3>Akad Nikah</h3>
       <div class="jam">08.00 — 10.00 WIB</div>
       <p>Sabtu, 12 Juni 2027<br>Balairung Grand Hall<br>Jl. Sudirman No. 88, Padang</p>
@@ -274,6 +308,8 @@
       </div>
     </div>
     <div class="event reveal">
+      <img class="card-orn tl" src="./img/songket-corner-tr.webp" alt="">
+      <img class="card-orn br" src="./img/songket-corner-bl.webp" alt="">
       <h3>Resepsi</h3>
       <div class="jam">11.00 WIB — SELESAI</div>
       <p>Sabtu, 12 Juni 2027<br>Balairung Grand Hall<br>Jl. Sudirman No. 88, Padang</p>
@@ -289,7 +325,7 @@
   <div class="wrap">
     <div class="label reveal">MOMEN BAHAGIA</div>
     <h2 class="sec reveal">Galeri <em>kami</em></h2>
-    <div class="divider reveal"><i></i></div>
+    <div class="orn-div reveal"><img src="./img/divider-songket.webp" alt=""></div>
     <div class="gal-grid reveal">
       <img src="./img/galeri-1.jpg?v=2" alt="Mempelai" loading="lazy">
       <img src="./img/galeri-2.jpg?v=2" alt="Detail pernikahan" loading="lazy">
@@ -304,6 +340,7 @@
     <div class="label reveal">KONFIRMASI</div>
     <h2 class="sec reveal">RSVP <em>kehadiran</em></h2>
     <p class="sub reveal">Mohon konfirmasi kehadiran Anda melalui tombol di bawah.</p>
+    <div class="motif-wrap reveal"><img src="./img/motif-rebung.webp" alt=""></div>
     <div class="form-card reveal">
       <label for="rsvp-nama">NAMA LENGKAP</label>
       <input id="rsvp-nama" type="text" placeholder="Nama Anda">
@@ -333,6 +370,7 @@
       <div class="an">a.n. Raka Pratama</div>
       <button onclick="salinRek('8210456789',this)">SALIN NOMOR</button>
     </div>
+    <div class="orn-div reveal"><img src="./img/divider-gonjong.webp" alt=""></div>
     <div class="rek reveal">
       <div class="bank">BANK BRI</div>
       <div class="norek">0021 0100 5567 890</div>
@@ -348,6 +386,7 @@
     <div class="label reveal">DOA &amp; HARAPAN</div>
     <h2 class="sec reveal">Ucapan <em>untuk kami</em></h2>
     <p class="sub reveal">Tuliskan doa terbaik Anda untuk kedua mempelai.</p>
+    <div class="motif-wrap reveal"><img src="./img/motif-sirih.webp" alt=""></div>
     <div id="daftar-ucapan" class="reveal">
       <div class="msg"><span class="nm">Wulan</span><span class="hd">HADIR</span><p>Barakallahu laka wa baraka alaika wa jama'a bainakuma fii khair. Selamat menempuh hidup baru, Raka &amp; Sinta!</p></div>
       <div class="msg"><span class="nm">Dimas</span><span class="hd">HADIR</span><p>Akhirnya! Selamat ya kalian berdua, semoga menjadi keluarga yang sakinah, mawaddah, warahmah.</p></div>
@@ -368,7 +407,8 @@
 <footer>
   <div class="wrap">
     <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
-    <div class="divider"><i></i></div>
+    <img class="foot-strip" src="./img/songket-strip.webp" alt="">
+    <img class="foot-rumah" src="./img/rumah-gadang.webp" alt="">
     <div class="names">Raka <em>&amp;</em> Sinta</div>
     <p>12 . 06 . 2027</p>
   </div>
