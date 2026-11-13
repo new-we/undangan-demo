@@ -50,6 +50,9 @@
       url('./img/kawung.webp?v=2') center/280px repeat;
     transition:opacity .9s ease,visibility .9s;overflow:hidden}
   #cover.hide{opacity:0;visibility:hidden}
+  /* v3: sampul mulai memudar SEGERA saat klik (bukan menunggu 1 dtk),
+     supaya wayang besar di baliknya langsung terlihat */
+  #cover.open{opacity:0;visibility:hidden}
   .cover-frame{position:absolute;inset:16px;border:1px solid rgba(212,160,23,.75);pointer-events:none;z-index:2}
   .cover-frame::before{content:"";position:absolute;inset:8px;border:1px solid rgba(212,160,23,.35);pointer-events:none}
   .cover-frame .orn-corner{width:78px;height:78px}
@@ -105,31 +108,37 @@
   body.opened .forest{animation:forestZoom 26s ease-in-out 1s infinite alternate}
   @keyframes forestZoom{from{transform:scale(1.02) translateX(0)}to{transform:scale(1.13) translateX(-1.6%)}}
   /* tirai batik — menutup panggung saat pembuka, memudar saat wayang membuka */
-  #tirai{inset:0;z-index:2;background:linear-gradient(rgba(28,18,6,.9),rgba(28,18,6,.9)),url('./img/kawung.webp?v=2') center/240px repeat;opacity:1;transition:opacity 4s ease 1s}
+  #tirai{inset:0;z-index:2;background:linear-gradient(rgba(28,18,6,.9),rgba(28,18,6,.9)),url('./img/kawung.webp?v=2') center/240px repeat;opacity:1;transition:opacity 4s ease .5s}
   body.opened #tirai{opacity:0}
   .hero-pendopo{left:50%;bottom:11%;transform:translateX(-50%);width:min(360px,88vw);height:auto;z-index:3;
     opacity:0;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
-  body.opened .hero-pendopo{animation:pendopoIn 1.8s cubic-bezier(.2,.7,.3,1) 5s forwards}
+  body.opened .hero-pendopo{animation:pendopoIn 1.8s cubic-bezier(.2,.7,.3,1) 5.4s forwards}
   @keyframes pendopoIn{from{opacity:0;transform:translateX(-50%) translateY(26px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-  /* wayang kiri-kanan — dua lapisan terpisah, membuka dari tengah ke tepi */
-  .wayang{height:40%;width:auto;z-index:4;bottom:6%;filter:drop-shadow(0 10px 16px rgba(0,0,0,.4));
-    transition:left 4.2s cubic-bezier(.22,.61,.21,1) .35s,right 4.2s cubic-bezier(.22,.61,.21,1) .35s,transform 4.2s cubic-bezier(.22,.61,.21,1) .35s}
-  .wy-kiri{left:50%;transform:translateX(-100%) scale(1.12) rotate(-2deg)}
-  .wy-kanan{right:50%;transform:translateX(100%) scale(1.12) rotate(2deg)}
-  body.opened .wy-kiri{left:-10px;transform:translateX(0) scale(1) rotate(0)}
-  body.opened .wy-kanan{right:-10px;transform:translateX(0) scale(1) rotate(0)}
-  /* lampion gantung — mengapit pendopo, bergoyang lembut */
-  .lamp{top:0;height:230px;width:auto;z-index:8;opacity:0;transition:opacity 1.1s ease 5.8s}
-  .lamp img{height:100%;width:auto;display:block;transform-origin:top center;animation:lampSway 5.5s ease-in-out 6.8s infinite alternate}
+  /* wayang kiri-kanan v3 — saat klik Buka: muncul DIPERBESAR (scale ~2.8)
+     menutupi semua di tengah, lalu MUNDUR (body.retreat, +1,2 dtk) mengecil
+     ke scale 1 dan bergeser ke posisi settle tepi (sama persis dengan v2).
+     Easing ease-in-out: wayang betah membesar dulu, baru mundur perlahan. */
+  .wayang{height:40%;width:auto;z-index:4;bottom:6%;opacity:0;filter:drop-shadow(0 10px 16px rgba(0,0,0,.4));
+    transition:opacity .45s ease,
+      left 4s cubic-bezier(.42,0,.58,1),right 4s cubic-bezier(.42,0,.58,1),
+      transform 4s cubic-bezier(.42,0,.58,1)}
+  .wy-kiri{left:46%;transform:translateX(-50%) scale(2.8) rotate(-3deg)}
+  .wy-kanan{right:46%;transform:translateX(50%) scale(2.8) rotate(3deg)}
+  body.opened .wayang{opacity:1}
+  body.retreat .wy-kiri{left:-10px;transform:translateX(0) scale(1) rotate(0)}
+  body.retreat .wy-kanan{right:-10px;transform:translateX(0) scale(1) rotate(0)}
+  /* lampion gantung — mengapit pendopo, bergoyang lembut (masuk 9,5 dtk) */
+  .lamp{top:0;height:230px;width:auto;z-index:8;opacity:0;transition:opacity 1.1s ease 9.5s}
+  .lamp img{height:100%;width:auto;display:block;transform-origin:top center;animation:lampSway 5.5s ease-in-out 10.5s infinite alternate}
   .lamp.kl{left:2px}
   .lamp.kr{right:2px;transform:scaleX(-1)}
   body.opened .lamp{opacity:1}
-  /* mawar bawah hero */
-  .hero-mawar{bottom:-4px;width:170px;height:auto;z-index:4;opacity:0;transition:opacity 1.2s ease 6.6s}
+  /* mawar bawah hero (masuk 11,9 dtk, terakhir) */
+  .hero-mawar{bottom:-4px;width:170px;height:auto;z-index:4;opacity:0;transition:opacity 1.2s ease 11.9s}
   .hm-kiri{left:-12px}
   .hm-kanan{right:-12px;transform:scaleX(-1)}
   body.opened .hero-mawar{opacity:1}
-  .bird{width:52px;height:auto;z-index:5;opacity:0;will-change:transform}
+  .bird{width:52px;height:auto;z-index:5;opacity:0;will-change:transform;transition:opacity 1s ease 10.3s}
   body.opened .bird{opacity:1}
   .bird.b1{top:11%;animation:flyAcross 17s linear -4s infinite}
   .bird.b2{top:19%;width:40px;animation:flyAcross 22s linear -12s infinite}
@@ -141,7 +150,7 @@
     75%{transform:translateX(82vw) translateY(-12px)}
     100%{transform:translateX(116vw) translateY(0)}
   }
-  .butterfly{width:30px;height:auto;z-index:5;opacity:0;will-change:transform}
+  .butterfly{width:30px;height:auto;z-index:5;opacity:0;will-change:transform;transition:opacity 1s ease 11.1s}
   .butterfly img{width:100%;height:auto;display:block;animation:flap .55s ease-in-out infinite alternate}
   @keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.72)}}
   body.opened .butterfly{opacity:1}
@@ -170,9 +179,9 @@
   .hero-frame .orn-tr{top:-2px;right:-2px}
   .hero-frame .orn-bl{bottom:-2px;left:-2px}
   .hero-frame .orn-br{bottom:-2px;right:-2px}
-  body.opened .hero-frame{animation:fadeIn 1.8s ease 8.2s forwards}
+  body.opened .hero-frame{animation:fadeIn 1.8s ease 6.2s forwards}
   @keyframes fadeIn{to{opacity:1}}
-  .hero-corner{position:absolute;width:118px;height:auto;z-index:7;pointer-events:none;opacity:0;transition:opacity 1.2s ease 8.4s}
+  .hero-corner{position:absolute;width:118px;height:auto;z-index:7;pointer-events:none;opacity:0;transition:opacity 1.2s ease 6.2s}
   .hc-tl{top:0;left:0}
   .hc-tr{top:0;right:0;transform:scaleX(-1)}
   .hc-bl{bottom:0;left:0;transform:scaleY(-1)}
@@ -180,7 +189,7 @@
   body.opened .hero-corner{opacity:1}
   .hero-inner{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;
     justify-content:flex-start;padding-top:17vh;text-align:center;color:#fff8ea;
-    opacity:0;transform:translateY(10px);transition:opacity 1.1s ease 8s,transform 1.1s ease 8s}
+    opacity:0;transform:translateY(10px);transition:opacity 1.1s ease 7s,transform 1.1s ease 7s}
   body.opened .hero-inner{opacity:1;transform:none}
   .hero-panel{background:linear-gradient(160deg,rgba(46,30,12,.88),rgba(28,18,6,.88));border:1px solid rgba(212,160,23,.6);
     border-radius:14px;padding:26px 22px 24px;box-shadow:0 20px 50px rgba(0,0,0,.45);position:relative;max-width:340px;width:82vw}
@@ -190,17 +199,18 @@
     text-shadow:0 3px 24px rgba(0,0,0,.55)}
   .hero-inner h1 .line{display:block;opacity:0;transform:translateY(36px)}
   body.opened .hero-inner h1 .line{animation:riseIn 1.1s cubic-bezier(.2,.7,.3,1) forwards}
-  body.opened .hero-inner h1 .line:nth-child(1){animation-delay:8.6s}
-  body.opened .hero-inner h1 .line:nth-child(2){animation-delay:8.95s}
-  body.opened .hero-inner h1 .line:nth-child(3){animation-delay:9.3s}
+  body.opened .hero-inner h1 .line:nth-child(1){animation-delay:7s}
+  body.opened .hero-inner h1 .line:nth-child(2){animation-delay:7.15s}
+  body.opened .hero-inner h1 .line:nth-child(3){animation-delay:7.3s}
   @keyframes riseIn{to{opacity:1;transform:none}}
-  body.opened .hero-inner .eyebrow,body.opened .hero-date{animation:riseIn 1.2s ease 10s both}
+  body.opened .hero-inner .eyebrow{animation:riseIn 1.2s ease 7s both}
+  body.opened .hero-date{animation:riseIn 1.2s ease 7.9s both}
   .hero-inner .amp{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold-l);font-size:30px}
   .hero-date{letter-spacing:4px;font-size:14px;margin-top:12px;color:#fff3d9;opacity:0;text-shadow:0 2px 12px rgba(0,0,0,.5)}
   .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:4px;z-index:8;
     color:var(--gold-l);opacity:0;text-shadow:0 2px 10px rgba(0,0,0,.5);background:rgba(28,18,6,.55);
     padding:9px 18px;border-radius:22px;backdrop-filter:blur(2px);white-space:nowrap}
-  body.opened .scroll-hint{animation:scrollHint 1.2s ease 10.8s both,bob 2.2s ease-in-out 12.1s infinite}
+  body.opened .scroll-hint{animation:scrollHint 1.2s ease 8.7s both,bob 2.2s ease-in-out 10s infinite}
   @keyframes scrollHint{to{opacity:.95}}
   @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);opacity:.9}50%{transform:translateX(-50%) translateY(8px);opacity:.5}}
   #hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -294,7 +304,7 @@
 .mu-music-btn.show{display:flex}
 .mu-music-btn.paused{opacity:.6}
 </style>
-<noscript><style>#cover{display:none!important}body.locked{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}#tirai{display:none!important}.wayang{transform:none!important}.wy-kiri{left:-10px!important}.wy-kanan{right:-10px!important}.lamp,.hero-mawar,.hero-corner{opacity:1!important}.hero-pendopo,.hero-frame,.hero-inner,.hero-inner .eyebrow,.hero-inner .hero-date,.scroll-hint{opacity:1!important;transform:none!important}.hero-inner h1 .line{opacity:1!important;transform:none!important}.bird,.butterfly{opacity:1!important}</style></noscript>
+<noscript><style>#cover{display:none!important}body.locked{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}#tirai{display:none!important}.wayang{opacity:1!important;transform:none!important}.wy-kiri{left:-10px!important}.wy-kanan{right:-10px!important}.lamp,.hero-mawar,.hero-corner{opacity:1!important}.hero-pendopo,.hero-frame,.hero-inner,.hero-inner .eyebrow,.hero-inner .hero-date,.scroll-hint{opacity:1!important;transform:none!important}.hero-inner h1 .line{opacity:1!important;transform:none!important}.bird,.butterfly{opacity:1!important}</style></noscript>
 </head>
 <body class="locked">
 <canvas id="dust"></canvas>
@@ -324,14 +334,14 @@
     <svg class="orn-corner orn-bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
     <svg class="orn-corner orn-br" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
   </div>
-  <img class="frame-corner fc-tl" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="frame-corner fc-tr" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="frame-corner fc-bl" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="frame-corner fc-br" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <span class="cover-lamp cl-kiri" aria-hidden="true"><img src="./img/lampion.webp?v=2" alt=""></span>
-  <span class="cover-lamp cl-kanan" aria-hidden="true"><img src="./img/lampion.webp?v=2" alt=""></span>
-  <img class="cover-mawar" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="cover-pendopo" src="./img/pendopo.webp?v=1" alt="Pendopo Jawa">
+  <img class="frame-corner fc-tl" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="frame-corner fc-tr" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="frame-corner fc-bl" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="frame-corner fc-br" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <span class="cover-lamp cl-kiri" aria-hidden="true"><img src="./img/lampion.webp?v=3" alt=""></span>
+  <span class="cover-lamp cl-kanan" aria-hidden="true"><img src="./img/lampion.webp?v=3" alt=""></span>
+  <img class="cover-mawar" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="cover-pendopo" src="./img/pendopo.webp?v=3" alt="Pendopo Jawa">
   <div class="cover-card">
     <div class="cover-eyebrow">UNDANGAN PERNIKAHAN</div>
     <h1>Raka <em>&amp;</em> Sinta</h1>
@@ -347,29 +357,29 @@
 <section id="hero">
   <div class="hero-layer forest" aria-hidden="true"></div>
   <div class="hero-layer" id="tirai" aria-hidden="true"></div>
-  <img class="hero-layer hero-pendopo" src="./img/pendopo.webp?v=1" alt="Pendopo Jawa">
-  <img class="hero-layer wayang wy-kiri" src="./img/wayang-kiri.webp?v=2" alt="Wayang Arjuna">
-  <img class="hero-layer wayang wy-kanan" src="./img/wayang-kanan.webp?v=2" alt="Wayang Srikandi">
-  <span class="hero-layer lamp kl" aria-hidden="true"><img src="./img/lampion.webp?v=2" alt=""></span>
-  <span class="hero-layer lamp kr" aria-hidden="true"><img src="./img/lampion.webp?v=2" alt=""></span>
-  <img class="hero-layer hero-mawar hm-kiri" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="hero-layer hero-mawar hm-kanan" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="hero-layer bird b1" src="./img/burung.webp?v=1" alt="">
-  <img class="hero-layer bird b2" src="./img/burung.webp?v=1" alt="">
-  <img class="hero-layer bird b3" src="./img/burung.webp?v=1" alt="">
-  <span class="hero-layer butterfly k1"><img src="./img/kupu.webp?v=1" alt=""></span>
-  <span class="hero-layer butterfly k2"><img src="./img/kupu.webp?v=1" alt=""></span>
-  <span class="hero-layer butterfly k3"><img src="./img/kupu.webp?v=1" alt=""></span>
+  <img class="hero-layer hero-pendopo" src="./img/pendopo.webp?v=3" alt="Pendopo Jawa">
+  <img class="hero-layer wayang wy-kiri" src="./img/wayang-kiri.webp?v=3" alt="Wayang Arjuna">
+  <img class="hero-layer wayang wy-kanan" src="./img/wayang-kanan.webp?v=3" alt="Wayang Srikandi">
+  <span class="hero-layer lamp kl" aria-hidden="true"><img src="./img/lampion.webp?v=3" alt=""></span>
+  <span class="hero-layer lamp kr" aria-hidden="true"><img src="./img/lampion.webp?v=3" alt=""></span>
+  <img class="hero-layer hero-mawar hm-kiri" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="hero-layer hero-mawar hm-kanan" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="hero-layer bird b1" src="./img/burung.webp?v=3" alt="">
+  <img class="hero-layer bird b2" src="./img/burung.webp?v=3" alt="">
+  <img class="hero-layer bird b3" src="./img/burung.webp?v=3" alt="">
+  <span class="hero-layer butterfly k1"><img src="./img/kupu.webp?v=3" alt=""></span>
+  <span class="hero-layer butterfly k2"><img src="./img/kupu.webp?v=3" alt=""></span>
+  <span class="hero-layer butterfly k3"><img src="./img/kupu.webp?v=3" alt=""></span>
   <div class="hero-layer hero-frame" aria-hidden="true">
     <svg class="orn-corner orn-tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
     <svg class="orn-corner orn-tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
     <svg class="orn-corner orn-bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
     <svg class="orn-corner orn-br" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
   </div>
-  <img class="hero-corner hc-tl" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="hero-corner hc-tr" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="hero-corner hc-bl" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
-  <img class="hero-corner hc-br" src="./img/bingkai-corner.webp?v=2" alt="" aria-hidden="true">
+  <img class="hero-corner hc-tl" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="hero-corner hc-tr" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="hero-corner hc-bl" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
+  <img class="hero-corner hc-br" src="./img/bingkai-corner.webp?v=3" alt="" aria-hidden="true">
   <div class="hero-inner">
     <div class="hero-panel">
       <div class="eyebrow">THE WEDDING OF</div>
@@ -384,8 +394,8 @@
 <section id="mempelai" class="batik">
   <svg class="sec-orn tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
   <svg class="sec-orn tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
-  <img class="sec-mawar sm-kiri" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="sec-mawar sm-kanan" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-kiri" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-kanan" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="label reveal">ASSALAMU'ALAIKUM</div>
     <p class="verse reveal">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."<b>— QS. AR-RŪM : 21</b></p>
@@ -431,8 +441,8 @@
 <section id="acara" class="batik">
   <svg class="sec-orn bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
   <svg class="sec-orn br" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
-  <img class="sec-mawar sm-tl" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="sec-mawar sm-tr" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-tl" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-tr" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="label reveal">WAKTU &amp; TEMPAT</div>
     <h2 class="sec reveal">Rangkaian <em>acara</em></h2>
@@ -513,8 +523,8 @@
 <section id="ucapan" class="batik2">
   <svg class="sec-orn tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
   <svg class="sec-orn tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
-  <img class="sec-mawar sm-kiri" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
-  <img class="sec-mawar sm-kanan" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-kiri" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
+  <img class="sec-mawar sm-kanan" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="label reveal">DOA &amp; HARAPAN</div>
     <h2 class="sec reveal">Ucapan <em>untuk kami</em></h2>
@@ -538,7 +548,7 @@
 
 <footer>
   <div class="wrap">
-    <img class="foot-mawar" src="./img/mawar.webp?v=2" alt="" aria-hidden="true">
+    <img class="foot-mawar" src="./img/mawar.webp?v=3" alt="" aria-hidden="true">
     <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
     <div class="names" style="margin-top:18px">Raka <em>&amp;</em> Sinta</div>
     <p>14 . 08 . 2027</p>
@@ -556,6 +566,11 @@
     var c = document.getElementById('cover');
     c.classList.add('open');
     document.body.classList.add('opened');
+    /* v3: wayang muncul DIPERBESAR menutupi semua, lalu +1,2 dtk MUNDUR ke tepi
+       (1,2 dtk = sampul sudah memudar, wayang besar sempat terlihat jelas) */
+    setTimeout(function(){
+      document.body.classList.add('retreat');
+    }, 1200);
     setTimeout(function(){
       c.classList.add('hide');
       document.body.classList.remove('locked');
