@@ -326,10 +326,20 @@ body.nav-on .mu-music-btn{bottom:74px}
   text-shadow:0 3px 18px rgba(0,0,0,.5)}
 .hero-inner{padding-top:13vh}
 /* ===== salam: belahan gunungan mengapit Bismillah ===== */
-.salam{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:36px}
-.gun-half{width:42px;height:auto;flex:none}
+.salam{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:36px}
+.gun-half{width:60px;height:auto;flex:none}
 .gun-half.gr{transform:scaleX(-1)}
 .bismillah{font-size:19px;line-height:1.6;color:var(--gold-d);text-align:center}
+/* ===== v6.1: gunungan salam lebih besar (60px; 48px di layar ≤380px) ===== */
+@media (max-width:380px){
+  .gun-half{width:48px}
+  .bismillah{font-size:17px}
+}
+/* ===== v6.1: figur wayang tampil utuh (jangan terpotong di lutut) ===== */
+.gallery figure.tall img{object-fit:contain}
+/* ===== v6.1: ruang gulir akhir + scroll-padding agar judul tak tertutup nav ===== */
+html{scroll-padding-bottom:84px}
+body{padding-bottom:56px}
 /* ===== kartu kutipan + lili peach di sudut bawah ===== */
 .quote-card{position:relative;background:#fffdf7;border:1px solid var(--line);border-radius:12px;
   padding:34px 26px 46px;box-shadow:0 14px 34px rgba(58,43,28,.10);text-align:center;margin-bottom:40px}
@@ -527,7 +537,7 @@ section{scroll-margin-top:14px}
     <div class="divider"><i></i></div>
     <div class="cover-to">Kepada Yth.<br>Bapak/Ibu/Saudara/i</div>
     <div class="cover-guest" id="guestName">Tamu Undangan</div>
-    <button class="btn-open" id="openBtn" onclick="bukaUndangan()">&#9993; BUKA UNDANGAN</button>
+    <button class="btn-open" id="openBtn" autofocus onclick="bukaUndangan()">&#9993; BUKA UNDANGAN</button>
   </div>
 </div>
 
@@ -673,8 +683,8 @@ section{scroll-margin-top:14px}
     <div class="gallery reveal">
       <figure><img src="./img/hutan.webp?v=3" alt="Hutan Jawa"><figcaption>HUTAN JAWA</figcaption></figure>
       <figure><img src="./img/pendopo.webp?v=3" alt="Pendopo"><figcaption>PENDOPO</figcaption></figure>
-      <figure><img src="./img/wayang-kiri.webp?v=3" alt="Arjuna"><figcaption>ARJUNA</figcaption></figure>
-      <figure><img src="./img/wayang-kanan.webp?v=3" alt="Srikandi"><figcaption>SRIKANDI</figcaption></figure>
+      <figure class="tall"><img src="./img/wayang-kiri.webp?v=3" alt="Arjuna"><figcaption>ARJUNA</figcaption></figure>
+      <figure class="tall"><img src="./img/wayang-kanan.webp?v=3" alt="Srikandi"><figcaption>SRIKANDI</figcaption></figure>
     </div>
   </div>
 </section>
@@ -826,7 +836,7 @@ section{scroll-margin-top:14px}
   /* ================================================================
      v6 — mengikuti referensi kekondangan (tenang, bukan panggung hidup).
      Sampul: fade-in stagger 2–3 dtk, lalu statis (hanya lampion/lili bergoyang).
-     Dibuka: GUNUNGAN terbelah seperti tirai (~1,7 dtk) — BUKAN wayang raksasa zoom.
+     Dibuka: GUNUNGAN terbelah seperti tirai (~1,5 dtk) — BUKAN wayang raksasa zoom.
      Hero: statis di balik tirai (tanpa stagger 7–30 dtk). Tanpa burung/kupu/ledakan.
      Perbaikan dari cek device v5: Enter/Spasi membuka (autofocus + focus ring),
      nav bawah benar-benar menggulir, umpan balik instan saat Buka diklik.
@@ -842,9 +852,23 @@ section{scroll-margin-top:14px}
   })();
 
   var openBtn = document.getElementById("openBtn");
+  var focusTimer = null, userActed = false;
   function focusOpenBtn(){
     if(openBtn && !opened){ try{ openBtn.focus({preventScroll:true}); }catch(e){ openBtn.focus(); } }
   }
+  function stopRefocus(){ userActed = true; if(focusTimer){ clearInterval(focusTimer); focusTimer = null; } }
+  /* v6.1: fokus SEGERA + diulang tiap 500 mdtk sampai pengguna berinteraksi.
+     Di fresh load fokus bisa masih di address bar sehingga Enter tidak sampai ke
+     halaman; begitu tombol terlihat, fokus pindah ke tombol dan Enter jalan.
+     focus() saat tombol masih tersembunyi (autoAlpha 0) tidak berpengaruh — aman. */
+  focusOpenBtn();
+  focusTimer = setInterval(function(){
+    if(opened || userActed){ stopRefocus(); } else { focusOpenBtn(); }
+  }, 500);
+  ["pointerdown","keydown","touchstart","wheel"].forEach(function(ev){
+    document.addEventListener(ev, stopRefocus, {once:true, passive:true});
+  });
+  window.addEventListener("load", focusOpenBtn);
 
   /* Entrance sampul — stagger 2–3 dtk seperti referensi (hanya bila GSAP ada).
      CSS default = semua terlihat (fallback aman bila GSAP gagal). */
@@ -906,9 +930,9 @@ section{scroll-margin-top:14px}
       tl
         .to("#cover .cover-card", {autoAlpha: 0, scale: .96, y: 10, duration: .35, ease: "power2.in"}, 0)
         .to("#cover", {yPercent: -100, duration: .8, ease: "power4.inOut"}, 0.15)
-        .to({}, {duration: .4}) /* jeda singkat — gunungan terlihat utuh sebelum terbelah */
-        .to(".gun-l", {xPercent: -101, duration: 1.7, ease: "power3.inOut"}, ">")
-        .to(".gun-r", {xPercent: 101, duration: 1.7, ease: "power3.inOut"}, "<");
+        .to({}, {duration: .15}) /* jeda singkat — gunungan terlihat utuh sebelum terbelah */
+        .to(".gun-l", {xPercent: -101, duration: 1.5, ease: "power2.inOut"}, ">")
+        .to(".gun-r", {xPercent: 101, duration: 1.5, ease: "power2.inOut"}, "<");
     } else {
       settleAll();
     }
