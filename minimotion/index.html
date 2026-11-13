@@ -53,6 +53,10 @@
   /* v3: sampul mulai memudar SEGERA saat klik (bukan menunggu 1 dtk),
      supaya wayang besar di baliknya langsung terlihat */
   #cover.open{opacity:0;visibility:hidden}
+  /* v4: video intro sebagai latar sampul (jalan pas link dibuka, berhenti saat habis) */
+  #coverVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  /* saat video jalan, pendopo+mawar sampul disembunyikan (keduanya sudah ada di dalam video) */
+  #cover.video-on .cover-pendopo,#cover.video-on .cover-mawar{display:none}
   .cover-frame{position:absolute;inset:16px;border:1px solid rgba(212,160,23,.75);pointer-events:none;z-index:2}
   .cover-frame::before{content:"";position:absolute;inset:8px;border:1px solid rgba(212,160,23,.35);pointer-events:none}
   .cover-frame .orn-corner{width:78px;height:78px}
@@ -216,6 +220,27 @@
   #hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(180deg,rgba(246,240,224,.16) 0%,rgba(43,28,10,0) 32%,rgba(43,28,10,0) 62%,rgba(43,28,10,.42) 100%)}
 
+  /* v4: skip-intro — bila video sudah memperagakan intro, hero live langsung
+     settle (semua elemen di posisi akhir, tanpa transisi/delay); gerak ambient
+     (burung/kupu-kupu/lampion bergoyang/hutan zoom) tetap jalan */
+  body.skip-intro #tirai{opacity:0;transition:none}
+  body.skip-intro .wayang{opacity:1;transition:none}
+  body.skip-intro .wy-kiri{left:-10px;transform:none}
+  body.skip-intro .wy-kanan{right:-10px;transform:none}
+  body.skip-intro .hero-pendopo{opacity:1;transition:none;animation:none}
+  body.skip-intro .hero-frame{opacity:1;animation:none}
+  body.skip-intro .hero-corner{opacity:1;transition:none}
+  body.skip-intro .lamp{opacity:1;transition:none}
+  body.skip-intro .lamp img{animation-delay:0s}
+  body.skip-intro .hero-mawar{opacity:1;transition:none}
+  body.skip-intro .bird{opacity:1;transition:none}
+  body.skip-intro .butterfly{opacity:1;transition:none}
+  body.skip-intro .hero-inner{opacity:1;transform:none;transition:none}
+  body.skip-intro .hero-inner .eyebrow{opacity:1;animation:none}
+  body.skip-intro .hero-inner h1 .line{opacity:1;transform:none;animation:none}
+  body.skip-intro .hero-date{opacity:1;animation:none}
+  body.skip-intro .scroll-hint{opacity:.95;animation:bob 2.2s ease-in-out 0s infinite}
+
   /* ===== couple ===== */
   #mempelai{background:var(--cream)}
   .verse{text-align:center;font-style:italic;color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 40px}
@@ -304,7 +329,7 @@
 .mu-music-btn.show{display:flex}
 .mu-music-btn.paused{opacity:.6}
 </style>
-<noscript><style>#cover{display:none!important}body.locked{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}#tirai{display:none!important}.wayang{opacity:1!important;transform:none!important}.wy-kiri{left:-10px!important}.wy-kanan{right:-10px!important}.lamp,.hero-mawar,.hero-corner{opacity:1!important}.hero-pendopo,.hero-frame,.hero-inner,.hero-inner .eyebrow,.hero-inner .hero-date,.scroll-hint{opacity:1!important;transform:none!important}.hero-inner h1 .line{opacity:1!important;transform:none!important}.bird,.butterfly{opacity:1!important}</style></noscript>
+<noscript><style>#cover{display:none!important}#coverVideo{display:none!important}body.locked{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}#tirai{display:none!important}.wayang{opacity:1!important;transform:none!important}.wy-kiri{left:-10px!important}.wy-kanan{right:-10px!important}.lamp,.hero-mawar,.hero-corner{opacity:1!important}.hero-pendopo,.hero-frame,.hero-inner,.hero-inner .eyebrow,.hero-inner .hero-date,.scroll-hint{opacity:1!important;transform:none!important}.hero-inner h1 .line{opacity:1!important;transform:none!important}.bird,.butterfly{opacity:1!important}</style></noscript>
 </head>
 <body class="locked">
 <canvas id="dust"></canvas>
@@ -328,6 +353,10 @@
 
 <!-- COVER -->
 <div id="cover">
+  <!-- v4: video intro — jalan pas link dibuka (autoplay muted), berhenti saat habis (tanpa loop) -->
+  <video id="coverVideo" autoplay muted playsinline preload="auto" poster="./img/hutan.webp" aria-hidden="true">
+    <source src="./img/intro.mp4" type="video/mp4">
+  </video>
   <div class="cover-frame">
     <svg class="orn-corner orn-tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
     <svg class="orn-corner orn-tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn-corner"/></svg>
@@ -566,11 +595,20 @@
     var c = document.getElementById('cover');
     c.classList.add('open');
     document.body.classList.add('opened');
-    /* v3: wayang muncul DIPERBESAR menutupi semua, lalu +1,2 dtk MUNDUR ke tepi
-       (1,2 dtk = sampul sudah memudar, wayang besar sempat terlihat jelas) */
-    setTimeout(function(){
-      document.body.classList.add('retreat');
-    }, 1200);
+    /* v4: hentikan video sampul begitu undangan dibuka */
+    var v = document.getElementById('coverVideo');
+    if (v) { v.pause(); }
+    if (window.__videoMode) {
+      /* v4: video sudah memperagakan intro di sampul — hero live langsung
+         settle, intro TIDAK diulang */
+      document.body.classList.add('skip-intro');
+    } else {
+      /* v3: wayang muncul DIPERBESAR menutupi semua, lalu +1,2 dtk MUNDUR ke tepi
+         (1,2 dtk = sampul sudah memudar, wayang besar sempat terlihat jelas) */
+      setTimeout(function(){
+        document.body.classList.add('retreat');
+      }, 1200);
+    }
     setTimeout(function(){
       c.classList.add('hide');
       document.body.classList.remove('locked');
@@ -648,6 +686,37 @@
       requestAnimationFrame(loop);
     })();
   })();
+</script>
+<script>
+/* VIDEO INTRO v4: video jalan pas link dibuka (autoplay muted), berhenti saat
+   habis (tanpa loop, tahan frame terakhir). Bila video gagal/error, fallback
+   ke intro CSS v3 seperti biasa (sampul kawung + ornamen statis). */
+(function(){
+  var v = document.getElementById('coverVideo');
+  var cover = document.getElementById('cover');
+  if(!v || !cover) return;
+  window.__videoMode = false; /* true = video berhasil jalan -> hero live skip intro */
+  function enableVideo(){
+    if (window.__videoMode) return;
+    window.__videoMode = true;
+    cover.classList.add('video-on');
+  }
+  function fallback(){
+    if (window.__videoMode) return; /* video sudah jalan, jangan fallback */
+    window.__videoMode = false;
+    v.style.display = 'none';
+    cover.classList.remove('video-on');
+  }
+  v.addEventListener('playing', enableVideo);
+  v.addEventListener('ended', function(){ v.pause(); /* tahan frame terakhir */ });
+  v.addEventListener('error', fallback);
+  /* bila 4 dtk tidak ada tanda video jalan -> fallback ke intro CSS v3 */
+  setTimeout(function(){
+    if (!window.__videoMode && v.readyState < 2) fallback();
+  }, 4000);
+  var pr = v.play();
+  if (pr && pr.catch) pr.catch(function(){ /* autoplay ditolak -> fallback timer bekerja */ });
+})();
 </script>
 <!-- MUSIK LATAR -->
 <button class="mu-music-btn" id="muMusicBtn" aria-label="Musik" title="Putar / jeda musik">♪</button>
