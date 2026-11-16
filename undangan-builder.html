@@ -282,6 +282,40 @@
       .coverstage[data-opener="circle"]{ clip-path:circle(125% at 50% 45%); transition:clip-path 1.25s ease; }
       .coverstage[data-opener="circle"].opening{ clip-path:circle(0% at 50% 45%); }
 
+      /* ---------- bentuk / shapes ---------- */
+      .shapegrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
+      .shapebtn{
+        border:1px solid var(--ui-line); background:var(--ui-panel2); color:var(--ui-text);
+        border-radius:.65rem; padding:.5rem .25rem .42rem; cursor:pointer; min-height:4.1rem;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem;
+        font-weight:700; font-size:.68rem; line-height:1.15;
+      }
+      .shapebtn:hover{ border-color:var(--gold); }
+      .shapebtn svg{ width:2.1rem; height:1.55rem; display:block; }
+      .shapebtn svg *{ fill:color-mix(in srgb, var(--gold) 34%, transparent); stroke:var(--gold); stroke-width:5; }
+      .shapebtn svg .nofill{ fill:none; }
+      .shapepresets{ display:grid; grid-template-columns:1fr 1fr; gap:.45rem; margin-top:.55rem; }
+      .shapepresets button{
+        border:1.5px dashed var(--gold); background:transparent; color:var(--gold);
+        border-radius:.65rem; padding:.5rem .35rem; font-weight:800; font-size:.74rem; cursor:pointer; min-height:2.6rem; line-height:1.25;
+      }
+      .shapepresets button:hover{ background:color-mix(in srgb, var(--gold) 12%, transparent); }
+      .orn .shpwrap{ position:relative; width:100%; height:100%; }
+      .orn .shpwrap svg{ display:block; width:100%; height:100%; }
+      .orn .shp-txt{
+        position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+        text-align:center; padding:.3rem .6rem; pointer-events:none; line-height:1.35; white-space:pre-line; overflow:hidden;
+      }
+      .segbtns{ display:flex; gap:.4rem; flex-wrap:wrap; }
+      .segbtns button{
+        flex:1; border:1px solid var(--ui-line); background:var(--ui-panel2); color:var(--ui-text);
+        border-radius:.55rem; padding:.42rem .3rem; font-weight:700; font-size:.74rem; cursor:pointer; min-height:2.3rem; white-space:nowrap;
+      }
+      .segbtns button.on{ background:var(--gold); border-color:var(--gold); color:#241a08; }
+      .corners{ display:grid; grid-template-columns:1fr 1fr; gap:.35rem .6rem; }
+      .corners .field{ margin-bottom:.25rem; }
+      .corners label{ font-size:.68rem !important; }
+
       /* ---------- elemen teks yang bisa digeser ---------- */
       .txtel{ position:absolute; cursor:grab; pointer-events:auto; line-height:1.3; }
       .txtel:active{ cursor:grabbing; }
@@ -490,6 +524,15 @@
       <!-- RAK ORNAMEN -->
       <aside class="col rack">
         <div class="sheethead"><strong>Tambah ornamen</strong><button class="btn" type="button" data-close-sheet>Tutup ✕</button></div>
+        <h2 class="sec">Bentuk &amp; latar tulisan</h2>
+        <p class="hint">Klik bentuk untuk menaruhnya di halaman aktif — lalu geser, putar, dan tarik gagangnya seperti ornamen. Cocok untuk kartu / border di belakang tulisan, label tanggal, lencana, garis pembatas, dan bingkai foto. Semua pengaturannya (isi, garis tepi, kelengkungan sudut, bayangan) ada di panel kanan setelah bentuknya diklik.</p>
+        <div class="shapegrid" id="shapeGrid"></div>
+        <div class="shapepresets">
+          <button type="button" data-shapepreset="card">＋ Kartu di belakang tulisan</button>
+          <button type="button" data-shapepreset="glass">＋ Kartu kaca gelap</button>
+          <button type="button" data-shapepreset="label">＋ Label / pita tanggal</button>
+          <button type="button" data-shapepreset="framephoto">＋ Bingkai foto</button>
+        </div>
         <h2 class="sec">Rak ornamen</h2>
         <p class="hint">Semua ornamen &amp; bingkai dari undangan-undangan di web, dikelompokkan per kategori — diambil langsung dari GitHub, jadi selalu sama persis dengan yang tampil di web. Klik untuk menaruhnya di halaman aktif, lalu geser langsung di kanvas — bingkai pun bisa digeser, diperbesar, dan diatur tumpukannya seperti ornamen lain.</p>
         <div class="cattabs" id="catTabs"></div>
@@ -520,7 +563,7 @@
       <aside class="col panel">
         <div class="sheethead"><strong>Pengaturan &amp; teks</strong><button class="btn" type="button" data-close-sheet>Tutup ✕</button></div>
         <h2 class="sec">Yang dipilih di kanvas</h2>
-        <div id="selPanel"><p class="hint">Belum ada yang dipilih. Klik ornamen atau teks di kanvas, atau tambahkan ornamen dari rak.</p></div>
+        <div id="selPanel"><p class="hint">Belum ada yang dipilih. Klik ornamen, bentuk, atau teks di kanvas, atau tambahkan dari rak di kiri.</p></div>
 
         <h2 class="sec">Latar halaman ini</h2>
         <div id="bgPanel"></div>
@@ -953,6 +996,111 @@ function mkEl(src, name, x, y, w, extra){
   if (extra) for (var k in extra) e[k] = extra[k];
   return e;
 }
+/* ================= BENTUK / SHAPES =================
+   Bentuk tinggal di daftar elemen yang sama dengan ornamen (S.pages[halaman]),
+   jadi otomatis bisa digeser, diputar, ditumpuk, dianimasikan, ikut pratinjau
+   & ikut file unduhan. Bedanya: tidak pakai gambar, melainkan digambar dari
+   pengaturannya sendiri (isi, garis tepi, sudut, bayangan). */
+var SHAPES = {
+  rect:       { label:"Kotak",            w:64, h:20, r:2,  prev:'<rect x="8" y="14" width="84" height="72" rx="2"/>' },
+  rounded:    { label:"Kotak Membulat",   w:64, h:20, r:20, prev:'<rect x="8" y="14" width="84" height="72" rx="20"/>' },
+  circle:     { label:"Lingkaran",        w:30, h:15, r:0,  prev:'<circle cx="50" cy="50" r="40"/>' },
+  ellipse:    { label:"Oval",             w:58, h:14, r:0,  prev:'<ellipse cx="50" cy="50" rx="44" ry="30"/>' },
+  pill:       { label:"Kapsul / Pil",     w:56, h:9,  r:50, prev:'<rect x="4" y="26" width="92" height="48" rx="24"/>' },
+  frame:      { label:"Bingkai Kotak",    w:64, h:20, r:10, prev:'<rect class="nofill" x="8" y="14" width="84" height="72" rx="10"/>' },
+  framecircle:{ label:"Bingkai Lingkaran",w:30, h:15, r:0,  prev:'<circle class="nofill" cx="50" cy="50" r="40"/>' },
+  arch:       { label:"Lengkung Atas",    w:52, h:26, r:0,  prev:'<path d="M12,88 L12,50 A38,38 0 0 1 88,50 L88,88 Z"/>' },
+  diamond:    { label:"Berlian",          w:34, h:17, r:0,  prev:'<polygon points="50,6 94,50 50,94 6,50"/>' },
+  triangle:   { label:"Segitiga",         w:36, h:16, r:0,  prev:'<polygon points="50,8 94,92 6,92"/>' },
+  star:       { label:"Bintang",          w:32, h:16, r:0,  prev:'<polygon points="50,4 61,37 96,37 68,57 79,91 50,70 21,91 32,57 4,37 39,37"/>' },
+  heart:      { label:"Hati",             w:32, h:15, r:0,  prev:'<path d="M50,90 C18,66 6,48 6,30 C6,13 19,4 32,4 C41,4 48,10 50,17 C52,10 59,4 68,4 C81,4 94,13 94,30 C94,48 82,66 50,90 Z"/>' },
+  line:       { label:"Garis Pembatas",   w:62, h:1.4,r:1,  prev:'<rect x="4" y="44" width="92" height="12" rx="6"/>' }
+};
+var SHAPE_RADIUS_TYPES = { rect:1, rounded:1, frame:1, pill:1, line:1 };
+function mkShape(shape, extra){
+  var d = SHAPES[shape] || SHAPES.rounded;
+  var isFrame = shape === "frame" || shape === "framecircle";
+  var e = mkEl("", d.label, 18, 30, d.w, {
+    shape: shape, h: d.h,
+    fillMode: isFrame ? "none" : "solid", fill: "#ffffff", fill2: "#d9a441", gradDir: 135, fillAlpha: 88,
+    stroke: "#d9a441", strokeW: isFrame ? 2.5 : 1.5, strokeStyle: "solid",
+    rTL: d.r, rTR: d.r, rBR: d.r, rBL: d.r,
+    shadow: "soft", shadowColor: "#000000",
+    shpText: "", shpTextColor: "#3a2a18", shpTextSize: 1
+  });
+  if (extra) for (var k in extra) e[k] = extra[k];
+  return e;
+}
+function hexToRgba(hex, a){
+  var c = String(hex || "#ffffff").replace("#", "");
+  if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+  if (c.length !== 6) return "rgba(255,255,255," + a + ")";
+  return "rgba(" + parseInt(c.substr(0,2),16) + "," + parseInt(c.substr(2,2),16) + "," + parseInt(c.substr(4,2),16) + "," + a + ")";
+}
+function shapeShadowCSS(e){
+  if (!e.shadow || e.shadow === "none") return "";
+  var sc = e.shadowColor || "#000000";
+  if (e.shadow === "soft")   return "filter:drop-shadow(0 3px 8px " + hexToRgba(sc, .22) + ");";
+  if (e.shadow === "medium") return "filter:drop-shadow(0 7px 16px " + hexToRgba(sc, .32) + ");";
+  if (e.shadow === "strong") return "filter:drop-shadow(0 12px 26px " + hexToRgba(sc, .45) + ");";
+  return "";
+}
+function roundedRectPath(tl, tr, br, bl){
+  var x0 = 1.5, y0 = 1.5, x1 = 98.5, y1 = 98.5;
+  tl = Math.min(tl, 48); tr = Math.min(tr, 48); br = Math.min(br, 48); bl = Math.min(bl, 48);
+  return "M" + (x0 + tl) + "," + y0 +
+    " L" + (x1 - tr) + "," + y0 + " Q" + x1 + "," + y0 + " " + x1 + "," + (y0 + tr) +
+    " L" + x1 + "," + (y1 - br) + " Q" + x1 + "," + y1 + " " + (x1 - br) + "," + y1 +
+    " L" + (x0 + bl) + "," + y1 + " Q" + x0 + "," + y1 + " " + x0 + "," + (y1 - bl) +
+    " L" + x0 + "," + (y0 + tl) + " Q" + x0 + "," + y0 + " " + (x0 + tl) + "," + y0 + " Z";
+}
+function shapeInnerHTML(e, tf){
+  var gid = "sg" + e.id;
+  var alpha = (e.fillAlpha == null ? 88 : e.fillAlpha) / 100;
+  var fillPaint = "none", defs = "";
+  if (e.fillMode === "solid") fillPaint = hexToRgba(e.fill || "#ffffff", alpha);
+  else if (e.fillMode === "gradient"){
+    var ang = (e.gradDir == null ? 135 : e.gradDir) * Math.PI / 180;
+    var gx1 = 50 - Math.cos(ang) * 50, gy1 = 50 - Math.sin(ang) * 50, gx2 = 50 + Math.cos(ang) * 50, gy2 = 50 + Math.sin(ang) * 50;
+    defs = '<defs><linearGradient id="' + gid + '" gradientUnits="userSpaceOnUse" x1="' + gx1.toFixed(1) + '" y1="' + gy1.toFixed(1) + '" x2="' + gx2.toFixed(1) + '" y2="' + gy2.toFixed(1) + '">' +
+      '<stop offset="0" stop-color="' + (e.fill || "#ffffff") + '" stop-opacity="' + alpha + '"/>' +
+      '<stop offset="1" stop-color="' + (e.fill2 || "#d9a441") + '" stop-opacity="' + alpha + '"/></linearGradient></defs>';
+    fillPaint = "url(#" + gid + ")";
+  }
+  var sw = (e.strokeStyle && e.strokeStyle !== "none") ? (e.strokeW == null ? 1.5 : e.strokeW) : 0;
+  if (e.strokeStyle === "double") sw = Math.max(3.5, sw);
+  var strokeAttrs = sw > 0
+    ? ' stroke="' + (e.stroke || "#d9a441") + '" stroke-width="' + sw + '" vector-effect="non-scaling-stroke"' +
+      (e.strokeStyle === "dashed" ? ' stroke-dasharray="7 5"' : e.strokeStyle === "dotted" ? ' stroke-dasharray="0.5 5" stroke-linecap="round"' : "")
+    : ' stroke="none"';
+  var body = "";
+  switch (e.shape){
+    case "circle": case "framecircle":
+      body = '<ellipse cx="50" cy="50" rx="46.5" ry="46.5"/>'; break;
+    case "ellipse":
+      body = '<ellipse cx="50" cy="50" rx="47.5" ry="46.5"/>'; break;
+    case "diamond":
+      body = '<polygon points="50,2.5 97.5,50 50,97.5 2.5,50"/>'; break;
+    case "triangle":
+      body = '<polygon points="50,3.5 97,96.5 3,96.5"/>'; break;
+    case "star":
+      body = '<polygon points="50,2 61.8,35.5 97.5,35.9 69,56.8 79.4,90.5 50,70.5 20.6,90.5 31,56.8 2.5,35.9 38.2,35.5"/>'; break;
+    case "heart":
+      body = '<path d="M50,91 C17,66 4.5,47.5 4.5,29.5 C4.5,12.5 18,3 31.5,3 C40.5,3 47.5,9 50,16.5 C52.5,9 59.5,3 68.5,3 C82,3 95.5,12.5 95.5,29.5 C95.5,47.5 83,66 50,91 Z"/>'; break;
+    case "arch":
+      body = '<path d="M3,97.5 L3,50 A47,47 0 0 1 97,50 L97,97.5 Z"/>'; break;
+    case "pill":
+      body = '<path d="' + roundedRectPath(50, 50, 50, 50) + '"/>'; break;
+    default: /* rect, rounded, frame, line */
+      body = '<path d="' + roundedRectPath(e.rTL || 0, e.rTR || 0, e.rBR || 0, e.rBL || 0) + '"/>'; break;
+  }
+  body = body.replace("/>", ' fill="' + fillPaint + '"' + strokeAttrs + "/>");
+  var svg = '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="' + shapeShadowCSS(e) + '">' + defs + body + "</svg>";
+  var txt = "";
+  if (e.shpText)
+    txt = '<div class="shp-txt" style="font-family:' + S.theme.fIsi + ';color:' + (e.shpTextColor || "#3a2a18") + ';font-size:' + (e.shpTextSize || 1) + 'rem">' + esc(e.shpText) + "</div>";
+  return '<div class="shpwrap" style="transform:' + tf + ';opacity:' + e.op + '">' + svg + txt + "</div>";
+}
 /* ================= HALAMAN & ELEMEN TEKS ================= */
 var PAGE_KINDS = {
   sampul:   { label:"Sampul" },
@@ -1239,11 +1387,14 @@ function ornHTML(e, interactive){
       '<span class="handle resize" data-h="size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 4H4v5M15 20h5v-5"/></svg></span>';
   }
   var hs = e.h ? "height:" + e.h + "%;" : "";
-  var inner = e.panel
-    ? '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>'
-    : '<img src="' + e.src + '" alt="' + esc(e.name) + '" draggable="false" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
-  return '<div class="orn' + sel + lk + enterClass(e) + '" data-id="' + e.id + '" style="left:' + e.x + '%;top:' + e.y + '%;width:' + e.w + '%;' + hs + 'z-index:' + (10 + S.pages[S.page].indexOf(e)) + ';' + enterVars(e) + '">' +
-    '<div class="orn-anim" style="' + animCSS(e) + (e.panel ? "height:100%;" : "") + '">' + inner + '</div>' + handles + '</div>';
+  var inner;
+  if (e.shape) inner = shapeInnerHTML(e, tf);
+  else if (e.panel)
+    inner = '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>';
+  else
+    inner = '<img src="' + e.src + '" alt="' + esc(e.name) + '" draggable="false" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
+  return '<div class="orn' + (e.shape ? " shp-orn" : "") + sel + lk + enterClass(e) + '" data-id="' + e.id + '" style="left:' + e.x + '%;top:' + e.y + '%;width:' + e.w + '%;' + hs + 'z-index:' + (10 + S.pages[S.page].indexOf(e)) + ';' + enterVars(e) + '">' +
+    '<div class="orn-anim" style="' + animCSS(e) + ((e.panel || e.shape) ? "height:100%;" : "") + '">' + inner + '</div>' + handles + '</div>';
 }
 
 /* ================= RENDER ================= */
@@ -1332,9 +1483,20 @@ function renderTextPanel(p, e){
       '<button class="btn" type="button" data-bfill="solid"' + (e.btnFill === "solid" ? ' style="border-color:var(--gold)"' : '') + '>Penuh</button>' +
     '</div></div>';
   }
+  html += '<h2 class="sec">Latar / border di belakang tulisan ini</h2>' +
+  '<p class="hint" style="margin:-.25rem 0 .55rem">Sekali klik: bentuk otomatis dibuat pas di belakang teks ini (ukuran &amp; posisinya mengikuti teks). Setelah dibuat, klik bentuknya untuk mengatur isi, garis tepi, kelengkungan sudut, dan bayangannya.</p>' +
+  '<div class="btnrow">' +
+    '<button class="btn" type="button" data-tbg="card">＋ Kartu putih</button>' +
+    '<button class="btn" type="button" data-tbg="glass">＋ Kartu kaca gelap</button>' +
+  '</div>' +
+  '<div class="btnrow" style="margin-top:.45rem">' +
+    '<button class="btn" type="button" data-tbg="gold">＋ Bingkai emas saja</button>' +
+    '<button class="btn" type="button" data-tbg="ribbon">＋ Pita / label</button>' +
+  '</div>';
   html += '<div class="btnrow" style="margin-top:.55rem"><button class="btn" type="button" id="ptResetPos">Kembalikan posisi &amp; gaya awal</button></div>' +
   '</div>';
   p.innerHTML = html;
+  p.querySelectorAll("[data-tbg]").forEach(function(b){ b.addEventListener("click", function(){ addShapeBehindText(e, b.getAttribute("data-tbg")); }); });
   var tx = $("ptText");
   if (tx) tx.addEventListener("input", function(){ e.text = this.value; renderCanvas(); renderPreviewIfOpen(); });
   $("ptFont").addEventListener("change", function(){ e.fontFam = this.value || null; renderCanvas(); renderPreviewIfOpen(); });
@@ -1359,16 +1521,205 @@ function renderTextPanel(p, e){
   });
   updateSelChip();
 }
+/* ================= PANEL PENGATURAN BENTUK ================= */
+function renderShapePanel(p, e){
+  var typeBtns = "";
+  for (var skey in SHAPES)
+    typeBtns += '<button type="button" data-shtype="' + skey + '"' + (e.shape === skey ? ' class="on"' : '') + '>' + SHAPES[skey].label + '</button>';
+  var animBtns = "";
+  for (var key in ANIMS) animBtns += '<button type="button" data-anim="' + key + '"' + (e.anim === key ? ' class="on"' : '') + '>' + ANIMS[key].label + '</button>';
+  var enterBtns = "";
+  for (var ekey in ENTERS) enterBtns += '<button type="button" data-enter="' + ekey + '"' + (e.enter === ekey ? ' class="on"' : '') + '>' + ENTERS[ekey].label + '</button>';
+  var canRadius = !!SHAPE_RADIUS_TYPES[e.shape];
+  var rAll = Math.round(((e.rTL || 0) + (e.rTR || 0) + (e.rBR || 0) + (e.rBL || 0)) / 4);
+  var html =
+  '<div class="selbox">' +
+    '<div class="selname"><span style="width:2rem;height:2rem;flex:none;border-radius:.35rem;border:1.5px solid ' + esc(e.stroke || "#d9a441") + ';background:' + (e.fillMode === "none" ? "transparent" : esc(e.fill || "#fff")) + '"></span>' + esc(e.name) + ' — bentuk</div>' +
+    '<div class="field"><label>Jenis bentuk (bisa diganti kapan saja)</label><div class="animgrid">' + typeBtns + '</div></div>' +
+    '<h2 class="sec">Ukuran &amp; posisi</h2>' +
+    '<div class="field"><label>Lebar <span class="val" id="vShpW">' + Math.round(e.w) + '%</span></label><input type="range" id="sW" min="3" max="120" step="1" value="' + e.w + '"></div>' +
+    '<div class="field"><label>Tinggi <span class="val" id="vShpH">' + (e.h || 10) + '%</span></label><input type="range" id="sH" min="1" max="96" step="0.5" value="' + (e.h || 10) + '"></div>' +
+    '<div class="field"><label>Putaran <span class="val" id="vShpRot">' + Math.round(e.rot) + '°</span></label><input type="range" id="sRot" min="-180" max="180" step="1" value="' + e.rot + '"></div>' +
+    '<div class="field"><label>Transparansi keseluruhan <span class="val" id="vShpOp">' + Math.round(e.op * 100) + '%</span></label><input type="range" id="sOp" min="5" max="100" step="1" value="' + Math.round(e.op * 100) + '"></div>' +
+    '<div class="btnrow"><button class="btn" type="button" id="sCenter">Taruh di tengah</button><button class="btn" type="button" id="sLock">' + (e.locked ? "Buka kunci" : "Kunci posisi") + '</button></div>' +
+    '<h2 class="sec">Isi bentuk</h2>' +
+    '<div class="field"><label>Model isi</label><div class="segbtns">' +
+      '<button type="button" data-fillmode="solid"' + (e.fillMode === "solid" ? ' class="on"' : '') + '>Padat</button>' +
+      '<button type="button" data-fillmode="gradient"' + (e.fillMode === "gradient" ? ' class="on"' : '') + '>Gradien</button>' +
+      '<button type="button" data-fillmode="none"' + (e.fillMode === "none" ? ' class="on"' : '') + '>Kosong (bingkai saja)</button>' +
+    '</div></div>' +
+    (e.fillMode !== "none" ?
+      '<div class="row2">' +
+        '<div class="field"><label>' + (e.fillMode === "gradient" ? "Warna awal" : "Warna isi") + '</label><input type="color" id="sFill" value="' + (e.fill || "#ffffff") + '"></div>' +
+        (e.fillMode === "gradient" ? '<div class="field"><label>Warna akhir</label><input type="color" id="sFill2" value="' + (e.fill2 || "#d9a441") + '"></div>' : '<div class="field"><label>Kepekatan isi <span class="val" id="vShpFA">' + (e.fillAlpha == null ? 88 : e.fillAlpha) + '%</span></label><input type="range" id="sFA" min="0" max="100" step="1" value="' + (e.fillAlpha == null ? 88 : e.fillAlpha) + '"></div>') +
+      '</div>' +
+      (e.fillMode === "gradient" ?
+        '<div class="field"><label>Kepekatan isi <span class="val" id="vShpFA">' + (e.fillAlpha == null ? 88 : e.fillAlpha) + '%</span></label><input type="range" id="sFA" min="0" max="100" step="1" value="' + (e.fillAlpha == null ? 88 : e.fillAlpha) + '"></div>' +
+        '<div class="field"><label>Arah gradien</label><select class="dirsel" id="sGradDir">' +
+          [["0","Kiri → kanan"],["45","Diagonal ↘"],["90","Atas → bawah"],["135","Diagonal ↙"],["180","Kanan → kiri"],["270","Bawah → atas"]].map(function(d){ return '<option value="' + d[0] + '"' + ((e.gradDir == null ? 135 : e.gradDir) === +d[0] ? " selected" : "") + '>' + d[1] + '</option>'; }).join("") + '</select></div>' : '')
+    : '') +
+    '<h2 class="sec">Garis tepi (border)</h2>' +
+    '<div class="field"><label>Model garis</label><div class="segbtns">' +
+      '<button type="button" data-strokestyle="none"' + (e.strokeStyle === "none" ? ' class="on"' : '') + '>Tidak ada</button>' +
+      '<button type="button" data-strokestyle="solid"' + (e.strokeStyle === "solid" ? ' class="on"' : '') + '>Padat</button>' +
+      '<button type="button" data-strokestyle="dashed"' + (e.strokeStyle === "dashed" ? ' class="on"' : '') + '>Putus-putus</button>' +
+      '<button type="button" data-strokestyle="dotted"' + (e.strokeStyle === "dotted" ? ' class="on"' : '') + '>Titik-titik</button>' +
+      '<button type="button" data-strokestyle="double"' + (e.strokeStyle === "double" ? ' class="on"' : '') + '>Ganda / tebal</button>' +
+    '</div></div>' +
+    (e.strokeStyle !== "none" ?
+      '<div class="row2">' +
+        '<div class="field"><label>Warna garis</label><input type="color" id="sStroke" value="' + (e.stroke || "#d9a441") + '"></div>' +
+        '<div class="field"><label>Ketebalan <span class="val" id="vShpSW">' + (e.strokeW == null ? 1.5 : e.strokeW) + ' px</span></label><input type="range" id="sSW" min="0.5" max="10" step="0.5" value="' + (e.strokeW == null ? 1.5 : e.strokeW) + '"></div>' +
+      '</div>' : '') +
+    (canRadius ?
+    '<h2 class="sec">Sudut — kelengkungan / ketajaman</h2>' +
+    '<div class="field"><label>Cepat</label><div class="segbtns">' +
+      '<button type="button" data-rpreset="0">Tajam</button>' +
+      '<button type="button" data-rpreset="10">Lembut</button>' +
+      '<button type="button" data-rpreset="24">Membulat</button>' +
+      '<button type="button" data-rpreset="50">Sangat bulat</button>' +
+    '</div></div>' +
+    '<div class="field"><label>Kelengkungan semua sudut <span class="val" id="vShpR">' + rAll + '</span></label><input type="range" id="sRAll" min="0" max="50" step="1" value="' + rAll + '"></div>' +
+    '<p class="hint" style="margin:-.2rem 0 .4rem">Atau atur tiap sudut sendiri:</p>' +
+    '<div class="corners">' +
+      '<div class="field"><label>Kiri atas <span class="val" id="vShpRTL">' + Math.round(e.rTL || 0) + '</span></label><input type="range" id="sRTL" min="0" max="50" step="1" value="' + (e.rTL || 0) + '"></div>' +
+      '<div class="field"><label>Kanan atas <span class="val" id="vShpRTR">' + Math.round(e.rTR || 0) + '</span></label><input type="range" id="sRTR" min="0" max="50" step="1" value="' + (e.rTR || 0) + '"></div>' +
+      '<div class="field"><label>Kiri bawah <span class="val" id="vShpRBL">' + Math.round(e.rBL || 0) + '</span></label><input type="range" id="sRBL" min="0" max="50" step="1" value="' + (e.rBL || 0) + '"></div>' +
+      '<div class="field"><label>Kanan bawah <span class="val" id="vShpRBR">' + Math.round(e.rBR || 0) + '</span></label><input type="range" id="sRBR" min="0" max="50" step="1" value="' + (e.rBR || 0) + '"></div>' +
+    '</div>' : '<h2 class="sec">Sudut</h2><p class="hint">Bentuk ini tidak memakai pengaturan sudut — kelengkungannya sudah bawaan bentuknya.</p>') +
+    '<h2 class="sec">Bayangan</h2>' +
+    '<div class="field"><div class="segbtns">' +
+      '<button type="button" data-shadow="none"' + (e.shadow === "none" ? ' class="on"' : '') + '>Tidak ada</button>' +
+      '<button type="button" data-shadow="soft"' + (e.shadow === "soft" ? ' class="on"' : '') + '>Lembut</button>' +
+      '<button type="button" data-shadow="medium"' + (e.shadow === "medium" ? ' class="on"' : '') + '>Sedang</button>' +
+      '<button type="button" data-shadow="strong"' + (e.shadow === "strong" ? ' class="on"' : '') + '>Kuat</button>' +
+    '</div></div>' +
+    (e.shadow !== "none" ? '<div class="field"><label>Warna bayangan</label><input type="color" id="sShadowCol" value="' + (e.shadowColor || "#000000") + '"></div>' : '') +
+    '<h2 class="sec">Tulisan di dalam bentuk</h2>' +
+    '<div class="field"><label>Isi tulisan (boleh kosong)</label><textarea id="sTxt" rows="2" placeholder="cth: 20 . 12 . 2026">' + esc(e.shpText || "") + '</textarea></div>' +
+    '<div class="row2">' +
+      '<div class="field"><label>Warna tulisan</label><input type="color" id="sTxtCol" value="' + (e.shpTextColor || "#3a2a18") + '"></div>' +
+      '<div class="field"><label>Ukuran tulisan <span class="val" id="vShpTS">' + Math.round((e.shpTextSize || 1) * 100) + '%</span></label><input type="range" id="sTxtSize" min="50" max="200" step="5" value="' + Math.round((e.shpTextSize || 1) * 100) + '"></div>' +
+    '</div>' +
+    '<h2 class="sec">Animasi bentuk ini</h2>' +
+    '<div class="animgrid">' + animBtns + '</div>' +
+    (e.anim !== "none" ? '<div class="field" style="margin-top:.6rem"><label>Kecepatan animasi <span class="val" id="vShpSpeed">' + (e.speed || 1).toFixed(1) + '×</span></label><input type="range" id="sSpeed" min="0.4" max="2.5" step="0.1" value="' + (e.speed || 1) + '"></div>' : '') +
+    '<h2 class="sec">Animasi masuk (ala PowerPoint)</h2>' +
+    '<div class="animgrid">' + enterBtns + '</div>' +
+    (e.enter !== "none" ?
+      '<div class="field" style="margin-top:.6rem"><label>Durasi masuk <span class="val" id="vShpED">' + (e.enterDur || 1).toFixed(1) + ' dtk</span></label><input type="range" id="sEDur" min="0.3" max="3" step="0.1" value="' + (e.enterDur || 1) + '"></div>' +
+      '<div class="field"><label>Tunda sebelum masuk <span class="val" id="vShpEDel">' + (e.enterDelay || 0).toFixed(1) + ' dtk</span></label><input type="range" id="sEDelay" min="0" max="3" step="0.1" value="' + (e.enterDelay || 0) + '"></div>' : '') +
+    '<div class="btnrow" style="margin-top:.55rem"><button class="btn" type="button" id="sReplay">▶ Putar ulang animasi masuk</button></div>' +
+    '<h2 class="sec">Tumpukan &amp; lainnya</h2>' +
+    '<p class="hint" style="margin:-.25rem 0 .5rem">Bentuk selalu tampil di belakang tulisan undangan, jadi tinggal kirim ke belakang ornamen lain untuk jadi latar / kartu tulisan.</p>' +
+    '<div class="btnrow">' +
+      '<button class="btn" type="button" id="sUp">Ke depan</button>' +
+      '<button class="btn" type="button" id="sDown">Ke belakang</button>' +
+    '</div>' +
+    '<div class="btnrow" style="margin-top:.45rem">' +
+      '<button class="btn" type="button" id="sBack">Paling belakang</button>' +
+      '<button class="btn" type="button" id="sFront">Paling depan</button>' +
+    '</div>' +
+    '<div class="btnrow" style="margin-top:.45rem">' +
+      '<button class="btn" type="button" id="sDup">Duplikat</button>' +
+      '<button class="btn" type="button" id="sDel" style="color:var(--danger);border-color:var(--danger)">Hapus</button>' +
+    '</div>' +
+  '</div>';
+  p.innerHTML = html;
+  function soft(){ renderShapePanelSoft(e); }
+  function rc(){ renderCanvas(); renderPreviewIfOpen(); }
+  $("sW").addEventListener("input", function(){ e.w = +this.value; rc(); soft(); });
+  $("sH").addEventListener("input", function(){ e.h = +this.value; rc(); soft(); });
+  $("sRot").addEventListener("input", function(){ e.rot = +this.value; rc(); soft(); });
+  $("sOp").addEventListener("input", function(){ e.op = +this.value / 100; rc(); soft(); });
+  $("sCenter").addEventListener("click", function(){ e.x = Math.max(0, (100 - e.w) / 2); rc(); });
+  $("sLock").addEventListener("click", function(){ e.locked = !e.locked; renderCanvas(); renderSelPanel(); });
+  p.querySelectorAll("[data-shtype]").forEach(function(b){ b.addEventListener("click", function(){
+    var nt = b.getAttribute("data-shtype"); var d = SHAPES[nt];
+    e.shape = nt; e.name = d.label;
+    if (nt === "frame" || nt === "framecircle"){ if (e.fillMode === "solid" && (e.fillAlpha == null || e.fillAlpha >= 88)) e.fillMode = "none"; }
+    renderCanvas(); renderSelPanel(); renderPreviewIfOpen();
+  }); });
+  p.querySelectorAll("[data-fillmode]").forEach(function(b){ b.addEventListener("click", function(){ e.fillMode = b.getAttribute("data-fillmode"); renderCanvas(); renderSelPanel(); renderPreviewIfOpen(); }); });
+  var sf = $("sFill"); if (sf) sf.addEventListener("input", function(){ e.fill = this.value; rc(); });
+  var sf2 = $("sFill2"); if (sf2) sf2.addEventListener("input", function(){ e.fill2 = this.value; rc(); });
+  var sfa = $("sFA"); if (sfa) sfa.addEventListener("input", function(){ e.fillAlpha = +this.value; var v = $("vShpFA"); if (v) v.textContent = this.value + "%"; rc(); });
+  var sgd = $("sGradDir"); if (sgd) sgd.addEventListener("change", function(){ e.gradDir = +this.value; rc(); });
+  p.querySelectorAll("[data-strokestyle]").forEach(function(b){ b.addEventListener("click", function(){ e.strokeStyle = b.getAttribute("data-strokestyle"); renderCanvas(); renderSelPanel(); renderPreviewIfOpen(); }); });
+  var ss = $("sStroke"); if (ss) ss.addEventListener("input", function(){ e.stroke = this.value; rc(); });
+  var ssw = $("sSW"); if (ssw) ssw.addEventListener("input", function(){ e.strokeW = +this.value; var v = $("vShpSW"); if (v) v.textContent = this.value + " px"; rc(); });
+  p.querySelectorAll("[data-rpreset]").forEach(function(b){ b.addEventListener("click", function(){
+    var r = +b.getAttribute("data-rpreset"); e.rTL = e.rTR = e.rBR = e.rBL = r; renderCanvas(); renderSelPanel(); renderPreviewIfOpen();
+  }); });
+  var sra = $("sRAll"); if (sra) sra.addEventListener("input", function(){ var r = +this.value; e.rTL = e.rTR = e.rBR = e.rBL = r; rc(); soft(); });
+  [["sRTL","rTL","vShpRTL"],["sRTR","rTR","vShpRTR"],["sRBL","rBL","vShpRBL"],["sRBR","rBR","vShpRBR"]].forEach(function(cfg){
+    var el = $(cfg[0]); if (el) el.addEventListener("input", function(){ e[cfg[1]] = +this.value; var v = $(cfg[2]); if (v) v.textContent = this.value; rc(); });
+  });
+  p.querySelectorAll("[data-shadow]").forEach(function(b){ b.addEventListener("click", function(){ e.shadow = b.getAttribute("data-shadow"); renderCanvas(); renderSelPanel(); renderPreviewIfOpen(); }); });
+  var ssc = $("sShadowCol"); if (ssc) ssc.addEventListener("input", function(){ e.shadowColor = this.value; rc(); });
+  $("sTxt").addEventListener("input", function(){ e.shpText = this.value; rc(); });
+  $("sTxtCol").addEventListener("input", function(){ e.shpTextColor = this.value; rc(); });
+  $("sTxtSize").addEventListener("input", function(){ e.shpTextSize = +this.value / 100; var v = $("vShpTS"); if (v) v.textContent = this.value + "%"; rc(); });
+  p.querySelectorAll("[data-anim]").forEach(function(b){ b.addEventListener("click", function(){ e.anim = b.getAttribute("data-anim"); renderCanvas(); renderSelPanel(); }); });
+  var ssp = $("sSpeed"); if (ssp) ssp.addEventListener("input", function(){ e.speed = +this.value; var v = $("vShpSpeed"); if (v) v.textContent = (+this.value).toFixed(1) + "×"; rc(); });
+  p.querySelectorAll("[data-enter]").forEach(function(b){ b.addEventListener("click", function(){ e.enter = b.getAttribute("data-enter"); renderCanvas(); renderSelPanel(); if (e.enter !== "none") setTimeout(replayEntrances, 60); }); });
+  var sed = $("sEDur"); if (sed) sed.addEventListener("input", function(){ e.enterDur = +this.value; var v = $("vShpED"); if (v) v.textContent = (+this.value).toFixed(1) + " dtk"; rc(); });
+  var sedel = $("sEDelay"); if (sedel) sedel.addEventListener("input", function(){ e.enterDelay = +this.value; var v = $("vShpEDel"); if (v) v.textContent = (+this.value).toFixed(1) + " dtk"; rc(); });
+  $("sReplay").addEventListener("click", replayEntrances);
+  $("sUp").addEventListener("click", function(){ moveLayer(e, 1); });
+  $("sDown").addEventListener("click", function(){ moveLayer(e, -1); });
+  $("sBack").addEventListener("click", function(){ var l = S.pages[S.page]; var i = l.indexOf(e); if (i > 0){ l.splice(i, 1); l.unshift(e); renderCanvas(); renderPreviewIfOpen(); } });
+  $("sFront").addEventListener("click", function(){ var l = S.pages[S.page]; var i = l.indexOf(e); if (i >= 0 && i < l.length - 1){ l.splice(i, 1); l.push(e); renderCanvas(); renderPreviewIfOpen(); } });
+  $("sDup").addEventListener("click", function(){
+    var c = JSON.parse(JSON.stringify(e)); c.id = uid++; c.x = Math.min(92, c.x + 4); c.y = Math.min(92, c.y + 4);
+    S.pages[S.page].push(c); S.selected = c.id; renderCanvas(); renderSelPanel();
+  });
+  $("sDel").addEventListener("click", function(){
+    S.pages[S.page] = S.pages[S.page].filter(function(x){ return x.id !== e.id; });
+    S.selected = null; renderCanvas(); renderSelPanel();
+  });
+  updateSelChip();
+}
+function renderShapePanelSoft(e){
+  var v;
+  v = $("vShpW"); if (v) v.textContent = Math.round(e.w) + "%";
+  v = $("vShpH"); if (v) v.textContent = (Math.round((e.h || 0) * 2) / 2) + "%";
+  v = $("vShpRot"); if (v) v.textContent = Math.round(e.rot) + "°";
+  v = $("vShpOp"); if (v) v.textContent = Math.round(e.op * 100) + "%";
+  v = $("vShpR"); if (v) v.textContent = Math.round(((e.rTL || 0) + (e.rTR || 0) + (e.rBR || 0) + (e.rBL || 0)) / 4);
+  v = $("vShpRTL"); if (v) v.textContent = Math.round(e.rTL || 0);
+  v = $("vShpRTR"); if (v) v.textContent = Math.round(e.rTR || 0);
+  v = $("vShpRBL"); if (v) v.textContent = Math.round(e.rBL || 0);
+  v = $("vShpRBR"); if (v) v.textContent = Math.round(e.rBR || 0);
+}
+/* tambah bentuk di belakang elemen teks terpilih (kartu / border tulisan) */
+function addShapeBehindText(te, preset){
+  var heights = { pengantar:6, nama:12, amp:7, tanggal:6, kepada:8, tamu:6, buka:7, head:10, body:30 };
+  var h = heights[te.kind] || 12;
+  var w = Math.min(96, te.w + 8), x = Math.max(0, te.x - 4), y = Math.max(0, te.y - 1.6);
+  var extra = { x: x, y: y, w: w, h: h + 3 };
+  if (preset === "glass") extra = Object.assign(extra, { fillMode:"solid", fill:"#1c1410", fillAlpha:55, stroke:"#d9a441", strokeW:1.5, strokeStyle:"solid", rTL:16, rTR:16, rBR:16, rBL:16, shadow:"medium" });
+  else if (preset === "gold") extra = Object.assign(extra, { fillMode:"none", stroke:"#d9a441", strokeW:2, strokeStyle:"double", rTL:4, rTR:4, rBR:4, rBL:4, shadow:"none" });
+  else if (preset === "ribbon") extra = Object.assign(extra, { shape:"pill", fillMode:"gradient", fill:"#d9a441", fill2:"#b4762a", fillAlpha:100, strokeStyle:"none", rTL:50, rTR:50, rBR:50, rBL:50, shadow:"soft" });
+  else extra = Object.assign(extra, { fillMode:"solid", fill:"#ffffff", fillAlpha:88, stroke:"#d9a441", strokeW:1.5, strokeStyle:"solid", rTL:16, rTR:16, rBR:16, rBL:16, shadow:"soft" });
+  var shp = mkShape(extra.shape || "rounded", extra);
+  shp.name = "Latar — " + te.label;
+  S.pages[S.page].unshift(shp);
+  S.selected = shp.id; S.selText = null;
+  renderCanvas(); renderSelPanel(); renderPreviewIfOpen();
+  if (isMobile()) openSheet("panel");
+}
 function renderSelPanel(){
   var p = $("selPanel");
   var te = selectedTextEl();
   if (te){ renderTextPanel(p, te); return; }
   var e = selectedEl();
   if (!e){
-    p.innerHTML = '<p class="hint">Belum ada yang dipilih. Klik ornamen atau teks di kanvas, atau tambahkan ornamen dari rak.</p>';
+    p.innerHTML = '<p class="hint">Belum ada yang dipilih. Klik ornamen, bentuk, atau teks di kanvas, atau tambahkan dari rak di kiri.</p>';
     updateSelChip();
     return;
   }
+  if (e.shape){ renderShapePanel(p, e); return; }
   var animBtns = "";
   for (var key in ANIMS){
     animBtns += '<button type="button" data-anim="' + key + '"' + (e.anim === key ? ' class="on"' : '') + '>' + ANIMS[key].label + '</button>';
@@ -1457,6 +1808,7 @@ function replayEntrances(){
 /* perbarui label nilai slider tanpa menggambar ulang panel (jaga fokus slider) */
 function renderSelPanelSoft(){
   var e = selectedEl(); if (!e) return;
+  if (e.shape){ renderShapePanelSoft(e); var sw2 = $("sW"), sh2 = $("sH"), sr2 = $("sRot"); if (sw2) sw2.value = e.w; if (sh2) sh2.value = e.h || 10; if (sr2) sr2.value = e.rot; return; }
   var v;
   v = $("vSize"); if (v) v.textContent = Math.round(e.w) + "%";
   v = $("vRot"); if (v) v.textContent = Math.round(e.rot) + "°";
@@ -1509,7 +1861,7 @@ canvas.addEventListener("pointerdown", function(ev){
   drag = {
     e: e, mode: mode, pid: ev.pointerId,
     sx: ev.clientX, sy: ev.clientY,
-    ox: e.x, oy: e.y, ow: e.w, orot: e.rot,
+    ox: e.x, oy: e.y, ow: e.w, oh: e.h || 0, orot: e.rot,
     cx: rect.left + (e.x / 100) * rect.width + (e.w / 100) * rect.width / 2,
     cy: rect.top + (e.y / 100) * rect.height,
     rect: rect
@@ -1543,6 +1895,7 @@ canvas.addEventListener("pointermove", function(ev){
     e.y = Math.max(-10, Math.min(98, drag.oy + (ev.clientY - drag.sy) / r.height * 100));
   } else if (drag.mode === "size"){
     e.w = Math.max(4, Math.min(140, drag.ow + (ev.clientX - drag.sx) / r.width * 100));
+    if (e.shape) e.h = Math.max(1, Math.min(97, (drag.oh || 10) + (ev.clientY - drag.sy) / r.height * 100));
   } else if (drag.mode === "rot"){
     var ang = Math.atan2(ev.clientY - drag.cy, ev.clientX - drag.cx) * 180 / Math.PI;
     var d = ang - drag.startAng;
@@ -1558,6 +1911,8 @@ function syncSliders(){
   var e = selectedEl(); if (!e) return;
   var s = $("pSize"), r = $("pRot");
   if (s) s.value = e.w; if (r) r.value = e.rot;
+  var sw3 = $("sW"), sh3 = $("sH"), sr3 = $("sRot");
+  if (sw3) sw3.value = e.w; if (sh3 && e.shape) sh3.value = e.h || 10; if (sr3) sr3.value = e.rot;
 }
 document.addEventListener("keydown", function(ev){
   var tag = (ev.target.tagName || "").toLowerCase();
@@ -1893,11 +2248,12 @@ function renderPreview(){
       if (split && e.gate) continue;
       var tf = "rotate(" + e.rot + "deg)" + (e.flip ? " scaleX(-1)" : "");
       var hs = e.h ? "height:" + e.h + "%;" : "";
-      var inn = e.panel
-        ? '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>'
-        : '<img src="' + e.src + '" alt="" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
+      var inn;
+      if (e.shape) inn = shapeInnerHTML(e, tf);
+      else if (e.panel) inn = '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>';
+      else inn = '<img src="' + e.src + '" alt="" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
       html += '<div class="orn' + enterClass(e) + '" style="left:' + e.x + '%;top:' + e.y + '%;width:' + e.w + '%;' + hs + 'z-index:' + (10 + i) + ';' + enterVars(e) + '">' +
-        '<div class="orn-anim" style="' + animCSS(e) + (e.panel ? "height:100%;" : "") + '">' + inn + '</div></div>';
+        '<div class="orn-anim" style="' + animCSS(e) + ((e.panel || e.shape) ? "height:100%;" : "") + '">' + inn + '</div></div>';
     }
     S.page = savedPage;
     if (isCover) html += openerPanelsHTML();
@@ -1959,6 +2315,15 @@ function specToEl(o){
     e.panel = o.panel; e.h = o.h || 100; e.gate = o.gate || null;
     if (o.style) e.style = o.style;
     if (o.extra && o.extra.style) e.style = o.extra.style;
+  }
+  if (o.shape){
+    e.shape = o.shape; e.h = o.h || 10;
+    e.fillMode = o.fillMode || "solid"; e.fill = o.fill || "#ffffff"; e.fill2 = o.fill2 || "#d9a441";
+    e.gradDir = (o.gradDir == null ? 135 : o.gradDir); e.fillAlpha = (o.fillAlpha == null ? 88 : o.fillAlpha);
+    e.stroke = o.stroke || "#d9a441"; e.strokeW = (o.strokeW == null ? 1.5 : o.strokeW); e.strokeStyle = o.strokeStyle || "solid";
+    e.rTL = o.rTL || 0; e.rTR = o.rTR || 0; e.rBR = o.rBR || 0; e.rBL = o.rBL || 0;
+    e.shadow = o.shadow || "none"; e.shadowColor = o.shadowColor || "#000000";
+    e.shpText = o.shpText || ""; e.shpTextColor = o.shpTextColor || "#3a2a18"; e.shpTextSize = o.shpTextSize || 1;
   }
   return e;
 }
@@ -2095,7 +2460,7 @@ $("btnSaveTpl").addEventListener("click", function(){
   var pages = {};
   S.pageList.forEach(function(pg){
     pages[pg.id] = (S.pages[pg.id] || []).map(function(e){
-      return { src:e.src, name:e.name, x:e.x, y:e.y, w:e.w, rot:e.rot, flip:e.flip, op:e.op, locked:e.locked, anim:e.anim, speed:e.speed, enter:e.enter, enterDur:e.enterDur, enterDelay:e.enterDelay, blend:e.blend || null, panel:e.panel || null, h:e.h || null, gate:e.gate || null, style:e.style || null };
+      return { src:e.src, name:e.name, x:e.x, y:e.y, w:e.w, rot:e.rot, flip:e.flip, op:e.op, locked:e.locked, anim:e.anim, speed:e.speed, enter:e.enter, enterDur:e.enterDur, enterDelay:e.enterDelay, blend:e.blend || null, panel:e.panel || null, h:e.h || null, gate:e.gate || null, style:e.style || null, shape:e.shape || null, fillMode:e.fillMode || null, fill:e.fill || null, fill2:e.fill2 || null, gradDir:(e.gradDir == null ? null : e.gradDir), fillAlpha:(e.fillAlpha == null ? null : e.fillAlpha), stroke:e.stroke || null, strokeW:(e.strokeW == null ? null : e.strokeW), strokeStyle:e.strokeStyle || null, rTL:e.rTL || 0, rTR:e.rTR || 0, rBR:e.rBR || 0, rBL:e.rBL || 0, shadow:e.shadow || null, shadowColor:e.shadowColor || null, shpText:e.shpText || "", shpTextColor:e.shpTextColor || null, shpTextSize:e.shpTextSize || 1 };
     });
   });
   myTemplates.push({
@@ -2178,6 +2543,7 @@ function buildExport(map){
   'body{font-family:' + th.fIsi + ';color:' + th.text + '}' +
   '.page{position:relative;width:100%;max-width:440px;margin:0 auto;min-height:100dvh;overflow:hidden;color:' + th.text + '}' +
   '.orn{position:absolute}.orn img{display:block;width:100%;height:auto}' +
+  '.orn .shpwrap{position:relative;width:100%;height:100%}.orn .shpwrap svg{display:block;width:100%;height:100%}.orn .shp-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:.3rem .6rem;line-height:1.35;white-space:pre-line;overflow:hidden}' +
   '.txtel{position:absolute;line-height:1.3}' +
   '.tk-buka{cursor:pointer}' +
   '.musicbtn{position:fixed;right:14px;bottom:' + (S.nav.on && S.nav.items.length ? "86px" : "18px") + ';z-index:300;width:46px;height:46px;border-radius:50%;border:1px solid ' + th.accent + ';background:rgba(0,0,0,.55);color:' + th.accent + ';font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center}' +
@@ -2228,11 +2594,12 @@ function buildExport(map){
       var tf = "rotate(" + e.rot + "deg)" + (e.flip ? " scaleX(-1)" : "");
       if (split && e.gate) continue;
       var hs2 = e.h ? "height:" + e.h + "%;" : "";
-      var inn = e.panel
-        ? '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>'
-        : '<img src="' + (map[e.src] || e.src) + '" alt="" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
+      var inn;
+      if (e.shape) inn = shapeInnerHTML(e, tf);
+      else if (e.panel) inn = '<div style="background:' + e.panel + ';width:100%;height:100%;transform:' + tf + ';opacity:' + e.op + ';' + (e.style || "") + '"></div>';
+      else inn = '<img src="' + (map[e.src] || e.src) + '" alt="" style="transform:' + tf + ';opacity:' + e.op + (e.blend ? ';mix-blend-mode:' + e.blend : '') + '">';
       out += '<div class="orn' + enterClass(e) + '" style="left:' + e.x + '%;top:' + e.y + '%;width:' + e.w + '%;' + hs2 + 'z-index:' + (10 + i) + ';' + enterVars(e) + '">' +
-        '<div class="orn-anim" style="' + animCSS(e) + (e.panel ? "height:100%;" : "") + '">' + inn + '</div></div>';
+        '<div class="orn-anim" style="' + animCSS(e) + ((e.panel || e.shape) ? "height:100%;" : "") + '">' + inn + '</div></div>';
     }
     if (isCover) out += openerPanelsHTML(bgCSS(bg, bgImg));
     out += textElsHTML(pid, false);
@@ -2329,7 +2696,7 @@ function updateSelChip(){
   $("scDel").style.display = "";
   var e = selectedEl();
   if (!e){ chip.classList.remove("show"); return; }
-  if (e.panel) $("scImg").style.display = "none"; else $("scImg").src = e.src;
+  if (e.panel || e.shape) $("scImg").style.display = "none"; else $("scImg").src = e.src;
   $("scName").textContent = e.name;
   chip.classList.add("show");
 }
@@ -2338,7 +2705,46 @@ $("scDup").addEventListener("click", function(){ var b = $("pDup"); if (b) b.cli
 $("scDel").addEventListener("click", function(){ var b = $("pDel"); if (b) b.click(); });
 $("scClose").addEventListener("click", function(){ S.selected = null; S.selText = null; renderAll(); });
 
+/* ================= RAK BENTUK: tampilkan & sisipkan ================= */
+function renderShapeGrid(){
+  var g = $("shapeGrid"); if (!g) return;
+  var html = "";
+  for (var k in SHAPES)
+    html += '<button type="button" class="shapebtn" data-shape="' + k + '"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' + SHAPES[k].prev + '</svg><span>' + SHAPES[k].label + '</span></button>';
+  g.innerHTML = html;
+}
+function insertShape(e){
+  S.pages[S.page].push(e); S.selected = e.id; S.selText = null; renderAll();
+  if (isMobile()) closeSheets();
+}
+$("shapeGrid").addEventListener("click", function(ev){
+  var b = ev.target.closest ? ev.target.closest("[data-shape]") : null;
+  if (!b) return;
+  var shp = mkShape(b.getAttribute("data-shape"));
+  /* letakkan agak ke tengah halaman aktif */
+  shp.x = Math.max(2, Math.min(94 - shp.w, (100 - shp.w) / 2));
+  shp.y = shp.shape === "line" ? 46 : Math.max(2, 38 - shp.h / 2);
+  insertShape(shp);
+});
+document.querySelectorAll("[data-shapepreset]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var kind = b.getAttribute("data-shapepreset"); var shp;
+    if (kind === "card")
+      shp = mkShape("rounded", { name:"Kartu Belakang Tulisan", x:8, y:22, w:84, h:34, fillMode:"solid", fill:"#ffffff", fillAlpha:88, stroke:"#d9a441", strokeW:1.5, rTL:16, rTR:16, rBR:16, rBL:16, shadow:"soft" });
+    else if (kind === "glass")
+      shp = mkShape("rounded", { name:"Kartu Kaca Gelap", x:8, y:22, w:84, h:34, fillMode:"solid", fill:"#1c1410", fillAlpha:55, stroke:"#d9a441", strokeW:1.5, rTL:16, rTR:16, rBR:16, rBL:16, shadow:"medium" });
+    else if (kind === "label")
+      shp = mkShape("pill", { name:"Label / Pita", x:22, y:44, w:56, h:8, fillMode:"gradient", fill:"#d9a441", fill2:"#b4762a", fillAlpha:100, strokeStyle:"none", shadow:"soft", shpText:"20 . 12 . 2026", shpTextColor:"#241a08", shpTextSize:0.95 });
+    else
+      shp = mkShape("frame", { name:"Bingkai Foto", x:15, y:18, w:70, h:36, fillMode:"none", stroke:"#d9a441", strokeW:2.5, rTL:10, rTR:10, rBR:10, rBL:10, shadow:"none" });
+    if (kind === "framephoto") S.pages[S.page].push(shp); else S.pages[S.page].unshift(shp);
+    S.selected = shp.id; S.selText = null; renderAll();
+    if (isMobile()) closeSheets();
+  });
+});
+
 /* ================= MULAI ================= */
+renderShapeGrid();
 refreshThemeUI();
 renderRack();
 renderTabs();
