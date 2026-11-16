@@ -73,6 +73,25 @@
       h2.sec:first-child{ margin-top:0; }
       .hint{ font-size:.78rem; color:var(--ui-dim); line-height:1.5; }
 
+      /* ---------- akordeon: tiap bagian panel jadi tombol sendiri ---------- */
+      .acc{
+        border:1px solid var(--ui-line); border-radius:.75rem; background:var(--ui-panel2);
+        margin:0 0 .6rem; overflow:hidden;
+      }
+      .accbtn{
+        width:100%; display:flex; align-items:center; gap:.5rem; min-height:2.9rem;
+        padding:.62rem .8rem; background:transparent; border:0; cursor:pointer;
+        font:inherit; font-size:.74rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+        color:var(--ui-text); text-align:left;
+      }
+      .accbtn:hover{ color:var(--gold); }
+      .accbtn .chev{ margin-left:auto; flex:none; width:1rem; height:1rem; color:var(--gold); transition:transform .25s ease; }
+      .acc.open .accbtn .chev{ transform:rotate(180deg); }
+      .accbody{ display:none; padding:.2rem .8rem .85rem; border-top:1px solid var(--ui-line); }
+      .acc.open .accbody{ display:block; }
+      .selbox .acc{ background:var(--ui-panel); margin:.75rem 0 .1rem; }
+      .selbox .accbody{ padding:.55rem .65rem .7rem; }
+
       /* ---------- rack ---------- */
       .rackgrid{ display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
       .rackitem{
@@ -212,6 +231,22 @@
         100%{ transform:translate(0,95vh) rotate(0deg); opacity:0; }
       }
       @keyframes kf-fade{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+      @keyframes kf-swaytop{ 0%,100%{ transform:rotate(-3.2deg);} 50%{ transform:rotate(3.2deg);} }
+      @keyframes kf-hang{ 0%,100%{ transform:rotate(5deg);} 50%{ transform:rotate(-5deg);} }
+      @keyframes kf-rock{ 0%,100%{ transform:rotate(-8deg);} 50%{ transform:rotate(8deg);} }
+      @keyframes kf-drift{ 0%,100%{ transform:translateX(-9px);} 50%{ transform:translateX(9px);} }
+      @keyframes kf-bob{ 0%,100%{ transform:translateY(0);} 30%{ transform:translateY(-10px);} 55%{ transform:translateY(0);} 75%{ transform:translateY(-4px);} }
+      @keyframes kf-twinkle{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.35; transform:scale(.82);} }
+      @keyframes kf-wiggle{ 0%,100%{ transform:rotate(0deg);} 25%{ transform:rotate(2.4deg);} 75%{ transform:rotate(-2.4deg);} }
+      @keyframes kf-rise{
+        0%{ transform:translate(0,6vh); opacity:0; }
+        10%{ opacity:1; }
+        30%{ transform:translate(10px,-26vh); }
+        55%{ transform:translate(-10px,-52vh); }
+        80%{ transform:translate(8px,-76vh); }
+        92%{ opacity:1; }
+        100%{ transform:translate(0,-96vh); opacity:0; }
+      }
 
       /* ---------- animasi masuk ala PowerPoint ---------- */
       @keyframes ke-fade{ from{ opacity:0; } to{ opacity:1; } }
@@ -716,9 +751,17 @@ var ANIMS = {
   none:  { label:"Tidak ada",        dur:0 },
   float: { label:"Melayang",         dur:4.5, kf:"kf-float", timing:"ease-in-out", loop:true },
   sway:  { label:"Bergoyang",        dur:5,   kf:"kf-sway",  timing:"ease-in-out", loop:true },
+  swaytop:{ label:"Goyang ujung atas (pangkal diam)", dur:5.5, kf:"kf-swaytop", timing:"ease-in-out", loop:true, origin:"50% 100%" },
+  hang:  { label:"Menggantung bergoyang (dari atas)", dur:4.2, kf:"kf-hang", timing:"ease-in-out", loop:true, origin:"50% 0%" },
+  rock:  { label:"Berayun lebar dari pangkal", dur:6.5, kf:"kf-rock", timing:"ease-in-out", loop:true, origin:"50% 100%" },
+  drift: { label:"Melayang ke samping", dur:6, kf:"kf-drift", timing:"ease-in-out", loop:true },
+  bob:   { label:"Memantul lembut",  dur:2.6, kf:"kf-bob",   timing:"ease-in-out", loop:true },
+  twinkle:{ label:"Berkelip (bintang / kilau)", dur:2.4, kf:"kf-twinkle", timing:"ease-in-out", loop:true },
+  wiggle:{ label:"Bergetar halus",   dur:1.6, kf:"kf-wiggle", timing:"ease-in-out", loop:true },
   spin:  { label:"Berputar perlahan",dur:26,  kf:"kf-spin",  timing:"linear",      loop:true },
   pulse: { label:"Berdenyut",        dur:3.2, kf:"kf-pulse", timing:"ease-in-out", loop:true },
   fall:  { label:"Jatuh seperti daun",dur:9,  kf:"kf-fall",  timing:"linear",      loop:true },
+  rise:  { label:"Naik seperti gelembung", dur:10, kf:"kf-rise", timing:"linear",  loop:true },
   fade:  { label:"Muncul perlahan",  dur:1.8, kf:"kf-fade",  timing:"ease",        loop:false }
 };
 var ENTERS = {
@@ -1309,7 +1352,8 @@ function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,
 function animCSS(e){
   var a = ANIMS[e.anim]; if (!a || !a.dur) return "";
   var d = (a.dur / (e.speed || 1)).toFixed(2);
-  return "animation:" + a.kf + " " + d + "s " + a.timing + (a.loop ? " infinite;" : " both;");
+  return "animation:" + a.kf + " " + d + "s " + a.timing + (a.loop ? " infinite;" : " both;") +
+    (a.origin ? "transform-origin:" + a.origin + ";" : "");
 }
 function enterClass(e){
   return (e.enter && e.enter !== "none") ? " ent ent-" + e.enter : "";
@@ -1709,17 +1753,92 @@ function addShapeBehindText(te, preset){
   renderCanvas(); renderSelPanel(); renderPreviewIfOpen();
   if (isMobile()) openSheet("panel");
 }
+/* ================= AKORDEON PANEL =================
+   Setiap judul bagian (h2.sec) di rak kiri, panel kanan, dan panel pilihan
+   diubah jadi tombol sendiri-sendiri: isinya baru muncul saat tombolnya
+   diklik. Membuka satu bagian menutup bagian lain dalam wadah yang sama. */
+var accOpenState = {}; /* "grup|judul" -> true/false, diingat antar gambar-ulang panel */
+function accSet(wrap, group, title, open){
+  wrap.classList.toggle("open", !!open);
+  var b = wrap.querySelector(".accbtn");
+  if (b) b.setAttribute("aria-expanded", open ? "true" : "false");
+  accOpenState[group + "|" + title] = !!open;
+}
+function accordionize(container, group, openFirst){
+  if (!container) return;
+  var kids = Array.prototype.slice.call(container.childNodes);
+  var current = null, made = [], anyStored = false;
+  kids.forEach(function(node){
+    if (node.nodeType === 1 && node.tagName === "H2" && node.classList.contains("sec")){
+      var title = node.textContent.replace(/\s+/g, " ").trim();
+      var wrap = document.createElement("div");
+      wrap.className = "acc";
+      wrap.setAttribute("data-accgroup", group);
+      wrap.setAttribute("data-acctitle", title);
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "accbtn";
+      btn.innerHTML = "<span>" + esc(title) + "</span>" +
+        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>';
+      var body = document.createElement("div"); body.className = "accbody";
+      wrap.appendChild(btn); wrap.appendChild(body);
+      container.insertBefore(wrap, node);
+      container.removeChild(node);
+      (function(w, t){
+        w.querySelector(".accbtn").addEventListener("click", function(){
+          var willOpen = !w.classList.contains("open");
+          Array.prototype.forEach.call(container.children, function(sib){
+            if (sib !== w && sib.classList && sib.classList.contains("acc"))
+              accSet(sib, group, sib.getAttribute("data-acctitle"), false);
+          });
+          accSet(w, group, t, willOpen);
+        });
+      })(wrap, title);
+      if ((group + "|" + title) in accOpenState){
+        anyStored = true;
+        if (accOpenState[group + "|" + title]) wrap.classList.add("open");
+        btn.setAttribute("aria-expanded", wrap.classList.contains("open") ? "true" : "false");
+      }
+      made.push(wrap);
+      current = body;
+    } else if (current){
+      current.appendChild(node);
+    }
+  });
+  if (openFirst && made.length && !anyStored && !container.querySelector(".acc.open")){
+    var t0 = made[0].getAttribute("data-acctitle");
+    accSet(made[0], group, t0, true);
+  }
+}
+/* buka satu bagian di panel kanan (dipakai saat elemen kanvas diklik/dipilih) */
+function openPanelSection(title){
+  var col = document.querySelector(".col.panel"); if (!col) return;
+  Array.prototype.forEach.call(col.children, function(w){
+    if (!w.classList || !w.classList.contains("acc")) return;
+    accSet(w, "panel", w.getAttribute("data-acctitle"), w.getAttribute("data-acctitle") === title);
+  });
+}
+/* selesai menggambar panel pilihan: jadikan sub-bagiannya tombol akordeon,
+   dan bila ada elemen terpilih, tampilkan hanya bagian itu di panel kanan */
+function finishSelPanel(p){
+  var box = p.querySelector(".selbox");
+  if (box){
+    var kind = selectedTextEl() ? "text" : ((selectedEl() || {}).shape ? "shape" : "orn");
+    accordionize(box, "sel-" + kind, true);
+  }
+  if (S.selected || S.selText) openPanelSection("Yang dipilih di kanvas");
+}
 function renderSelPanel(){
   var p = $("selPanel");
   var te = selectedTextEl();
-  if (te){ renderTextPanel(p, te); return; }
+  if (te){ renderTextPanel(p, te); finishSelPanel(p); return; }
   var e = selectedEl();
   if (!e){
     p.innerHTML = '<p class="hint">Belum ada yang dipilih. Klik ornamen, bentuk, atau teks di kanvas, atau tambahkan dari rak di kiri.</p>';
     updateSelChip();
+    finishSelPanel(p);
     return;
   }
-  if (e.shape){ renderShapePanel(p, e); return; }
+  if (e.shape){ renderShapePanel(p, e); finishSelPanel(p); return; }
   var animBtns = "";
   for (var key in ANIMS){
     animBtns += '<button type="button" data-anim="' + key + '"' + (e.anim === key ? ' class="on"' : '') + '>' + ANIMS[key].label + '</button>';
@@ -1790,6 +1909,7 @@ function renderSelPanel(){
   if (el2) el2.addEventListener("input", function(){ e.enterDelay = +this.value; renderCanvas(); renderSelPanelSoft(); });
   $("pReplay").addEventListener("click", replayEntrances);
   updateSelChip();
+  finishSelPanel(p);
 }
 /* putar ulang semua animasi masuk di halaman aktif, langsung di kanvas */
 var replayTimer = null;
@@ -2559,6 +2679,14 @@ function buildExport(map){
   '@keyframes kf-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}' +
   '@keyframes kf-fall{0%{transform:translate(0,-6vh) rotate(0deg);opacity:0}8%{opacity:1}25%{transform:translate(14px,26vh) rotate(16deg)}50%{transform:translate(-14px,50vh) rotate(-13deg)}75%{transform:translate(12px,72vh) rotate(11deg)}92%{opacity:1}100%{transform:translate(0,95vh) rotate(0deg);opacity:0}}' +
   '@keyframes kf-fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}' +
+  '@keyframes kf-swaytop{0%,100%{transform:rotate(-3.2deg)}50%{transform:rotate(3.2deg)}}' +
+  '@keyframes kf-hang{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-5deg)}}' +
+  '@keyframes kf-rock{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}' +
+  '@keyframes kf-drift{0%,100%{transform:translateX(-9px)}50%{transform:translateX(9px)}}' +
+  '@keyframes kf-bob{0%,100%{transform:translateY(0)}30%{transform:translateY(-10px)}55%{transform:translateY(0)}75%{transform:translateY(-4px)}}' +
+  '@keyframes kf-twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}' +
+  '@keyframes kf-wiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(2.4deg)}75%{transform:rotate(-2.4deg)}}' +
+  '@keyframes kf-rise{0%{transform:translate(0,6vh);opacity:0}10%{opacity:1}30%{transform:translate(10px,-26vh)}55%{transform:translate(-10px,-52vh)}80%{transform:translate(8px,-76vh)}92%{opacity:1}100%{transform:translate(0,-96vh);opacity:0}}' +
   '@keyframes ke-fade{from{opacity:0}to{opacity:1}}' +
   '@keyframes ke-fly-left{from{opacity:0;transform:translateX(-130%)}to{opacity:1;transform:translateX(0)}}' +
   '@keyframes ke-fly-right{from{opacity:0;transform:translateX(130%)}to{opacity:1;transform:translateX(0)}}' +
@@ -2744,6 +2872,12 @@ document.querySelectorAll("[data-shapepreset]").forEach(function(b){
 });
 
 /* ================= MULAI ================= */
+/* rak kiri & panel kanan: semua bagian jadi tombol akordeon (rapi, tidak
+   dikeluarkan semua ke bawah). Bawaan awal: Rak ornamen & pilihan kanvas. */
+accOpenState["rack|Rak ornamen"] = true;
+accOpenState["panel|Yang dipilih di kanvas"] = true;
+accordionize(document.querySelector(".col.rack"), "rack", false);
+accordionize(document.querySelector(".col.panel"), "panel", false);
 renderShapeGrid();
 refreshThemeUI();
 renderRack();
