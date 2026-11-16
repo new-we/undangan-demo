@@ -455,6 +455,26 @@
       @media (max-width: 480px){
         .rackgrid{ grid-template-columns:repeat(3,1fr); }
       }
+      /* ---------- desktop: panel samping punya scroll sendiri ---------- */
+      /* Halaman dikunci setinggi layar; rak kiri & panel kanan (dan panggung)
+         masing-masing scroll di dalam kolomnya sendiri, jadi menggeser pilihan
+         ke bawah tidak menggerakkan pratinjau — kanvas tetap terlihat di tengah. */
+      @media (min-width: 861px){
+        html, body{ height:100%; }
+        body{ display:flex; flex-direction:column; height:100vh; height:100dvh; overflow:hidden; }
+        .layout{ flex:1 1 auto; min-height:0; width:100%; grid-template-rows:minmax(0,1fr); align-items:stretch; }
+        .col{ height:100%; min-height:0; }
+        .col.rack, .col.panel, .col.stage{
+          overflow-y:auto; overscroll-behavior:contain;
+          scrollbar-width:thin; scrollbar-color:var(--ui-line) transparent;
+        }
+        .col.rack::-webkit-scrollbar, .col.panel::-webkit-scrollbar, .col.stage::-webkit-scrollbar{ width:10px; }
+        .col.rack::-webkit-scrollbar-thumb, .col.panel::-webkit-scrollbar-thumb, .col.stage::-webkit-scrollbar-thumb{
+          background:var(--ui-line); border-radius:99px; border:2px solid var(--ui-bg);
+        }
+        .col.rack::-webkit-scrollbar-thumb:hover, .col.panel::-webkit-scrollbar-thumb:hover, .col.stage::-webkit-scrollbar-thumb:hover{ background:var(--gold); }
+        .col.rack::-webkit-scrollbar-track, .col.panel::-webkit-scrollbar-track, .col.stage::-webkit-scrollbar-track{ background:transparent; }
+      }
       /* ================= TAMPILAN HP RAMAH JARI ================= */
       @media (max-width: 860px){
         /* bar atas ramping — aksi utama pindah ke bar bawah */
@@ -2506,6 +2526,8 @@ function applyTemplate(tpl){
   $("tplOverlay").classList.remove("open");
   closeSheets();
   window.scrollTo({ top: 0, behavior: "smooth" });
+  /* panel samping punya scroll sendiri — kembalikan scroll tiap kolom ke atas */
+  document.querySelectorAll(".col.rack, .col.panel, .col.stage").forEach(function(c){ c.scrollTop = 0; });
 }
 function tplById(id){
   for (var i = 0; i < TEMPLATES.length; i++) if (TEMPLATES[i].id === id) return TEMPLATES[i];
